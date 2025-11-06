@@ -1,0 +1,28 @@
+[
+  {
+    "id": "supply-matching",
+    "title": "Supply–demand matching for a marketplace",
+    "role": "Product Designer",
+    "timeframe": "Jan–Apr 2024",
+    "problem": "High drop‑off in provider acceptance flow.",
+    "goals": ["Increase acceptance rate","Shorten time-to-match"],
+    "process": ["Heuristic review","User interviews","Prototyping","Usability testing"],
+    "outcomes": ["Acceptance +18%","Time-to-match −22%"],
+    "heroImage": "/images/deep/supply-matching.jpg",
+    "href": "/work/supply-matching",
+    "readingTimeMins": 7
+  },
+  {
+    "id": "usage-insights",
+    "title": "Usage insights dashboard for B2B SaaS",
+    "role": "UX Designer",
+    "timeframe": "Aug–Nov 2024",
+    "problem": "Admins lacked feature usage visibility across teams.",
+    "goals": ["Improve discoverability","Drive adoption"],
+    "process": ["Data audit","IA","Mid‑fi wires","Design system tokens","Eval tests"],
+    "outcomes": ["Feature adoption +12%","NPS +0.6"],
+    "heroImage": "/images/deep/usage-insights.jpg",
+    "href": "/work/usage-insights",
+    "readingTimeMins": 8
+  }
+]

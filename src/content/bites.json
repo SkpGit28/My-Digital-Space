@@ -1,0 +1,20 @@
+[
+  {
+    "id": "checkout-summary",
+    "title": "Checkout summary optimization",
+    "summary": "Reduced cognitive load with clearer totals and shipping choices.",
+    "image": "/images/bites/checkout-summary.jpg",
+    "tags": ["E‑commerce","UX Copy"],
+    "ctaLabel": "View bite",
+    "href": "/bites/checkout-summary"
+  },
+  {
+    "id": "onboarding-handoff",
+    "title": "Onboarding handoff screen",
+    "summary": "Increased activation by clarifying next steps after signup.",
+    "image": "/images/bites/onboarding-handoff.jpg",
+    "tags": ["Onboarding","Mobile"],
+    "ctaLabel": "View bite",
+    "href": "/bites/onboarding-handoff"
+  }
+]
