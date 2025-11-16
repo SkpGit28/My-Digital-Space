@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "../styles/globals.css";
+import { Manrope } from "next/font/google";
+import "./globals.css";
 import { defaultMetadata } from "./metadata";
+import ThemeProviderWrapper from "@/Components/ThemeProviderWrapper";
+import TopNav from "@/Components/TopNav";
 
-const inter = Inter({ 
+const manrope = Manrope({ 
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-manrope",
   display: "swap",
 });
 
@@ -27,22 +29,20 @@ export const metadata: Metadata = {
   },
 };
 
-import { ThemeProvider } from "@/lib/theme";
-import { track } from "@/lib/analytics";
-
-if (typeof window !== 'undefined') {
-  track('page_view', { path: window.location.pathname });
-}
-
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} antialiased font-sans`}>
-        {children}
+    <html lang="en" className="scroll-smooth">
+      <body className={`${manrope.variable} antialiased font-sans min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300`}>
+        <ThemeProviderWrapper>
+          <div className="flex min-h-screen flex-col">
+            <TopNav />
+            <main className="flex-1">{children}</main>
+          </div>
+        </ThemeProviderWrapper>
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -60,3 +60,4 @@ export default function RootLayout({
     </html>
   );
 }
+

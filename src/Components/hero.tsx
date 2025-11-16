@@ -1,28 +1,82 @@
+import Image from "next/image";
+import { useState } from "react";
+import Container from "./container";
+
 export default function Hero() {
+  const [slide, setSlide] = useState(0); // 0=base, 1=design, 2=build, 3=act
+
   return (
-    <section id="top" className="min-h-[78vh] flex items-center">
-      <div className="container-p text-center">
-        {/* Availability pill (edit text freely) */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
-          <span className="inline-block h-2 w-2 rounded-full bg-emerald-400" aria-hidden />
-          Open to opportunities next month
+    <section id="top" className="min-h-[72vh] flex flex-col items-center justify-center text-center">
+      <Container>
+        {/* AVATAR — stacked images */}
+        <div className="relative w-[152px] h-[152px] mx-auto rounded-full overflow-hidden shadow-lg bg-[#70B7FF]">
+          <Image
+            src="/avatars/hey-me.svg"
+            alt="Base pose"
+            width={152}
+            height={152}
+            className={`absolute inset-0 transition-opacity duration-500 ${slide === 0 ? "opacity-100" : "opacity-0"}`}
+            priority
+          />
+          <Image
+            src="/avatars/design.svg"
+            alt="Design pose"
+            width={152}
+            height={152}
+            className={`absolute inset-0 transition-opacity duration-500 ${slide === 1 ? "opacity-100" : "opacity-0"}`}
+          />
+          <Image
+            src="/avatars/build.svg"
+            alt="Build pose"
+            width={152}
+            height={152}
+            className={`absolute inset-0 transition-opacity duration-500 ${slide === 2 ? "opacity-100" : "opacity-0"}`}
+          />
+          <Image
+            src="/avatars/act.svg"
+            alt="Act pose"
+            width={152}
+            height={152}
+            className={`absolute inset-0 transition-opacity duration-500 ${slide === 3 ? "opacity-100" : "opacity-0"}`}
+          />
         </div>
 
-        <h1 className="mt-5 text-4xl md:text-6xl font-semibold leading-tight tracking-tight">
-          Hi, I’m <span className="text-white/90">Sushant Kumar</span> — a UI/UX designer
-          with ~2 years’ experience turning product goals into clean, usable experiences.
+        {/* HEADINGS */}
+        <h1 className="mt-5 text-gray-400 text-2xl md:text-[56px] font-light leading-tight tracking-tight">
+          Hi, I’m <span className="text-white/90 font-semibold">Sushant</span>
         </h1>
 
-        <p className="mt-5 text-lg md:text-xl text-white/70">
-          I design flows, validate with users, and ship thoughtful interfaces.
-          Explore quick <strong>UX Case Study Bites</strong> or a few <strong>Deep Dives</strong>.
+        <h2 className="mt-2 text-white text-xl md:text-[56px] font-semibold leading-tight tracking-tight">
+          <span className="text-gray-400 font-light">I like{" "}</span>
+          <span
+            className="u-underline [--uclr:#10B981]"
+            onMouseEnter={() => setSlide(1)}
+            onMouseLeave={() => setSlide(0)}
+          >
+            designing
+          </span>
+          ,{" "}
+          <span
+            className="u-underline [--uclr:#FACC15]"
+            onMouseEnter={() => setSlide(2)}
+            onMouseLeave={() => setSlide(0)}
+          >
+            building
+          </span>
+          <span className="text-gray-400 font-light">, &{" "}</span>
+          <span
+            className="u-underline [--uclr:#3B82F6]"
+            onMouseEnter={() => setSlide(3)}
+            onMouseLeave={() => setSlide(0)}
+          >
+            acting 
+          </span>
+        </h2>
+        <p className="mt-4 text-lg md:text-[20px] font-semibold text-gray-400">
+          Product Designer with 2+ years of experience in designing clarity and trust in fintech. Based in Noida. Currently @
+          <a href="https://payfi.co.in" target="_blank" rel="noopener noreferrer" className="text-white underline">Payfi</a>
         </p>
-
-        <div className="mt-8 flex items-center justify-center gap-3">
-          <a href="#work" className="btn-primary">See case studies</a>
-          <a href="/resume.pdf" className="btn-ghost">Download résumé</a>
-        </div>
-      </div>
+      </Container>
     </section>
   );
 }

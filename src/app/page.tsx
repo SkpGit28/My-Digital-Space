@@ -1,6 +1,5 @@
 "use client";
 import Hero from "@/Components/hero";
-import BottomNav from "@/Components/bottomnav";
 import SegmentedSwitch from "@/Components/SegmentedSwitch";
 import HorizontalRail from "@/Components/HorizontalRail";
 import CardBite from "@/Components/CardBite";
@@ -10,15 +9,16 @@ import Footer from "@/Components/Footer";
 import { useState } from "react";
 import bites from "@/content/bites.json";
 import deep from "@/content/deep.json";
+import Projects from "@/Components/projects";
 
 export default function Page() {
   const [tab, setTab] = useState<"bites" | "deep">("bites");
 
   return (
     <>
-      <a href="#main" className="skip-link">Skip to content</a>
       <main id="main">
         <Hero />
+        <Projects />
 
         <section id="work" className="container-p py-24">
           <div className="flex items-center justify-between mb-8">
