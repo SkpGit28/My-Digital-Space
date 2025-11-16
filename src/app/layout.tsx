@@ -4,6 +4,7 @@ import "./globals.css";
 import { defaultMetadata } from "./metadata";
 import ThemeProviderWrapper from "@/Components/ThemeProviderWrapper";
 import TopNav from "@/Components/TopNav";
+import ScrollProgress from "@/Components/ScrollProgress";
 
 const manrope = Manrope({ 
   subsets: ["latin"],
@@ -38,6 +39,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body className={`${manrope.variable} antialiased font-sans min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300`}>
         <ThemeProviderWrapper>
+          <ScrollProgress />
           <div className="flex min-h-screen flex-col">
             <TopNav />
             <main className="flex-1">{children}</main>
