@@ -1,34 +1,179 @@
 @import "tailwindcss";
-@layer utilities {
-  /* Screenshot-style underline: enter from left, exit to right */
-  .u-underline {
-    position: relative;
-    display: inline-block;           /* ensures ::after width/positioning works */
-    cursor: pointer;
-    color: inherit;                  /* keep the word the same gray as surrounding text */
-  }
-
- .u-underline::after {
+.u-underline::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: 6px;                /* start from bottom of text */
+  bottom: 6px;
   width: 100%;
-  height: 10%;              /* covers half the text height */
+  height: 10%;
   background-color: var(--uclr, currentColor);
-  z-index: -1;              /* places it BEHIND the text */
+  z-index: -1;
   transform: scaleX(0);
-  transform-origin: right;
+  transform-origin: right;  /* Important: shrinks to RIGHT */
   transition: transform 0.3s ease;
 }
+.u-underline:hover::after,
+.u-underline:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;  /* Grows from LEFT on hover */
+}
 
-  .u-underline:hover::after,
-  .u-underline:focus-visible::after {
-    transform: scaleX(1);
-    transform-origin: left;          /* grow from LEFT edge on hover */
+@layer components {
+  .glass-nav {
+    position: relative;
+    border-radius: 9999px; /* pill */
+    overflow: hidden;      /* keep blur inside the pill */
+  }
+
+  .glass-nav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+
+    /* frosted background layer */
+    background: radial-gradient(circle at 0% 0%, rgba(255,255,255,0.35), transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(56,189,248,0.3), transparent 55%),
+                rgba(15,23,42,0.78); /* slate-900 with some tint */
+
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+
+    box-shadow: 0 18px 45px rgba(0,0,0,0.45);
+    opacity: 0.95; /* tweak this if you want more/less see-through */
+  }
+
+  .glass-nav-inner {
+    position: relative;
+    z-index: 1; /* sit above the blur layer */
   }
 }
 
+/* Work section container */
+.c-work {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+/* The list wrapper */
+.c-work__list {
+  display: grid;
+  gap: 40px;
+}
+
+/* Each card */
+.c-work__item {
+  /* mobile: simple stacked cards, not sticky */
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: radial-gradient(circle at top left, #1f2933, #020617);
+  color: #f9fafb;
+}
+
+/* Layout + sticky on tablet/desktop */
+@media (min-width: 768px) {
+  .c-work__item {
+    position: sticky;
+    top: 120px; /* adjust to sit nicely under your nav */
+    right: 0;
+    left: 0;
+
+    display: grid;
+    grid-template-columns: 0.3fr 0.7fr; /* 30% text / 70% image */
+    grid-template-rows: minmax(360px, 70vh);
+  }
+}
+
+/* Image side */
+.c-work__item-figure {
+  position: relative;
+  grid-column: 1 / -1;
+  grid-row: 1 / 2;
+}
+
+@media (min-width: 768px) {
+  .c-work__item-figure {
+    grid-column: 2 / -1; /* image on the right */
+    grid-row: 1 / -1;
+  }
+}
+
+.c-work__item-image {
+  object-fit: cover;
+}
+
+/* Text side */
+.c-work__item-info {
+  grid-column: 1 / -1;
+  grid-row: 2 / -1;
+  padding: 32px;
+  display: grid;
+  align-content: center;
+  gap: 16px;
+  background: radial-gradient(circle at top left, #020617, #020617);
+}
+
+@media (min-width: 768px) {
+  .c-work__item-info {
+    grid-column: 1 / 2; /* text on the left */
+    grid-row: 1 / -1;
+  }
+}
+
+.c-work__item-title {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.c-work__item-excerpt {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(249, 250, 251, 0.8);
+}
+
+.c-work__item-link {
+  width: max-content;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(248, 250, 252, 0.28);
+  text-decoration: none;
+  font-size: 14px;
+  background-color: rgba(15, 23, 42, 0.9);
+  color: #f9fafb;
+  transition: all 0.35s ease;
+}
+
+.c-work__item-link:hover {
+  background-color: #f9fafb;
+  color: #020617;
+}
+
+/* Scroll-driven scale animation (Chrome / Edge, etc.) */
+@keyframes work-card-in-out {
+  0%,
+  75% {
+    scale: 1;
+  }
+  100% {
+    scale: 0.85;
+  }
+}
+
+/* Apply to all but last card */
+@media (min-width: 768px) {
+  @supports (animation-timeline: view()) {
+    .c-work__item:not(:last-child) {
+      view-timeline-name: --work-card;
+      view-timeline-axis: block;
+      animation-timeline: --work-card;
+      animation-name: work-card-in-out;
+      animation-range: entry 90% cover 50%;
+      animation-fill-mode: both;
+    }
+  }
+}
 
 :root {
   --background: #ffffff;

@@ -2,74 +2,122 @@
 
 import Image from "next/image";
 import Container from "./container";
-import { useState } from "react";
+import PortalTooltip from "./PortalTooltip";
+import { useMemo, useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 
-const techStack = [
-  { name: "Figma", logo: "/techstack/Figma.svg", description: "Design HQ" },
-  { name: "Framer", logo: "/techstack/Framer.svg", description: "Instant Publish" },
-  { name: "ChatGPT", logo: "/techstack/GPT.svg", description: "My Senior" },
-  { name: "Notion", logo: "/techstack/Notion.svg", description: "Second Brain" },
-  { name: "Refero", logo: "/techstack/Refero.svg", description: "Ideas" },
-  { name: "Spotify", logo: "/techstack/Spotify.svg", description: "Focus Mode" },
-  { name: "Supabase", logo: "/techstack/Supabase.svg", description: "AI Backend" },
-  { name: "VS Code", logo: "/techstack/VS.svg", description: "Dev Desk" },
+type Tech = {
+  name: string;
+  logo: string;
+  description: string;
+};
+
+const techStack: Tech[] = [
+  { name: "Design HQ", logo: "/techstack/Figma.svg", description: "Design HQ" },
+  { name: "Instant Publish", logo: "/techstack/Framer.svg", description: "Instant Publish" },
+  { name: "My Senior", logo: "/techstack/GPT.svg", description: "My Senior" },
+  { name: "Second Brain", logo: "/techstack/Notion.svg", description: "Second Brain" },
+  { name: "Ideas", logo: "/techstack/Refero.svg", description: "Ideas" },
+  { name: "Focus Mode", logo: "/techstack/Spotify.svg", description: "Focus Mode" },
+  { name: "AI Backend", logo: "/techstack/Supabase.svg", description: "AI Backend" },
+  { name: "Dev Desk", logo: "/techstack/VS.svg", description: "Dev Desk" },
 ];
 
+type TechItem = Tech & { uid: string };
+
 export default function TechStack() {
-  // Split into 2 rows of 4
-  const row1 = techStack.slice(0, 4);
-  const row2 = techStack.slice(4, 8);
-  const [hoveredTech, setHoveredTech] = useState<string | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-  const TechTile = ({ tech }: { tech: typeof techStack[0] }) => (
-    <div
-      key={tech.name}
-      className="relative group"
-      onMouseEnter={() => setHoveredTech(tech.name)}
-      onMouseLeave={() => setHoveredTech(null)}
-    >
-      <div className="flex items-center justify-center p-4 rounded-lg bg-white/5 hover:bg-white/10 ring-1 ring-white/10 hover:ring-white/20 transition-all duration-200 cursor-pointer">
-        <Image
-          src={tech.logo}
-          alt={tech.name}
-          width={48}
-          height={48}
-          className="w-12 h-12"
-        />
-      </div>
+  // Trigger animation when section comes into view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of section is visible
+    );
 
-      {/* Tooltip - Description Only */}
-      {hoveredTech === tech.name && (
-        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-3 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-md text-xs md:text-sm whitespace-nowrap text-white/90 pointer-events-none animate-fade-in">
-          {tech.description}
-          {/* Arrow */}
-          <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-white/10" />
-        </div>
-      )}
-    </div>
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isVisible]);
+
+  const tiles: TechItem[] = useMemo(
+    () => [...techStack, ...techStack].map((t, i) => ({ ...t, uid: `${t.name}-${i}` })),
+    []
   );
 
+  function TechTile({ item }: { item: TechItem }) {
+    const ref = useRef<HTMLDivElement>(null);
+    const isOpen = hoveredId === item.uid;
+
+    return (
+      <div
+        ref={ref}
+        className="relative flex-shrink-0 flex items-center justify-center cursor-pointer outline-none"
+        onMouseEnter={() => setHoveredId(item.uid)}
+        onMouseLeave={() => setHoveredId(null)}
+        onFocus={() => setHoveredId(item.uid)}
+        onBlur={() => setHoveredId(null)}
+        tabIndex={0}
+        aria-label={item.name}
+      >
+        <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }}>
+          <Image
+            src={item.logo}
+            alt={item.name}
+            width={48}
+            height={48}
+            className="w-12 h-12"
+            priority={false}
+          />
+        </motion.div>
+
+        <PortalTooltip anchorRef={ref} open={isOpen} offsetY={12}>
+          {item.name}
+        </PortalTooltip>
+      </div>
+    );
+  }
+
   return (
-    <section className="py-12 md:py-16">
+    <motion.section
+      ref={sectionRef}
+      className="py-12 md:py-16"
+      initial={{ opacity: 0, y: 40 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+    >
       <Container>
         <h2 className="mb-10 text-3xl md:text-[18px] font-light text-gray-400 tracking-wider">
           MY TOOLKIT
         </h2>
-        
-        {/* Row 1 */}
-        <div className="grid grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
-          {row1.map((tech) => (
-            <TechTile key={tech.name} tech={tech} />
-          ))}
-        </div>
 
-        {/* Row 2 */}
-        <div className="grid grid-cols-4 gap-6 md:gap-8">
-          {row2.map((tech) => (
-            <TechTile key={tech.name} tech={tech} />
-          ))}
+        <div className="relative h-[88px] flex items-center overflow-hidden">
+          <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+
+          <motion.div
+            className="flex gap-8 md:gap-12"
+            animate={{ x: [0, -800] }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+          >
+            {tiles.map((item) => (
+              <TechTile key={item.uid} item={item} />
+            ))}
+          </motion.div>
         </div>
       </Container>
-    </section>
+    </motion.section>
   );
 }

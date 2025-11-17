@@ -1,11 +1,11 @@
 "use client";
-
+import { motion, useReducedMotion } from "framer-motion"; 
 import Link from "next/link";
 import Image from "next/image";
 import { track } from "@/lib/analytics";
 import { useTheme } from "@/lib/theme";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { ReactNode } from "react";
 import Container from "./container";
 
@@ -24,7 +24,7 @@ interface TopNavProps {
 
 /** Small inline component for the desktop hover dropdown */
 function ContactDropdown() {
-  const email = "your.email@domain.com"; // <-- put your real email
+  const email = "skponpourpose@gmail.com"; // <-- put your real email
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(email);
@@ -54,11 +54,11 @@ function ContactDropdown() {
 
       {/* Popover */}
       <div
-        className="invisible opacity-0 group-hover:visible group-hover:opacity-100
+        className="opacity-0 group-hover:visible group-hover:opacity-100
                    group-focus-within:visible group-focus-within:opacity-100
-                   absolute right-0 mt-2 w-56 rounded-xl p-2
-                   bg-white/95 dark:bg-gray-800/95 backdrop-blur
-                   border border-gray-200 dark:border-gray-700 shadow-lg
+                   absolute left-1/2 transform -translate-x-1/2 mt-4 w-56 rounded-xl p-2
+                   bg-white/95 dark:bg-neutral-900 backdrop-blur-sm
+                   border-gray-200 dark:border-gray-700 shadow-lg
                    transition-all"
         role="menu"
       >
@@ -105,6 +105,22 @@ export default function TopNav({
 }: TopNavProps): ReactNode {
   const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false); // Track scroll state
+  const prefersReducedMotion = useReducedMotion();
+  const ease = [0.16, 1, 0.3, 1] as const;
+  const dur = prefersReducedMotion ? 0 : 0.6;
+
+  // Scroll event listener
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -112,107 +128,105 @@ export default function TopNav({
   };
 
   return (
-  
-      <header className="sticky top-0 z-50">
-          <Container>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
-          rel="stylesheet"
-        />
-
-      {/* Floating theme toggle – top right */}
-<div className="fixed top-5 mt-2 right-6 z-[60]">
-  <button
-    onClick={toggleTheme}
-    className={cn(
-      "w-10 h-10 rounded-full flex items-center justify-center shadow-lg",
-      "bg-white/90 dark:bg-gray-900/90 backdrop-blur",
-      "text-gray-700 dark:text-gray-300",
-      "hover:bg-white dark:hover:bg-gray-800",
-      "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900",
-      "transition-colors duration-200"
-    )}
-    aria-label="Toggle theme"
-  >
-    {theme === "dark" ? (
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
-      </svg>
-    ) : (
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-      </svg>
-    )}
-  </button>
-</div>
-
-        {/* Sticky, centered pill */}
-        <nav
-          aria-label="Main navigation"
-          className={cn(
-            "sticky mt-4 mx-auto max-w-4xl w-full px-2 md:px-2",
-            "py-1.5 rounded-full border border-white/10 bg-white/80 dark:bg-gray-900/80",
-            "backdrop-blur-md shadow-lg",
-            "flex items-center justify-between"
-          )}
-        >
-        {/* Logo + brand - extreme left */}
-        <Link href="/" className="flex items-center gap-10 shrink-0">
-          <Image
-            src="avatars/logo.svg"
-            alt="Logo"
-            width={48}
-            height={48}
-            className="h-12 w-12 rounded-full"
-            priority
+    <header className="sticky top-0 z-50">
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}   // ✅ no filter here
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.16,1,0.3,1], delay: 0.05 }}
+      >
+        <Container>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
+            rel="stylesheet"
           />
-          <span className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            {logoLabel}
-          </span>
-        </Link>
 
-        {/* Desktop links - centered */}
-        <div className="hidden md:flex items-center gap-0 flex-1 justify-center">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
+          {/* Floating theme toggle – top right */}
+          <div className="fixed top-5 mt-2 right-6 z-60">
+            <button
+              onClick={toggleTheme}
               className={cn(
-                "mr-4 text-gray-700 hover:text-gray-900 dark:text-[#898989] dark:hover:text-white",
-                "transition-colors duration-200 px-4 py-1 rounded-md",
-                "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                "w-10 h-10 rounded-full flex items-center justify-center shadow-lg",
+                "bg-white/90 dark:bg-gray-900/90 backdrop-blur-3xl",
+                "text-gray-700 dark:text-gray-300",
+                "hover:bg-white dark:hover:bg-gray-800",
+                "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900",
+                "transition-colors duration-200"
               )}
-              onClick={() => {
-                track("nav_click", { label: link.label, href: link.href });
-                onLinkClick?.(link.href);
-              }}
+              aria-label="Toggle theme"
             >
-              {link.label}
-            </Link>
-          ))}
-        </div>
+              {theme === "dark" ? (
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                </svg>
+              )}
+            </button>
+          </div>
 
-        {/* CTA group - extreme right */}
-        <div className="hidden md:block shrink-0">
-          <ContactDropdown />
-        </div>
-
-        {/* Mobile trigger (visible on small screens) */}
-        <button
-          className="md:hidden ml-auto p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary"
-          onClick={toggleMenu}
-          aria-expanded={isMenuOpen}
-          aria-label="Toggle menu"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            {isMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          {/* Sticky, centered pill */}
+          <nav
+            aria-label="Main navigation"
+            className={cn(
+              "sticky top-0 z-50 -mt-10",                        // pull it over content
+              "rounded-full mx-auto mt-4 max-w-4xl w-full px-3 md:px-2",
+              isScrolled
+                ? "backdrop-blur-sm backdrop-saturate-200 backdrop-filter bg-white/40 dark:bg-neutral-900/45 border border-white/20 dark:border-white/10"
+                : "bg-transparent border-none"
             )}
-          </svg>
-        </button>
-      </nav>
+          >
+
+            {/* Actual nav content */}
+            <div className="relative z-10 flex items-center justify-between py-2">
+              {/* Logo + brand */}
+              <Link href="/" className="flex items-center gap-3 shrink-0">
+                <Image
+                  src="avatars/logo.svg"
+                  alt="Logo"
+                  width={48}
+                  height={48}
+                  className="h-12 w-12 rounded-full"
+                  priority
+                />
+                <span className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+                  {logoLabel}
+                </span>
+              </Link>
+
+              {/* Desktop links */}
+              <div className="hidden md:flex items-center gap-1 flex-1 justify-center">
+                {links.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={cn(
+                      "px-4 py-1 rounded-md text-md font-medium",
+                      "text-gray-800/90 dark:text-gray-100/90",
+                      "hover:text-gray-950 dark:hover:text-white",
+                      "hover:bg-white/20 dark:hover:bg-white/10",
+                      "transition-colors duration-200"
+                    )}
+                    onClick={() => {
+                      track("nav_click", { label: link.label, href: link.href });
+                      onLinkClick?.(link.href);
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+
+              {/* Contact CTA */}
+              <div className="hidden md:block shrink-0">
+                <ContactDropdown />
+              </div>
+
+              {/* Mobile toggle stays the same... */}
+            </div>
+          </nav>
+
 
       {/* Mobile menu: centered dropdown under the pill */}
       <div
@@ -281,7 +295,7 @@ export default function TopNav({
         </div>
       </div>
       </Container>
+    </motion.div>
     </header>
-    
   );
 }
