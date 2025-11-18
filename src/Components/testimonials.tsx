@@ -150,7 +150,7 @@ export default function Testimonials() {
           </h2>
         </motion.div>
 
-       <div className="grid md:grid-cols-2 gap-8">
+       <div className="grid md:grid-cols-2 gap-0">
   {testimonials.map((t, i) => {
     const [titlePart, companyPart] = t.role.split(",");
     return (
