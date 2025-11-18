@@ -6,6 +6,8 @@ import Link from "next/link";
 import Container from "@/Components/container";
 import Footer from "@/Components/Footer";
 import { cn } from "@/lib/utils";
+import { motion, useReducedMotion } from "framer-motion";
+
 
 export type WorkCard = {
   id: string;
@@ -56,21 +58,50 @@ const CARDS: WorkCard[] = [
 ];
 
 export default function WorkPage(): ReactElement {
+    const prefersReducedMotion = useReducedMotion();
+  const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+  const SECTION_DUR = prefersReducedMotion ? 0 : 0.8;
+
+  // Heading animation
+  const headingVariants = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: SECTION_DUR,
+        ease: EASE,
+      },
+    },
+  } as const;
+
+  // Content animation
+  const contentVariants = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 16 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: SECTION_DUR,
+        ease: EASE,
+        delay: 0.2,
+      },
+    },
+  } as const;
   return (
     <>
-      <main className="pt-24 md:pt-28">
+      <main className="py-16 md:py-24">
         <Container>
           {/* Heading */}
           <header className="text-center">
-            <h1
-              id="work-heading"
-              className={cn(
-                "font-semibold tracking-tight leading-tight text-white",
-                "text-[38px] sm:text-[48px] md:text-[64px]"
-              )}
+            <motion.h1
+              variants={headingVariants}
+              initial="hidden"
+              animate="visible"
+              className="text-5xl md:text-[64px] font-bold text-gray-900 dark:text-white text-center mb-16 md:mb-20 leading-tight tracking-tight"
             >
               Most of my design
-            </h1>
+            </motion.h1>
           </header>
 
           {/* Stacked / sticky list */}

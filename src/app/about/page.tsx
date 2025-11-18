@@ -6,7 +6,6 @@ import Footer from "@/Components/Footer";
 
 export default function AboutPage() {
   const prefersReducedMotion = useReducedMotion();
-  
   const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
   const SECTION_DUR = prefersReducedMotion ? 0 : 0.8;
 
