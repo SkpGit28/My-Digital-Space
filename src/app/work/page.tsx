@@ -5,9 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Container from "@/Components/container";
 import Footer from "@/Components/Footer";
-import { cn } from "@/lib/utils";
 import { motion, useReducedMotion } from "framer-motion";
-
 
 export type WorkCard = {
   id: string;
@@ -58,11 +56,10 @@ const CARDS: WorkCard[] = [
 ];
 
 export default function WorkPage(): ReactElement {
-    const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotion();
   const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
   const SECTION_DUR = prefersReducedMotion ? 0 : 0.8;
 
-  // Heading animation
   const headingVariants = {
     hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 24 },
     visible: {
@@ -75,30 +72,17 @@ export default function WorkPage(): ReactElement {
     },
   } as const;
 
-  // Content animation
-  const contentVariants = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 16 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: SECTION_DUR,
-        ease: EASE,
-        delay: 0.2,
-      },
-    },
-  } as const;
   return (
     <>
       <main className="py-16 md:py-24">
         <Container>
-          {/* Heading */}
-          <header className="text-center">
+          {/* Heading - CSS handles sticky → relative transition */}
+          <header className="c-work-heading bg-white dark:bg-neutral-950 py-4 md:py-6 text-center transition-all duration-300">
             <motion.h1
               variants={headingVariants}
               initial="hidden"
               animate="visible"
-              className="text-5xl md:text-[64px] font-bold text-gray-900 dark:text-white text-center mb-16 md:mb-20 leading-tight tracking-tight"
+              className="text-5xl md:text-[64px] font-bold text-gray-900 dark:text-white text-center mb-0 leading-tight tracking-tight"
             >
               Most of my design
             </motion.h1>
@@ -129,15 +113,10 @@ export default function WorkPage(): ReactElement {
 
                   {/* Info (left on desktop) */}
                   <div className="c-work__item-info">
-                    <h2
-                      id={`${card.id}-title`}
-                      className="c-work__item-title"
-                    >
+                    <h2 id={`${card.id}-title`} className="c-work__item-title">
                       {card.title}
                     </h2>
-                    <p className="c-work__item-excerpt">
-                      {card.description}
-                    </p>
+                    <p className="c-work__item-excerpt">{card.description}</p>
                     <Link
                       href={card.slug ? `/work/${card.slug}` : "#"}
                       aria-label={`Read case study: ${card.title}`}
