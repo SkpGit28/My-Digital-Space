@@ -99,7 +99,7 @@ function ContactDropdown() {
 }
 
 export default function TopNav({
-  logoLabel = "SKP",
+  logoLabel = "",
   links = navLinks,
   onLinkClick,
 }: TopNavProps): ReactNode {
@@ -179,11 +179,11 @@ export default function TopNav({
           >
 
             {/* Actual nav content */}
-            <div className="relative z-10 flex items-center justify-between py-2">
+            <div className="relative z-10 px-1 flex items-center justify-between py-2">
               {/* Logo + brand */}
-              <Link href="/" className="flex items-center gap-3 shrink-0">
+              <Link href="/" className="flex items-center gap-4 shrink-0">
                 <Image
-                  src="avatars/logo.svg"
+                  src="avatars/SKPFont.svg"
                   alt="Logo"
                   width={48}
                   height={48}
