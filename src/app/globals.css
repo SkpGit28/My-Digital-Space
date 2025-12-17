@@ -1,4 +1,5 @@
 @import "tailwindcss";
+
 .u-underline::after {
   content: "";
   position: absolute;
@@ -9,21 +10,26 @@
   background-color: var(--uclr, currentColor);
   z-index: -1;
   transform: scaleX(0);
-  transform-origin: right;  /* Important: shrinks to RIGHT */
+  transform-origin: right;
+  /* Important: shrinks to RIGHT */
   transition: transform 0.3s ease;
 }
+
 .u-underline:hover::after,
 .u-underline:focus-visible::after {
   transform: scaleX(1);
-  transform-origin: left;  /* Grows from LEFT on hover */
+  transform-origin: left;
+  /* Grows from LEFT on hover */
 }
 
 
 @layer components {
   .glass-nav {
     position: relative;
-    border-radius: 9999px; /* pill */
-    overflow: hidden;      /* keep blur inside the pill */
+    border-radius: 9999px;
+    /* pill */
+    overflow: hidden;
+    /* keep blur inside the pill */
   }
 
   .glass-nav::before {
@@ -33,20 +39,23 @@
     border-radius: inherit;
 
     /* frosted background layer */
-    background: radial-gradient(circle at 0% 0%, rgba(255,255,255,0.35), transparent 60%),
-                radial-gradient(circle at 100% 100%, rgba(56,189,248,0.3), transparent 55%),
-                rgba(15,23,42,0.78); /* slate-900 with some tint */
+    background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.35), transparent 60%),
+      radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.3), transparent 55%),
+      rgba(15, 23, 42, 0.78);
+    /* slate-900 with some tint */
 
     backdrop-filter: blur(24px) saturate(160%);
     -webkit-backdrop-filter: blur(24px) saturate(160%);
 
-    box-shadow: 0 18px 45px rgba(0,0,0,0.45);
-    opacity: 0.95; /* tweak this if you want more/less see-through */
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+    opacity: 0.95;
+    /* tweak this if you want more/less see-through */
   }
 
   .glass-nav-inner {
     position: relative;
-    z-index: 1; /* sit above the blur layer */
+    z-index: 1;
+    /* sit above the blur layer */
   }
 }
 
@@ -77,12 +86,14 @@
 @media (min-width: 768px) {
   .c-work__item {
     position: sticky;
-    top: 120px; /* adjust to sit nicely under your nav */
+    top: 120px;
+    /* adjust to sit nicely under your nav */
     right: 0;
     left: 0;
 
     display: grid;
-    grid-template-columns: 0.3fr 0.7fr; /* 30% text / 70% image */
+    grid-template-columns: 0.3fr 0.7fr;
+    /* 30% text / 70% image */
     grid-template-rows: minmax(360px, 70vh);
   }
 }
@@ -96,7 +107,8 @@
 
 @media (min-width: 768px) {
   .c-work__item-figure {
-    grid-column: 2 / -1; /* image on the right */
+    grid-column: 2 / -1;
+    /* image on the right */
     grid-row: 1 / -1;
   }
 }
@@ -118,7 +130,8 @@
 
 @media (min-width: 768px) {
   .c-work__item-info {
-    grid-column: 1 / 2; /* text on the left */
+    grid-column: 1 / 2;
+    /* text on the left */
     grid-row: 1 / -1;
   }
 }
@@ -154,10 +167,12 @@
 
 /* Scroll-driven scale animation (Chrome / Edge, etc.) */
 @keyframes work-card-in-out {
+
   0%,
   75% {
     scale: 1;
   }
+
   100% {
     scale: 0.85;
   }
@@ -178,8 +193,18 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Foundation Colors - Dark Only */
+  --background: #0E0F12;
+  --surface: #15161A;
+  --elevated: #1B1D23;
+  --border-subtle: #24262E;
+
+  /* Text Colors */
+  --text-primary: #E5ECF5;
+  --text-accent: #70B7FF;
+
+  /* Legacy support */
+  --foreground: #E5ECF5;
 }
 
 /* v4: @theme is valid */
@@ -188,13 +213,6 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {

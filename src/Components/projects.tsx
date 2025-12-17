@@ -18,12 +18,12 @@ type Project = {
 const projects: Project[] = [
   {
     id: 1,
-    title: "From zero to launch: building a 100% AI-led platform",
+    title: "Trust > Revenue",
     kicker: "Product • UX • Systems",
     summary:
       "Shipped an MVP without writing code. I explored how far AI could take the product lifecycle—from research to v1.",
     img: "/projects/p1.png",
-    href: "#p1",
+    href: "/case-studies/trust-revenue",
   },
   {
     id: 2,
@@ -92,11 +92,11 @@ export default function Projects() {
 
   return (
     <motion.section
-  id="projects"
-  variants={sectionVariants}
-  initial="hidden"
-  animate="visible"   // 👈 triggers immediately on mount
->
+      id="projects"
+      variants={sectionVariants}
+      initial="hidden"
+      animate="visible"   // 👈 triggers immediately on mount
+    >
 
       <Container>
         <div className="py-18">
@@ -106,12 +106,12 @@ export default function Projects() {
 
           {/* top border + between-items divider */}
           <motion.ol
-  className="divide-y divide-white/10 border-t border-white/10"
-  variants={listVariants}
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true, amount: 0.35 }}  // 👈 only once when entering view
->
+            className="divide-y divide-white/10 border-t border-white/10"
+            variants={listVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.35 }}  // 👈 only once when entering view
+          >
 
             {projects.map((p) => (
               <motion.li key={p.id} variants={rowVariants}>
@@ -164,8 +164,6 @@ export default function Projects() {
                             <a
                               href={p.href}
                               className="mt-4 inline-flex items-center gap-2 text-white/80 hover:text-white underline decoration-white/30 decoration-2 underline-offset-4 transition-colors"
-                              target="_blank"
-                              rel="noopener noreferrer"
                             >
                               Read case study
                               <svg

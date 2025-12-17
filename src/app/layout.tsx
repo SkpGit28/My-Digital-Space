@@ -37,13 +37,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="dark scroll-smooth">
       <body
-        className={`${manrope.variable} antialiased font-sans min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300`}
+        className={`${manrope.variable} antialiased font-sans min-h-screen transition-colors duration-300`}
+        style={{ backgroundColor: '#0E0F12' }}
       >
         <ThemeProviderWrapper>
           <ScrollProgress />
-          
+
           <div className="flex min-h-screen flex-col">
             <TopNav />
 
