@@ -54,20 +54,20 @@ function ContactDropdown() {
 
       {/* Popover */}
       <div
-  className="opacity-0 group-hover:visible group-hover:opacity-100
+        className="opacity-0 group-hover:visible group-hover:opacity-100
              group-focus-within:visible group-focus-within:opacity-100
              absolute left-1/2 -translate-x-1/2 mt-4 w-56 rounded-xl p-2
-             bg-black/30 backdrop-blur-xl
+             bg-[#1B1D23]/95
              border border-[#24262E]
              shadow-lg
              transition-all
              z-50"
-  role="menu"
->
+        role="menu"
+      >
 
 
         <a
-          href="public/resume.pdf"
+          href="/resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="block px-3 py-2 rounded-md text-md font-medium
@@ -85,7 +85,7 @@ function ContactDropdown() {
             alert("Email copied!");
             track("contact_menu_click", { item: "copy_email_mobile" });
           }}
-         className="w-full flex items-center px-3 py-2 rounded-md
+          className="w-full flex items-center px-3 py-2 rounded-md
            text-md font-medium
            text-[#B6C2D9]
            hover:bg-white/10 hover:text-[#E5ECF5]
@@ -117,7 +117,7 @@ export default function TopNav({
   links = navLinks,
   onLinkClick,
 }: TopNavProps): ReactNode {
-  const { theme, toggleTheme } = useTheme();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false); // Track scroll state
   const prefersReducedMotion = useReducedMotion();
@@ -154,31 +154,7 @@ export default function TopNav({
             rel="stylesheet"
           />
 
-          {/* Floating theme toggle – top right */}
-          <div className="fixed top-5 mt-2 right-6 z-60">
-            <button
-              onClick={toggleTheme}
-              className={cn(
-                "w-10 h-10 rounded-full flex items-center justify-center shadow-lg",
-                "bg-white/90 dark:bg-gray-900/90 backdrop-blur-3xl",
-                "text-gray-700 dark:text-gray-300",
-                "hover:bg-white dark:hover:bg-gray-800",
-                "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900",
-                "transition-colors duration-200"
-              )}
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
-                </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-                </svg>
-              )}
-            </button>
-          </div>
+
 
           {/* Sticky, centered pill */}
           <nav
@@ -187,18 +163,16 @@ export default function TopNav({
               "sticky top-0 z-50 -mt-10",                        // pull it over content
               "rounded-full mx-auto mt-4 max-w-4xl w-full px-3 md:px-2",
               isScrolled
-                ? "backdrop-blur-sm backdrop-saturate-200 backdrop-filter border border-[#24262E]"
+                ? "bg-[#0E0F12]/80 backdrop-blur-sm backdrop-saturate-200 border border-[#24262E]"
                 : "border-none"
             )}
-            style={{ backgroundColor: "transparent" }}
           >
-
             {/* Actual nav content */}
             <div className="relative z-10 px-1 flex items-center justify-between py-2">
               {/* Logo + brand */}
               <Link href="/" className="flex items-center gap-4 shrink-0">
                 <Image
-                  src="avatars/SKPFont.svg"
+                  src="/avatars/SKPFont.svg"
                   alt="Logo"
                   width={48}
                   height={48}
@@ -248,7 +222,7 @@ export default function TopNav({
             <div
               className={cn(
                 "mx-auto mt-2 w-[min(92vw,720px)] rounded-2xl border border-white/10",
-                "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-xl p-4"
+                "bg-gray-900/90 backdrop-blur-md shadow-xl p-4"
               )}
             >
               <div className="flex flex-col space-y-3">
@@ -256,7 +230,7 @@ export default function TopNav({
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white px-2 py-2 rounded-md transition-colors"
+                    className="text-gray-300 hover:text-white px-2 py-2 rounded-md transition-colors"
                     onClick={() => {
                       track("nav_click", { label: link.label, href: link.href });
                       setIsMenuOpen(false);
@@ -269,14 +243,14 @@ export default function TopNav({
 
                 {/* Mobile "Contact" block */}
                 <div className="pt-2 mt-1 border-t border-gray-200 dark:border-gray-700">
-                  <div className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400 px-1 mb-1">
+                  <div className="text-xs uppercase tracking-wide text-gray-400 px-1 mb-1">
                     Contact
                   </div>
                   <a
                     href="/resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block px-2 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+                    className="block px-2 py-2 rounded-md hover:bg-gray-800"
                     onClick={() => track("contact_menu_click", { item: "resume_mobile" })}
                   >
                     📄 Download Resume
@@ -287,7 +261,7 @@ export default function TopNav({
                       alert("Email copied!");
                       track("contact_menu_click", { item: "copy_email_mobile" });
                     }}
-                    className="w-full text-left block px-2 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+                    className="w-full text-left block px-2 py-2 rounded-md hover:bg-gray-800"
                   >
                     ✉️ Copy Email
                   </button>
@@ -295,7 +269,7 @@ export default function TopNav({
                     href="https://www.linkedin.com/in/skplovesdesign"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block px-2 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+                    className="block px-2 py-2 rounded-md hover:bg-gray-800"
                     onClick={() => track("contact_menu_click", { item: "linkedin_mobile" })}
                   >
                     🔗 LinkedIn
@@ -305,7 +279,7 @@ export default function TopNav({
             </div>
           </div>
         </Container>
-      </motion.div>
-    </header>
+      </motion.div >
+    </header >
   );
 }
