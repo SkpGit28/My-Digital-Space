@@ -38,11 +38,21 @@ function ContactDropdown() {
   return (
     <div className="relative group ">
       <button
-        className="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-full 
-             bg-gradient-to-r from-[#70B7FF] to-[#4D9EFF] text-white font-medium
-             shadow-lg hover:shadow-xl border border-[#70B7FF] backdrop-blur-sm
-             hover:opacity-90 transition-all duration-200
-             focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+        className="
+    inline-flex items-center justify-center gap-2
+    px-3 py-2 rounded-full
+    bg-transparent
+    text-white font-medium
+    shadow-lg hover:shadow-xl
+    border border-gray-300 dark:border-gray-700
+    hover:border-[#70B7FF]
+    backdrop-blur-sm
+    hover:opacity-90
+    transition-colors transition-shadow duration-200
+    focus:outline-none
+    focus:ring-2 focus:ring-primary focus:ring-offset-2
+    dark:focus:ring-offset-gray-900
+  "
         aria-haspopup="menu"
         aria-expanded="false"
       >
@@ -51,6 +61,7 @@ function ContactDropdown() {
           keyboard_arrow_down
         </span>
       </button>
+
 
       {/* Popover */}
       <div
@@ -163,7 +174,7 @@ export default function TopNav({
               "sticky top-0 z-50 -mt-10",                        // pull it over content
               "rounded-full mx-auto mt-4 max-w-4xl w-full px-3 md:px-2",
               isScrolled
-                ? "bg-[#0E0F12]/80 backdrop-blur-sm backdrop-saturate-200 border border-[#24262E]"
+                ? "bg-background/80 backdrop-blur-sm backdrop-saturate-200 border border-[#24262E]"
                 : "border-none"
             )}
           >

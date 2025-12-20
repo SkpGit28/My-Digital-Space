@@ -13,12 +13,13 @@ export default function TrustRevenueCaseStudy() {
         <main className="relative">
             {/* Hero Section with Gradient Background - Sticky */}
             <section
-                className="sticky top-0 min-h-screen -mt-32 pt-32 flex flex-col items-center justify-center overflow-hidden"
+                className="sticky top-0 min-h-screen -mt-32 pt-32 flex flex-col items-center justify-center overflow-hidden bg-dynamic-gradient z-10"
                 style={{
-                    background: "linear-gradient(90deg, #47A3FF 0%, #007FFF 38%, #007FFF 100%)",
-                }}
+                    "--color-start": "#2BACE0",
+                    "--color-end": "#166C8F",
+                } as React.CSSProperties}
             >
-                <Container>
+                <Container className="max-w-none">
                     <div className="relative z-10 text-center">
                         {/* Heading */}
                         <motion.h1
@@ -32,7 +33,7 @@ export default function TrustRevenueCaseStudy() {
 
                         {/* Mockup Image */}
                         <motion.div
-                            className="relative w-full max-w-2xl mx-auto mt-12"
+                            className="relative w-full max-w-5xl mx-auto my-[-40px]"
                             initial={{ opacity: 0, y: 24 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: dur, ease, delay: 0.3 }}
@@ -55,7 +56,7 @@ export default function TrustRevenueCaseStudy() {
             </section>
 
             {/* Content Section - Scrolls over the hero */}
-            <section className="relative z-20 py-20 rounded-t-3xl shadow-2xl" style={{ backgroundColor: '#15161A' }}>
+            <section className="relative z-20 py-20 rounded-t-3xl shadow-2xl bg-background">
                 <Container>
                     <div className="max-w-4xl mx-auto space-y-12">
                         <motion.div

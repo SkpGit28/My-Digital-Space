@@ -39,8 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body
-        className={`${manrope.variable} antialiased font-sans min-h-screen transition-colors duration-300`}
-        style={{ backgroundColor: '#0E0F12' }}
+        className={`${manrope.variable} antialiased font-sans min-h-screen bg-background transition-colors duration-300`}
       >
         <ThemeProviderWrapper>
           <ScrollProgress />

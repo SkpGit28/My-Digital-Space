@@ -147,6 +147,23 @@
   color: rgba(249, 250, 251, 0.8);
 }
 
+/* globals.css */
+.bg-dynamic-gradient {
+  /* We use variables that will be provided by React */
+  background: linear-gradient(180deg,
+      var(--color-start) 20%,
+      var(--color-end) 100%);
+}
+
+.bg-dynamic-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, white, transparent);
+  opacity: 0.1;
+  /* Adds a subtle highlight regardless of the color */
+}
+
 .c-work__item-link {
   width: max-content;
   padding: 10px 22px;
@@ -194,10 +211,11 @@
 
 :root {
   /* Foundation Colors - Dark Only */
-  --background: #0E0F12;
+  --background: #15161A;
   --surface: #15161A;
   --elevated: #1B1D23;
   --border-subtle: #24262E;
+  --footer-bg: #0A0A0A;
 
   /* Text Colors */
   --text-primary: #E5ECF5;
@@ -210,6 +228,7 @@
 /* v4: @theme is valid */
 @theme inline {
   --color-background: var(--background);
+  --color-footer-bg: var(--footer-bg);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
