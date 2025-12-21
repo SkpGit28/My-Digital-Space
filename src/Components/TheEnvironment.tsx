@@ -37,7 +37,7 @@ const TheEnvironment: React.FC = () => {
             <Container>
                 <div className="flex flex-col gap-16">
                     {/* Narrative Section */}
-                    <div className="relative pl-6 max-w-3xl">
+                    <div className="relative pl-6 max-w-5xl">
                         {/* Vertical Accent Line */}
                         <div className="absolute top-0 left-0 w-1 h-full bg-text-accent/50" />
 

@@ -33,7 +33,7 @@ const StrategyBridge: React.FC = () => {
                             </span>
                         </h3>
 
-                        <p className="text-slate-400 text-xl leading-relaxed max-w-3xl mx-auto">
+                        <p className="text-slate-400 text-xl leading-relaxed max-w-5xl mx-auto">
                             When money is involved, patience is zero. If a merchant has to look three different places or click several buttons to find their payout, they start panicking. My logic was simple: Don't make them hunt.
                         </p>
                     </div>

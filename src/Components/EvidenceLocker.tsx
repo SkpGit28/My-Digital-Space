@@ -15,7 +15,7 @@ const EvidenceLocker: React.FC = () => {
 
                     {/* Narrative Section */}
                     <div className="flex flex-col md:flex-row justify-between items-center gap-12">
-                        <div className="max-w-4xl relative pl-6">
+                        <div className="max-w-6xl relative pl-6">
                             {/* Vertical Accent Line */}
                             <div className="absolute top-0 left-0 w-1 h-full bg-text-accent/50" />
 

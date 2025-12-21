@@ -56,23 +56,23 @@ export default function AboutPage() {
               variants={contentVariants}
               initial="hidden"
               animate="visible"
-              className="max-w-3xl mx-auto"
+              className="max-w-5xl mx-auto"
             >
               <div className="space-y-6 text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
                 <p>
-                  Hi! I'm <strong className="text-gray-900 dark:text-white">Sushant Kumar</strong>, a UI/UX Designer passionate about creating 
-                  intuitive and delightful digital experiences. I specialize in product design, design systems, 
+                  Hi! I'm <strong className="text-gray-900 dark:text-white">Sushant Kumar</strong>, a UI/UX Designer passionate about creating
+                  intuitive and delightful digital experiences. I specialize in product design, design systems,
                   and bringing thoughtful solutions to complex problems.
                 </p>
 
                 <p>
-                  With a strong focus on user research, interface design, and accessibility, I've worked on 
-                  projects spanning fintech, healthcare, e-commerce, and SaaS platforms. My approach combines 
+                  With a strong focus on user research, interface design, and accessibility, I've worked on
+                  projects spanning fintech, healthcare, e-commerce, and SaaS platforms. My approach combines
                   strategic thinking with attention to detail, ensuring every pixel serves a purpose.
                 </p>
 
                 <p>
-                  When I'm not designing, you'll find me exploring new design trends, contributing to open-source 
+                  When I'm not designing, you'll find me exploring new design trends, contributing to open-source
                   projects, or sharing insights about UX and product design with the community.
                 </p>
 
@@ -105,7 +105,7 @@ export default function AboutPage() {
                     Let's Connect
                   </h2>
                   <p>
-                    I'm always open to discussing new projects, creative ideas, or opportunities to be part of 
+                    I'm always open to discussing new projects, creative ideas, or opportunities to be part of
                     your vision. Feel free to reach out through email or connect with me on LinkedIn.
                   </p>
                 </div>

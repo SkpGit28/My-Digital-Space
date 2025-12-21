@@ -87,7 +87,7 @@ const ProfilePivot: React.FC = () => {
                                 className="absolute inset-0 px-6 md:px-12 pb-12 flex flex-col items-center justify-start pt-[80px]"
                             >
                                 {/* The Identity Hub UI */}
-                                <div className="w-full max-w-3xl border border-text-accent/20 bg-background rounded-[2.5rem] p-8 md:p-10 shadow-[0_0_50px_rgba(22,108,143,0.1)] relative overflow-hidden mt-10">
+                                <div className="w-full max-w-5xl border border-text-accent/20 bg-background rounded-[2.5rem] p-8 md:p-10 shadow-[0_0_50px_rgba(22,108,143,0.1)] relative overflow-hidden mt-10">
                                     {/* Background glow */}
                                     <div className="absolute -top-24 -right-24 w-80 h-80 bg-text-accent/5 rounded-full blur-[100px] pointer-events-none" />
 

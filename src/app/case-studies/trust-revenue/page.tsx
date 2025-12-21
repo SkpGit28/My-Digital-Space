@@ -101,7 +101,7 @@ export default function TrustRevenueCaseStudy() {
                                         <span className="text-slate-500">over Generic Personas.</span>
                                     </h3>
 
-                                    <div className="relative bg-elevated/80 p-8 rounded-xl border border-border-subtle max-w-4xl">
+                                    <div className="relative bg-elevated/80 p-8 rounded-xl border border-border-subtle max-w-6xl">
                                         {/* SVG Quote Icon */}
                                         <svg
                                             className="absolute top-6 left-6 text-slate-700 w-8 h-8 opacity-50"
@@ -176,7 +176,7 @@ export default function TrustRevenueCaseStudy() {
                 {/* Content Section */}
                 <section className="relative py-20">
                     <Container>
-                        <div className="max-w-4xl mx-auto space-y-12">
+                        <div className="max-w-6xl mx-auto space-y-12">
                             <motion.div
                                 initial={{ opacity: 0, y: 16 }}
                                 whileInView={{ opacity: 1, y: 0 }}
