@@ -174,7 +174,7 @@ export default function TopNav({
               "sticky top-0 z-50 -mt-10",                        // pull it over content
               "rounded-full mx-auto mt-4 max-w-4xl w-full px-3 md:px-2",
               isScrolled
-                ? "bg-background/80 backdrop-blur-sm backdrop-saturate-200 border border-[#24262E]"
+                ? "bg-background/80 backdrop-blur-sm backdrop-saturate-200 border border-[var(--nav-border)]"
                 : "border-none"
             )}
           >

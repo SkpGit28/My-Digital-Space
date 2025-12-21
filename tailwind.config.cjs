@@ -12,9 +12,10 @@ module.exports = {
         sans: ['Manrope', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        primary: '#0070F3',
+        primary: 'var(--primary)',
         secondary: '#7928CA',
         border: '#EAEAEA',
+        'nav-border': '#24262E',
         background: 'var(--background)',
         foreground: '#000000',
         muted: '#666666',

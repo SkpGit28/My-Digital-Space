@@ -28,24 +28,24 @@ function UnderlineOnce({
       style={{ ["--uclr" as any]: color }}
     >
       {children}
-      
+
       {/* One-time sweep underline */}
-     <motion.span
-  aria-hidden
-  className="pointer-events-none absolute left-0 bottom-0 w-full origin-left"
-  style={{ 
-    backgroundColor: color,
-    height: "10%",
-  }}
-  initial={{ scaleX: 0, opacity: 1 }}
-  animate={{ scaleX: [0, 1, 1, 0], opacity: [1, 1, 1, 1] }}
-  transition={{
-    delay,
-    duration: 0.8,
-    times: [0, 0.2, 0.7, 1],
-    ease: "easeInOut",
-  }}
-/>
+      <motion.span
+        aria-hidden
+        className="pointer-events-none absolute left-0 bottom-0 w-full origin-left"
+        style={{
+          backgroundColor: color,
+          height: "10%",
+        }}
+        initial={{ scaleX: 0, opacity: 1 }}
+        animate={{ scaleX: [0, 1, 1, 0], opacity: [1, 1, 1, 1] }}
+        transition={{
+          delay,
+          duration: 0.8,
+          times: [0, 0.2, 0.7, 1],
+          ease: "easeInOut",
+        }}
+      />
 
 
 
@@ -129,14 +129,14 @@ export default function Hero() {
         >
           <span className="text-gray-400 font-light">I like{" "}</span>
 
-        <UnderlineOnce
-          color="#10B981"
-          delay={prefersReducedMotion ? 0 : 1.10}  // one-time sweep shortly after H2 appears
-          onEnter={() => setSlide(1)}
-          onLeave={() => setSlide(0)}
-        >
-          designing
-        </UnderlineOnce>
+          <UnderlineOnce
+            color="#10B981"
+            delay={prefersReducedMotion ? 0 : 1.10}  // one-time sweep shortly after H2 appears
+            onEnter={() => setSlide(1)}
+            onLeave={() => setSlide(0)}
+          >
+            designing
+          </UnderlineOnce>
 
 
           ,{" "}

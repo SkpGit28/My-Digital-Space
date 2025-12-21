@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
 @import "tailwindcss";
 
 .u-underline::after {
@@ -217,9 +218,11 @@
   --border-subtle: #24262E;
   --footer-bg: #0A0A0A;
 
+  /* Nav Border */
+  --nav-border: #24262E;
   /* Text Colors */
   --text-primary: #E5ECF5;
-  --text-accent: #70B7FF;
+  --primary: #70B7FF;
 
   /* Legacy support */
   --foreground: #E5ECF5;
@@ -228,10 +231,15 @@
 /* v4: @theme is valid */
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-elevated: var(--elevated);
+  --color-border-subtle: var(--border-subtle);
+  --color-primary: var(--primary);
+  --color-text-accent: var(--project-accent, var(--primary));
   --color-footer-bg: var(--footer-bg);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-manrope);
+  --font-mono: var(--font-manrope);
+  --color-nav-border: var(--nav-border);
 }
 
 body {

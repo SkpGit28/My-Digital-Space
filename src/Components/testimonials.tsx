@@ -131,12 +131,12 @@ export default function Testimonials() {
           We change the 'div' to 'motion.div' and pass in the animation props.
         */}
         <motion.div
-  className="flex items-center gap-3 mb-10"
-  initial={fadeInFromDown.initial}
-  whileInView={fadeInFromDown.whileInView}
-  viewport={fadeInFromDown.viewport}
-  transition={{ ...fadeTransition, delay: 0.1 }}
->
+          className="flex items-center gap-3 mb-10"
+          initial={fadeInFromDown.initial}
+          whileInView={fadeInFromDown.whileInView}
+          viewport={fadeInFromDown.viewport}
+          transition={{ ...fadeTransition, delay: 0.1 }}
+        >
           {/* <svg
             className="w-8 h-8 text-[#70B7FF]"
             viewBox="0 0 24 24"
@@ -150,91 +150,91 @@ export default function Testimonials() {
           </h2>
         </motion.div>
 
-       <div className="grid md:grid-cols-2 gap-8">
-  {testimonials.map((t, i) => {
-    const [titlePart, companyPart] = t.role.split(",");
-    return (
-      <motion.article
-  key={i}
-  initial={fadeInFromDown.initial}
-  whileInView={fadeInFromDown.whileInView}
-  viewport={fadeInFromDown.viewport}
-  transition={{ ...fadeTransition, delay: 0.3 + i * 0.2 }}
->
-  <div
-    className={[
-      "relative group",
-      // Base background + rounded
-      "bg-gradient-to-br from-white/5 to-white/[0.02] rounded-2xl p-8",
-      // Base border
-      "border border-white/10",
-      // Hover → brand outline + glow
-      "group-hover:border-[#70B7FF] group-hover:shadow-[0_0_22px_rgba(112,183,255,0.25)]",
-      // Smooth animation
-      "transition-all duration-300",
-      // Flex layout
-      "h-full flex flex-col"
-    ].join(" ")}
-  >
-    {/* Corner Quote Icon */}
-    <svg
-      className="
+        <div className="grid md:grid-cols-2 gap-8">
+          {testimonials.map((t, i) => {
+            const [titlePart, companyPart] = t.role.split(",");
+            return (
+              <motion.article
+                key={i}
+                initial={fadeInFromDown.initial}
+                whileInView={fadeInFromDown.whileInView}
+                viewport={fadeInFromDown.viewport}
+                transition={{ ...fadeTransition, delay: 0.3 + i * 0.2 }}
+              >
+                <div
+                  className={[
+                    "relative group",
+                    // Base background + rounded
+                    "bg-gradient-to-br from-white/5 to-white/[0.02] rounded-2xl p-8",
+                    // Base border
+                    "border border-white/10",
+                    // Hover → brand outline + glow
+                    "group-hover:border-[#70B7FF] group-hover:shadow-[0_0_22px_rgba(112,183,255,0.25)]",
+                    // Smooth animation
+                    "transition-all duration-300",
+                    // Flex layout
+                    "h-full flex flex-col"
+                  ].join(" ")}
+                >
+                  {/* Corner Quote Icon */}
+                  <svg
+                    className="
         absolute top-5 left-5 w-8 h-8
         text-white/30
         transition-all duration-300
         group-hover:text-[#70B7FF]
         group-hover:drop-shadow-[0_0_10px_rgba(112,183,255,0.45)]
       "
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-    </svg>
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                  </svg>
 
-    {/* Quote */}
-    <p className="text-white/80 text-base leading-relaxed mb-6 flex-grow mt-10">
-      <Highlighted text={t.quote} terms={t.highlights} />
-    </p>
+                  {/* Quote */}
+                  <p className="text-white/80 text-base leading-relaxed mb-6 flex-grow mt-10">
+                    <Highlighted text={t.quote} terms={t.highlights} />
+                  </p>
 
-    {/* Author */}
-    <div className="flex items-center gap-4 pt-4 border-t border-white/10">
-      <Avatar src={t.image} name={t.name} priority={i === 0} />
-      <div>
-        <p className="text-white font-medium flex items-center gap-2">
-          {t.name}
-          {t.linkedin && (
-            <a
-              href={t.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${t.name} LinkedIn`}
-              className="text-[#70B7FF] hover:text-[#9ccfff] transition-colors"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0V8zm7.5 0h4.6v2.3h.1c.6-1.1 2-2.3 4.2-2.3 4.5 0 5.3 3 5.3 6.8V24h-5v-7.6c0-1.8 0-4.1-2.5-4.1-2.5 0-2.9 1.9-2.9 3.9V24h-5V8z" />
-              </svg>
-            </a>
-          )}
-        </p>
+                  {/* Author */}
+                  <div className="flex items-center gap-4 pt-4 border-t border-white/10">
+                    <Avatar src={t.image} name={t.name} priority={i === 0} />
+                    <div>
+                      <p className="text-white font-medium flex items-center gap-2">
+                        {t.name}
+                        {t.linkedin && (
+                          <a
+                            href={t.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${t.name} LinkedIn`}
+                            className="text-[#70B7FF] hover:text-[#9ccfff] transition-colors"
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0V8zm7.5 0h4.6v2.3h.1c.6-1.1 2-2.3 4.2-2.3 4.5 0 5.3 3 5.3 6.8V24h-5v-7.6c0-1.8 0-4.1-2.5-4.1-2.5 0-2.9 1.9-2.9 3.9V24h-5V8z" />
+                            </svg>
+                          </a>
+                        )}
+                      </p>
 
-        <p className="text-white/60 text-sm">
-          {titlePart?.trim()}
-          {companyPart && (
-            <>
-              , <span className="text-white/80 font-medium">{companyPart.trim()}</span>
-            </>
-          )}
-        </p>
-      </div>
-    </div>
-  </div>
-</motion.article>
+                      <p className="text-white/60 text-sm">
+                        {titlePart?.trim()}
+                        {companyPart && (
+                          <>
+                            , <span className="text-white/80 font-medium">{companyPart.trim()}</span>
+                          </>
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.article>
 
 
-    );
-  })}
-</div>
+            );
+          })}
+        </div>
 
       </Container>
     </section>
