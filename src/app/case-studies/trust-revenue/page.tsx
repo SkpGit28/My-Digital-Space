@@ -10,6 +10,7 @@ import EvidenceLocker from "@/Components/EvidenceLocker";
 import ProfilePivot from "@/Components/ProfilePivot";
 import AtomicDesign from "@/Components/AtomicDesign";
 import TheEnvironment from "@/Components/TheEnvironment";
+import Ecosystem from "@/Components/Ecosystem";
 
 export default function TrustRevenueCaseStudy() {
     const prefersReducedMotion = useReducedMotion();
@@ -171,7 +172,25 @@ export default function TrustRevenueCaseStudy() {
 
                 <AtomicDesign />
 
+                {/* Figma Board Embed */}
+                <section className="py-24 max-w-6xl mx-auto relative overflow-hidden bg-background">
+                    <Container>
+                        <div className="flex justify-center">
+                            <iframe
+                                style={{ border: '1px solid rgba(0, 0, 0, 0.1)' }}
+                                width="800"
+                                height="450"
+                                src="https://embed.figma.com/board/ORiTOi4B8WngVloxuRNs1K/LowLevelArc?node-id=1-2&embed-host=share"
+                                allowFullScreen
+                                className="rounded-2xl shadow-2xl"
+                            />
+                        </div>
+                    </Container>
+                </section>
+
                 <TheEnvironment />
+
+                <Ecosystem />
 
                 {/* Content Section */}
                 <section className="relative py-20">
