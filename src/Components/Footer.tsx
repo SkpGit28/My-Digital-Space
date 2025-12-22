@@ -37,9 +37,8 @@ export default function Footer() {
           {/* 4. Animate the "Let's build" button */}
           <a
             href="mailto:skponpurpose@gmail.com"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#70B7FF] to-[#4D9EFF] text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200 hover:opacity-90"
-          >
-            Let&apos;s build
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#70B7FF] to-[#4D9EFF] text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200 hover:opacity-90">
+            Connect
             <svg
               className="w-4 h-4"
               viewBox="0 0 24 24"

@@ -11,6 +11,8 @@ import ProfilePivot from "@/Components/ProfilePivot";
 import AtomicDesign from "@/Components/AtomicDesign";
 import TheEnvironment from "@/Components/TheEnvironment";
 import Ecosystem from "@/Components/Ecosystem";
+import Outcome from "@/Components/Outcome";
+import Footer from "@/Components/Footer";
 
 export default function TrustRevenueCaseStudy() {
     const prefersReducedMotion = useReducedMotion();
@@ -178,9 +180,9 @@ export default function TrustRevenueCaseStudy() {
                         <div className="flex justify-center">
                             <iframe
                                 style={{ border: '1px solid rgba(0, 0, 0, 0.1)' }}
-                                width="800"
+                                width="1156"
                                 height="450"
-                                src="https://embed.figma.com/board/ORiTOi4B8WngVloxuRNs1K/LowLevelArc?node-id=1-2&embed-host=share"
+                                src="https://embed.figma.com/board/ORiTOi4B8WngVloxuRNs1K/FlowsOnly?node-id=0-1&embed-host=share"
                                 allowFullScreen
                                 className="rounded-2xl shadow-2xl"
                             />
@@ -192,67 +194,12 @@ export default function TrustRevenueCaseStudy() {
 
                 <Ecosystem />
 
-                {/* Content Section */}
-                <section className="relative py-20">
-                    <Container>
-                        <div className="max-w-6xl mx-auto space-y-12">
-                            <motion.div
-                                initial={{ opacity: 0, y: 16 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6 }}
-                            >
-                                <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
-                                    Overview
-                                </h2>
-                                <p className="text-lg text-gray-400 leading-relaxed mb-4">
-                                    This case study explores how we shipped an MVP without writing code,
-                                    leveraging AI to take the product lifecycle from research to version 1.
-                                </p>
-                                <p className="text-lg text-gray-400 leading-relaxed">
-                                    The challenge was to validate a product idea quickly and efficiently,
-                                    while maintaining a high standard of user experience and design quality.
-                                </p>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ opacity: 0, y: 16 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: 0.1 }}
-                            >
-                                <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4">
-                                    The Problem
-                                </h3>
-                                <p className="text-lg text-gray-400 leading-relaxed">
-                                    In early-stage startups, building trust with users is often more critical
-                                    than generating revenue. We needed to validate this hypothesis through
-                                    rapid prototyping and user testing.
-                                </p>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ opacity: 0, y: 16 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: 0.2 }}
-                            >
-                                <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4">
-                                    The Approach
-                                </h3>
-                                <p className="text-lg text-gray-400 leading-relaxed">
-                                    Using AI-powered tools and no-code platforms, we were able to design,
-                                    prototype, and test our product idea in a fraction of the time it would
-                                    have taken with traditional development approaches.
-                                </p>
-                            </motion.div>
-
-                            {/* Add more content sections as needed */}
-                            <div className="h-96"></div>
-                        </div>
-                    </Container>
-                </section>
+                <Outcome />
+               <Footer />
             </div>
+           
         </main>
+            
+        
     );
 }
