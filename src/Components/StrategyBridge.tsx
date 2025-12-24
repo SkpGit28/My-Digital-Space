@@ -46,7 +46,7 @@ const StrategyBridge: React.FC = () => {
     });
 
     return (
-        <section className="py-32 relative overflow-hidden bg-background">
+        <section className="py-24 relative overflow-hidden bg-background">
             <Container>
                 <div className="max-w-5xl mx-auto">
                     <div className="text-center">

@@ -42,7 +42,7 @@ const Outcome: React.FC = () => {
         <section className="py-24 relative overflow-hidden bg-background">
             <Container>
                 <div className="flex flex-col gap-16">
-                    
+
 
                     {/* Big Number Section with Gradient */}
                     <motion.div
@@ -72,7 +72,7 @@ const Outcome: React.FC = () => {
 
                     {/* Three Content Sections - Receipt Style Layout */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {/* Outcome */}
+                        {/* Native Mobile App */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -81,14 +81,14 @@ const Outcome: React.FC = () => {
                             className="bg-elevated border border-border-subtle rounded-2xl p-8"
                         >
                             <h4 className="text-text-accent font-mono text-xs tracking-widest uppercase mb-4">
-                                Outcome
+                                NATIVE MOBILE APP
                             </h4>
                             <p className="text-slate-400 text-sm leading-relaxed">
-                                Within five weeks of implementation, the platform processed ₹1.2 Cr in transactions—indicating early merchant trust and stability in the core payment and settlement flows.
+                                Designed and developed for more accessibility. We expanded beyond the web to ship a native mobile app, ensuring critical alerts and settlement tracking were accessible to merchants in the field—meeting them where they work.
                             </p>
                         </motion.div>
 
-                        {/* What This Work Unlocked */}
+                        {/* What I Learned */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -97,10 +97,10 @@ const Outcome: React.FC = () => {
                             className="bg-elevated border border-border-subtle rounded-2xl p-8"
                         >
                             <h4 className="text-text-accent font-mono text-xs tracking-widest uppercase mb-4">
-                                What This Work Unlocked
+                                WHAT I LEARNED
                             </h4>
                             <p className="text-slate-400 text-sm leading-relaxed">
-                                The decisions made here established a reliable foundation for expanding into refunds, disputes, analytics, and compliance workflows without introducing cognitive overhead into high-stakes interactions.
+                                Real impact comes from aligning business goals with user psychology. I learned that clarity reduces anxiety, and trust is built through consistent, transparent communication. I'm eager to bring this user-first, data-backed approach to future problems.
                             </p>
                         </motion.div>
 

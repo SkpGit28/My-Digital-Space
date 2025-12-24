@@ -99,7 +99,7 @@ export default function TrustRevenueCaseStudy() {
                 </div>
 
                 {/* Founder Intelligence Section */}
-                <section className="relative py-24 overflow-hidden">
+                <section className="relative pt-24 pb-0 overflow-hidden">
                     <Container>
                         <div>
                             <div className="mb-12 relative flex">
@@ -140,7 +140,7 @@ export default function TrustRevenueCaseStudy() {
                 </section>
 
                 {/* Archetypes Section */}
-                <section className="relative py-24">
+                <section className="relative pt-12 pb-24">
                     <Container >
                         <div className="max-w-6xl mx-auto">
                             <div className="grid md:grid-cols-2 gap-8">
