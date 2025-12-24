@@ -93,6 +93,8 @@ const BoringView: React.FC<BoringViewProps> = ({ onSwitch }) => {
     );
 };
 
+import TextScramble from "@/Components/TextScramble";
+
 const ProfilePivot: React.FC = () => {
     const [view, setView] = useState<'boring' | 'hub'>('hub');
 
@@ -110,7 +112,7 @@ const ProfilePivot: React.FC = () => {
 
                         <div className="pl-8">
                             <h2 className="text-sm font-mono text-text-accent tracking-widest mb-2 uppercase">
-                                STORY_02 // THE OPERATIONS HUB
+                                <TextScramble>STORY_02 // THE OPERATIONS HUB</TextScramble>
                             </h2>
                             <h3 className="text-3xl md:text-5xl font-bold mb-4 text-white tracking-tight">
                                 Profile  to Business Continuity

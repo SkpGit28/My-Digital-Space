@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Lock, FileX, CheckCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import Container from '@/Components/container';
 
+import TextScramble from "@/Components/TextScramble";
+
 const rejectedDesigns = [
     { src: '/assets/Banner.png', alt: 'Rejected Banner' },
     { src: '/assets/TopLeft.png', alt: 'Rejected Sidebar' }
@@ -35,7 +37,7 @@ const EvidenceLocker: React.FC = () => {
 
                             <div className="pl-8">
                                 <h2 className="text-sm font-mono text-text-accent tracking-widest mb-2 uppercase">
-                                    STORY_01 // EVIDENCE LOCKER
+                                    <TextScramble>STORY_01 // EVIDENCE LOCKER</TextScramble>
                                 </h2>
                                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 tracking-tight">
                                     The Revenue Generator

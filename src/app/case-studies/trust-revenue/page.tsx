@@ -14,6 +14,8 @@ import Ecosystem from "@/Components/Ecosystem";
 import Outcome from "@/Components/Outcome";
 import Footer from "@/Components/Footer";
 
+import TextScramble from "@/Components/TextScramble";
+
 export default function TrustRevenueCaseStudy() {
     const prefersReducedMotion = useReducedMotion();
     const ease = [0.16, 1, 0.3, 1] as const;
@@ -106,7 +108,7 @@ export default function TrustRevenueCaseStudy() {
 
                                 <div className="pl-8">
                                     <h2 className="text-sm font-mono text-text-accent tracking-widest mb-2 uppercase">
-                                        SOURCE: CEO_INTEL_LOG_V4
+                                        <TextScramble>SOURCE: CEO_INTEL_LOG_V4</TextScramble>
                                     </h2>
                                     <h3 className="text-3xl md:text-5xl font-bold mb-8 leading-tight tracking-tight">
                                         <span className="text-white">Leveraging Founder Intelligence</span><br />

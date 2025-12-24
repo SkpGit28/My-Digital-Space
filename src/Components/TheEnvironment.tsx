@@ -5,6 +5,7 @@ import * as d3 from 'd3';
 import { motion } from 'framer-motion';
 import { LogIn, UserPlus, ShieldCheck, Wallet } from 'lucide-react';
 import Container from '@/Components/container';
+import TextScramble from "@/Components/TextScramble";
 
 const TheEnvironment: React.FC = () => {
     // Create a multi-step sigmoid curve path using D3
@@ -43,7 +44,7 @@ const TheEnvironment: React.FC = () => {
 
                         <div className="pl-8">
                             <h2 className="text-sm font-mono text-text-accent tracking-widest mb-2 uppercase">
-                                STORY_04 // THE_ENVIRONMENT
+                                <TextScramble>STORY_04 // THE_ENVIRONMENT</TextScramble>
                             </h2>
                             <h3 className="text-3xl md:text-5xl font-bold mb-4 text-white tracking-tight">
                                 The End-to-End Flow

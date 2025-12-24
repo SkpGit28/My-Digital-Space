@@ -5,6 +5,8 @@ import * as d3 from 'd3';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import Container from '@/Components/container';
 
+import TextScramble from "@/Components/TextScramble";
+
 const StrategyBridge: React.FC = () => {
     const pathRef = useRef<SVGPathElement>(null);
     const [pathLength, setPathLength] = useState(0);
@@ -49,7 +51,7 @@ const StrategyBridge: React.FC = () => {
                 <div className="max-w-5xl mx-auto">
                     <div className="text-center">
                         <h2 className="text-sm font-mono text-text-accent tracking-widest mb-2 uppercase">
-                            STRATEGY_PROTOCOL // ABSORPTION_LAYER
+                            <TextScramble>STRATEGY_PROTOCOL // ABSORPTION_LAYER</TextScramble>
                         </h2>
                         <h3 className="text-3xl md:text-5xl font-bold mb-8 leading-tight tracking-tight text-white">
                             Reducing friction in high <br />
