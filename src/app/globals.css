@@ -1,189 +1,335 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
 @import "tailwindcss";
 
-.u-underline::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 6px;
-  width: 100%;
-  height: 10%;
-  background-color: var(--uclr, currentColor);
-  z-index: -1;
-  transform: scaleX(0);
-  transform-origin: right;
-  /* Important: shrinks to RIGHT */
-  transition: transform 0.3s ease;
+
+@theme {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-elevated: var(--elevated);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-border-subtle: var(--border-subtle);
+  --color-nav-border: var(--nav-border);
+  --color-footer-bg: var(--footer-bg);
+
+  --color-status-rose: var(--status-rose);
+  --color-status-orange: var(--status-orange);
+  --color-status-blue: var(--status-blue);
+  --color-status-emerald: var(--status-emerald);
+
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+
+  --color-work-card-bg: var(--work-card-bg);
+  --color-work-card-border: var(--work-card-border);
+  --color-work-card-text: var(--work-card-text);
+
+  /* Brand tokens for Trust Revenue */
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-primary-dark: var(--brand-primary-dark);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-accent: var(--text-accent);
+  --color-border-accent: var(--border-accent);
+
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-base: var(--shadow-base);
+  --shadow-md: var(--shadow-md);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-glow: var(--shadow-glow);
 }
 
-.u-underline:hover::after,
-.u-underline:focus-visible::after {
-  transform: scaleX(1);
-  transform-origin: left;
-  /* Grows from LEFT on hover */
+@layer base {
+  :root {
+    /* =========================================
+       LIGHT MODE (New Physics)
+       ========================================= */
+    /* STRUCTURE */
+    --background: #FAFAFA;
+    /* Zinc-50: Softer than pure white */
+    --surface: #FFFFFF;
+    /* Pure White for cards */
+    --elevated: #FFFFFF;
+    /* Light mode uses Shadow for elevation, not lightness */
+    --footer-bg: #F4F4F5;
+    /* Zinc-100 */
+
+    /* BORDERS & DIVIDERS */
+    /* Using opacity so they blend with any background */
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --nav-border: rgba(0, 0, 0, 0.05);
+
+    /* TEXT */
+    --text-primary: #18181B;
+    /* Zinc-900: Soft Black */
+    --text-secondary: #71717A;
+    /* Zinc-500 */
+    --foreground: #18181B;
+
+    /* BRANDING */
+    /* Darker blue needed for Light Mode contrast against white */
+    --primary: #0284C7;
+    /* Sky-600 */
+    --primary-foreground: #FFFFFF;
+
+    /* STATUS COLORS (From Hardcoded) */
+    --status-rose: #E11D48;
+    /* Rose-600 */
+    --status-orange: #D97706;
+    /* Amber-600 */
+    --status-blue: #2563EB;
+    /* Blue-600 */
+    --status-emerald: #059669;
+    /* Emerald-600 */
+
+    /* SPECIALTY: GLASS NAV */
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(0, 0, 0, 0.05);
+
+    /* SPECIALTY: WORK CARDS */
+    --work-card-bg: #FFFFFF;
+    --work-card-border: rgba(0, 0, 0, 0.06);
+    --work-card-text: #18181B;
+
+    /* SPECIALTY: SCROLLBAR */
+    --scrollbar-thumb: rgba(0, 0, 0, 0.2);
+    --scrollbar-track: transparent;
+
+    /* =========================================
+       SHADOW SYSTEM (Physics)
+       ========================================= */
+    /* Delicate shadows for light mode */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.01);
+
+    /* THE TINTED GLOW FIX */
+    /* Subtle Brand Blue Tint instead of dirty black smudge */
+    --shadow-glow: 0 0 40px rgba(14, 165, 233, 0.15);
+
+    /* =========================================
+       TRUST REVENUE BRAND TOKENS
+       ========================================= */
+    /* Primary brand colors for Trust Revenue case study */
+    --brand-primary: #2BACE0;
+    --brand-primary-dark: #166C8F;
+
+    /* Semantic text colors */
+    --text-tertiary: #CBD5E1;
+    /* slate-300 for de-emphasized text */
+    --text-accent: #70B7FF;
+    /* Accent text color */
+
+    /* Border accent for special cases */
+    --border-accent: rgba(255, 255, 255, 0.05);
+  }
+
+  /* =========================================
+     DARK MODE (Your Original Colors)
+     ========================================= */
+  .dark {
+    /* STRUCTURE */
+    --background: #15161A;
+    /* Your Original Base */
+    --surface: #15161A;
+    /* Your Original Surface */
+    --elevated: #1B1D23;
+    /* Your Original Elevated */
+    --footer-bg: #0A0A0A;
+    /* Your Original Footer */
+
+    /* BORDERS */
+    --border-subtle: #24262E;
+    /* Your Original Border */
+    --nav-border: #24262E;
+
+    /* TEXT */
+    --text-primary: #E5ECF5;
+    /* Your Original Text */
+    --text-secondary: #94A3B8;
+    /* Slate-400 */
+    --foreground: #E5ECF5;
+
+    /* BRANDING */
+    --primary: #70B7FF;
+    /* Your Original Blue */
+    --primary-foreground: #000000;
+
+    /* STATUS COLORS (Lighter for Dark Mode) */
+    --status-rose: #f43f5e;
+    --status-orange: #f59e0b;
+    --status-blue: #3b82f6;
+    --status-emerald: #10b981;
+
+    /* SPECIALTY: GLASS NAV */
+    --glass-bg: rgba(15, 23, 42, 0.78);
+    --glass-border: rgba(255, 255, 255, 0.05);
+
+    /* SPECIALTY: WORK CARDS */
+    /* Using your original gradient concept */
+    --work-card-bg: radial-gradient(circle at top left, #1f2933, #020617);
+    --work-card-border: rgba(255, 255, 255, 0.06);
+    --work-card-text: #f9fafb;
+
+    /* SPECIALTY: SCROLLBAR */
+    --scrollbar-thumb: rgba(255, 255, 255, 0.1);
+
+    /* SHADOWS (Rim Lighting logic) */
+    --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.05);
+    --shadow-base: 0 0 0 1px rgba(255, 255, 255, 0.05);
+    --shadow-md: 0 0 0 1px rgba(255, 255, 255, 0.08);
+    --shadow-xl: 0 0 0 1px rgba(255, 255, 255, 0.12);
+    --shadow-glow: 0 0 40px rgba(70, 183, 255, 0.1);
+    /* Brand color glow */
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    @apply antialiased transition-colors duration-300;
+  }
 }
 
+/* =========================================
+   COMPONENT UTILITIES
+   ========================================= */
 
 @layer components {
+
+  /* Glass Navigation */
   .glass-nav {
-    position: relative;
-    border-radius: 9999px;
-    /* pill */
-    overflow: hidden;
-    /* keep blur inside the pill */
+    @apply relative rounded-full overflow-hidden;
   }
 
   .glass-nav::before {
     content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-
-    /* frosted background layer */
-    background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.35), transparent 60%),
-      radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.3), transparent 55%),
-      rgba(15, 23, 42, 0.78);
-    /* slate-900 with some tint */
-
+    @apply absolute inset-0 rounded-[inherit] opacity-95;
+    background: var(--glass-bg);
     backdrop-filter: blur(24px) saturate(160%);
     -webkit-backdrop-filter: blur(24px) saturate(160%);
-
     box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
-    opacity: 0.95;
-    /* tweak this if you want more/less see-through */
   }
 
   .glass-nav-inner {
-    position: relative;
-    z-index: 1;
-    /* sit above the blur layer */
+    @apply relative z-10;
   }
-}
 
-/* Work section container */
-.c-work {
-  width: min(1120px, 100%);
-  margin: 0 auto;
-}
+  /* Work Section Container */
+  .c-work {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+  }
 
-/* The list wrapper */
-.c-work__list {
-  display: grid;
-  gap: 40px;
-}
+  .c-work__list {
+    @apply grid gap-10;
+  }
 
-/* Each card */
-.c-work__item {
-  /* mobile: simple stacked cards, not sticky */
-  position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  background: radial-gradient(circle at top left, #1f2933, #020617);
-  color: #f9fafb;
-}
-
-/* Layout + sticky on tablet/desktop */
-@media (min-width: 768px) {
+  /* Work Card */
   .c-work__item {
-    position: sticky;
-    top: 120px;
-    /* adjust to sit nicely under your nav */
-    right: 0;
-    left: 0;
-
-    display: grid;
-    grid-template-columns: 0.3fr 0.7fr;
-    /* 30% text / 70% image */
-    grid-template-rows: minmax(360px, 70vh);
+    @apply relative rounded-3xl overflow-hidden transition-colors;
+    border: 1px solid var(--work-card-border);
+    background: var(--work-card-bg);
+    color: var(--work-card-text);
   }
-}
 
-/* Image side */
-.c-work__item-figure {
-  position: relative;
-  grid-column: 1 / -1;
-  grid-row: 1 / 2;
-}
+  @media (min-width: 768px) {
+    .c-work__item {
+      @apply sticky top-[120px] right-0 left-0;
+      display: grid;
+      grid-template-columns: 0.3fr 0.7fr;
+      grid-template-rows: minmax(360px, 70vh);
+    }
+  }
 
-@media (min-width: 768px) {
   .c-work__item-figure {
-    grid-column: 2 / -1;
-    /* image on the right */
-    grid-row: 1 / -1;
+    @apply relative;
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
   }
-}
 
-.c-work__item-image {
-  object-fit: cover;
-}
+  @media (min-width: 768px) {
+    .c-work__item-figure {
+      grid-column: 2 / -1;
+      grid-row: 1 / -1;
+    }
+  }
 
-/* Text side */
-.c-work__item-info {
-  grid-column: 1 / -1;
-  grid-row: 2 / -1;
-  padding: 32px;
-  display: grid;
-  align-content: center;
-  gap: 16px;
-  background: radial-gradient(circle at top left, #020617, #020617);
-}
+  .c-work__item-image {
+    @apply object-cover;
+  }
 
-@media (min-width: 768px) {
   .c-work__item-info {
-    grid-column: 1 / 2;
-    /* text on the left */
-    grid-row: 1 / -1;
+    @apply grid gap-4 p-8 content-center;
+    background-color: var(--background);
+    grid-column: 1 / -1;
+    grid-row: 2 / -1;
+  }
+
+  @media (min-width: 768px) {
+    .c-work__item-info {
+      grid-column: 1 / 2;
+      grid-row: 1 / -1;
+    }
+  }
+
+  .c-work__item-title {
+    @apply text-[28px] font-bold;
+  }
+
+  .c-work__item-excerpt {
+    @apply text-[15px] leading-relaxed opacity-80;
+  }
+
+  .c-work__item-link {
+    @apply w-max px-6 py-2.5 rounded-full border transition-all duration-300;
+    border-color: var(--border-subtle);
+    background-color: var(--elevated);
+    color: var(--foreground);
+  }
+
+  .c-work__item-link:hover {
+    background-color: var(--foreground);
+    color: var(--background);
+  }
+
+  /* Dynamic Gradient Background */
+  .bg-dynamic-gradient {
+    background: linear-gradient(180deg,
+        var(--color-start) 20%,
+        var(--color-end) 100%);
+  }
+
+  .bg-dynamic-gradient::before {
+    content: "";
+    @apply absolute inset-0 opacity-10 pointer-events-none;
+    background: radial-gradient(circle at top right, var(--surface), transparent);
+  }
+
+  /* Underline Animation */
+  .u-underline::after {
+    content: "";
+    @apply absolute left-0 bottom-1.5 w-full h-[10%] z-[-1];
+    background-color: var(--uclr, currentColor);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .u-underline:hover::after,
+  .u-underline:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 }
 
-.c-work__item-title {
-  font-size: 28px;
-  font-weight: 700;
-}
+/* =========================================
+   ANIMATIONS
+   ========================================= */
 
-.c-work__item-excerpt {
-  font-size: 15px;
-  line-height: 1.7;
-  color: rgba(249, 250, 251, 0.8);
-}
-
-/* globals.css */
-.bg-dynamic-gradient {
-  /* We use variables that will be provided by React */
-  background: linear-gradient(180deg,
-      var(--color-start) 20%,
-      var(--color-end) 100%);
-}
-
-.bg-dynamic-gradient::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at top right, white, transparent);
-  opacity: 0.1;
-  /* Adds a subtle highlight regardless of the color */
-}
-
-.c-work__item-link {
-  width: max-content;
-  padding: 10px 22px;
-  border-radius: 999px;
-  border: 1px solid rgba(248, 250, 252, 0.28);
-  text-decoration: none;
-  font-size: 14px;
-  background-color: rgba(15, 23, 42, 0.9);
-  color: #f9fafb;
-  transition: all 0.35s ease;
-}
-
-.c-work__item-link:hover {
-  background-color: #f9fafb;
-  color: #020617;
-}
-
-
-/* Scroll-driven scale animation (Chrome / Edge, etc.) */
 @keyframes work-card-in-out {
 
   0%,
@@ -196,7 +342,6 @@
   }
 }
 
-/* Apply to all but last card */
 @media (min-width: 768px) {
   @supports (animation-timeline: view()) {
     .c-work__item:not(:last-child) {
@@ -210,40 +355,29 @@
   }
 }
 
-:root {
-  /* Foundation Colors - Dark Only */
-  --background: #15161A;
-  --surface: #15161A;
-  --elevated: #1B1D23;
-  --border-subtle: #24262E;
-  --footer-bg: #0A0A0A;
+/* =========================================
+   CUSTOM SCROLLBAR
+   ========================================= */
 
-  /* Nav Border */
-  --nav-border: #24262E;
-  /* Text Colors */
-  --text-primary: #E5ECF5;
-  --primary: #70B7FF;
-
-  /* Legacy support */
-  --foreground: #E5ECF5;
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
 }
 
-/* v4: @theme is valid */
-@theme inline {
-  --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-elevated: var(--elevated);
-  --color-border-subtle: var(--border-subtle);
-  --color-primary: var(--primary);
-  --color-text-accent: var(--project-accent, var(--primary));
-  --color-footer-bg: var(--footer-bg);
-  --font-sans: var(--font-manrope);
-  --font-mono: var(--font-manrope);
-  --color-nav-border: var(--nav-border);
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-manrope), system-ui, -apple-system, sans-serif;
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  @apply rounded-lg;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb);
+  opacity: 1.5;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }

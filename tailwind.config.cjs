@@ -1,38 +1,56 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
-
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './pages/**/*.{js,ts,jsx,tsx,mdx}'
+    "./src/**/*.{js,ts,jsx,tsx}",
+    // Add other paths if needed
   ],
+  darkMode: ["class"],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Manrope', ...defaultTheme.fontFamily.sans],
-      },
       colors: {
-        primary: 'var(--primary)',
-        secondary: '#7928CA',
-        border: '#EAEAEA',
-        'nav-border': '#24262E',
-        background: 'var(--background)',
-        foreground: '#000000',
-        muted: '#666666',
-        'footer-bg': 'var(--footer-bg)',
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
-      keyframes: {
-        'fade-in': {
-          '0%': { opacity: '0', transform: 'translateY(-4px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+        background: "var(--background)",
+        surface: "var(--surface)",
+        elevated: "var(--elevated)",
+        foreground: "var(--foreground)",
+        
+        // Semantic Colors
+        primary: {
+          DEFAULT: "var(--primary)",
+          foreground: "var(--primary-foreground)",
         },
+        muted: {
+          DEFAULT: "var(--text-secondary)",
+          foreground: "var(--text-primary)",
+        },
+        border: "var(--border-subtle)",
+        "nav-border": "var(--nav-border)",
+        "footer-bg": "var(--footer-bg)",
+        
+        // New Status Colors (For StrategyBridge & Environment)
+        status: {
+          rose: "var(--status-rose)",
+          orange: "var(--status-orange)",
+          blue: "var(--status-blue)",
+          emerald: "var(--status-emerald)",
+        },
+
+        // Specialty
+        glass: {
+          bg: "var(--glass-bg)",
+          border: "var(--glass-border)",
+        },
+        work: {
+          bg: "var(--work-card-bg)", // Note: This will need 'bg-[image:var(--work-card-bg)]' usage if it's a gradient
+          border: "var(--work-card-border)",
+          text: "var(--work-card-text)",
+        }
       },
-      animation: {
-        'fade-in': 'fade-in 0.2s ease-out',
+      boxShadow: {
+        'sm': 'var(--shadow-sm)',
+        'DEFAULT': 'var(--shadow-base)',
+        'md': 'var(--shadow-md)',
+        'xl': 'var(--shadow-xl)',
+        'glow': 'var(--shadow-glow)', // The Tinted Glow
       },
     },
   },

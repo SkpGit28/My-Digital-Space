@@ -2,11 +2,25 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Lock, FileX, CheckCircle, Wallet } from 'lucide-react';
+import { Lock, FileX, CheckCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import Container from '@/Components/container';
+
+const rejectedDesigns = [
+    { src: '/assets/Banner.png', alt: 'Rejected Banner' },
+    { src: '/assets/TopLeft.png', alt: 'Rejected Sidebar' }
+];
 
 const EvidenceLocker: React.FC = () => {
     const [activeTab, setActiveTab] = useState<'rejected' | 'approved'>('rejected');
+    const [currentRejectedIndex, setCurrentRejectedIndex] = useState(0);
+
+    const handlePrevious = () => {
+        setCurrentRejectedIndex((prev) => (prev === 0 ? rejectedDesigns.length - 1 : prev - 1));
+    };
+
+    const handleNext = () => {
+        setCurrentRejectedIndex((prev) => (prev === rejectedDesigns.length - 1 ? 0 : prev + 1));
+    };
 
     return (
         <section className="py-24 relative overflow-hidden bg-background">
@@ -15,20 +29,21 @@ const EvidenceLocker: React.FC = () => {
 
                     {/* Narrative Section */}
                     <div className="flex flex-col md:flex-row justify-between items-center gap-12">
-                        <div className="max-w-6xl relative pl-6">
-                            {/* Vertical Accent Line */}
-                            <div className="absolute top-0 left-0 w-1 h-full bg-text-accent/50" />
+                        <div className="max-w-6xl relative flex">
+                            {/* Brand Vertical Line */}
+                            <div className="w-[4px] bg-[#2BACE0] shrink-0" />
 
-                            <div className="flex items-center gap-2 mb-6 text-slate-500 font-mono text-[10px] tracking-[0.2em] uppercase">
-                                <Lock size={12} className="text-text-accent" />
-                                <span>EVIDENCE_LOCKER // STORY_01</span>
+                            <div className="pl-8">
+                                <h2 className="text-sm font-mono text-text-accent tracking-widest mb-2 uppercase">
+                                    STORY_01 // EVIDENCE LOCKER
+                                </h2>
+                                <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 tracking-tight">
+                                    The Revenue Generator
+                                </h2>
+                                <p className="text-slate-400 text-lg leading-relaxed">
+                                    During early wireframes, the idea of adding, a strong transactional banner came up from PM. I worried it might add pressure at a moment when users are already unsure. To check I quickly prototyped both directions using AI Tools and reviewed them side by side. Keeping guidance close to the action reduced hesitation without feeling pushy.
+                                </p>
                             </div>
-                            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 tracking-tight">
-                                The Settle Button
-                            </h2>
-                            <p className="text-slate-400 text-lg leading-relaxed">
-                                "During early wireframes, the idea of adding, a strong transactional banner came up from PM. I worried it might add pressure at a moment when users are already unsure. To check I quickly prototyped both directions using AI Tools and reviewed them side by side. Keeping guidance close to the action reduced hesitation without feeling pushy."
-                            </p>
                         </div>
                     </div>
 
@@ -43,7 +58,7 @@ const EvidenceLocker: React.FC = () => {
                                     : 'text-slate-500 hover:text-slate-300'
                                     }`}
                             >
-                                <FileX size={14} /> REJECTED_FILES (3)
+                                <FileX size={14} /> REJECTED_FILES (2)
                                 {activeTab === 'rejected' && (
                                     <motion.div
                                         layoutId="activeTab"
@@ -82,25 +97,55 @@ const EvidenceLocker: React.FC = () => {
                                         animate={{ opacity: 1, scale: 1, y: 0 }}
                                         exit={{ opacity: 0, scale: 0.95, y: -10 }}
                                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                                        className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl"
+                                        className="w-full relative flex items-center justify-center"
                                     >
-                                        <div className="bg-background/40 p-8 rounded-2xl border border-rose-500/10 opacity-60 hover:opacity-100 transition-all duration-500 hover:border-rose-500/30 hover:shadow-[0_0_30px_rgba(244,63,94,0.05)] group/card">
-                                            <div className="h-1 w-12 bg-rose-500/20 mb-6 rounded-full group-hover/card:bg-rose-500/40 transition-colors" />
-                                            <div className="h-24 bg-rose-500/10 border border-rose-500/20 rounded-xl flex items-center justify-center text-rose-500 font-bold text-xs tracking-widest uppercase">
-                                                AGGRESSIVE BANNER
-                                            </div>
-                                            <p className="text-[10px] text-rose-500/50 mt-4 font-mono tracking-tighter uppercase">
-                                                {">"} ERR_TOO_INTRUSIVE
-                                            </p>
+                                        {/* Previous Arrow */}
+                                        <button
+                                            onClick={handlePrevious}
+                                            className="absolute left-4 z-20 p-3 rounded-full bg-slate-800 border border-slate-700 text-slate-300 hover:bg-slate-700 hover:border-slate-600 transition-all duration-300 shadow-lg"
+                                            aria-label="Previous rejected design"
+                                        >
+                                            <ChevronLeft size={24} />
+                                        </button>
+
+                                        {/* Carousel Content */}
+                                        <div className="w-full flex items-center justify-center">
+                                            <AnimatePresence mode="wait">
+                                                <motion.img
+                                                    key={currentRejectedIndex}
+                                                    src={rejectedDesigns[currentRejectedIndex].src}
+                                                    alt={rejectedDesigns[currentRejectedIndex].alt}
+                                                    className="w-full h-auto rounded-2xl shadow-2xl border border-white/5"
+                                                    initial={{ opacity: 0, x: 100 }}
+                                                    animate={{ opacity: 1, x: 0 }}
+                                                    exit={{ opacity: 0, x: -100 }}
+                                                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                                                />
+                                            </AnimatePresence>
                                         </div>
-                                        <div className="bg-background/40 p-8 rounded-2xl border border-rose-500/10 opacity-60 hover:opacity-100 transition-all duration-500 hover:border-rose-500/30 hover:shadow-[0_0_30px_rgba(244,63,94,0.05)] group/card">
-                                            <div className="h-1 w-12 bg-rose-500/20 mb-6 rounded-full group-hover/card:bg-rose-500/40 transition-colors" />
-                                            <div className="h-24 border border-dashed border-rose-500/30 rounded-xl flex items-center justify-center text-rose-500/60 font-bold text-xs tracking-widest uppercase">
-                                                SIDEBAR LINK
-                                            </div>
-                                            <p className="text-[10px] text-rose-500/50 mt-4 font-mono tracking-tighter uppercase">
-                                                {">"} ERR_POOR_VISIBILITY
-                                            </p>
+
+                                        {/* Next Arrow */}
+                                        <button
+                                            onClick={handleNext}
+                                            className="absolute right-4 z-20 p-3 rounded-full bg-slate-800 border border-slate-700 text-slate-300 hover:bg-slate-700 hover:border-slate-600 transition-all duration-300 shadow-lg"
+                                            aria-label="Next rejected design"
+                                        >
+                                            <ChevronRight size={24} />
+                                        </button>
+
+                                        {/* Indicator Dots */}
+                                        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+                                            {rejectedDesigns.map((_, index) => (
+                                                <button
+                                                    key={index}
+                                                    onClick={() => setCurrentRejectedIndex(index)}
+                                                    className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentRejectedIndex
+                                                        ? 'bg-slate-300 w-8'
+                                                        : 'bg-slate-600 hover:bg-slate-500'
+                                                        }`}
+                                                    aria-label={`Go to rejected design ${index + 1}`}
+                                                />
+                                            ))}
                                         </div>
                                     </motion.div>
                                 ) : (
@@ -110,51 +155,34 @@ const EvidenceLocker: React.FC = () => {
                                         animate={{ opacity: 1, scale: 1, y: 0 }}
                                         exit={{ opacity: 0, scale: 0.95, y: -20 }}
                                         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                                        className="w-full max-w-md"
+                                        className="w-full flex items-center justify-center"
                                     >
-                                        <div className="bg-background border border-emerald-500/20 rounded-[2.5rem] p-10 shadow-[0_0_50px_rgba(16,185,129,0.1)] relative overflow-hidden group/winner">
-                                            {/* Animated Glow */}
-                                            <div className="absolute -inset-24 bg-emerald-500/5 blur-[100px] rounded-full group-hover/winner:bg-emerald-500/10 transition-colors duration-700" />
+                                        <div className="w-full flex flex-col gap-6 items-center justify-center">
+                                            <img
+                                                src="/assets/Card.png"
+                                                alt="Shipped Solution"
+                                                className="w-full h-auto rounded-[2.5rem] shadow-[0_0_50px_rgba(16,185,129,0.1)] border border-emerald-500/20"
+                                            />
 
-                                            <div className="absolute top-6 right-6 bg-emerald-500 text-slate-950 text-[10px] font-black px-4 py-1.5 rounded-full tracking-tighter uppercase shadow-lg shadow-emerald-500/20">
-                                                SHIPPED
-                                            </div>
-
-                                            <div className="relative z-10">
-                                                <div className="flex justify-between items-center mb-8">
-                                                    <span className="text-slate-500 text-xs font-mono tracking-widest uppercase">Available Balance</span>
-                                                    <div className="p-2 bg-emerald-500/10 rounded-lg">
-                                                        <Wallet size={18} className="text-emerald-500" />
-                                                    </div>
+                                            {/* Impact Section */}
+                                            <div className="w-full p-4 bg-emerald-500/5 border border-emerald-500/10 rounded-2xl backdrop-blur-sm">
+                                                <div className="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-500/30 px-4 py-2 rounded-full mb-3">
+                                                    <CheckCircle size={16} className="text-emerald-400" />
+                                                    <h4 className="text-emerald-400 font-bold text-sm uppercase tracking-wider">
+                                                        Impact
+                                                    </h4>
                                                 </div>
-
-                                                <div className="text-4xl font-mono text-white mb-10 tracking-tighter flex items-baseline gap-2">
-                                                    <span className="text-emerald-500/50 text-xl">₹</span>
-                                                    82,450.00
-                                                </div>
-
-                                                <button className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-5 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 shadow-xl shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0">
-                                                    Settle Now
-                                                    <span className="text-[9px] bg-slate-950/20 px-2.5 py-1 rounded-full font-black tracking-widest">INSTANT</span>
-                                                </button>
+                                                <p className="text-emerald-200/60 text-sm leading-relaxed">
+                                                    ₹1.2 Cr Settled via Widget within 5 weeks of the launch. Zero support tickets regarding "Where is my money?"
+                                                </p>
                                             </div>
                                         </div>
-                                        <p className="text-center text-emerald-500/40 font-mono text-[10px] mt-8 tracking-[0.3em] uppercase">
-                                            The "Wallet Widget" Strategy
-                                        </p>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
                         </div>
                     </div>
-                    <div className="w-full md:w-full p-4 bg-emerald-500/5 border border-emerald-500/10 rounded-2xl backdrop-blur-sm shrink-0">
-                        <h4 className="text-emerald-400 font-bold mb-2 flex items-center gap-2 text-sm uppercase tracking-wider">
-                            <CheckCircle size={16} /> Impact
-                        </h4>
-                        <p className="text-emerald-200/60 text-sm leading-relaxed">
-                            ₹1.2 Cr Settled via Widget within 5 weeks of the launch. Zero support tickets regarding "Where is my money?"
-                        </p>
-                    </div>
+
                 </div>
             </Container>
         </section>

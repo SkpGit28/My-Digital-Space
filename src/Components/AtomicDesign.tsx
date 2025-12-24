@@ -10,19 +10,21 @@ const AtomicDesign: React.FC = () => {
             <Container>
                 <div className="flex flex-col gap-16">
                     {/* Narrative Section */}
-                    <div className="relative pl-6 max-w-5xl">
-                        {/* Vertical Accent Line */}
-                        <div className="absolute top-0 left-0 w-1 h-full bg-text-accent/50" />
+                    <div className="relative flex max-w-5xl">
+                        {/* Brand Vertical Line */}
+                        <div className="w-[4px] bg-[#2BACE0] shrink-0" />
 
-                        <h2 className="text-sm font-mono text-text-accent tracking-widest mb-2 uppercase">
-                            STORY_03 // BRAND_GUIDELINES
-                        </h2>
-                        <h3 className="text-3xl md:text-5xl font-bold mb-4 text-white tracking-tight">
-                            Brand Guidelines
-                        </h3>
-                        <p className="text-slate-400 text-lg leading-relaxed">
-                            Typography creates hierarchy and trust. We chose two typefaces that balance professionalism with approachability.
-                        </p>
+                        <div className="pl-8">
+                            <h2 className="text-sm font-mono text-text-accent tracking-widest mb-2 uppercase">
+                                STORY_03 // BRAND_GUIDELINES
+                            </h2>
+                            <h3 className="text-3xl md:text-5xl font-bold mb-4 text-white tracking-tight">
+                                Brand Guidelines
+                            </h3>
+                            <p className="text-slate-400 text-lg leading-relaxed">
+                                Typography creates hierarchy and trust. We chose two typefaces that balance professionalism with approachability.
+                            </p>
+                        </div>
                     </div>
 
                     {/* Two Cards Side by Side */}

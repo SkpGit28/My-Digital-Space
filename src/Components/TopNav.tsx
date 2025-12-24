@@ -1,86 +1,155 @@
 "use client";
-import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { motion, LayoutGroup, useMotionValue, useMotionTemplate } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import type { ReactNode } from "react";
-import Container from "./container";
 
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Work", href: "/work" },
-  { label: "SKP", href: "/about" },
-  { label: "Contact", href: "#contact" },
+  { id: 'home', label: 'Home', href: '/' },
+  { id: 'work', label: 'Work', href: '/work' },
+  { id: 'skp', label: 'SKP', href: '/about' },
+  { id: 'contact', label: 'Contact', href: '#contact' }
 ];
 
 export default function TopNav(): ReactNode {
   const pathname = usePathname();
-  const [isScrolled, setIsScrolled] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [isHoveringNav, setIsHoveringNav] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // Motion Values for the spotlight (viewport coordinates)
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    // We use client coordinates for fixed background attachment
+    mouseX.set(e.clientX);
+    mouseY.set(e.clientY);
+  };
+
+  const getItemPadding = (itemId: string, isActive: boolean) => {
+    if (!isHoveringNav) {
+      return 16;
+    }
+    if (hoveredId === itemId) {
+      return 28; // Larger expansion for the hovered item
+    }
+    if (isActive) {
+      return 16; // Active item stays at default size even if not hovered
+    }
+    return 10; // Neighbors shrink slightly
+  };
+
+  // Fluid Spring Config
+  const navSpring = {
+    type: 'spring' as const,
+    stiffness: 200, // Slightly faster response
+    damping: 25,    // Increased damping to reduce oscillation/swing
+    mass: 1,        // Standard mass for more predictable movement
+  };
+
+  // Gradient for the spotlight
+  const gradient = useMotionTemplate`radial-gradient(100px circle at ${mouseX}px ${mouseY}px, #FFFFFF 0%, #888888 50%, #888888 100%)`;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 pt-6 pointer-events-none">
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="flex justify-center w-full"
-      >
-        <nav
-          aria-label="Main navigation"
-          className={cn(
-            "pointer-events-auto transition-all duration-300",
-            "bg-black/80 backdrop-blur-xl p-1.5 rounded-full border border-white/10 shadow-2xl inline-block",
-            isScrolled ? "translate-y-0" : "translate-y-0"
-          )}
+    <header className="fixed top-0 left-0 right-0 z-50 pt-6 pointer-events-none flex justify-center">
+      <LayoutGroup>
+        <motion.nav
+          layout
+          className="pointer-events-auto relative flex items-center justify-center overflow-hidden border bg-black/50 backdrop-blur-lg py-2"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            gap: isHoveringNav ? '8px' : '6px',
+            paddingLeft: isHoveringNav ? '24px' : '12px',
+            paddingRight: isHoveringNav ? '24px' : '12px',
+          }}
+          transition={{
+            ...navSpring,
+            opacity: { duration: 0.8 },
+            scale: { duration: 0.8 },
+          }}
+          style={{
+            height: '58px',
+            borderRadius: '9999px',
+            borderColor: 'rgba(255, 255, 255, 0.08)',
+          }}
+          onMouseEnter={() => setIsHoveringNav(true)}
+          onMouseLeave={() => {
+            setIsHoveringNav(false);
+            setHoveredId(null);
+          }}
+          onMouseMove={handleMouseMove}
         >
-          <ul className="flex items-center gap-4 relative z-0 px-2 py-1">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+            const paddingX = getItemPadding(link.id, isActive);
 
-              return (
-                <li key={link.href} className="relative">
-                  <Link
-                    href={link.href}
-                    className={cn(
-                      "relative px-4 py-2 text-sm font-medium rounded-full transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20",
-                      isActive ? "text-white" : "text-neutral-500 hover:text-neutral-300"
-                    )}
-                    onClick={() => track("nav_click", { label: link.label, href: link.href })}
-                    style={{ WebkitTapHighlightColor: "transparent" }}
+            return (
+              <Link
+                key={link.id}
+                href={link.href}
+                onClick={() => track("nav_click", { label: link.label, href: link.href })}
+                className="relative h-full"
+              >
+                <motion.div
+                  layout
+                  onMouseEnter={() => setHoveredId(link.id)}
+                  className="relative flex h-full cursor-pointer items-center justify-center bg-transparent outline-none"
+                  animate={{
+                    paddingLeft: paddingX,
+                    paddingRight: paddingX,
+                  }}
+                  transition={navSpring}
+                  style={{
+                    WebkitTapHighlightColor: 'transparent',
+                  }}
+                >
+                  {/* Active Pill Background */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="active-pill"
+                      className="absolute inset-0 bg-white/10 rounded-full z-0"
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30
+                      }}
+                    />
+                  )}
+
+                  <motion.span
+                    className="relative z-10 transition-colors duration-200"
+                    style={{
+                      fontSize: '14px',
+                      fontWeight: 500,
+
+                      // Default text color (dim grey) vs Transparent (for gradient reveal)
+                      color: isHoveringNav ? (isActive ? '#FFFFFF' : 'transparent') : (isActive ? '#FFFFFF' : '#888888'),
+
+                      // The Magic: Spotlight Gradient
+                      backgroundImage: (isHoveringNav && !isActive) ? gradient : 'none',
+                      backgroundSize: '100% 100%',
+
+                      backgroundAttachment: 'fixed',
+
+                      backgroundClip: 'text',
+                      WebkitBackgroundClip: 'text',
+
+                      WebkitTextFillColor: isHoveringNav ? (isActive ? '#FFFFFF' : 'transparent') : (isActive ? '#FFFFFF' : '#888888'),
+                    }}
                   >
-                    {/* Active Pill Background */}
-                    {isActive && (
-                      <motion.div
-                        layoutId="active-pill"
-                        className="absolute inset-0 bg-white/10 rounded-full z-0"
-                        transition={{
-                          type: "spring",
-                          stiffness: 300,
-                          damping: 30
-                        }}
-                      />
-                    )}
-
-                    {/* Text Content */}
-                    <span className="relative z-10">{link.label}</span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </motion.div>
+                    {link.label}
+                  </motion.span>
+                </motion.div>
+              </Link>
+            );
+          })}
+        </motion.nav>
+      </LayoutGroup>
     </header>
   );
 }

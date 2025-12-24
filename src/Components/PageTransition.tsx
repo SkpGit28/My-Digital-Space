@@ -22,6 +22,17 @@ export default function PageTransition({
     }
   }, [pathname]);
 
+  // Scroll to top on route change and initial load
+  useEffect(() => {
+    // Disable browser's automatic scroll restoration
+    if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    // Force scroll to top
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <>
       {/* Blue screen overlay that descends from top - ON EVERY PAGE CHANGE */}

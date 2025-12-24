@@ -42,6 +42,8 @@ const Outcome: React.FC = () => {
         <section className="py-24 relative overflow-hidden bg-background">
             <Container>
                 <div className="flex flex-col gap-16">
+                    
+
                     {/* Big Number Section with Gradient */}
                     <motion.div
                         ref={ref}
@@ -76,7 +78,7 @@ const Outcome: React.FC = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.1 }}
-                            className="bg-elevated border border-border-subtle rounded-[2rem] p-8"
+                            className="bg-elevated border border-border-subtle rounded-2xl p-8"
                         >
                             <h4 className="text-text-accent font-mono text-xs tracking-widest uppercase mb-4">
                                 Outcome
@@ -92,7 +94,7 @@ const Outcome: React.FC = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.2 }}
-                            className="bg-elevated border border-border-subtle rounded-[2rem] p-8"
+                            className="bg-elevated border border-border-subtle rounded-2xl p-8"
                         >
                             <h4 className="text-text-accent font-mono text-xs tracking-widest uppercase mb-4">
                                 What This Work Unlocked
@@ -108,7 +110,7 @@ const Outcome: React.FC = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.3 }}
-                            className="bg-elevated border border-border-subtle rounded-[2rem] p-8"
+                            className="bg-elevated border border-border-subtle rounded-2xl p-8"
                         >
                             <h4 className="text-text-accent font-mono text-xs tracking-widest uppercase mb-4">
                                 Tradeoffs & Open Decisions

@@ -30,7 +30,7 @@ export default function ArchetypeCard({
 
     return (
         <motion.div
-            className={`relative flex flex-col h-full p-6 rounded-2xl bg-elevated border border-border-subtle border-t-4 ${accentClass} overflow-hidden`}
+            className={`relative flex flex-col h-full p-8 rounded-2xl bg-elevated overflow-hidden`}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -43,7 +43,7 @@ export default function ArchetypeCard({
                 </div>
                 <div>
                     <h4 className="text-lg font-bold text-white leading-tight">{title}</h4>
-                    <p className={`text-[10px] font-mono uppercase tracking-widest mt-0.5 ${textAccentClass}`}>
+                    <p className={`text-xs font-mono uppercase tracking-widest mt-0.5 ${textAccentClass}`}>
                         {archetype}
                     </p>
                 </div>
@@ -57,7 +57,7 @@ export default function ArchetypeCard({
 
                 <div className="relative pl-5 py-0.5">
                     <div className={`absolute left-0 top-0 w-[1.5px] h-full ${bgAccentClass.replace('/10', '/40')}`} />
-                    <p className="text-[13px] text-slate-400 italic leading-relaxed">
+                    <p className="text-sm text-slate-400 italic leading-relaxed">
                         "{quote}"
                     </p>
                 </div>
@@ -65,10 +65,10 @@ export default function ArchetypeCard({
 
             {/* Footer */}
             <div className="mt-8 pt-5 border-t border-white/5 flex items-center justify-between">
-                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
                     PRIMARY DRIVER
                 </span>
-                <div className={`px-3 py-1 rounded-md text-[10px] font-black uppercase tracking-tight ${pillClass}`}>
+                <div className={`px-3 py-1 rounded-md text-xs font-bold uppercase tracking-tight ${pillClass}`}>
                     {driver}
                 </div>
             </div>
