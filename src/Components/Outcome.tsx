@@ -5,6 +5,7 @@ import { motion, useInView } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import Container from '@/Components/container';
+import TextScramble from "@/Components/TextScramble";
 
 const Outcome: React.FC = () => {
     const [count, setCount] = useState(0);
@@ -65,9 +66,8 @@ const Outcome: React.FC = () => {
                                 backgroundClip: 'text',
                             }}
                         >
-                            ₹{formatIndianCurrency(count)}
+                            ₹{formatIndianCurrency(count)}+
                         </h2>
-                        <p className="text-slate-400 text-lg">Processed</p>
                     </motion.div>
 
                     {/* Three Content Sections - Receipt Style Layout */}
@@ -81,7 +81,7 @@ const Outcome: React.FC = () => {
                             className="bg-elevated border border-border-subtle rounded-2xl p-8"
                         >
                             <h4 className="text-text-accent font-mono text-xs tracking-widest uppercase mb-4">
-                                NATIVE MOBILE APP
+                                <TextScramble>NATIVE MOBILE APP</TextScramble>
                             </h4>
                             <p className="text-slate-400 text-sm leading-relaxed">
                                 Designed and developed for more accessibility. We expanded beyond the web to ship a native mobile app, ensuring critical alerts and settlement tracking were accessible to merchants in the field—meeting them where they work.
@@ -97,7 +97,7 @@ const Outcome: React.FC = () => {
                             className="bg-elevated border border-border-subtle rounded-2xl p-8"
                         >
                             <h4 className="text-text-accent font-mono text-xs tracking-widest uppercase mb-4">
-                                WHAT I LEARNED
+                                <TextScramble>WHAT I LEARNED</TextScramble>
                             </h4>
                             <p className="text-slate-400 text-sm leading-relaxed">
                                 Real impact comes from aligning business goals with user psychology. I learned that clarity reduces anxiety, and trust is built through consistent, transparent communication. I'm eager to bring this user-first, data-backed approach to future problems.
@@ -113,7 +113,7 @@ const Outcome: React.FC = () => {
                             className="bg-elevated border border-border-subtle rounded-2xl p-8"
                         >
                             <h4 className="text-text-accent font-mono text-xs tracking-widest uppercase mb-4">
-                                Tradeoffs & Open Decisions
+                                <TextScramble>Tradeoffs & Open Decisions</TextScramble>
                             </h4>
                             <p className="text-slate-400 text-sm leading-relaxed">
                                 To prioritize clarity and speed, some advanced capabilities were intentionally simplified in the first phase. These remain open design questions as the platform scales and merchant behavior evolves.
