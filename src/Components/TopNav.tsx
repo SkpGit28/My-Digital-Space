@@ -29,17 +29,49 @@ export default function TopNav(): ReactNode {
     mouseY.set(e.clientY);
   };
 
-  const getItemPadding = (itemId: string, isActive: boolean) => {
-    if (!isHoveringNav) {
-      return 16;
+  const activeLink = navLinks.find(
+    (link) => pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href))
+  );
+  const activeId = activeLink?.id || null;
+
+  const getItemWidth = (itemId: string) => {
+    const activeWidth = 96; // Fixed uniform base width for the selected state
+    let baseWidth = 66;
+
+    if (itemId === activeId) {
+      baseWidth = activeWidth;
+    } else {
+      switch (itemId) {
+        case "home":
+          baseWidth = 66;
+          break;
+        case "work":
+          baseWidth = 66;
+          break;
+        case "skp":
+          baseWidth = 58;
+          break;
+        case "contact":
+          baseWidth = 80;
+          break;
+        default:
+          baseWidth = 66;
+      }
     }
+
+    // If not hovering the navigation bar, return the base width
+    if (!isHoveringNav || !hoveredId) {
+      return baseWidth;
+    }
+
+    // Restore the fluid fisheye texture:
+    // Hovered item expands by 24px. All other items contract by 8px.
+    // This keeps the sum of all item widths constant (+24 - 8*3 = 0),
+    // preventing any layout shifting or jitter in the outer navbar container.
     if (hoveredId === itemId) {
-      return 28; // Larger expansion for the hovered item
+      return baseWidth + 24;
     }
-    if (isActive) {
-      return 16; // Active item stays at default size even if not hovered
-    }
-    return 10; // Neighbors shrink slightly
+    return baseWidth - 8;
   };
 
   // Fluid Spring Config
@@ -63,9 +95,6 @@ export default function TopNav(): ReactNode {
           animate={{
             opacity: 1,
             scale: 1,
-            gap: isHoveringNav ? '8px' : '6px',
-            paddingLeft: isHoveringNav ? '24px' : '12px',
-            paddingRight: isHoveringNav ? '24px' : '12px',
           }}
           transition={{
             ...navSpring,
@@ -76,6 +105,9 @@ export default function TopNav(): ReactNode {
             height: '58px',
             borderRadius: '9999px',
             borderColor: 'rgba(255, 255, 255, 0.08)',
+            gap: '8px',
+            paddingLeft: '16px',
+            paddingRight: '16px',
           }}
           onMouseEnter={() => setIsHoveringNav(true)}
           onMouseLeave={() => {
@@ -85,8 +117,8 @@ export default function TopNav(): ReactNode {
           onMouseMove={handleMouseMove}
         >
           {navLinks.map((link) => {
-            const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
-            const paddingX = getItemPadding(link.id, isActive);
+            const isActive = link.id === activeId;
+            const itemWidth = getItemWidth(link.id);
 
             return (
               <Link
@@ -100,8 +132,7 @@ export default function TopNav(): ReactNode {
                   onMouseEnter={() => setHoveredId(link.id)}
                   className="relative flex h-full cursor-pointer items-center justify-center bg-transparent outline-none"
                   animate={{
-                    paddingLeft: paddingX,
-                    paddingRight: paddingX,
+                    width: itemWidth,
                   }}
                   transition={navSpring}
                   style={{
