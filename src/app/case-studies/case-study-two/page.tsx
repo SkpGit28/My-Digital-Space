@@ -243,9 +243,8 @@ function ArrowToLeft() {
       height="32"
       viewBox="0 0 46 32"
       fill="none"
-      className={styles.arAnnotationArrow}
+      className={`${styles.arAnnotationArrow} ${styles.arAnnotationArrowLeft}`}
       aria-hidden="true"
-      style={{ transform: "scaleX(-1)" }}
     >
       <path
         d="M4 28C12 18 22 10 40 6"
@@ -428,34 +427,33 @@ function AnnotatedRail() {
 }
 
 export default function CaseStudyTwoPage() {
-  const video1Ref = useRef<HTMLVideoElement>(null);
-  const video2Ref = useRef<HTMLVideoElement>(null);
-  const video3Ref = useRef<HTMLVideoElement>(null);
-  const video4Ref = useRef<HTMLVideoElement>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  const videoRefCallback = (el: HTMLVideoElement | null) => {
+    if (!el) return;
+    if (!observerRef.current) {
+      observerRef.current = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const video = entry.target as HTMLVideoElement;
+            if (entry.isIntersecting) {
+              video.play().catch(() => {});
+            } else {
+              video.pause();
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+    }
+    observerRef.current.observe(el);
+  };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const video = entry.target as HTMLVideoElement;
-          if (entry.isIntersecting) {
-            video.play().catch(() => {});
-          } else {
-            video.pause();
-          }
-        });
-      },
-      { threshold: 0.35 }
-    );
-
-    [video1Ref, video2Ref, video3Ref, video4Ref].forEach((ref) => {
-      if (ref.current) {
-        observer.observe(ref.current);
-      }
-    });
-
     return () => {
-      observer.disconnect();
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
     };
   }, []);
 
@@ -543,14 +541,10 @@ export default function CaseStudyTwoPage() {
 
                 {/* Card 3: The Features */}
                 <div
-                  className={`${styles.platformCard} ${styles.platformCardStretch}`}
-                  style={{ paddingBottom: "var(--cs2-space-32)" }}
+                  className={`${styles.platformCard} ${styles.platformCardStretch} ${styles.platformCardPadding}`}
                 >
                   <h2 className={styles.platformCardTitle}>Features</h2>
-                  <p
-                    className={styles.platformCardBodyRegular}
-                    style={{ whiteSpace: "pre-line" }}
-                  >
+                  <p className={styles.platformCardBodyRegular}>
                     <strong>Trip viability meter:</strong> shows economic health
                     of the trip in real time{"\n\n"}
                     <strong>On-Route Chips:</strong> Decreases the coordination
@@ -598,10 +592,7 @@ export default function CaseStudyTwoPage() {
                       9 Mixed Participants
                     </span>
                   </h2>
-                  <p
-                    className={styles.platformCardBodyRegular}
-                    style={{ whiteSpace: "pre-line" }}
-                  >
+                  <p className={styles.platformCardBodyRegular}>
                     All 9 participants preferred seeing trip viability meter
                     upfront.{"\n\n"}7 of 9 found the On Route map clearer than
                     phone coordination. (2 still preferred phone calls 🥺)
@@ -662,21 +653,12 @@ export default function CaseStudyTwoPage() {
           </Reveal>
 
           <Reveal>
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                height: "552px",
-                margin: "40px 0",
-                borderRadius: "12px",
-                overflow: "hidden",
-              }}
-            >
+            <div className={styles.contextImageContainer}>
               <Image
                 src="/mockups/Context.webp"
                 alt="Context: how a BlaBlaCar trip is listed and discovered today"
                 fill
-                style={{ objectFit: "cover" }}
+                className={styles.coverImage}
                 loading="lazy"
               />
             </div>
@@ -727,22 +709,12 @@ export default function CaseStudyTwoPage() {
           </Reveal>
 
           <Reveal>
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                height: "630px",
-                margin: "40px 0",
-                borderRadius: "12px",
-                overflow: "hidden",
-                backgroundColor: "var(--cs2-color-neutral-800)",
-              }}
-            >
+            <div className={styles.problemImageContainer}>
               <Image
                 src="/mockups/problem.webp"
                 alt="Problem: where the booking flow breaks rider expectations"
                 fill
-                style={{ objectFit: "cover" }}
+                className={styles.coverImage}
                 loading="lazy"
               />
             </div>
@@ -850,7 +822,7 @@ export default function CaseStudyTwoPage() {
                   uncertainty
                   <span className={styles.headingLight}> with </span>
                   honest, upfront expectations
-                  <span style={{ color: "var(--cs2-color-blue-500)" }}>.</span>
+                  <span className={styles.blueDot}>.</span>
                 </h2>
               </div>
               <div className={styles.rightCol}>
@@ -891,7 +863,7 @@ export default function CaseStudyTwoPage() {
               <div className={styles.leftCol}>
                 <h2 className={styles.heading2}>
                   Where the road ended
-                  <span style={{ color: "var(--cs2-color-blue-500)" }}>.</span>
+                  <span className={styles.blueDot}>.</span>
                 </h2>
                 <p className={styles.constraintBodyText}>
                   Many ideas looked promising until they met the realities of
@@ -936,10 +908,7 @@ export default function CaseStudyTwoPage() {
           <Reveal>
             <div className={styles.howIWorkedRow}>
               <div className={styles.howIWorkedLeft}>
-                <h2
-                  className={styles.heading2}
-                  style={{ letterSpacing: "-0.02em" }}
-                >
+                <h2 className={`${styles.heading2} ${styles.letterSpacingTight}`}>
                   <span className={styles.unhighlighted}>Going </span>
                   <span className={styles.highlighted}>wide</span>
                   <span className={styles.unhighlighted}> and </span>
@@ -982,18 +951,18 @@ export default function CaseStudyTwoPage() {
 
                   <div className="ts-legend">
                     <span>
-                      <i style={{ background: "var(--ts-success)" }}></i>2
+                      <i className={styles.triageIndicatorSuccess}></i>2
                       Finalized
                     </span>
                     <span>
-                      <i style={{ background: "var(--ts-warning)" }}></i>2
+                      <i className={styles.triageIndicatorWarning}></i>2
                       Partial
                     </span>
                     <span>
-                      <i style={{ background: "var(--ts-info)" }}></i>2 Parked
+                      <i className={styles.triageIndicatorInfo}></i>2 Parked
                     </span>
                     <span>
-                      <i style={{ background: "var(--ts-neutral)" }}></i>14
+                      <i className={styles.triageIndicatorNeutral}></i>14
                       Discarded
                     </span>
                   </div>
@@ -1100,10 +1069,7 @@ export default function CaseStudyTwoPage() {
                               </div>
                             </div>
                             <div className="m-row">
-                              <div
-                                className="m-avatar"
-                                style={{ borderColor: "var(--ts-accent)" }}
-                              >
+                              <div className="m-avatar m-avatar-accent">
                                 S
                               </div>
                               <div className="m-name">
@@ -1509,7 +1475,7 @@ export default function CaseStudyTwoPage() {
               <div className={styles.solutionTextCol}>
                 <span className={styles.sectionTag}>
                   <span>SOLUTION 1/4</span>
-                  <span style={{ color: "var(--cs2-text-heading)" }}>
+                  <span className={styles.sectionTagAccent}>
                     {" "}
                     • TRIP VIABILITY METER
                   </span>
@@ -1523,71 +1489,35 @@ export default function CaseStudyTwoPage() {
                   confidence.
                 </p>
                 <div className={styles.tripStateCards}>
-                  <div
-                    className={styles.tripCard}
-                    style={{ backgroundColor: "var(--cs2-color-blue-050)" }}
-                  >
-                    <span
-                      className={styles.tripDot}
-                      style={{ backgroundColor: "var(--cs2-color-blue-500)" }}
-                    />
+                  <div className={`${styles.tripCard} ${styles.tripCardBlue}`}>
+                    <span className={`${styles.tripDot} ${styles.tripDotBlue}`} />
                     <div className={styles.tripCardContent}>
-                      <span
-                        className={styles.tripCardTitle}
-                        style={{ color: "var(--cs2-color-blue-600)" }}
-                      >
+                      <span className={`${styles.tripCardTitle} ${styles.tripTextBlue}`}>
                         Just listed
                       </span>
-                      <span
-                        className={styles.tripCardBody}
-                        style={{ color: "var(--cs2-color-blue-600)" }}
-                      >
+                      <span className={`${styles.tripCardBody} ${styles.tripTextBlue}`}>
                         New trip, no seats yet.
                       </span>
                     </div>
                   </div>
-                  <div
-                    className={styles.tripCard}
-                    style={{ backgroundColor: "var(--cs2-color-amber-050)" }}
-                  >
-                    <span
-                      className={styles.tripDot}
-                      style={{ backgroundColor: "var(--cs2-color-amber-500)" }}
-                    />
+                  <div className={`${styles.tripCard} ${styles.tripCardAmber}`}>
+                    <span className={`${styles.tripDot} ${styles.tripDotAmber}`} />
                     <div className={styles.tripCardContent}>
-                      <span
-                        className={styles.tripCardTitle}
-                        style={{ color: "var(--cs2-color-amber-600)" }}
-                      >
+                      <span className={`${styles.tripCardTitle} ${styles.tripTextAmber}`}>
                         Filling up
                       </span>
-                      <span
-                        className={styles.tripCardBody}
-                        style={{ color: "var(--cs2-color-amber-600)" }}
-                      >
+                      <span className={`${styles.tripCardBody} ${styles.tripTextAmber}`}>
                         One more seat and it locks.
                       </span>
                     </div>
                   </div>
-                  <div
-                    className={styles.tripCard}
-                    style={{ backgroundColor: "var(--cs2-color-green-050)" }}
-                  >
-                    <span
-                      className={styles.tripDot}
-                      style={{ backgroundColor: "var(--cs2-color-green-500)" }}
-                    />
+                  <div className={`${styles.tripCard} ${styles.tripCardGreen}`}>
+                    <span className={`${styles.tripDot} ${styles.tripDotGreen}`} />
                     <div className={styles.tripCardContent}>
-                      <span
-                        className={styles.tripCardTitle}
-                        style={{ color: "var(--cs2-color-green-600)" }}
-                      >
+                      <span className={`${styles.tripCardTitle} ${styles.tripTextGreen}`}>
                         Locked in
                       </span>
-                      <span
-                        className={styles.tripCardBody}
-                        style={{ color: "var(--cs2-color-green-600)" }}
-                      >
+                      <span className={`${styles.tripCardBody} ${styles.tripTextGreen}`}>
                         Set to go, a seat still open.
                       </span>
                     </div>
@@ -1597,7 +1527,7 @@ export default function CaseStudyTwoPage() {
               <div className={styles.solutionImageCol}>
                 <div className={styles.solutionImageInner}>
                   <video
-                    ref={video1Ref}
+                    ref={videoRefCallback}
                     src="/mockups/1st Solution.mp4"
                     loop
                     muted
@@ -1616,7 +1546,7 @@ export default function CaseStudyTwoPage() {
               <div className={styles.solutionTextCol}>
                 <span className={styles.sectionTag}>
                   <span>SOLUTION 2/4</span>
-                  <span style={{ color: "var(--cs2-text-heading)" }}>
+                  <span className={styles.sectionTagAccent}>
                     {" "}
                     • ON-ROUTE MAP CHIPS
                   </span>
@@ -1633,23 +1563,14 @@ export default function CaseStudyTwoPage() {
 
                   <div className={styles.timelineItem}>
                     <div className={styles.timelineCircleWrap}>
-                      <div
-                        className={styles.timelineCircle}
-                        style={{ backgroundColor: "#eef0f3" }}
-                      >
-                        <span
-                          className={styles.timelineNum}
-                          style={{ color: "#70768c" }}
-                        >
+                      <div className={`${styles.timelineCircle} ${styles.timelineCircleReused}`}>
+                        <span className={`${styles.timelineNum} ${styles.timelineNumReused}`}>
                           1
                         </span>
                       </div>
                     </div>
                     <div className={styles.timelineContent}>
-                      <span
-                        className={styles.timelineLabel}
-                        style={{ color: "#70768c" }}
-                      >
+                      <span className={`${styles.timelineLabel} ${styles.timelineLabelReused}`}>
                         REUSED
                       </span>
                       <span className={styles.timelineTitle}>
@@ -1660,23 +1581,14 @@ export default function CaseStudyTwoPage() {
 
                   <div className={styles.timelineItem}>
                     <div className={styles.timelineCircleWrap}>
-                      <div
-                        className={styles.timelineCircle}
-                        style={{ backgroundColor: "#eef0f3" }}
-                      >
-                        <span
-                          className={styles.timelineNum}
-                          style={{ color: "#70768c" }}
-                        >
+                      <div className={`${styles.timelineCircle} ${styles.timelineCircleReused}`}>
+                        <span className={`${styles.timelineNum} ${styles.timelineNumReused}`}>
                           2
                         </span>
                       </div>
                     </div>
                     <div className={styles.timelineContent}>
-                      <span
-                        className={styles.timelineLabel}
-                        style={{ color: "#70768c" }}
-                      >
+                      <span className={`${styles.timelineLabel} ${styles.timelineLabelReused}`}>
                         REUSED
                       </span>
                       <span className={styles.timelineTitle}>
@@ -1687,23 +1599,14 @@ export default function CaseStudyTwoPage() {
 
                   <div className={styles.timelineItem}>
                     <div className={styles.timelineCircleWrap}>
-                      <div
-                        className={styles.timelineCircle}
-                        style={{ backgroundColor: "#0071eb" }}
-                      >
-                        <span
-                          className={styles.timelineNum}
-                          style={{ color: "#ffffff" }}
-                        >
+                      <div className={`${styles.timelineCircle} ${styles.timelineCircleNew}`}>
+                        <span className={`${styles.timelineNum} ${styles.timelineNumNew}`}>
                           3
                         </span>
                       </div>
                     </div>
                     <div className={styles.timelineContent}>
-                      <span
-                        className={styles.timelineLabel}
-                        style={{ color: "#0071eb" }}
-                      >
+                      <span className={`${styles.timelineLabel} ${styles.timelineLabelNew}`}>
                         NEW
                       </span>
                       <div className={styles.timelineTitleRow}>
@@ -1719,23 +1622,14 @@ export default function CaseStudyTwoPage() {
 
                   <div className={styles.timelineItem}>
                     <div className={styles.timelineCircleWrap}>
-                      <div
-                        className={styles.timelineCircle}
-                        style={{ backgroundColor: "#0071eb" }}
-                      >
-                        <span
-                          className={styles.timelineNum}
-                          style={{ color: "#ffffff" }}
-                        >
+                      <div className={`${styles.timelineCircle} ${styles.timelineCircleNew}`}>
+                        <span className={`${styles.timelineNum} ${styles.timelineNumNew}`}>
                           4
                         </span>
                       </div>
                     </div>
                     <div className={styles.timelineContent}>
-                      <span
-                        className={styles.timelineLabel}
-                        style={{ color: "#0071eb" }}
-                      >
+                      <span className={`${styles.timelineLabel} ${styles.timelineLabelNew}`}>
                         NEW
                       </span>
                       <span className={styles.timelineTitle}>
@@ -1750,7 +1644,7 @@ export default function CaseStudyTwoPage() {
                   className={`${styles.solutionImageInner} ${styles.solutionImageInnerTall}`}
                 >
                   <video
-                    ref={video2Ref}
+                    ref={videoRefCallback}
                     src="/mockups/2nd Solution.mp4"
                     loop
                     muted
@@ -1769,7 +1663,7 @@ export default function CaseStudyTwoPage() {
               <div className={styles.solutionTextCol}>
                 <span className={styles.sectionTag}>
                   <span>SOLUTION 3/4</span>
-                  <span style={{ color: "var(--cs2-text-heading)" }}>
+                  <span className={styles.sectionTagAccent}>
                     {" "}
                     • BADGE & INTENT CHIPS
                   </span>
@@ -1789,28 +1683,12 @@ export default function CaseStudyTwoPage() {
 
                   <div className={styles.timelineItem}>
                     <div className={styles.timelineCircleWrap}>
-                      <div
-                        style={{
-                          width: 40,
-                          height: 40,
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <div
-                          style={{
-                            width: 16,
-                            height: 16,
-                            borderRadius: "50%",
-                            backgroundColor: "#0071eb",
-                          }}
-                        />
+                      <div className={styles.iconStepperDotWrap}>
+                        <div className={styles.iconStepperDot} />
                       </div>
                     </div>
                     <div
-                      className={styles.timelineContent}
-                      style={{ paddingTop: 8 }}
+                      className={`${styles.timelineContent} ${styles.timelineContentAlign}`}
                     >
                       <span className={styles.iconStepperPill}>
                         Frequent host
@@ -1853,8 +1731,7 @@ export default function CaseStudyTwoPage() {
                       </div>
                     </div>
                     <div
-                      className={styles.timelineContent}
-                      style={{ paddingTop: 10 }}
+                      className={`${styles.timelineContent} ${styles.timelineContentAlign10}`}
                     >
                       <span className={styles.iconStepperLabel}>
                         Work commute
@@ -1890,8 +1767,7 @@ export default function CaseStudyTwoPage() {
                       </div>
                     </div>
                     <div
-                      className={styles.timelineContent}
-                      style={{ paddingTop: 10 }}
+                      className={`${styles.timelineContent} ${styles.timelineContentAlign10}`}
                     >
                       <span className={styles.iconStepperLabel}>
                         Heading home
@@ -1934,8 +1810,7 @@ export default function CaseStudyTwoPage() {
                       </div>
                     </div>
                     <div
-                      className={styles.timelineContent}
-                      style={{ paddingTop: 10 }}
+                      className={`${styles.timelineContent} ${styles.timelineContentAlign10}`}
                     >
                       <span className={styles.iconStepperLabel}>
                         Weekend trip
@@ -1947,7 +1822,7 @@ export default function CaseStudyTwoPage() {
               <div className={styles.solutionImageCol}>
                 <div className={styles.solutionImageInner}>
                   <video
-                    ref={video3Ref}
+                    ref={videoRefCallback}
                     src="/mockups/3rd Solution.mp4"
                     loop
                     muted
@@ -1966,7 +1841,7 @@ export default function CaseStudyTwoPage() {
               <div className={styles.solutionTextCol}>
                 <span className={styles.sectionTag}>
                   <span>SOLUTION 4/4</span>
-                  <span style={{ color: "var(--cs2-text-heading)" }}>
+                  <span className={styles.sectionTagAccent}>
                     {" "}
                     • COPY
                   </span>
@@ -2016,7 +1891,7 @@ export default function CaseStudyTwoPage() {
               <div className={styles.solutionImageCol}>
                 <div className={styles.solutionImageInner}>
                   <video
-                    ref={video4Ref}
+                    ref={videoRefCallback}
                     src="/mockups/4th Solution.mp4"
                     loop
                     muted
@@ -2034,7 +1909,7 @@ export default function CaseStudyTwoPage() {
         <section className={styles.sectionContainer}>
           <div className={styles.eyebrowRow}>
             <span className={styles.sectionTag}>
-              <span style={{ color: "#031539" }}>VALIDATION</span>
+              <span className={styles.darkEyebrowText}>VALIDATION</span>
             </span>
           </div>
 
@@ -2061,14 +1936,8 @@ export default function CaseStudyTwoPage() {
 
           <Reveal>
             <div className={styles.validationStatsRow}>
-              <div
-                className={styles.validationStatCard}
-                style={{ backgroundColor: "#e5f4ee" }}
-              >
-                <div
-                  className={styles.statNumber}
-                  style={{ color: "var(--cs2-color-green-600)" }}
-                >
+              <div className={`${styles.validationStatCard} ${styles.valCardGreen}`}>
+                <div className={`${styles.statNumber} ${styles.valTextGreen}`}>
                   9/9
                 </div>
                 <div className={styles.statDesc}>
@@ -2076,14 +1945,8 @@ export default function CaseStudyTwoPage() {
                 </div>
               </div>
 
-              <div
-                className={styles.validationStatCard}
-                style={{ backgroundColor: "#edf1ff" }}
-              >
-                <div
-                  className={styles.statNumber}
-                  style={{ color: "var(--cs2-color-blue-600)" }}
-                >
+              <div className={`${styles.validationStatCard} ${styles.valCardBlue}`}>
+                <div className={`${styles.statNumber} ${styles.valTextBlue}`}>
                   7/9
                 </div>
                 <div className={styles.statDesc}>
@@ -2092,14 +1955,8 @@ export default function CaseStudyTwoPage() {
                 </div>
               </div>
 
-              <div
-                className={styles.validationStatCard}
-                style={{ backgroundColor: "#fff7e4" }}
-              >
-                <div
-                  className={styles.statNumber}
-                  style={{ color: "var(--cs2-color-amber-700)" }}
-                >
+              <div className={`${styles.validationStatCard} ${styles.valCardAmber}`}>
+                <div className={`${styles.statNumber} ${styles.valTextAmber}`}>
                   2/9
                 </div>
                 <div className={styles.statDesc}>
@@ -2113,7 +1970,7 @@ export default function CaseStudyTwoPage() {
         <section className={styles.sectionContainer}>
           <div className={styles.eyebrowRow}>
             <span className={styles.sectionTag}>
-              <span style={{ color: "#031539" }}>TRADE-OFF&apos;s</span>
+              <span className={styles.darkEyebrowText}>TRADE-OFF&apos;s</span>
             </span>
           </div>
 
@@ -2169,8 +2026,7 @@ export default function CaseStudyTwoPage() {
 
           <Reveal>
             <div
-              className={styles.tradeoffGrid}
-              style={{ gridTemplateColumns: "1fr 1fr 1fr" }}
+              className={`${styles.tradeoffGrid} ${styles.tradeoffGridThree}`}
             >
               <div
                 className={`${styles.tradeoffCard} ${styles.tradeoffCardGreenFill}`}
@@ -2218,8 +2074,7 @@ export default function CaseStudyTwoPage() {
 
           <Reveal>
             <div
-              className={styles.tradeoffGrid}
-              style={{ gridTemplateColumns: "1fr 1fr 1fr" }}
+              className={`${styles.tradeoffGrid} ${styles.tradeoffGridThree}`}
             >
               <div
                 className={`${styles.tradeoffCard} ${styles.tradeoffCardBlueFill}`}

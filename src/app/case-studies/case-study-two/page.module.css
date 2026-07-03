@@ -1229,6 +1229,7 @@
   font-weight: 400;
   line-height: 1.5rem;
   color: var(--cs2-text-body);
+  white-space: pre-line;
 }
 
 .platformNote {
@@ -2715,5 +2716,180 @@
 
   .arBtn {
     display: none;
+  }
+}
+
+/* Phase 4 Inline Styles Migration */
+.arAnnotationArrowLeft {
+  transform: scaleX(-1);
+}
+
+.contextImageContainer {
+  position: relative;
+  width: 100%;
+  height: 34.5rem; /* 552px */
+  margin: var(--cs2-space-40) 0;
+  border-radius: var(--cs2-radius-12);
+  overflow: hidden;
+}
+
+.problemImageContainer {
+  position: relative;
+  width: 100%;
+  height: 39.375rem; /* 630px */
+  margin: var(--cs2-space-40) 0;
+  border-radius: var(--cs2-radius-12);
+  overflow: hidden;
+  background-color: var(--cs2-color-neutral-800);
+}
+
+.coverImage {
+  object-fit: cover;
+}
+
+.blueDot {
+  color: var(--cs2-color-blue-500);
+}
+
+.letterSpacingTight {
+  letter-spacing: -0.02em;
+}
+
+.sectionTagAccent {
+  color: var(--cs2-text-heading);
+}
+
+/* Trip state card color configurations */
+.tripCardBlue {
+  background-color: var(--cs2-color-blue-050);
+}
+.tripDotBlue {
+  background-color: var(--cs2-color-blue-500);
+}
+.tripTextBlue {
+  color: var(--cs2-color-blue-600);
+}
+
+.tripCardAmber {
+  background-color: var(--cs2-color-amber-050);
+}
+.tripDotAmber {
+  background-color: var(--cs2-color-amber-500);
+}
+.tripTextAmber {
+  color: var(--cs2-color-amber-600);
+}
+
+.tripCardGreen {
+  background-color: var(--cs2-color-green-050);
+}
+.tripDotGreen {
+  background-color: var(--cs2-color-green-500);
+}
+.tripTextGreen {
+  color: var(--cs2-color-green-600);
+}
+
+/* Timeline steppers reused vs new */
+.timelineCircleReused {
+  background-color: #eef0f3;
+}
+.timelineNumReused {
+  color: var(--cs2-text-body);
+}
+.timelineLabelReused {
+  color: var(--cs2-text-body);
+}
+
+.timelineCircleNew {
+  background-color: var(--cs2-color-blue-500);
+}
+.timelineNumNew {
+  color: var(--cs2-color-neutral-0);
+}
+.timelineLabelNew {
+  color: var(--cs2-color-blue-500);
+}
+
+/* Stepper icons and labels alignment */
+.iconStepperDotWrap {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconStepperDot {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: var(--cs2-color-blue-500);
+}
+
+.timelineContentAlign {
+  padding-top: var(--cs2-space-8);
+}
+
+.timelineContentAlign10 {
+  padding-top: 0.625rem;
+}
+
+.triageIndicatorSuccess {
+  background: var(--ts-success);
+}
+.triageIndicatorWarning {
+  background: var(--ts-warning);
+}
+.triageIndicatorInfo {
+  background: var(--ts-info);
+}
+.triageIndicatorNeutral {
+  background: var(--ts-neutral);
+}
+
+.tsRoot :global(.m-avatar-accent) {
+  border-color: var(--ts-accent);
+}
+
+/* Additional Phase 4 Styles */
+.platformCardPadding {
+  padding-bottom: var(--cs2-space-32);
+}
+
+.darkEyebrowText {
+  color: var(--cs2-text-heading);
+}
+
+/* Validation Stat Card Configurations */
+.valCardGreen {
+  background-color: #e5f4ee;
+}
+.valTextGreen {
+  color: var(--cs2-color-green-600);
+}
+
+.valCardBlue {
+  background-color: #edf1ff;
+}
+.valTextBlue {
+  color: var(--cs2-color-blue-600);
+}
+
+.valCardAmber {
+  background-color: #fff7e4;
+}
+.valTextAmber {
+  color: var(--cs2-color-amber-700);
+}
+
+/* 3 Column Grid for Trade-offs / Reflection / What's Next */
+.tradeoffGridThree {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+  .tradeoffGridThree {
+    grid-template-columns: 1fr;
   }
 }
