@@ -434,7 +434,7 @@
   align-items: flex-start;
   gap: var(--cs2-space-16); /* Adheres to 1.0rem (16px) Standard Spacing */
   padding: var(--cs2-space-24); /* Adheres to 1.5rem (24px) Separated Spacing */
-  background-color: #ffffff;
+  background-color: var(--cs2-color-neutral-0);
   border: 0.0625rem solid var(--cs2-color-neutral-200);
   border-radius: var(--cs2-radius-12);
   transition:
@@ -620,7 +620,7 @@
   align-items: center;
   gap: var(--cs2-space-16);
   height: 4.75rem;
-  border-radius: 0.875rem;
+  border-radius: var(--cs2-radius-14);
   padding: 0 var(--cs2-space-24);
   width: 100%;
 }
@@ -669,7 +669,7 @@
   bottom: 2rem; /* padding-bottom (1rem) + half circle (1rem) = stops at circle 4 */
   left: 0.9375rem;
   width: 0.125rem;
-  background-color: #e3e6eb;
+  background-color: var(--cs2-bg-subtle);
   z-index: 0;
 }
 
@@ -726,7 +726,7 @@
   font-family: var(--cs2-font-satoshi), sans-serif;
   font-size: 1.125rem;
   font-weight: 700;
-  color: #001536;
+  color: var(--cs2-text-heading);
   line-height: 1.3;
 }
 
@@ -734,7 +734,7 @@
   font-family: var(--cs2-font-figtree), sans-serif;
   font-size: 1.125rem;
   font-weight: 400;
-  color: #70768c;
+  color: var(--cs2-text-body);
   line-height: 1.5;
 }
 
@@ -771,7 +771,7 @@
   bottom: 1.875rem;
   left: 1.1875rem; /* center of 40px node */
   width: 0.125rem;
-  background-color: #e3e6eb;
+  background-color: var(--cs2-bg-subtle);
   z-index: 0;
 }
 
@@ -793,7 +793,7 @@
   font-family: var(--cs2-font-satoshi), sans-serif;
   font-size: 1rem;
   font-weight: 700;
-  color: #001536;
+  color: var(--cs2-text-heading);
   line-height: 1.25;
 }
 
@@ -805,8 +805,8 @@
   width: 7.4375rem;
   height: 1.75rem;
   flex-shrink: 0;
-  background-color: #eaf1fb;
-  color: #001536;
+  background-color: var(--cs2-color-blue-050);
+  color: var(--cs2-text-heading);
   font-family: var(--cs2-font-satoshi), sans-serif;
   font-size: 0.84375rem;
   font-weight: 700;
@@ -820,7 +820,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  border-top: 0.0625rem solid #e5e8ed;
+  border-top: 0.0625rem solid var(--cs2-border-default);
 }
 
 /* Each row: horizontal flex, 45px min-height, 13px vertical padding, gap 14px between cols */
@@ -831,7 +831,7 @@
   gap: var(--cs2-space-16); /* Normalized to 1rem standard spacing */
   min-height: 2.8125rem;
   padding: 0.75rem 0; /* Normalized to 0.75rem */
-  border-bottom: 0.0625rem solid #e5e8ed;
+  border-bottom: 0.0625rem solid var(--cs2-border-default);
 }
 
 /* Taller row for "Booked! Enjoy your ride" which wraps to 2 lines (64px in Figma) */
@@ -851,9 +851,9 @@
   font-family: var(--cs2-font-figtree), sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: #70768c;
+  color: var(--cs2-text-body);
   text-decoration: line-through;
-  text-decoration-color: #70768c;
+  text-decoration-color: var(--cs2-text-body);
   line-height: 1.4;
 }
 
@@ -862,7 +862,7 @@
   flex: 0 0 1.875rem;
   text-align: center;
   font-size: 1rem;
-  color: #c2c9d4;
+  color: var(--cs2-border-strong);
   line-height: 1;
 }
 
@@ -872,7 +872,7 @@
   font-family: var(--cs2-font-figtree), sans-serif;
   font-size: 1rem;
   font-weight: 700;
-  color: #001536;
+  color: var(--cs2-text-heading);
   line-height: 1.4;
 }
 
@@ -890,7 +890,7 @@
   font-family: var(--cs2-font-satoshi), sans-serif;
   font-size: 1.75rem;
   font-weight: 700;
-  color: #001536;
+  color: var(--cs2-text-heading);
   line-height: 1.25;
 }
 
@@ -900,7 +900,7 @@
   font-family: var(--cs2-font-figtree), sans-serif;
   font-size: 1.125rem;
   font-weight: 400;
-  color: #70768c;
+  color: var(--cs2-text-body);
   line-height: 1.5;
 }
 
@@ -929,7 +929,7 @@
   font-family: var(--cs2-font-satoshi), sans-serif;
   font-size: 1.75rem;
   font-weight: 700;
-  color: #001536;
+  color: var(--cs2-text-heading);
   line-height: 1.25;
 }
 
@@ -938,7 +938,7 @@
   font-family: var(--cs2-font-figtree), sans-serif;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #001536;
+  color: var(--cs2-text-heading);
   line-height: 1.4;
 }
 
@@ -968,7 +968,7 @@
   font-family: var(--cs2-font-satoshi), sans-serif;
   font-size: 1rem;
   font-weight: 700;
-  color: #001536;
+  color: var(--cs2-text-heading);
   line-height: 1.4;
 }
 
@@ -1061,15 +1061,15 @@
   font-family: var(--cs2-font-figtree), sans-serif;
   font-size: 1.125rem;
   font-weight: 400;
-  color: #70768c;
+  color: var(--cs2-text-body);
   line-height: 1.6;
   margin: 0;
 }
 
 /* solution-status-bar card — Figma 1:263: bg #fff, border 1px #e5e7eb, radius 12, padding 16, gap 12 */
 .statusBar {
-  background-color: #ffffff;
-  border: 0.0625rem solid #e5e7eb;
+  background-color: var(--cs2-color-neutral-0);
+  border: 0.0625rem solid var(--cs2-border-default);
   border-radius: var(--cs2-radius-12);
   padding: var(--cs2-space-16);
   display: flex;
@@ -1084,7 +1084,7 @@
   font-family: "Inter", sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
-  color: #70768c;
+  color: var(--cs2-text-body);
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
@@ -1110,7 +1110,7 @@
 .segSep {
   width: 0.0625rem;
   height: 2.5rem;
-  background-color: #ffffff;
+  background-color: var(--cs2-color-neutral-0);
   flex-shrink: 0;
 }
 
@@ -1162,7 +1162,7 @@
   font-size: 1.125rem;
   font-weight: 400;
   font-style: italic;
-  color: #70768c;
+  color: var(--cs2-text-body);
   line-height: 1.4;
   letter-spacing: -0.02em;
   margin: 0;
@@ -1299,7 +1299,7 @@
   width: 100%;
   border: 0.0625rem solid var(--cs2-color-neutral-200);
   border-radius: var(--cs2-radius-16);
-  background-color: #ffffff;
+  background-color: var(--cs2-color-neutral-0);
   margin-top: var(--cs2-space-40);
   box-shadow: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.02);
 }
@@ -1369,39 +1369,39 @@
 }
 
 .verdictDiscarded {
-  background-color: #fdecea;
-  color: #c0392b;
+  background-color: var(--cs2-status-error-bg);
+  color: var(--cs2-status-error);
 }
 
 .verdictDiscarded .verdictDot {
-  background-color: #c0392b;
+  background-color: var(--cs2-status-error);
 }
 
 .verdictParked {
-  background-color: #e0f2fe;
-  color: #0369a1;
+  background-color: var(--cs2-color-blue-100);
+  color: var(--cs2-color-blue-700);
 }
 
 .verdictParked .verdictDot {
-  background-color: #0369a1;
+  background-color: var(--cs2-color-blue-700);
 }
 
 .verdictFinalized {
-  background-color: #e6f9f1;
-  color: #1a7f4b;
+  background-color: var(--cs2-color-green-100);
+  color: var(--cs2-color-green-600);
 }
 
 .verdictFinalized .verdictDot {
-  background-color: #1a7f4b;
+  background-color: var(--cs2-color-green-600);
 }
 
 .verdictPartial {
-  background-color: #fff7e6;
-  color: #b05c00;
+  background-color: var(--cs2-status-warning-bg);
+  color: var(--cs2-status-warning);
 }
 
 .verdictPartial .verdictDot {
-  background-color: #b05c00;
+  background-color: var(--cs2-status-warning);
 }
 
 /* Footer note & link */

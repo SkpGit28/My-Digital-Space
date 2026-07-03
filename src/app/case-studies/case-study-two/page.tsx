@@ -544,7 +544,7 @@ export default function CaseStudyTwoPage() {
                 {/* Card 3: The Features */}
                 <div
                   className={`${styles.platformCard} ${styles.platformCardStretch}`}
-                  style={{ paddingBottom: "32px" }}
+                  style={{ paddingBottom: "var(--cs2-space-32)" }}
                 >
                   <h2 className={styles.platformCardTitle}>Features</h2>
                   <p
@@ -1525,22 +1525,22 @@ export default function CaseStudyTwoPage() {
                 <div className={styles.tripStateCards}>
                   <div
                     className={styles.tripCard}
-                    style={{ backgroundColor: "rgb(237, 241, 250)" }}
+                    style={{ backgroundColor: "var(--cs2-color-blue-050)" }}
                   >
                     <span
                       className={styles.tripDot}
-                      style={{ backgroundColor: "rgb(0, 113, 235)" }}
+                      style={{ backgroundColor: "var(--cs2-color-blue-500)" }}
                     />
                     <div className={styles.tripCardContent}>
                       <span
                         className={styles.tripCardTitle}
-                        style={{ color: "rgb(0, 87, 190)" }}
+                        style={{ color: "var(--cs2-color-blue-600)" }}
                       >
                         Just listed
                       </span>
                       <span
                         className={styles.tripCardBody}
-                        style={{ color: "rgb(0, 87, 190)" }}
+                        style={{ color: "var(--cs2-color-blue-600)" }}
                       >
                         New trip, no seats yet.
                       </span>
@@ -1548,22 +1548,22 @@ export default function CaseStudyTwoPage() {
                   </div>
                   <div
                     className={styles.tripCard}
-                    style={{ backgroundColor: "rgb(255, 248, 228)" }}
+                    style={{ backgroundColor: "var(--cs2-color-amber-050)" }}
                   >
                     <span
                       className={styles.tripDot}
-                      style={{ backgroundColor: "rgb(244, 166, 35)" }}
+                      style={{ backgroundColor: "var(--cs2-color-amber-500)" }}
                     />
                     <div className={styles.tripCardContent}>
                       <span
                         className={styles.tripCardTitle}
-                        style={{ color: "rgb(195, 123, 10)" }}
+                        style={{ color: "var(--cs2-color-amber-600)" }}
                       >
                         Filling up
                       </span>
                       <span
                         className={styles.tripCardBody}
-                        style={{ color: "rgb(195, 123, 10)" }}
+                        style={{ color: "var(--cs2-color-amber-600)" }}
                       >
                         One more seat and it locks.
                       </span>
@@ -1571,22 +1571,22 @@ export default function CaseStudyTwoPage() {
                   </div>
                   <div
                     className={styles.tripCard}
-                    style={{ backgroundColor: "rgb(230, 245, 236)" }}
+                    style={{ backgroundColor: "var(--cs2-color-green-050)" }}
                   >
                     <span
                       className={styles.tripDot}
-                      style={{ backgroundColor: "rgb(31, 157, 94)" }}
+                      style={{ backgroundColor: "var(--cs2-color-green-500)" }}
                     />
                     <div className={styles.tripCardContent}>
                       <span
                         className={styles.tripCardTitle}
-                        style={{ color: "rgb(16, 110, 64)" }}
+                        style={{ color: "var(--cs2-color-green-600)" }}
                       >
                         Locked in
                       </span>
                       <span
                         className={styles.tripCardBody}
-                        style={{ color: "rgb(65, 122, 92)" }}
+                        style={{ color: "var(--cs2-color-green-600)" }}
                       >
                         Set to go, a seat still open.
                       </span>
