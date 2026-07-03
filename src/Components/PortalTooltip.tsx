@@ -55,7 +55,7 @@ export default function PortalTooltip({
     zIndex: 10000,
     pointerEvents: "none",
   }}
-  className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-md text-xs text-white px-2 py-1 whitespace-nowrap"
+  className="bg-elevated border border-border-subtle rounded-md text-xs text-text-primary px-2 py-1 whitespace-nowrap shadow-md"
 >
   {children}
 </motion.div>
