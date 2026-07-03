@@ -99,7 +99,7 @@ export default function TechStack() {
       }}
     >
       <Container>
-        <h2 className="mb-10 text-3xl md:text-[18px] font-light text-gray-400 tracking-wider">
+        <h2 className="mb-10 text-3xl md:text-[18px] font-light text-text-secondary tracking-wider">
           MY TOOLKIT
         </h2>
 
