@@ -100,13 +100,13 @@ export default function Projects() {
 
       <Container>
         <div className="py-18">
-          <h2 className="mb-10 text-3xl md:text-[18px] font-light text-gray-400 tracking-wider">
+          <h2 className="mb-10 text-3xl md:text-[18px] font-light text-text-secondary tracking-wider">
             MY RECENT WORK
           </h2>
 
           {/* top border + between-items divider */}
           <motion.ol
-            className="divide-y divide-white/10 border-t border-white/10"
+            className="divide-y divide-black/10 border-t border-black/10"
             variants={listVariants}
             initial="hidden"
             whileInView="visible"
@@ -127,7 +127,7 @@ export default function Projects() {
                   aria-expanded={openId === p.id}
                 >
                   {/* Index */}
-                  <div className="text-4xl md:text-6xl font-light text-white">
+                  <div className="text-4xl md:text-6xl font-light text-foreground">
                     {String(p.id).padStart(2, "0")}
                   </div>
 
@@ -135,7 +135,7 @@ export default function Projects() {
                   <div className="relative">
                     {/* Title (always visible) */}
                     <div className="pr-0 md:pr-64">
-                      <h3 className="text-2xl md:text-4xl font-normal text-white leading-snug">
+                      <h3 className="text-2xl md:text-4xl font-normal text-foreground leading-snug">
                         {p.title}
                       </h3>
                     </div>
@@ -152,9 +152,9 @@ export default function Projects() {
                       {/* Make right image match left text height */}
                       <div className="grid grid-cols-1 md:grid-cols-[1fr_280px] md:items-stretch gap-6 md:gap-10">
                         {/* Left: details */}
-                        <div className="text-white/80">
+                        <div className="text-text-primary">
                           {p.kicker && (
-                            <p className="mb-2 text-sm uppercase tracking-[0.12em] text-white/50">
+                            <p className="mb-2 text-sm uppercase tracking-[0.12em] text-text-secondary">
                               {p.kicker}
                             </p>
                           )}
@@ -163,7 +163,7 @@ export default function Projects() {
                           {p.href && (
                             <a
                               href={p.href}
-                              className="mt-4 inline-flex items-center gap-2 text-white/80 hover:text-white underline decoration-white/30 decoration-2 underline-offset-4 transition-colors"
+                              className="mt-4 inline-flex items-center gap-2 text-text-secondary hover:text-foreground underline decoration-black/30 decoration-2 underline-offset-4 transition-colors"
                             >
                               Read case study
                               <svg
@@ -189,7 +189,7 @@ export default function Projects() {
                         <div
                           className={[
                             "relative h-full min-h-[160px] md:min-h-[200px] rounded-xl overflow-hidden",
-                            "bg-white/5 ring-1 ring-white/10",
+                            "bg-black/5 ring-1 ring-black/10",
                             "translate-y-2 opacity-0",
                             "group-hover:translate-y-0 group-hover:opacity-100",
                             openId === p.id ? "translate-y-0 opacity-100" : "",
