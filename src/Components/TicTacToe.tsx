@@ -90,10 +90,10 @@ const TicTacToe: React.FC = () => {
     return (
         <div className="flex flex-col items-center gap-4">
             <div className="flex items-center justify-between w-full mb-2">
-                <span className="text-xs font-mono text-slate-500 uppercase tracking-widest">Let's Play</span>
+                <span className="text-xs font-mono text-text-secondary uppercase tracking-widest">Let's Play</span>
                 <button
                     onClick={resetGame}
-                    className="text-slate-500 hover:text-white transition-colors"
+                    className="text-text-secondary hover:text-foreground transition-colors"
                     aria-label="Reset Game"
                 >
                     <RefreshCw size={14} />
@@ -103,17 +103,17 @@ const TicTacToe: React.FC = () => {
             {/* Grid Container */}
             <div className="relative grid grid-cols-3 w-[120px] h-[120px]">
                 {/* Vertical Lines */}
-                <div className="absolute top-0 bottom-0 left-1/3 w-[1px] bg-white/20" />
-                <div className="absolute top-0 bottom-0 right-1/3 w-[1px] bg-white/20" />
+                <div className="absolute top-0 bottom-0 left-1/3 w-[1px] bg-black/20" />
+                <div className="absolute top-0 bottom-0 right-1/3 w-[1px] bg-black/20" />
 
                 {/* Horizontal Lines */}
-                <div className="absolute left-0 right-0 top-1/3 h-[1px] bg-white/20" />
-                <div className="absolute left-0 right-0 bottom-1/3 h-[1px] bg-white/20" />
+                <div className="absolute left-0 right-0 top-1/3 h-[1px] bg-black/20" />
+                <div className="absolute left-0 right-0 bottom-1/3 h-[1px] bg-black/20" />
 
                 {squares.map((square, i) => (
                     <button
                         key={i}
-                        className="w-full h-full flex items-center justify-center text-xl font-bold focus:outline-none hover:bg-white/5 transition-colors duration-200 rounded-sm"
+                        className="w-full h-full flex items-center justify-center text-xl font-bold focus:outline-none hover:bg-black/5 transition-colors duration-200 rounded-sm"
                         onClick={() => handleClick(i)}
                         disabled={!!square || !!winner || !isUserTurn}
                     >
@@ -121,7 +121,7 @@ const TicTacToe: React.FC = () => {
                             <motion.span
                                 initial={{ opacity: 0, scale: 0.5 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                className={`flex items-center justify-center w-full h-full leading-none ${square === 'X' ? 'text-text-accent' : 'text-emerald-400'}`}
+                                className={`flex items-center justify-center w-full h-full leading-none ${square === 'X' ? 'text-text-accent' : 'text-status-emerald'}`}
                             >
                                 {square}
                             </motion.span>
@@ -135,7 +135,7 @@ const TicTacToe: React.FC = () => {
                     <motion.p
                         initial={{ opacity: 0, y: 5 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-xs font-mono text-white"
+                        className="text-xs font-mono text-foreground"
                     >
                         {winner === 'Draw' ? "It's a Draw!" : winner === 'X' ? "You Win!" : "I Won!"}
                     </motion.p>
