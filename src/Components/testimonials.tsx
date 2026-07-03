@@ -145,7 +145,7 @@ export default function Testimonials() {
           >
             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
           </svg> */}
-          <h2 className="mb-0 text-3xl md:text-[18px] font-light text-gray-400 tracking-wider">
+          <h2 className="mb-0 text-3xl md:text-[18px] font-light text-text-secondary tracking-wider">
             SOME KIND WORDS:
           </h2>
         </motion.div>
@@ -165,9 +165,9 @@ export default function Testimonials() {
                   className={[
                     "relative group",
                     // Base background + rounded
-                    "bg-gradient-to-br from-white/5 to-white/[0.02] rounded-2xl p-8",
+                    "bg-gradient-to-br from-black/[0.04] to-black/[0.01] rounded-2xl p-8",
                     // Base border
-                    "border border-white/10",
+                    "border border-black/10",
                     // Hover → brand outline + glow
                     "group-hover:border-[#70B7FF] group-hover:shadow-[0_0_22px_rgba(112,183,255,0.25)]",
                     // Smooth animation
@@ -180,7 +180,7 @@ export default function Testimonials() {
                   <svg
                     className="
         absolute top-5 left-5 w-8 h-8
-        text-white/30
+        text-black/15
         transition-all duration-300
         group-hover:text-[#70B7FF]
         group-hover:drop-shadow-[0_0_10px_rgba(112,183,255,0.45)]
@@ -193,15 +193,15 @@ export default function Testimonials() {
                   </svg>
 
                   {/* Quote */}
-                  <p className="text-white/80 text-base leading-relaxed mb-6 flex-grow mt-10">
+                  <p className="text-text-primary text-base leading-relaxed mb-6 flex-grow mt-10">
                     <Highlighted text={t.quote} terms={t.highlights} />
                   </p>
 
                   {/* Author */}
-                  <div className="flex items-center gap-4 pt-4 border-t border-white/10">
+                  <div className="flex items-center gap-4 pt-4 border-t border-black/10">
                     <Avatar src={t.image} name={t.name} priority={i === 0} />
                     <div>
-                      <p className="text-white font-medium flex items-center gap-2">
+                      <p className="text-foreground font-medium flex items-center gap-2">
                         {t.name}
                         {t.linkedin && (
                           <a
@@ -218,11 +218,11 @@ export default function Testimonials() {
                         )}
                       </p>
 
-                      <p className="text-white/60 text-sm">
+                      <p className="text-text-secondary text-sm">
                         {titlePart?.trim()}
                         {companyPart && (
                           <>
-                            , <span className="text-white/80 font-medium">{companyPart.trim()}</span>
+                            , <span className="text-text-primary font-medium">{companyPart.trim()}</span>
                           </>
                         )}
                       </p>
