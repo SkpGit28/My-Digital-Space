@@ -46,7 +46,7 @@ export default function AboutPage() {
               variants={headingVariants}
               initial="hidden"
               animate="visible"
-              className="text-5xl md:text-[64px] font-bold text-gray-900 dark:text-white text-center mb-16 md:mb-20 leading-tight tracking-tight"
+              className="text-5xl md:text-[64px] font-bold text-foreground text-center mb-16 md:mb-20 leading-tight tracking-tight"
             >
               About Me
             </motion.h1>
@@ -58,9 +58,9 @@ export default function AboutPage() {
               animate="visible"
               className="max-w-5xl mx-auto"
             >
-              <div className="space-y-6 text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+              <div className="space-y-6 text-lg text-text-primary leading-relaxed">
                 <p>
-                  Hi! I'm <strong className="text-gray-900 dark:text-white">Sushant Kumar</strong>, a UI/UX Designer passionate about creating
+                  Hi! I'm <strong className="text-foreground">Sushant Kumar</strong>, a UI/UX Designer passionate about creating
                   intuitive and delightful digital experiences. I specialize in product design, design systems,
                   and bringing thoughtful solutions to complex problems.
                 </p>
@@ -77,31 +77,31 @@ export default function AboutPage() {
                 </p>
 
                 <div className="pt-8">
-                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                     What I Do
                   </h2>
                   <ul className="space-y-3">
                     <li className="flex items-start gap-3">
-                      <span className="text-blue-600 dark:text-blue-400 mt-1">→</span>
+                      <span className="text-primary mt-1">→</span>
                       <span>UI/UX Design & Product Strategy</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-blue-600 dark:text-blue-400 mt-1">→</span>
+                      <span className="text-primary mt-1">→</span>
                       <span>Design Systems & Component Libraries</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-blue-600 dark:text-blue-400 mt-1">→</span>
+                      <span className="text-primary mt-1">→</span>
                       <span>User Research & Usability Testing</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-blue-600 dark:text-blue-400 mt-1">→</span>
+                      <span className="text-primary mt-1">→</span>
                       <span>Prototyping & Interaction Design</span>
                     </li>
                   </ul>
                 </div>
 
                 <div className="pt-8">
-                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                     Let's Connect
                   </h2>
                   <p>
