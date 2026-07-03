@@ -1,0 +1,784 @@
+.container {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--cs2-space-48);
+  align-items: start;
+  width: 100%;
+  margin-top: var(--cs2-space-64);
+  margin-bottom: var(--cs2-space-115);
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-24);
+}
+
+.headerGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-8);
+}
+
+.preHeading {
+  display: flex;
+  align-items: center;
+  gap: var(--cs2-space-8);
+}
+
+.pillText {
+  font-family: var(--cs2-font-figtree);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cs2-color-blue-500);
+  letter-spacing: -0.28px;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--cs2-color-neutral-300);
+  border-radius: var(--cs2-radius-full);
+}
+
+.title {
+  color: var(--cs2-text-heading);
+  margin: 0;
+}
+
+.description {
+  color: var(--cs2-text-body);
+  max-width: 440px;
+  margin: 0;
+}
+
+/* Trip State Cards */
+.stateCards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-16);
+  margin-top: var(--cs2-space-12);
+}
+
+.stateCard {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--cs2-space-16);
+  padding: var(--cs2-space-16) var(--cs2-space-20);
+  border: 2px solid var(--cs2-border-default);
+  border-radius: var(--cs2-radius-12);
+  background-color: var(--cs2-color-neutral-0);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: var(--cs2-shadow-card);
+  text-align: left;
+  width: 100%;
+}
+
+.stateCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--cs2-color-neutral-300);
+  box-shadow: var(--cs2-shadow-raised);
+}
+
+.stateCard.active {
+  border-color: var(--cs2-color-blue-500);
+  background-color: var(--cs2-color-blue-050);
+}
+
+.stateCard.active.justListed {
+  border-color: var(--cs2-color-blue-500);
+  background-color: var(--cs2-color-blue-050);
+}
+
+.stateCard.active.fillingUp {
+  border-color: var(--cs2-color-amber-500);
+  background-color: var(--cs2-color-amber-050);
+}
+
+.stateCard.active.lockedIn {
+  border-color: var(--cs2-color-green-500);
+  background-color: var(--cs2-color-green-050);
+}
+
+.cardIndicatorDot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--cs2-radius-full);
+  margin-top: 5px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.stateCard.active .cardIndicatorDot {
+  transform: scale(1.2);
+}
+
+.justListed .cardIndicatorDot {
+  background-color: var(--cs2-color-blue-500);
+}
+
+.fillingUp .cardIndicatorDot {
+  background-color: var(--cs2-color-amber-500);
+}
+
+.lockedIn .cardIndicatorDot {
+  background-color: var(--cs2-color-green-500);
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-4);
+}
+
+.cardTitle {
+  font-family: var(--cs2-font-figtree);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--cs2-text-heading);
+  letter-spacing: -0.25px;
+  margin: 0;
+}
+
+.cardSubtitle {
+  font-family: var(--cs2-font-figtree);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--cs2-text-body);
+  letter-spacing: -0.2px;
+  margin: 0;
+}
+
+/* Right Column - Skeuomorphic Phone Mockup */
+.rightColumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.phoneMockup {
+  position: relative;
+  width: 320px;
+  height: 600px;
+  background-color: var(--cs2-color-neutral-800);
+  border-radius: var(--cs2-radius-40);
+  border: 12px solid var(--cs2-color-neutral-800);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 
+              inset 0 4px 6px rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.phoneNotch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110px;
+  height: 20px;
+  background-color: var(--cs2-color-neutral-800);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  z-index: 10;
+}
+
+.phoneScreen {
+  flex: 1;
+  background-color: var(--cs2-color-neutral-50);
+  padding: 24px 16px 16px 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-16);
+  scrollbar-width: none; /* Hide scrollbar for aesthetics */
+}
+
+.phoneScreen::-webkit-scrollbar {
+  display: none;
+}
+
+/* Phone UI Elements */
+.phoneHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  padding-bottom: 4px;
+}
+
+.backButton {
+  font-size: 18px;
+  color: var(--cs2-text-heading);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.screenTitle {
+  font-family: var(--cs2-font-satoshi);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cs2-text-heading);
+}
+
+.infoIcon {
+  font-size: 18px;
+  color: var(--cs2-text-muted);
+}
+
+/* Trip Card */
+.tripCard {
+  background-color: var(--cs2-color-neutral-0);
+  border: 1px solid var(--cs2-border-default);
+  border-radius: var(--cs2-radius-16);
+  padding: var(--cs2-space-16);
+  box-shadow: var(--cs2-shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-12);
+}
+
+.driverInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--cs2-space-12);
+}
+
+.driverAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--cs2-radius-full);
+  background-color: var(--cs2-color-blue-100);
+  color: var(--cs2-color-blue-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-family: var(--cs2-font-figtree);
+  font-size: 14px;
+}
+
+.driverMeta {
+  display: flex;
+  flex-direction: column;
+}
+
+.driverName {
+  font-family: var(--cs2-font-figtree);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--cs2-text-heading);
+}
+
+.driverRating {
+  font-family: var(--cs2-font-figtree);
+  font-size: 11px;
+  color: var(--cs2-text-muted);
+}
+
+.routeInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-8);
+  padding: var(--cs2-space-10) 0;
+  border-top: 1px solid var(--cs2-color-neutral-100);
+  border-bottom: 1px solid var(--cs2-color-neutral-100);
+}
+
+.routeRow {
+  display: flex;
+  gap: var(--cs2-space-12);
+  align-items: center;
+}
+
+.routeDot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--cs2-radius-full);
+  border: 2px solid var(--cs2-color-blue-500);
+  background-color: var(--cs2-color-neutral-0);
+}
+
+.routeDot.end {
+  border-color: var(--cs2-color-green-500);
+  background-color: var(--cs2-color-green-500);
+}
+
+.routeTime {
+  font-family: var(--cs2-font-figtree);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cs2-text-heading);
+  min-width: 45px;
+}
+
+.routeCity {
+  font-family: var(--cs2-font-figtree);
+  font-size: 13px;
+  color: var(--cs2-text-body);
+}
+
+/* Interactive Seats Area */
+.seatsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.seatsTitle {
+  font-family: var(--cs2-font-figtree);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--cs2-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.seatsInstruction {
+  font-family: var(--cs2-font-figtree);
+  font-size: 10px;
+  color: var(--cs2-color-blue-500);
+  font-weight: 600;
+}
+
+.seatSelectorGrid {
+  display: flex;
+  gap: var(--cs2-space-12);
+  justify-content: space-between;
+  padding: var(--cs2-space-4) 0;
+}
+
+.interactiveSeat {
+  flex: 1;
+  aspect-ratio: 1;
+  border: 2px dashed var(--cs2-border-strong);
+  border-radius: var(--cs2-radius-12);
+  background-color: var(--cs2-color-neutral-50);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  padding: 4px;
+}
+
+.interactiveSeat:hover {
+  border-color: var(--cs2-color-neutral-400);
+  background-color: var(--cs2-color-neutral-100);
+}
+
+.interactiveSeat.filled {
+  border-style: solid;
+  border-color: var(--cs2-color-blue-500);
+  background-color: var(--cs2-color-blue-050);
+}
+
+.interactiveSeat.filled.justListed {
+  border-color: var(--cs2-color-blue-500);
+  background-color: var(--cs2-color-blue-050);
+}
+
+.interactiveSeat.filled.fillingUp {
+  border-color: var(--cs2-color-amber-500);
+  background-color: var(--cs2-color-amber-050);
+}
+
+.interactiveSeat.filled.lockedIn {
+  border-color: var(--cs2-color-green-500);
+  background-color: var(--cs2-color-green-050);
+}
+
+.seatIcon {
+  font-size: 16px;
+  color: var(--cs2-color-neutral-400);
+  transition: all 0.2s ease;
+}
+
+.interactiveSeat.filled .seatIcon {
+  color: var(--cs2-color-blue-500);
+}
+
+.interactiveSeat.filled.justListed .seatIcon {
+  color: var(--cs2-color-blue-500);
+}
+
+.interactiveSeat.filled.fillingUp .seatIcon {
+  color: var(--cs2-color-amber-500);
+}
+
+.interactiveSeat.filled.lockedIn .seatIcon {
+  color: var(--cs2-color-green-500);
+}
+
+.seatLabel {
+  font-family: var(--cs2-font-figtree);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--cs2-text-muted);
+}
+
+.interactiveSeat.filled .seatLabel {
+  color: var(--cs2-color-blue-600);
+}
+
+.interactiveSeat.filled.justListed .seatLabel {
+  color: var(--cs2-color-blue-600);
+}
+
+.interactiveSeat.filled.fillingUp .seatLabel {
+  color: var(--cs2-color-amber-700);
+}
+
+.interactiveSeat.filled.lockedIn .seatLabel {
+  color: var(--cs2-color-green-700);
+}
+
+/* Phone Live Viability Meter Widget */
+.meterWidget {
+  background-color: var(--cs2-color-neutral-0);
+  border: 2px solid var(--cs2-border-default);
+  border-radius: var(--cs2-radius-12);
+  padding: var(--cs2-space-12) var(--cs2-space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-12);
+  box-shadow: var(--cs2-shadow-card);
+  transition: all 0.3s ease;
+}
+
+.meterWidget.justListed {
+  border-color: var(--cs2-color-blue-300);
+}
+
+.meterWidget.fillingUp {
+  border-color: var(--cs2-color-amber-200);
+}
+
+.meterWidget.lockedIn {
+  border-color: var(--cs2-color-green-200);
+}
+
+.meterHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.meterHeading {
+  font-family: var(--cs2-font-figtree);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--cs2-text-heading);
+}
+
+.statusPill {
+  font-family: var(--cs2-font-figtree);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: var(--cs2-radius-full);
+}
+
+.statusPill.justListed {
+  background-color: var(--cs2-color-blue-050);
+  color: var(--cs2-color-blue-600);
+}
+
+.statusPill.fillingUp {
+  background-color: var(--cs2-color-amber-050);
+  color: var(--cs2-color-amber-700);
+}
+
+.statusPill.lockedIn {
+  background-color: var(--cs2-color-green-050);
+  color: var(--cs2-color-green-700);
+}
+
+/* Custom Progress Bar with Ticks and Lock Point */
+.progressContainer {
+  position: relative;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  margin: var(--cs2-space-8) 0;
+}
+
+.progressTrack {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background-color: var(--cs2-color-neutral-200);
+  border-radius: var(--cs2-radius-full);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  width: 0%;
+  border-radius: var(--cs2-radius-full);
+  transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+              background-color 0.4s ease;
+}
+
+.progressFill.justListed {
+  background-color: var(--cs2-color-blue-500);
+}
+
+.progressFill.fillingUp {
+  background-color: var(--cs2-color-amber-500);
+}
+
+.progressFill.lockedIn {
+  background-color: var(--cs2-color-green-500);
+}
+
+.progressTicks {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+/* Lock point vertical line marker */
+.lockLine {
+  position: absolute;
+  left: 75%; /* 3 of 4 seats is 75% */
+  top: -4px;
+  bottom: -4px;
+  width: 2px;
+  z-index: 2;
+  transition: background-color 0.3s ease;
+}
+
+.lockLine.justListed {
+  background-color: var(--cs2-color-blue-500);
+}
+
+.lockLine.fillingUp {
+  background-color: var(--cs2-color-amber-500);
+}
+
+.lockLine.lockedIn {
+  background-color: var(--cs2-color-green-500);
+}
+
+.lockLabel {
+  position: absolute;
+  left: 75%;
+  top: -16px;
+  transform: translateX(-50%);
+  font-family: var(--cs2-font-figtree);
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--cs2-text-muted);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.lockLabel.active {
+  color: var(--cs2-color-green-600);
+}
+
+/* Slider Thumb Indicator */
+.sliderThumb {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--cs2-radius-full);
+  background-color: var(--cs2-color-neutral-0);
+  border: 3px solid var(--cs2-color-blue-500);
+  box-shadow: var(--cs2-shadow-raised);
+  z-index: 3;
+  transition: left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+              border-color 0.4s ease;
+  transform: translate(-50%, -1px);
+}
+
+.sliderThumb.justListed {
+  border-color: var(--cs2-color-blue-500);
+}
+
+.sliderThumb.fillingUp {
+  border-color: var(--cs2-color-amber-500);
+}
+
+.sliderThumb.lockedIn {
+  border-color: var(--cs2-color-green-500);
+}
+
+.meterFooter {
+  font-family: var(--cs2-font-figtree);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--cs2-text-body);
+  line-height: 1.4;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.meterFooter.justListed {
+  color: var(--cs2-color-blue-700);
+}
+
+.meterFooter.fillingUp {
+  color: var(--cs2-color-amber-700);
+}
+
+.meterFooter.lockedIn {
+  color: var(--cs2-color-green-700);
+}
+
+/* Live Stats / Financial Benefits card */
+.statsCard {
+  background-color: var(--cs2-color-neutral-0);
+  border: 1px solid var(--cs2-border-default);
+  border-radius: var(--cs2-radius-16);
+  padding: var(--cs2-space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-12);
+  box-shadow: var(--cs2-shadow-card);
+}
+
+.statsHeader {
+  font-family: var(--cs2-font-figtree);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--cs2-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--cs2-color-neutral-100);
+  padding-bottom: var(--cs2-space-8);
+}
+
+.statsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statsLabel {
+  font-family: var(--cs2-font-figtree);
+  font-size: 13px;
+  color: var(--cs2-text-body);
+}
+
+.statsValue {
+  font-family: var(--cs2-font-figtree);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--cs2-text-heading);
+}
+
+.statsValue.discount {
+  color: var(--cs2-color-green-600);
+}
+
+.statsValue.confirmed {
+  color: var(--cs2-color-green-600);
+  background-color: var(--cs2-color-green-050);
+  padding: 2px 6px;
+  border-radius: var(--cs2-radius-8);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.statsValue.unconfirmed {
+  color: var(--cs2-color-blue-600);
+  background-color: var(--cs2-color-blue-050);
+  padding: 2px 6px;
+  border-radius: var(--cs2-radius-8);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.statsValue.unconfirmed.filling {
+  color: var(--cs2-color-amber-700);
+  background-color: var(--cs2-color-amber-050);
+}
+
+/* Submit Action Button */
+.actionButton {
+  width: 100%;
+  padding: var(--cs2-space-12);
+  border: none;
+  border-radius: var(--cs2-radius-12);
+  font-family: var(--cs2-font-figtree);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.actionButton.justListed {
+  background-color: var(--cs2-color-blue-500);
+  color: var(--cs2-color-neutral-0);
+}
+
+.actionButton.justListed:hover {
+  background-color: var(--cs2-color-blue-600);
+}
+
+.actionButton.fillingUp {
+  background-color: var(--cs2-color-amber-500);
+  color: var(--cs2-color-neutral-0);
+}
+
+.actionButton.fillingUp:hover {
+  background-color: var(--cs2-color-amber-600);
+}
+
+.actionButton.lockedIn {
+  background-color: var(--cs2-color-green-500);
+  color: var(--cs2-color-neutral-0);
+}
+
+.actionButton.lockedIn:hover {
+  background-color: var(--cs2-color-green-600);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: var(--cs2-space-32);
+    margin-bottom: var(--cs2-space-64);
+  }
+
+  .leftColumn {
+    align-items: center;
+    text-align: center;
+  }
+
+  .description {
+    max-width: 600px;
+  }
+
+  .stateCards {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .rightColumn {
+    margin-top: var(--cs2-space-16);
+  }
+}
+
+@media (max-width: 480px) {
+  .phoneMockup {
+    width: 100%;
+    max-width: 310px;
+    height: 560px;
+  }
+}

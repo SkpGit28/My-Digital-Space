@@ -6,6 +6,7 @@ import ThemeProviderWrapper from "@/Components/ThemeProviderWrapper";
 import TopNav from "@/Components/TopNav";
 import ScrollProgress from "@/Components/ScrollProgress";
 import PageTransition from "@/Components/PageTransition";
+import SmoothScrollProvider from "@/Components/SmoothScrollProvider";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -37,22 +38,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="scroll-smooth">
       <body
         className={`${manrope.variable} antialiased font-sans min-h-screen bg-background transition-colors duration-300`}
       >
         <ThemeProviderWrapper>
-          <ScrollProgress />
+          <SmoothScrollProvider>
+            <ScrollProgress />
 
-          <div className="flex min-h-screen flex-col">
-            <TopNav />
+            <div className="flex min-h-screen flex-col">
+              <TopNav />
 
-            <main className="flex-1">
-              <PageTransition>
-                {children}
-              </PageTransition>
-            </main>
-          </div>
+              <main className="flex-1">
+                <PageTransition>
+                  {children}
+                </PageTransition>
+              </main>
+            </div>
+          </SmoothScrollProvider>
         </ThemeProviderWrapper>
 
         <script type="application/ld+json">

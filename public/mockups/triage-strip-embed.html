@@ -1,0 +1,462 @@
+<!--
+    ============================================================================
+    IDEAS EXPLORED — TRIAGE STRIP  (self-contained embed)
+    ============================================================================
+    HOW TO INTEGRATE (for the AI coding agent):
+
+    1. This section is fully self-contained: scoped CSS (every class is
+       prefixed `ts-`), no Tailwind, no icon fonts, no external requests.
+       Drop the whole <section> (including its <style>) anywhere in the page,
+       or split the <style> into your stylesheet pipeline.
+
+    2. All colors, radii, and fonts are driven by the CSS custom properties
+       declared on `.ts-root`. Remap them to the site's design tokens, e.g.:
+
+           --ts-surface        → var(--color-surface)          (card background)
+           --ts-bg-page        → var(--color-background-subtle)(section bg, optional)
+           --ts-border         → var(--color-border)
+           --ts-text           → var(--color-text-primary)
+           --ts-text-muted     → var(--color-text-secondary)
+           --ts-text-faint     → var(--color-text-tertiary)
+           --ts-accent         → var(--color-brand)            (BlaBlaCar blue in mock UIs)
+           --ts-success        → var(--color-positive)         (Finalized)
+           --ts-warning        → var(--color-caution)          (Partial)
+           --ts-info           → var(--color-informative)      (Parked)
+           --ts-neutral        → var(--color-neutral)          (Discarded)
+           --ts-radius-card    → var(--radius-xl)
+           --ts-radius-phone   → var(--radius-lg)
+           --ts-font-heading   → var(--font-family-display)
+           --ts-font-body      → var(--font-family-text)
+
+       Only remap the variables — do not restyle the mini phone screens
+       themselves; they intentionally depict the BlaBlaCar prototype UI and
+       should keep their internal look regardless of the host site's theme.
+
+    3. The strip scrolls horizontally with scroll-snap; the last card peeks
+       ~1/3 out under a fade to signal scrollability. Both are pure CSS.
+
+    4. Accessibility: the section is a figure-like exhibit. Mini screens are
+       aria-hidden decorative depictions; the card names + status pills below
+       them carry the information.
+    ============================================================================
+-->
+<section class="ts-root">
+    <style>
+        .ts-root {
+            /* ==== TOKEN MAPPING SURFACE — remap these to the site's tokens ==== */
+            --ts-surface: #ffffff;
+            --ts-bg-page: transparent;
+            --ts-border: #e2e8f0;
+            --ts-text: #0f172a;
+            --ts-text-muted: #64748b;
+            --ts-text-faint: #94a3b8;
+            --ts-accent: #00aff5;          /* brand blue used inside mock UIs */
+            --ts-accent-soft: #e5f7fe;
+            --ts-success: #059669;         /* Finalized */
+            --ts-success-soft: #ecfdf5;
+            --ts-warning: #d97706;         /* Partial */
+            --ts-warning-soft: #fffbeb;
+            --ts-info: #3b82f6;            /* Parked */
+            --ts-info-soft: #eff6ff;
+            --ts-neutral: #94a3b8;         /* Discarded */
+            --ts-radius-card: 28px;
+            --ts-radius-phone: 22px;
+            --ts-font-heading: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+            --ts-font-body: 'Figtree', 'Inter', system-ui, sans-serif;
+            /* =================================================================== */
+
+            /* fixed micro-palette for the mock phone UIs (theme-independent) */
+            --ts-ui-ink: #054734;
+            --ts-ui-dark: #0f172a;
+            --ts-ui-purple: #9333ea;
+            --ts-ui-red: #ef4444;
+
+            font-family: var(--ts-font-body);
+            color: var(--ts-text);
+            background: var(--ts-bg-page);
+            display: block;
+        }
+        .ts-root *, .ts-root *::before, .ts-root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        .ts-card {
+            background: var(--ts-surface);
+            border: 1px solid var(--ts-border);
+            border-radius: var(--ts-radius-card);
+            padding: 40px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+        .ts-eyebrow {
+            font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--ts-text-faint); margin-bottom: 8px;
+        }
+        .ts-title {
+            font-family: var(--ts-font-heading);
+            font-size: clamp(20px, 2.4vw, 26px); font-weight: 800;
+            letter-spacing: -0.01em; margin-bottom: 20px;
+        }
+        .ts-legend { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 32px; }
+        .ts-legend span { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--ts-text-muted); }
+        .ts-legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+
+        /* ---- scroll strip ---- */
+        .ts-strip-wrap { position: relative; margin-right: -40px; }
+        .ts-strip {
+            display: flex; gap: 16px; overflow-x: auto; padding: 0 40px 16px 0;
+            scrollbar-width: thin; scrollbar-color: var(--ts-text-faint) transparent;
+            scroll-snap-type: x proximity; scroll-behavior: smooth;
+        }
+        .ts-strip::-webkit-scrollbar { height: 4px; }
+        .ts-strip::-webkit-scrollbar-track { background: color-mix(in srgb, var(--ts-border) 50%, transparent); border-radius: 99px; }
+        .ts-strip::-webkit-scrollbar-thumb { background: var(--ts-text-faint); border-radius: 99px; }
+        .ts-strip::-webkit-scrollbar-thumb:hover { background: var(--ts-text-muted); }
+        .ts-strip > div { scroll-snap-align: start; flex-shrink: 0; width: 128px; }
+        .ts-fade {
+            pointer-events: none; position: absolute; top: 0; bottom: 16px; right: 0; width: 64px;
+            background: linear-gradient(to left, var(--ts-surface), color-mix(in srgb, var(--ts-surface) 70%, transparent), transparent);
+        }
+
+        /* ---- mini phone chassis ---- */
+        .ts-phone {
+            height: 250px; border-radius: var(--ts-radius-phone); background: #fff;
+            padding: 8px; display: flex; flex-direction: column; gap: 6px; overflow: hidden;
+        }
+        .ts-phone--final   { border: 2px solid var(--ts-success); }
+        .ts-phone--partial { border: 2px solid var(--ts-warning); }
+        .ts-phone--parked  { border: 2px dashed var(--ts-info); }
+        .ts-phone--ghost   { border: 2px dashed var(--ts-border); background: color-mix(in srgb, var(--ts-border) 18%, #fff);
+                             align-items: center; justify-content: center; text-align: center; }
+
+        .ts-caption { margin-top: 10px; padding: 0 2px; }
+        .ts-caption b { display: block; font-size: 12px; font-weight: 700; line-height: 1.25; color: var(--ts-text); }
+        .ts-pill { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 99px; }
+        .ts-pill i { width: 6px; height: 6px; border-radius: 99px; display: inline-block; }
+        .ts-pill--final   { background: var(--ts-success-soft); color: var(--ts-success); }
+        .ts-pill--final i { background: var(--ts-success); }
+        .ts-pill--partial { background: var(--ts-warning-soft); color: var(--ts-warning); }
+        .ts-pill--partial i { background: var(--ts-warning); }
+        .ts-pill--parked  { background: var(--ts-info-soft); color: var(--ts-info); }
+        .ts-pill--parked i { background: var(--ts-info); }
+        .ts-caption--ghost b { color: var(--ts-text-faint); font-weight: 600; }
+
+        /* ---- shared mock-UI primitives (theme-independent by design) ---- */
+        .ts-phone { font-family: var(--ts-font-body); color: var(--ts-ui-ink); }
+        .m-head { font-size: 6px; font-weight: 700; color: #64748b; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px; }
+        .m-head--big { font-size: 7px; font-weight: 800; color: var(--ts-ui-ink); }
+        .m-row { display: flex; align-items: center; gap: 5px; }
+        .m-avatar { width: 18px; height: 18px; border-radius: 99px; background: #f1f5f9; border: 1px solid #e2e8f0;
+                    font-size: 5px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .m-name { font-size: 6.5px; font-weight: 700; line-height: 1.3; }
+        .m-sub { font-size: 5px; color: #94a3b8; font-weight: 600; }
+        .m-note { display: flex; gap: 4px; align-items: flex-start; background: #f8fafc; border-radius: 5px; padding: 4px; font-size: 5px; color: #475569; font-weight: 600; line-height: 1.35; }
+        .m-cta { font-size: 5px; font-weight: 700; text-align: center; border-radius: 99px; padding: 4px 8px; }
+        .m-cta--blue { background: var(--ts-accent); color: #fff; }
+        .m-cta--darkfull { display: block; width: 100%; background: var(--ts-ui-dark); color: #fff; border-radius: 6px; padding: 4px 0; }
+        .m-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 4px; }
+        .m-price small { display: block; font-size: 4.5px; color: #94a3b8; font-weight: 600; }
+        .m-price b { font-size: 7px; font-weight: 800; }
+
+        /* screen 1 — viability box */
+        .m-via { background: #ecfdf5; border: 1px solid #34d399; border-radius: 8px; padding: 6px; display: flex; flex-direction: column; gap: 4px; }
+        .m-via-top { display: flex; justify-content: space-between; align-items: center; }
+        .m-via-label { font-size: 4.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.06em; }
+        .m-via-badge { font-size: 4.5px; font-weight: 700; background: #d1fae5; color: #047857; padding: 1px 4px; border-radius: 3px; }
+        .m-bar { height: 4px; background: #e2e8f0; border-radius: 99px; overflow: hidden; position: relative; }
+        .m-bar > i { position: absolute; left: 0; top: 0; height: 100%; width: 66%; background: #10b981; border-radius: 99px; display: block; }
+        .m-bar > b { position: absolute; left: 66%; top: 0; bottom: 0; width: 1px; background: #fff; z-index: 2; }
+        .m-split { display: flex; justify-content: space-between; font-size: 4.5px; font-weight: 600; color: #64748b; }
+        .m-via-note { font-size: 4.5px; background: rgba(255,255,255,0.7); border-radius: 4px; padding: 4px; color: #065f46; line-height: 1.35; }
+
+        /* screen 2 — route + status */
+        .m-route { display: flex; gap: 6px; }
+        .m-route-line { display: flex; flex-direction: column; align-items: center; padding-top: 2px; }
+        .m-route-line u { width: 6px; height: 6px; border-radius: 99px; border: 1.5px solid var(--ts-accent); background: #fff; }
+        .m-route-line s { width: 1px; height: 16px; background: #cbd5e1; }
+        .m-route-line v { width: 6px; height: 6px; border-radius: 99px; background: var(--ts-ui-ink); }
+        .m-route-stops { display: flex; flex-direction: column; gap: 7px; font-size: 6px; font-weight: 700; }
+        .m-statusbox { background: #f9fbfc; border: 1px solid #f1f5f9; border-radius: 6px; padding: 5px; display: flex; flex-direction: column; gap: 4px; }
+        .m-statusbox-top { display: flex; justify-content: space-between; align-items: center; }
+        .m-auto { font-size: 4px; font-weight: 700; background: #e2e8f0; color: #64748b; padding: 1px 3px; border-radius: 3px; text-transform: uppercase; }
+        .m-status { display: flex; gap: 4px; align-items: center; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 5px; padding: 4px; }
+        .m-dot { width: 5px; height: 5px; border-radius: 99px; background: #10b981; flex-shrink: 0; animation: ts-pulse 2s infinite; }
+        @keyframes ts-pulse { 50% { opacity: 0.4; } }
+        .m-status b { display: block; font-size: 5.5px; font-weight: 800; }
+        .m-status span { font-size: 4.5px; color: #64748b; line-height: 1.3; }
+        .m-verify { font-size: 4.5px; color: #64748b; font-weight: 600; }
+        .m-btn-ghost { display: block; width: 100%; text-align: center; background: #fff; border: 1px solid #e2e8f0; color: var(--ts-accent); font-size: 5px; font-weight: 700; padding: 3.5px 0; border-radius: 99px; }
+        .m-btn-book { display: block; width: 100%; text-align: center; background: var(--ts-accent); color: #fff; font-size: 5.5px; font-weight: 800; padding: 4px 0; border-radius: 99px; }
+        .m-chip-tag { font-size: 4px; font-weight: 700; background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; padding: 1px 4px; border-radius: 99px; }
+
+        /* screen 3 — map */
+        .ts-phone--map { padding: 0; background: #e2e8f0; }
+        .m-map { height: 45%; position: relative; background: #cbd5e1; flex-shrink: 0; overflow: hidden;
+                 background-image: repeating-linear-gradient(0deg, #94a3b8 0 1px, transparent 1px 14px),
+                                   repeating-linear-gradient(90deg, #94a3b8 0 1px, transparent 1px 14px);
+                 background-blend-mode: soft-light; }
+        .m-map .hwy { position: absolute; top: 0; left: 50%; width: 6px; height: 100%; background: var(--ts-accent); transform: translateX(-50%); }
+        .m-map .car { position: absolute; top: 25%; left: 50%; transform: translate(-50%,-50%); width: 16px; height: 16px;
+                      background: #fff; border: 2px solid var(--ts-accent); border-radius: 99px; display: flex; align-items: center; justify-content: center; font-size: 7px; }
+        .m-map .pin { position: absolute; top: 66%; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; background: #fff; border: 2px solid #1e293b; border-radius: 99px; }
+        .m-map .walkline { position: absolute; top: 66%; left: 25%; width: 25%; height: 25%; }
+        .m-map .walker { position: absolute; top: 82%; left: 25%; transform: translate(-50%,-50%); width: 13px; height: 13px;
+                         background: #1e293b; color: #fff; border-radius: 99px; display: flex; align-items: center; justify-content: center; font-size: 6px; }
+        .m-sheet { flex: 1; background: #fff; border-radius: 12px 12px 0 0; margin-top: -8px; z-index: 2; padding: 6px; display: flex; flex-direction: column; gap: 4px; }
+        .m-grab { width: 16px; height: 2px; background: #e2e8f0; border-radius: 99px; margin: 0 auto; }
+        .m-proto-badge { align-self: flex-start; font-size: 4.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+                         background: #fffbeb; color: #d97706; border: 1px solid #fde68a; padding: 1.5px 4px; border-radius: 3px; }
+        .m-sheet h5 { font-size: 7px; font-weight: 800; }
+        .m-sheet p { font-size: 4.5px; color: #64748b; line-height: 1.4; }
+        .m-walkrow { margin-top: auto; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px; padding: 4px; display: flex; align-items: center; justify-content: space-between; }
+        .m-walkrow b { display: block; font-size: 5.5px; }
+        .m-walkrow small { font-size: 4.5px; color: #64748b; }
+        .m-nav-btn { background: #0f172a; color: #fff; font-size: 4.5px; font-weight: 700; padding: 3px 6px; border-radius: 5px; }
+
+        /* screen 4 — pledge */
+        .m-pledge-head { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px;
+                         font-size: 4.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #94a3b8; }
+        .m-hand { width: 22px; height: 22px; border-radius: 7px; background: #faf5ff; display: flex; align-items: center; justify-content: center; font-size: 10px; margin: 0 auto; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+        .m-pledge-title { text-align: center; font-size: 7px; font-weight: 800; margin-top: 3px; }
+        .m-pledge-sub { text-align: center; font-size: 4.5px; color: #64748b; line-height: 1.35; margin-top: 1px; }
+        .m-pledge-box { background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px; padding: 5px; display: flex; flex-direction: column; gap: 4px; }
+        .m-pledge-row { display: flex; gap: 4px; align-items: flex-start; font-size: 4.5px; line-height: 1.35; color: #334155; }
+        .m-pledge-ico { width: 10px; height: 10px; border-radius: 3px; background: #f3e8ff; color: var(--ts-ui-purple);
+                        display: flex; align-items: center; justify-content: center; font-size: 4.5px; flex-shrink: 0; font-weight: 800; }
+        .m-tags { display: flex; gap: 2px; flex-wrap: wrap; margin-top: 2px; }
+        .m-tags span { font-size: 3.5px; font-weight: 600; background: #e9edf2; color: #475569; padding: 1px 3px; border-radius: 2px; }
+        .m-cta--purple { margin-top: auto; display: block; width: 100%; background: var(--ts-ui-purple); color: #fff; font-size: 5px; font-weight: 700; text-align: center; padding: 4px 0; border-radius: 6px; }
+
+        /* screens 5 & 6 — dark */
+        .ts-phone--dark { background: #0f172a; color: #fff; }
+        .m-scan { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 3px; }
+        .m-scan-ring { width: 30px; height: 30px; border-radius: 99px; border: 1px solid color-mix(in srgb, var(--ts-accent) 40%, transparent);
+                       display: flex; align-items: center; justify-content: center; margin-bottom: 2px; }
+        .m-scan-core { width: 18px; height: 18px; border-radius: 99px; background: var(--ts-accent); color: #fff;
+                       display: flex; align-items: center; justify-content: center; font-size: 7px; font-weight: 800; }
+        .m-scan b { font-size: 6.5px; font-weight: 700; }
+        .m-scan .blue { font-size: 5px; color: var(--ts-accent); }
+        .m-scan .faint { font-size: 4px; color: #64748b; }
+        .m-saved { background: #fff; color: #0f172a; border-radius: 10px; padding: 6px; display: flex; flex-direction: column; gap: 4px; }
+        .m-saved-check { width: 14px; height: 14px; border-radius: 99px; background: #ecfdf5; color: #059669; border: 2px solid #fff;
+                         box-shadow: 0 1px 3px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center;
+                         font-size: 6px; font-weight: 800; margin: -13px auto 0; }
+        .m-saved h6 { text-align: center; font-size: 6.5px; font-weight: 800; }
+        .m-saved p { text-align: center; font-size: 4.5px; color: #64748b; line-height: 1.35; }
+        .m-saved-row { background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px; padding: 4px; display: flex; align-items: center; justify-content: space-between; }
+        .m-saved-row .who b { display: block; font-size: 4.5px; font-weight: 700; }
+        .m-saved-row .who small { font-size: 4px; color: #64748b; }
+        .m-badge-price { font-size: 3.5px; font-weight: 700; background: var(--ts-accent-soft); color: var(--ts-accent); padding: 1px 3px; border-radius: 3px; }
+        .m-saved .m-cta--darkfull { font-size: 4.5px; }
+        .m-standby-label { display: flex; align-items: center; gap: 4px; margin: 8px 0 8px;
+                           font-size: 4.5px; font-weight: 700; color: var(--ts-accent); text-transform: uppercase; letter-spacing: 0.08em; }
+        .m-standby-label i { width: 4px; height: 4px; border-radius: 99px; background: var(--ts-accent); animation: ts-pulse 2s infinite; }
+        .m-dark-title { font-size: 8px; font-weight: 800; }
+        .m-dark-sub { font-size: 5px; color: #94a3b8; margin: 2px 0 8px; }
+        .m-glass { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 6px; margin-bottom: 6px; }
+        .m-glass b { display: block; font-size: 5.5px; font-weight: 700; margin-bottom: 1px; }
+        .m-glass p { font-size: 4.5px; color: #cbd5e1; line-height: 1.4; }
+        .m-oncall { display: flex; justify-content: space-between; align-items: center; }
+        .m-oncall small { display: block; font-size: 4.5px; color: #94a3b8; }
+        .m-oncall b { font-size: 5.5px; font-weight: 700; }
+        .m-oncall-tag { font-size: 4px; font-weight: 700; background: color-mix(in srgb, var(--ts-accent) 20%, transparent); color: var(--ts-accent); padding: 1px 4px; border-radius: 3px; }
+        .m-cta--redline { margin-top: auto; display: block; width: 100%; text-align: center; border: 1px solid rgba(239,68,68,0.5);
+                          color: #f87171; background: rgba(239,68,68,0.1); font-size: 4.5px; font-weight: 700; padding: 4px 0; border-radius: 99px; }
+
+        /* +14 ghost card */
+        .ts-phone--ghost b { font-family: var(--ts-font-heading); font-size: 26px; font-weight: 800; color: var(--ts-neutral); }
+        .ts-phone--ghost span { font-size: 10px; color: var(--ts-neutral); line-height: 1.35; margin-top: 4px; }
+    </style>
+
+    <div class="ts-card">
+        <div class="ts-eyebrow">Ideas Explored — Prototyped on Mobile</div>
+        <h2 class="ts-title">20+ directions, narrowed to what the product could carry</h2>
+
+        <div class="ts-legend">
+            <span><i style="background: var(--ts-success)"></i>2 Finalized</span>
+            <span><i style="background: var(--ts-warning)"></i>2 Partial</span>
+            <span><i style="background: var(--ts-info)"></i>2 Parked</span>
+            <span><i style="background: var(--ts-neutral)"></i>14 Discarded</span>
+        </div>
+
+        <div class="ts-strip-wrap">
+            <div class="ts-strip">
+
+                <!-- 1 · Trip Lock (Finalized) -->
+                <div>
+                    <div class="ts-phone ts-phone--final" aria-hidden="true">
+                        <div class="m-head">‹ &nbsp;Ride details</div>
+                        <div class="m-row">
+                            <div class="m-avatar">SV</div>
+                            <div><div class="m-name">Sohil V.</div><div class="m-sub">★ 4.9 · 14 rides</div></div>
+                        </div>
+                        <div class="m-note">🏠 &nbsp;Heading home for the weekend</div>
+                        <div class="m-via">
+                            <div class="m-via-top">
+                                <span class="m-via-label">Co-Commute Viability</span>
+                                <span class="m-via-badge">Locked 66%</span>
+                            </div>
+                            <div class="m-bar"><i></i><b></b></div>
+                            <div class="m-split"><span>2 of 3 seats filled</span><span>₹800 / ₹1,200</span></div>
+                            <div class="m-via-note"><strong>Trip Guaranteed:</strong> fuel &amp; tolls covered. Sohil is 100% committed.</div>
+                        </div>
+                        <div class="m-foot">
+                            <div class="m-price"><small>Total Price</small><b>₹400</b></div>
+                            <span class="m-cta m-cta--blue">Request to Join</span>
+                        </div>
+                    </div>
+                    <div class="ts-caption">
+                        <b>Trip Lock</b>
+                        <span class="ts-pill ts-pill--final"><i></i>Finalized</span>
+                    </div>
+                </div>
+
+                <!-- 2 · Locked-in status (Finalized) -->
+                <div>
+                    <div class="ts-phone ts-phone--final" aria-hidden="true">
+                        <div class="m-head m-head--big">← &nbsp;Sunday, 31 May</div>
+                        <div class="m-route">
+                            <div class="m-route-line"><u></u><s></s><v></v></div>
+                            <div class="m-route-stops"><span>12:30 · Saharanpur</span><span>14:50 · Delhi</span></div>
+                        </div>
+                        <div class="m-statusbox">
+                            <div class="m-statusbox-top">
+                                <span class="m-via-label">Systemic Route Status</span>
+                                <span class="m-auto">Auto</span>
+                            </div>
+                            <div class="m-status">
+                                <span class="m-dot"></span>
+                                <div><b>Going as planned</b><span>Stable departure guaranteed via commuter patterns.</span></div>
+                            </div>
+                        </div>
+                        <div class="m-row">
+                            <div class="m-avatar" style="border-color: var(--ts-accent)">S</div>
+                            <div class="m-name">Sameer &nbsp;<span class="m-chip-tag">Home Visit</span></div>
+                        </div>
+                        <div class="m-verify">✓ Verified Profile · 14 trips/mo on route</div>
+                        <div style="margin-top:auto; display:flex; flex-direction:column; gap:4px;">
+                            <span class="m-btn-ghost">💬 Contact Sameer</span>
+                            <span class="m-btn-book">Book</span>
+                        </div>
+                    </div>
+                    <div class="ts-caption">
+                        <b>Locked-in status</b>
+                        <span class="ts-pill ts-pill--final"><i></i>Finalized</span>
+                    </div>
+                </div>
+
+                <!-- 3 · On-route distance chips (Partial) -->
+                <div>
+                    <div class="ts-phone ts-phone--partial ts-phone--map" aria-hidden="true">
+                        <div class="m-map">
+                            <div class="hwy"></div>
+                            <div class="car">🚗</div>
+                            <div class="pin"></div>
+                            <svg class="walkline"><line x1="0" y1="25" x2="100%" y2="0" stroke="#1e293b" stroke-width="2" stroke-dasharray="3,3"/></svg>
+                            <div class="walker">🚶</div>
+                        </div>
+                        <div class="m-sheet">
+                            <div class="m-grab"></div>
+                            <span class="m-proto-badge">Highway Protocol Active</span>
+                            <h5>Walk to Main Highway</h5>
+                            <p>To avoid 25 mins of service-lane traffic, your host stays on NH-48. Walk to the pickup point.</p>
+                            <div class="m-walkrow">
+                                <div><b>400m Walk</b><small>Approx. 5 mins</small></div>
+                                <span class="m-nav-btn">Navigate</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ts-caption">
+                        <b>On-route distance chips</b>
+                        <span class="ts-pill ts-pill--partial"><i></i>Partial</span>
+                    </div>
+                </div>
+
+                <!-- 4 · Route Host framing (Partial) -->
+                <div>
+                    <div class="ts-phone ts-phone--partial" aria-hidden="true">
+                        <div class="m-pledge-head"><span>Booking Confirmation</span><span>✕</span></div>
+                        <div class="m-hand">🤝</div>
+                        <div class="m-pledge-title">The Mezbaan-Mehmaan Pact</div>
+                        <div class="m-pledge-sub">Not a driver and a fare — a Route Host welcoming a Co-Traveler.</div>
+                        <div class="m-pledge-box">
+                            <div class="m-pledge-row"><span class="m-pledge-ico">⚖</span><span><strong>We are equals sharing space</strong> — Rahul splits fuel; Priya chips in.</span></div>
+                            <div class="m-pledge-row"><span class="m-pledge-ico">🚗</span>
+                                <span><strong>Rahul's Car Sanctuary</strong>
+                                    <span class="m-tags"><span>Non-Smoking</span><span>Indie Music</span><span>AC On</span></span>
+                                </span>
+                            </div>
+                            <div class="m-pledge-row"><span class="m-pledge-ico">📣</span><span><strong>Communication is gold</strong> — both update each other instantly.</span></div>
+                        </div>
+                        <span class="m-cta--purple">Enter Journey with Respect ✓</span>
+                    </div>
+                    <div class="ts-caption">
+                        <b>Route Host framing</b>
+                        <span class="ts-pill ts-pill--partial"><i></i>Partial</span>
+                    </div>
+                </div>
+
+                <!-- 5 · Auto-transfer (Parked) -->
+                <div>
+                    <div class="ts-phone ts-phone--parked ts-phone--dark" aria-hidden="true">
+                        <div class="m-scan">
+                            <div class="m-scan-ring"><div class="m-scan-core">⇄</div></div>
+                            <b>Host Cancelled</b>
+                            <span class="blue">Don't panic. Activating Route Standby.</span>
+                            <span class="faint">Scanning 14 cars on the GGN → Noida corridor...</span>
+                        </div>
+                        <div class="m-saved">
+                            <div class="m-saved-check">✓</div>
+                            <h6>Journey Saved!</h6>
+                            <p>Seat transferred to another host leaving 15 mins later.</p>
+                            <div class="m-saved-row">
+                                <div class="who" style="display:flex; align-items:center; gap:4px;">
+                                    <div class="m-avatar" style="width:12px; height:12px; font-size:4px;">R</div>
+                                    <div><b>Rahul's Tata Nexon</b><small>Departs 21:15 (+15m)</small></div>
+                                </div>
+                                <span class="m-badge-price">Same Price</span>
+                            </div>
+                            <span class="m-cta--darkfull">View New Trip Details</span>
+                        </div>
+                    </div>
+                    <div class="ts-caption">
+                        <b>Auto-transfer</b>
+                        <span class="ts-pill ts-pill--parked"><i></i>Parked</span>
+                    </div>
+                </div>
+
+                <!-- 6 · Standby rides (Parked) -->
+                <div>
+                    <div class="ts-phone ts-phone--parked ts-phone--dark" aria-hidden="true">
+                        <div class="m-standby-label"><i></i>Route Standby Active</div>
+                        <div class="m-dark-title">Gurgaon → Noida</div>
+                        <div class="m-dark-sub">Host: Neha S. · Departs in 1.5 hrs</div>
+                        <div class="m-glass">
+                            <b>🛡 Urgent Travel Protected</b>
+                            <p>If Neha's car doesn't fill up and she cancels, the community fleet auto-transfers you to another car on this route.</p>
+                        </div>
+                        <div class="m-glass m-oncall">
+                            <div><small>Standby match ready</small><b>Rahul's Nexon · 21:15</b></div>
+                            <span class="m-oncall-tag">ON CALL</span>
+                        </div>
+                        <span class="m-cta--redline">Simulate Host Cancellation ▸</span>
+                    </div>
+                    <div class="ts-caption">
+                        <b>Standby rides</b>
+                        <span class="ts-pill ts-pill--parked"><i></i>Parked</span>
+                    </div>
+                </div>
+
+                <!-- 7 · Discarded -->
+                <div>
+                    <div class="ts-phone ts-phone--ghost">
+                        <b>+14</b>
+                        <span>explored &amp;<br>discarded</span>
+                    </div>
+                    <div class="ts-caption ts-caption--ghost">
+                        <b>Didn't survive<br>triage</b>
+                    </div>
+                </div>
+
+            </div>
+            <div class="ts-fade"></div>
+        </div>
+    </div>
+</section>

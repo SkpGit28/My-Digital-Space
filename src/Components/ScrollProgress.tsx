@@ -1,30 +1,62 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLenis } from "./SmoothScrollProvider";
 
 export default function ScrollProgress() {
   const [progress, setProgress] = useState(0);
+  const lenis = useLenis();
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Calculate scroll percentage
-      const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = window.scrollY;
-      const scrollPercent = windowHeight > 0 ? (scrolled / windowHeight) * 100 : 0;
-      setProgress(scrollPercent);
+    if (!lenis) {
+      // Fallback for native scroll when Lenis is disabled (e.g. reduced motion)
+      const handleScroll = () => {
+        const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = window.scrollY;
+        const scrollPercent = windowHeight > 0 ? (scrolled / windowHeight) * 100 : 0;
+        setProgress(scrollPercent);
+      };
+
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      // Set initial progress
+      handleScroll();
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
+
+    // Connect directly to Lenis scroll callback for real-time synchronization
+    const handleLenisScroll = (e: any) => {
+      const progressVal = e.progress !== undefined ? e.progress * 100 : (e.scroll / e.limit) * 100;
+      setProgress(progressVal);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    lenis.on("scroll", handleLenisScroll);
+
+    // Initial state
+    const initialProgress = lenis.progress !== undefined ? lenis.progress * 100 : (lenis.scroll / lenis.limit) * 100;
+    setProgress(initialProgress);
+
+    return () => {
+      lenis.off("scroll", handleLenisScroll);
+    };
+  }, [lenis]);
 
   return (
     <>
       {/* Modern minimal circular progress at bottom right */}
       <button
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        onClick={() => {
+          if (lenis) {
+            lenis.scrollTo(0, { duration: 1.2 });
+          } else {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        }}
         title="Scroll to top"
-        className="fixed bottom-8 right-8 z-40 w-12 h-12 rounded-full bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl border border-white/15 hover:border-white/30 flex items-center justify-center pointer-events-auto cursor-pointer transition-all duration-300 hover:from-white/10 hover:to-white/15 group shadow-xl"
+        className={`fixed bottom-8 right-8 z-40 w-12 h-12 rounded-full bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl border border-white/15 hover:border-white/30 flex items-center justify-center cursor-pointer transition-all duration-300 hover:from-white/10 hover:to-white/15 group shadow-xl ${
+          progress > 2
+            ? "opacity-100 pointer-events-auto translate-y-0"
+            : "opacity-0 pointer-events-none translate-y-2"
+        }`}
       >
         {/* SVG circular progress */}
         <svg className="absolute w-full h-full" viewBox="0 0 100 100" style={{ transform: "rotate(-90deg)" }}>
@@ -38,7 +70,7 @@ export default function ScrollProgress() {
             strokeWidth="1.5"
           />
           
-          {/* Progress circle - animated */}
+          {/* Progress circle - animated in real-time (no lag transition on stroke-dasharray) */}
           <circle
             cx="50"
             cy="50"
@@ -48,8 +80,10 @@ export default function ScrollProgress() {
             strokeWidth="2"
             strokeDasharray={`${(Math.PI * 84 * progress) / 100} ${Math.PI * 84}`}
             strokeLinecap="round"
-            className="transition-all duration-500"
-            style={{ filter: "drop-shadow(0 0 8px rgba(112, 183, 255, 0.4))" }}
+            style={{ 
+              filter: "drop-shadow(0 0 8px rgba(112, 183, 255, 0.4))",
+              transition: "none"
+            }}
           />
           
           <defs>
