@@ -1517,7 +1517,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ts-text-faint);
+  color: var(--cs2-color-neutral-600);
   margin-bottom: 8px;
 }
 .tsRoot :global(.ts-title) {
@@ -2777,7 +2777,7 @@
   background-color: var(--cs2-color-amber-500);
 }
 .tripTextAmber {
-  color: var(--cs2-color-amber-600);
+  color: var(--cs2-color-amber-700);
 }
 
 .tripCardGreen {
@@ -2787,7 +2787,7 @@
   background-color: var(--cs2-color-green-500);
 }
 .tripTextGreen {
-  color: var(--cs2-color-green-600);
+  color: var(--cs2-color-green-700);
 }
 
 /* Timeline steppers reused vs new */
