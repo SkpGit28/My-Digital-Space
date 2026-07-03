@@ -52,7 +52,7 @@ export default function ScrollProgress() {
           }
         }}
         title="Scroll to top"
-        className={`fixed bottom-8 right-8 z-40 w-12 h-12 rounded-full bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl border border-white/15 hover:border-white/30 flex items-center justify-center cursor-pointer transition-all duration-300 hover:from-white/10 hover:to-white/15 group shadow-xl ${
+        className={`fixed bottom-8 right-8 z-40 w-12 h-12 rounded-full bg-gradient-to-br from-black/5 to-black/10 backdrop-blur-xl border border-black/15 hover:border-black/30 flex items-center justify-center cursor-pointer transition-all duration-300 hover:from-black/10 hover:to-black/15 group shadow-xl ${
           progress > 2
             ? "opacity-100 pointer-events-auto translate-y-0"
             : "opacity-0 pointer-events-none translate-y-2"
@@ -66,7 +66,7 @@ export default function ScrollProgress() {
             cy="50"
             r="42"
             fill="none"
-            stroke="rgba(255, 255, 255, 0.08)"
+            stroke="rgba(0, 0, 0, 0.08)"
             strokeWidth="1.5"
           />
           
@@ -93,10 +93,10 @@ export default function ScrollProgress() {
             </linearGradient>
           </defs>
         </svg>
-
+ 
         {/* Up chevron icon - centered */}
         <svg
-          className="w-7 h-7 text-white/80 relative z-10 group-hover:text-white transition-colors duration-300"
+          className="w-7 h-7 text-text-primary relative z-10 group-hover:text-foreground transition-colors duration-300"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
