@@ -7,7 +7,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/10 py-8 bg-footer-bg">
+    <footer className="border-t border-black/10 py-8 bg-footer-bg">
       <Container>
         <div className="flex flex-col gap-6">
           {/* Main Content Row */}
@@ -48,7 +48,7 @@ export default function Footer() {
                     key={link.name}
                     href={link.url}
                     download={link.download}
-                    className="group flex items-center gap-1 text-slate-400 hover:text-white transition-colors"
+                    className="group flex items-center gap-1 text-text-secondary hover:text-foreground transition-colors"
                   >
                     <span className="text-sm font-medium">{link.name}</span>
                     <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
@@ -64,13 +64,13 @@ export default function Footer() {
           </div>
 
           {/* Copyright */}
-          <div className="flex flex-col items-center justify-center gap-1 text-center border-t border-white/5 pt-6">
-            <div className="flex items-center gap-2 text-slate-500 text-xs">
+          <div className="flex flex-col items-center justify-center gap-1 text-center border-t border-black/5 pt-6">
+            <div className="flex items-center gap-2 text-text-secondary text-xs">
               <span>Made with</span>
               <Github size={12} />
               <span>Copilot and Redbull</span>
             </div>
-            <p className="text-xs text-slate-600">© {currentYear} SKP.</p>
+            <p className="text-xs text-text-secondary">© {currentYear} SKP.</p>
           </div>
         </div>
       </Container>
