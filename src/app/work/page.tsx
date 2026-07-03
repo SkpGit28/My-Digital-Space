@@ -77,12 +77,12 @@ export default function WorkPage(): ReactElement {
       <main className="py-16 md:py-24">
         <Container>
           {/* Heading - CSS handles sticky → relative transition */}
-          <header className="c-work-heading bg-white dark:bg-neutral-950 py-4 md:py-6 text-center transition-all duration-300">
+          <header className="c-work-heading bg-background py-4 md:py-6 text-center transition-all duration-300">
             <motion.h1
               variants={headingVariants}
               initial="hidden"
               animate="visible"
-              className="text-5xl md:text-[64px] font-bold text-gray-900 dark:text-white text-center mb-0 leading-tight tracking-tight"
+              className="text-5xl md:text-[64px] font-bold text-foreground text-center mb-0 leading-tight tracking-tight"
             >
               Most of my design
             </motion.h1>
