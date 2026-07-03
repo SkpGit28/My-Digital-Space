@@ -112,22 +112,22 @@ export default function Hero() {
 
         {/* H1 (second) */}
         <motion.h1
-          className="mt-5 text-gray-400 text-2xl md:text-[56px] font-light leading-tight tracking-tight"
+          className="mt-5 text-text-secondary text-2xl md:text-[56px] font-light leading-tight tracking-tight"
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: dur, ease, delay: prefersReducedMotion ? 0 : 0.65 }}
         >
-          Hi, I’m <span className="text-white/90 font-semibold">Sushant</span>
+          Hi, I’m <span className="text-foreground font-semibold">Sushant</span>
         </motion.h1>
 
         {/* H2 (third) */}
         <motion.h2
-          className="mt-2 text-white text-xl md:text-[56px] font-semibold leading-tight tracking-tight"
+          className="mt-2 text-foreground text-xl md:text-[56px] font-semibold leading-tight tracking-tight"
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: dur, ease, delay: prefersReducedMotion ? 0 : 0.95 }}
         >
-          <span className="text-gray-400 font-light">I like{" "}</span>
+          <span className="text-text-secondary font-light">I like{" "}</span>
 
           <UnderlineOnce
             color="#10B981"
@@ -150,7 +150,7 @@ export default function Hero() {
             building
           </UnderlineOnce>
 
-          <span className="text-gray-400 font-light">, &{" "}</span>
+          <span className="text-text-secondary font-light">, &{" "}</span>
 
           <UnderlineOnce
             color="#3B82F6"
@@ -164,7 +164,7 @@ export default function Hero() {
 
         {/* Body (last) */}
         <motion.p
-          className="mt-4 text-lg md:text-[20px] font-semibold text-gray-400"
+          className="mt-4 text-lg md:text-[20px] font-semibold text-text-secondary"
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: dur, ease, delay: prefersReducedMotion ? 0 : 1.25 }}
@@ -174,7 +174,7 @@ export default function Hero() {
             href="https://payfi.co.in"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white underline"
+            className="text-primary underline"
           >
             Payfi
           </a>
