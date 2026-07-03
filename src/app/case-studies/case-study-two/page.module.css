@@ -1,0 +1,2719 @@
+.cs2Root {
+  /* Reset all properties to browser defaults, shielding the subtree from portfolio global styles */
+  all: revert;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+
+  /* Scoped design tokens integration */
+  font-family: var(--cs2-font-figtree), sans-serif;
+  background-color: var(--cs2-bg-page);
+  color: var(--cs2-text-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.cs2Root *,
+.cs2Root *::before,
+.cs2Root *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Centered content column shell */
+.innerContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 62.5rem;
+  margin: 0 auto;
+  gap: 10rem; /* Exactly 160px gap */
+  padding: 10rem var(--cs2-space-24); /* Exactly 160px vertical padding */
+}
+
+@media (max-width: 52.125em) {
+  .innerContainer {
+    gap: 5rem; /* 80px gap on mobile */
+    padding: 5rem var(--cs2-space-20); /* 80px padding on mobile */
+  }
+}
+
+/* Hero Section */
+.heroSection {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding: 7.5rem var(--cs2-space-24) 0;
+  overflow: hidden;
+}
+
+@media (max-width: 48rem) {
+  .heroSection {
+    height: 100vh;
+    padding-top: var(--cs2-space-64);
+  }
+}
+
+.heroBgImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.heroBgImage img {
+  object-fit: cover;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 42.5rem; /* 680px - matching Figma's 680px text block */
+  width: 100%;
+  gap: var(--cs2-space-16);
+  margin-top: 0;
+}
+
+.badgesRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  row-gap: var(--cs2-space-8);
+  column-gap: var(--cs2-space-16); /* 16px gap from Figma */
+}
+
+.badgeText {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--cs2-color-neutral-600);
+  text-transform: uppercase;
+}
+
+.badgeDotCircle {
+  width: 0.5rem; /* 8px from Figma */
+  height: 0.5rem; /* 8px from Figma */
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.badgeDotGreen {
+  background-color: var(--cs2-color-green-300); /* Soft pastel green */
+}
+
+.badgeDotPurple {
+  background-color: var(--cs2-color-purple-500); /* Soft pastel purple */
+}
+
+.badgeDotBlue {
+  background-color: var(--cs2-color-blue-300); /* Soft pastel blue */
+}
+
+.heroTitle {
+  color: var(--cs2-text-heading);
+  margin: 0;
+}
+
+.heroDescription {
+  font-family: var(--cs2-body-font-family);
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--cs2-text-body);
+  max-width: 37.5rem;
+  margin: 0 auto;
+}
+
+.heroMockupContainer {
+  position: relative;
+  z-index: 2;
+  width: 42.375rem; /* 678px from Figma */
+  height: 40.75rem; /* 652px from Figma */
+  margin-top: var(--cs2-space-48);
+}
+
+.heroMockupContainer img {
+  object-fit: contain;
+}
+
+@media (max-width: 48rem) {
+  .heroMockupContainer {
+    width: 100%;
+    max-width: 25rem;
+    height: auto;
+    aspect-ratio: 678 / 652;
+    margin-top: var(--cs2-space-48);
+  }
+}
+
+.heroDisclaimer {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 0.875rem;
+  color: var(--cs2-color-neutral-400);
+  line-height: 1.5;
+  max-width: 37.5rem;
+}
+
+/* Base structural layout for the page sections */
+.sectionContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--cs2-space-40);
+}
+
+.eyebrowRow {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.sectionTag {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--cs2-text-body);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.twoColumnRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--cs2-space-115);
+  width: 100%;
+}
+
+.leftCol {
+  flex: 0 0 45%; /* Heading takes up slightly less than half */
+  display: flex;
+  flex-direction: column;
+}
+
+.rightCol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-20);
+}
+
+@media (max-width: 52.125em) {
+  .twoColumnRow {
+    flex-direction: column;
+    gap: var(--cs2-space-24);
+  }
+  .leftCol {
+    flex: none;
+    width: 100%;
+  }
+}
+
+.heading2 {
+  font-family: var(--cs2-h2-font-family);
+  font-size: var(--cs2-h2-font-size);
+  font-weight: var(--cs2-h2-font-weight);
+  line-height: var(--cs2-h2-line-height);
+  letter-spacing: var(--cs2-h2-letter-spacing);
+  color: var(--cs2-text-heading);
+  margin: 0;
+}
+
+.highlighted {
+  color: var(--cs2-text-heading);
+  font-weight: 700;
+}
+
+.unhighlighted {
+  color: var(--cs2-text-heading-unhighlighted);
+  font-weight: 500;
+}
+
+.paragraph {
+  font-family: var(--cs2-body-font-family);
+  font-size: var(--cs2-body-font-size);
+  font-weight: var(--cs2-body-font-weight);
+  line-height: var(--cs2-body-line-height);
+  letter-spacing: var(--cs2-body-letter-spacing);
+  color: var(--cs2-text-body);
+  margin: 0;
+}
+
+.invertedSection {
+  position: relative;
+  background-color: var(--cs2-color-neutral-0);
+  background-image: url("/mockups/Constraint.webp");
+  background-size: cover;
+  background-position: left center;
+  background-repeat: no-repeat;
+  border-radius: var(--cs2-radius-20);
+  padding: var(--cs2-space-48) var(--cs2-space-48) var(--cs2-space-64)
+    var(--cs2-space-48);
+  border: 0.0625rem solid var(--cs2-color-neutral-200);
+}
+
+@media (max-width: 52.125em) {
+  .invertedSection {
+    padding: var(--cs2-space-32) var(--cs2-space-24);
+    background-size: auto 65%;
+    background-position: left -20px bottom -20px;
+  }
+}
+
+.invertedSection .sectionTag {
+  color: var(--cs2-color-blue-500) !important;
+}
+
+.constraintBodyText {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--cs2-text-body);
+  margin: var(--cs2-space-16) 0 0 0;
+}
+
+/* Image Placeholder (Dark Rectangle) */
+.imagePlaceholder {
+  width: 100%;
+  background-color: var(
+    --cs2-color-neutral-800
+  ); /* Dark rectangle as requested */
+  border-radius: var(--cs2-radius-12);
+  display: block;
+}
+
+/* Quote Card */
+.quoteCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--cs2-space-10);
+  padding: 0 var(--cs2-space-32);
+  height: 7rem;
+  background-color: var(--cs2-color-amber-200);
+  margin: var(--cs2-space-12) 0;
+  /* border-radius: var(--cs2-radius-8); */
+}
+
+.quoteText {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--cs2-text-heading);
+}
+
+.quoteSubtext {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--cs2-text-body);
+}
+
+/* Insights Grid */
+.insightsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--cs2-space-32);
+  width: 100%;
+}
+
+.insightCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: 0 0 0 var(--cs2-space-24);
+  background-color: transparent;
+}
+
+.insightCard::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.375rem; /* Inset from the top of the heading text */
+  bottom: 0.375rem; /* Inset from the bottom of the body text */
+  width: 0.3125rem;
+  background-color: var(--insight-stroke-color, var(--cs2-border-default));
+}
+
+.insightTag {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--cs2-text-body);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.insightTitle {
+  font-family: var(--cs2-font-satoshi), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--insight-color, var(--cs2-text-heading));
+  margin: 0;
+}
+
+.insightDesc {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--cs2-text-body);
+  margin: 0;
+}
+
+@media (max-width: 37.5em) {
+  .insightsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Profile Grid (Context Section) */
+.profileGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+  gap: var(--cs2-space-16);
+  width: 100%;
+}
+
+.profileCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-4);
+  padding: var(--cs2-space-16);
+  border-radius: var(--cs2-radius-8);
+  border: 0.0625rem solid var(--cs2-border-default);
+  background-color: var(--cs2-color-neutral-0);
+}
+
+.profileStat {
+  font-family: var(--cs2-font-satoshi), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--cs2-text-heading);
+}
+
+.profileSub {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 0.75rem;
+  color: var(--cs2-text-muted);
+}
+
+/* Constraints List */
+.constraintList {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: var(--cs2-space-24); /* Adheres to 1.5rem (24px) Separated Spacing */
+}
+
+.constraintItem {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--cs2-space-16); /* Adheres to 1.0rem (16px) Standard Spacing */
+  padding: var(--cs2-space-24); /* Adheres to 1.5rem (24px) Separated Spacing */
+  background-color: #ffffff;
+  border: 0.0625rem solid var(--cs2-color-neutral-200);
+  border-radius: var(--cs2-radius-12);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.02);
+}
+
+.constraintItem:hover {
+  transform: translateY(-0.125rem); /* 2px lift */
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.04);
+}
+
+.invertedSection .constraintList {
+  gap: 0 !important;
+}
+
+.invertedSection .constraintItem {
+  background-color: transparent !important;
+  border: none !important;
+  border-bottom: 0.0625rem solid var(--cs2-color-neutral-200) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: var(--cs2-space-20) 0 !important;
+  transition: none !important;
+}
+
+.invertedSection .constraintItem:hover {
+  transform: none !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.invertedSection .constraintItem:last-child {
+  border-bottom: none !important;
+}
+
+.invertedSection .constraintItem:first-child {
+  padding-top: 0 !important;
+}
+
+.constraintNum {
+  font-family: var(--cs2-font-satoshi), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--cs2-color-blue-500);
+}
+
+.constraintIllustrationContainer {
+  margin-top: var(--cs2-space-32);
+  width: 100%;
+  max-width: 25rem; /* 400px */
+  position: relative;
+}
+
+.constraintIllustration {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.constraintText {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--cs2-text-body);
+  margin: 0;
+}
+
+.constraintText strong {
+  font-weight: 600;
+  color: var(--cs2-text-heading);
+}
+
+/* Solutions Layout */
+.solutionRow {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: var(--cs2-space-115);
+  width: 100%;
+  height: 43.75rem; /* 700px from Figma */
+}
+
+.solutionRow.reversed {
+  flex-direction: row-reverse;
+}
+
+.solutionTextCol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--cs2-space-24);
+}
+
+.solutionTextCol > .sectionTag {
+  margin-bottom: var(
+    --cs2-space-16
+  ); /* 24px (flex gap) + 16px = 40px total gap to heading */
+}
+
+.solutionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10rem; /* Exactly 160px distance between each solution section */
+  width: 100%;
+}
+
+@media (max-width: 52.125em) {
+  .solutionsContainer {
+    gap: 5rem; /* 80px on mobile */
+  }
+}
+
+.solutionImageCol {
+  position: relative;
+  width: 31.25rem; /* Exactly 500px from Figma */
+  height: 43.75rem; /* Exactly 700px from Figma */
+  flex: 0 0 31.25rem;
+  border-radius: var(--cs2-radius-12);
+  border: 0.09375rem solid var(--cs2-border-default); /* 1.5px solid border */
+  overflow: hidden;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.solutionImageInner {
+  position: relative;
+  width: 18.75rem; /* Exactly 300px from Figma */
+  height: 34.375rem; /* Exactly 550px from Figma */
+  overflow: hidden;
+  border-radius: var(--cs2-radius-8);
+}
+
+/* Taller variant for videos with more vertical content (e.g. Solution 2) */
+.solutionImageInnerTall {
+  height: 40rem; /* 640px — gives the full phone frame room to breathe */
+}
+
+@media (max-width: 52.125em) {
+  .solutionRow {
+    flex-direction: column;
+    height: auto;
+    gap: var(--cs2-space-32);
+  }
+  .solutionRow.reversed {
+    flex-direction: column;
+  }
+  .solutionImageCol {
+    width: 100%;
+    max-width: 31.25rem;
+    height: auto;
+    aspect-ratio: 500 / 700;
+    flex: none;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .solutionImageInner {
+    width: 60%;
+    height: auto;
+    aspect-ratio: 300 / 550;
+  }
+}
+
+/* Trip State Cards — Solution 1 (exact Figma: 468×276, gap 24, card 76h, cornerRadius 14) */
+.tripStateCards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-24);
+  width: 100%;
+}
+
+.tripCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--cs2-space-16);
+  height: 4.75rem;
+  border-radius: 0.875rem;
+  padding: 0 var(--cs2-space-24);
+  width: 100%;
+}
+
+.tripDot {
+  display: inline-block;
+  width: 0.6875rem;
+  height: 0.6875rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tripCardContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-4);
+}
+
+.tripCardTitle {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.tripCardBody {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Vertical Timeline — Solution 2 (Figma node 1:583) */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+/* The 2px grey connecting line, sitting behind circles */
+.timelineLine {
+  position: absolute;
+  top: 2rem; /* padding-top (1rem) + half circle (1rem) = centres on circle 1 */
+  bottom: 2rem; /* padding-bottom (1rem) + half circle (1rem) = stops at circle 4 */
+  left: 0.9375rem;
+  width: 0.125rem;
+  background-color: #e3e6eb;
+  z-index: 0;
+}
+
+.timelineItem {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--cs2-space-16);
+  padding: var(--cs2-space-16) 0;
+  position: relative;
+}
+
+/* Wrapper keeps circle on top of the line via z-index */
+.timelineCircleWrap {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* 32×32px circle, fully rounded, exact from Figma cornerRadius: 16 */
+.timelineCircle {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timelineNum {
+  font-family: Inter, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.timelineContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-4);
+  padding-top: 0.25rem;
+  flex: 1;
+}
+
+.timelineLabel {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: var(--cs2-font-size-12);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.timelineTitle {
+  font-family: var(--cs2-font-satoshi), sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #001536;
+  line-height: 1.3;
+}
+
+.timelineBody {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: #70768c;
+  line-height: 1.5;
+}
+
+/* Horizontal row for title + chip side by side */
+.timelineTitleRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--cs2-space-10); /* Normalized to tight grouping variable */
+  flex-wrap: wrap;
+}
+
+/* Code chip for turf.nearestPointOnline */
+.timelineChip {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--cs2-bg-subtle);
+  color: var(--cs2-text-body);
+  font-family: "Courier New", Courier, monospace;
+  font-size: var(--cs2-font-size-12);
+  font-weight: 600;
+  padding: 0.25rem 0.75rem; /* Optical weight correction */
+  border-radius: 0.375rem;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  border: 0.0625rem solid var(--cs2-border-default);
+}
+
+/* Icon Stepper — Solution 3 (Figma node 1:637) */
+/* Connector line sized for 40×40 icon nodes */
+.timelineLineIcon {
+  position: absolute;
+  top: 1.875rem;
+  bottom: 1.875rem;
+  left: 1.1875rem; /* center of 40px node */
+  width: 0.125rem;
+  background-color: #e3e6eb;
+  z-index: 0;
+}
+
+/* 40×40 grey circle node with icon inside */
+.iconStepperNode {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: #eef0f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Satoshi Bold 16px label — color #001536 */
+.iconStepperLabel {
+  font-family: var(--cs2-font-satoshi), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #001536;
+  line-height: 1.25;
+}
+
+/* Frequent host pill — exact Figma: 119×28, bg #eaf1fb, radius 999, Satoshi Bold 13.5px */
+.iconStepperPill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 7.4375rem;
+  height: 1.75rem;
+  flex-shrink: 0;
+  background-color: #eaf1fb;
+  color: #001536;
+  font-family: var(--cs2-font-satoshi), sans-serif;
+  font-size: 0.84375rem;
+  font-weight: 700;
+  border-radius: var(--cs2-radius-full);
+  white-space: nowrap;
+}
+
+/* Word Replacement Table — Solution 4 (Figma node 1:844) */
+.wordTable {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 0.0625rem solid #e5e8ed;
+}
+
+/* Each row: horizontal flex, 45px min-height, 13px vertical padding, gap 14px between cols */
+.wordRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--cs2-space-16); /* Normalized to 1rem standard spacing */
+  min-height: 2.8125rem;
+  padding: 0.75rem 0; /* Normalized to 0.75rem */
+  border-bottom: 0.0625rem solid #e5e8ed;
+}
+
+/* Taller row for "Booked! Enjoy your ride" which wraps to 2 lines (64px in Figma) */
+.wordRowTall {
+  align-items: flex-start;
+  min-height: 4rem;
+}
+
+/* Last row — no bottom border */
+.wordRowLast {
+  border-bottom: none;
+}
+
+/* Left column — old taxi word, strikethrough, #70768c, Figtree SemiBold 16px */
+.wordOld {
+  flex: 0 0 8.4375rem; /* 135px converted to rem */
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #70768c;
+  text-decoration: line-through;
+  text-decoration-color: #70768c;
+  line-height: 1.4;
+}
+
+/* Centre arrow — neutral grey, same width as Figma's 30px SPAN */
+.wordArrow {
+  flex: 0 0 1.875rem;
+  text-align: center;
+  font-size: 1rem;
+  color: #c2c9d4;
+  line-height: 1;
+}
+
+/* Right column — new carpool word, Figtree Bold 16px, #001536 */
+.wordNew {
+  flex: 1;
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #001536;
+  line-height: 1.4;
+}
+
+/* VALIDATION SECTION (Figma node 1:893) */
+.validationTopRow {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--cs2-space-layout-gap);
+}
+
+/* Left text (Satoshi Bold 28, #001536) */
+.validationTopLeft {
+  flex: 0 0 27.6875rem;
+  font-family: var(--cs2-font-satoshi), sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #001536;
+  line-height: 1.25;
+}
+
+/* Right text (Figtree Regular 18, #70768c) */
+.validationTopRight {
+  flex: 0 0 27.5rem;
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: #70768c;
+  line-height: 1.5;
+}
+
+/* Stats Row (Figma gap 20px -> normalized to 32px / 2rem to fix hierarchy) */
+.validationStatsRow {
+  display: flex;
+  flex-direction: row;
+  gap: var(--cs2-space-32);
+  margin-top: 2.5rem; /* Space between text row and stats row in Figma */
+  width: 100%;
+}
+
+/* Individual Stat Card */
+.validationStatCard {
+  flex: 1; /* evenly distribute 3 cards */
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-8);
+  padding: var(--cs2-space-24) var(--cs2-space-24) var(--cs2-space-32)
+    var(--cs2-space-24);
+  border-radius: var(--cs2-radius-14);
+}
+
+/* Stat Number (Satoshi Bold 28, #001536) */
+.statNumber {
+  font-family: var(--cs2-font-satoshi), sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #001536;
+  line-height: 1.25;
+}
+
+/* Stat Description (Figtree SemiBold 14, #001536) */
+.statDesc {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #001536;
+  line-height: 1.4;
+}
+
+/* TRADE-OFF's SECTION — simplified: eyebrow + 2×2 card grid, no heading, no icons */
+
+/* Grid: 2 columns equal width, 20px gap -> normalized to 2rem to fix layout hierarchy */
+.tradeoffGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--cs2-space-32);
+  width: 100%;
+}
+
+/* Card: bg #f8f8f8, border 2px #e5e7eb, radius 12, padding 20 24 -> normalized to 24px (1.5rem) to fix layout hierarchy */
+.tradeoffCard {
+  background-color: var(--cs2-bg-surface);
+  border: none;
+  border-radius: var(--cs2-radius-12);
+  padding: var(--cs2-space-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-16);
+}
+
+/* Title — Satoshi Bold 16px, darker #001536 */
+.tradeoffTitle {
+  font-family: var(--cs2-font-satoshi), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #001536;
+  line-height: 1.4;
+}
+
+/* Body — Figtree Regular 16px, lighter #70768c */
+.tradeoffDesc {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--cs2-text-body);
+  line-height: 1.5;
+}
+
+/* --- Trade-off section variant: amber/warning tint --- */
+.tradeoffCardAmber {
+  background-color: var(--cs2-color-neutral-0);
+  border: 0.03125rem solid var(--cs2-color-amber-500);
+}
+.tradeoffCardAmber .tradeoffTitle {
+  color: var(--cs2-color-amber-700);
+}
+.tradeoffCardAmberFill {
+  background-color: var(--cs2-color-amber-050);
+  border: none;
+}
+.tradeoffCardAmberFill .tradeoffTitle {
+  color: var(--cs2-color-amber-700);
+}
+
+/* --- Reflection section variant: green/positive tint --- */
+.tradeoffCardGreen {
+  background-color: var(--cs2-color-neutral-0);
+  border: 0.03125rem solid var(--cs2-color-green-500);
+}
+.tradeoffCardGreen .tradeoffTitle {
+  color: var(--cs2-color-green-600);
+}
+.tradeoffCardGreenFill {
+  background-color: var(--cs2-color-green-050);
+  border: none;
+}
+.tradeoffCardGreenFill .tradeoffTitle {
+  color: var(--cs2-color-green-600);
+}
+
+/* --- What's Next section variant: blue/forward-looking tint --- */
+.tradeoffCardBlue {
+  background-color: var(--cs2-color-neutral-0);
+  border: 0.03125rem solid var(--cs2-color-blue-500);
+}
+.tradeoffCardBlue .tradeoffTitle {
+  color: var(--cs2-color-blue-600);
+}
+.tradeoffCardBlueFill {
+  background-color: var(--cs2-color-blue-050);
+  border: none;
+}
+.tradeoffCardBlueFill .tradeoffTitle {
+  color: var(--cs2-color-blue-600);
+}
+
+/* HOW I WORKED SECTION (Figma nodes 1:259, 1:260, 1:291) */
+
+/* Parent row — HORIZONTAL, gap 115px (same as twoColumnRow but we use exact Figma gap) */
+.howIWorkedRow {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--cs2-space-layout-gap);
+  width: 100%;
+}
+
+/* Left col — Figma 1:260: VERTICAL, gap 32px, width 443 */
+.howIWorkedLeft {
+  flex: 0 0 27.6875rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-32);
+}
+
+/* Right col — Figma 1:291: VERTICAL, gap 16px, width 440 */
+.howIWorkedRight {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-16);
+}
+
+/* Right col paragraphs — Figtree Regular 18px, #70768c */
+.howIWorkedPara {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: #70768c;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* solution-status-bar card — Figma 1:263: bg #fff, border 1px #e5e7eb, radius 12, padding 16, gap 12 */
+.statusBar {
+  background-color: #ffffff;
+  border: 0.0625rem solid #e5e7eb;
+  border-radius: var(--cs2-radius-12);
+  padding: var(--cs2-space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(
+    --cs2-space-16
+  ); /* Normalized to standard 1rem gap to remove magic number */
+}
+
+/* bar-title — Inter Bold 12px, #70768c */
+.statusBarTitle {
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #70768c;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* segmented-bar — Figma 1:265: w 411, h 40, gap 5, radius 20 applied to first/last segments */
+.segmentedBar {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0.3125rem;
+  height: 2.5rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* individual color segment */
+.segment {
+  height: 2.5rem;
+  flex-shrink: 0;
+}
+
+/* 1px white separator between segments */
+.segSep {
+  width: 0.0625rem;
+  height: 2.5rem;
+  background-color: #ffffff;
+  flex-shrink: 0;
+}
+
+/* legend-row — Figma 1:273: HORIZONTAL, gap 12px */
+.legendRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--cs2-space-16); /* Normalized to standard 1rem gap */
+}
+
+/* each legend item — HORIZONTAL, gap 4px, align center */
+.legendItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--cs2-space-4);
+}
+
+/* dot — 10×10 circle, fill + 1px stroke from Figma */
+.legendDot {
+  display: inline-block;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  border: 0.0625rem solid transparent;
+  flex-shrink: 0;
+}
+
+/* count number — Inter Bold 12px */
+.legendCount {
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* label text — Inter Medium 12px */
+.legendLabel {
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+/* italic quote — Figma 1:290: Figtree Italic 18px, #70768c, letter-spacing -2% */
+.howIWorkedQuote {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  font-style: italic;
+  color: #70768c;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+/* THE PLATFORM SECTION (Figma node 7:19) */
+.platformContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-16);
+  width: 100%;
+}
+
+.platformColumns {
+  display: flex;
+  flex-direction: row;
+  gap: var(--cs2-space-8);
+  width: 100%;
+}
+
+.platformCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-8);
+  flex: 1;
+  min-width: 0;
+}
+
+.platformCard {
+  background-color: var(--cs2-bg-surface);
+  border-radius: var(--cs2-radius-8);
+  padding: var(--cs2-space-16) var(--cs2-space-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-8);
+}
+
+.platformCardTitle {
+  font-family: var(--cs2-font-satoshi), sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: var(--cs2-text-heading);
+}
+
+.platformCardTitleSub {
+  font-family: var(--cs2-font-satoshi), sans-serif;
+  font-weight: 400;
+  color: var(--cs2-text-body);
+}
+
+.platformCardBody {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--cs2-text-body);
+}
+
+.platformCardBodyRegular {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  color: var(--cs2-text-body);
+}
+
+.platformNote {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: var(--cs2-text-body);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.platformNoteBold {
+  font-weight: 700;
+  font-style: normal;
+  color: var(--cs2-text-heading);
+}
+
+@media (min-width: 835px) {
+  .platformCardStretch {
+    flex: 1;
+  }
+}
+
+@media (max-width: 52.125em) {
+  .platformColumns {
+    flex-direction: column;
+  }
+}
+
+.opportunityList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs2-space-24);
+}
+
+.opportunitySubheader {
+  font-family: var(--cs2-body-font-family);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--cs2-text-heading);
+  margin: 0 0 var(--cs2-space-24) 0;
+}
+
+.opportunityText {
+  font-family: var(--cs2-body-font-family);
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.75rem;
+  color: var(--cs2-text-body);
+  margin: 0;
+}
+
+.opportunityText strong {
+  font-weight: 600;
+  color: var(--cs2-text-body);
+}
+
+.headingLight {
+  font-weight: 300;
+  color: var(--cs2-text-muted);
+}
+
+/* Table Styles */
+.tableContainer {
+  width: 100%;
+  border: 0.0625rem solid var(--cs2-color-neutral-200);
+  border-radius: var(--cs2-radius-16);
+  background-color: #ffffff;
+  margin-top: var(--cs2-space-40);
+  box-shadow: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.02);
+}
+
+.overflowWrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.exploredTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-family: var(--cs2-body-font-family);
+  font-size: 0.875rem; /* 14px */
+}
+
+.exploredTable th {
+  padding: var(--cs2-space-20) var(--cs2-space-24);
+  font-family: var(--cs2-body-font-family);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--cs2-text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 0.0625rem solid var(--cs2-color-neutral-200);
+  background-color: var(--cs2-bg-surface);
+}
+
+.exploredTable td {
+  padding: var(--cs2-space-20) var(--cs2-space-24);
+  vertical-align: top;
+  line-height: 1.55;
+  color: var(--cs2-text-body);
+  border-bottom: 0.0625rem solid var(--cs2-color-neutral-200);
+}
+
+.exploredTable tr:last-child td {
+  border-bottom: none;
+}
+
+.tableAreaCell {
+  font-weight: 600;
+  color: var(--cs2-text-heading) !important;
+  white-space: nowrap;
+}
+
+/* Verdict Badges */
+.verdictBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cs2-space-8);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--cs2-radius-20);
+  font-size: 0.8125rem; /* 13px */
+  font-weight: 700;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.verdictDot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.verdictDiscarded {
+  background-color: #fdecea;
+  color: #c0392b;
+}
+
+.verdictDiscarded .verdictDot {
+  background-color: #c0392b;
+}
+
+.verdictParked {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.verdictParked .verdictDot {
+  background-color: #0369a1;
+}
+
+.verdictFinalized {
+  background-color: #e6f9f1;
+  color: #1a7f4b;
+}
+
+.verdictFinalized .verdictDot {
+  background-color: #1a7f4b;
+}
+
+.verdictPartial {
+  background-color: #fff7e6;
+  color: #b05c00;
+}
+
+.verdictPartial .verdictDot {
+  background-color: #b05c00;
+}
+
+/* Footer note & link */
+.tableFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: var(--cs2-space-24);
+  font-family: var(--cs2-body-font-family);
+  font-size: 0.875rem;
+}
+
+.footerNote {
+  color: var(--cs2-text-muted);
+}
+
+.footerLink {
+  color: var(--cs2-color-blue-500);
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: color 0.2s ease;
+}
+
+.footerLink:hover {
+  color: var(--cs2-color-blue-600);
+}
+
+.footerLink:hover .footerArrow {
+  transform: translateX(0.1875rem);
+}
+
+.footerArrow {
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.solutionVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Use contain for videos where cover crops the phone frame */
+.solutionVideoContain {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ============================================================================
+/* ============================================================================
+   IDEAS EXPLORED — TRIAGE STRIP GLOBAL STYLES (v2)
+   ============================================================================ */
+.tsRoot {
+  --ts-surface: var(--cs2-color-neutral-0);
+  --ts-bg-page: transparent;
+  --ts-border: var(--cs2-border-default);
+  --ts-text: var(--cs2-text-heading);
+  --ts-text-muted: var(--cs2-text-body);
+  --ts-text-faint: var(--cs2-color-neutral-400);
+  --ts-accent: var(--cs2-color-blue-500); /* brand blue used inside mock UIs */
+  --ts-accent-soft: var(--cs2-color-blue-050);
+  --ts-success: var(--cs2-color-green-500); /* Finalized */
+  --ts-success-soft: var(--cs2-color-green-050);
+  --ts-warning: var(--cs2-color-amber-500); /* Partial */
+  --ts-warning-soft: var(--cs2-color-amber-050);
+  --ts-info: var(--cs2-color-blue-500); /* Parked */
+  --ts-info-soft: var(--cs2-color-blue-050);
+  --ts-neutral: var(--cs2-color-neutral-400); /* Discarded */
+  --ts-radius-card: var(--cs2-radius-20);
+  --ts-radius-phone: var(--cs2-radius-14);
+  --ts-font-heading: var(--cs2-font-satoshi), "Inter", system-ui, sans-serif;
+  --ts-font-body: var(--cs2-font-figtree), "Inter", system-ui, sans-serif;
+
+  /* fixed micro-palette for the mock phone UIs (theme-independent) */
+  --ts-ui-ink: #054734;
+  --ts-ui-dark: #0f172a;
+  --ts-ui-purple: #9333ea;
+
+  font-family: var(--ts-font-body);
+  color: var(--ts-text);
+  background: var(--ts-bg-page);
+  display: block;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  margin-bottom: var(--cs2-space-48);
+}
+
+.tsRoot *,
+.tsRoot *::before,
+.tsRoot *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.tsRoot :global(.ts-card) {
+  background: var(--ts-surface);
+  border: 1px solid var(--ts-border);
+  border-radius: var(--ts-radius-card);
+  padding: 40px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+.tsRoot :global(.ts-eyebrow) {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ts-text-faint);
+  margin-bottom: 8px;
+}
+.tsRoot :global(.ts-title) {
+  font-family: var(--ts-font-heading);
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+.tsRoot :global(.ts-legend) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-bottom: 32px;
+}
+.tsRoot :global(.ts-legend) span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ts-text-muted);
+}
+.tsRoot :global(.ts-legend) i {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+/* ---- scroll strip ---- */
+.tsRoot :global(.ts-strip-wrap) {
+  position: relative;
+  margin-right: -40px;
+}
+.tsRoot :global(.ts-strip) {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 0 40px 16px 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ts-text-faint) transparent;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+}
+.tsRoot :global(.ts-strip)::-webkit-scrollbar {
+  height: 4px;
+}
+.tsRoot :global(.ts-strip)::-webkit-scrollbar-track {
+  background: rgba(226, 232, 240, 0.5);
+  border-radius: 99px;
+}
+.tsRoot :global(.ts-strip)::-webkit-scrollbar-thumb {
+  background: var(--ts-text-faint);
+  border-radius: 99px;
+}
+.tsRoot :global(.ts-strip)::-webkit-scrollbar-thumb:hover {
+  background: var(--ts-text-muted);
+}
+.tsRoot :global(.ts-strip) > div {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  width: 128px;
+}
+.tsRoot :global(.ts-fade) {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 16px;
+  right: 0;
+  width: 64px;
+  background: linear-gradient(to left, var(--ts-surface) 20%, transparent);
+}
+
+/* ---- mini phone chassis (fixed outer size) ---- */
+.tsRoot :global(.ts-phone) {
+  width: 128px;
+  height: 250px;
+  border-radius: var(--ts-radius-phone);
+  background: #fff;
+  overflow: hidden;
+  position: relative;
+}
+.tsRoot :global(.ts-phone--final) {
+  border: 2px solid var(--ts-success);
+}
+.tsRoot :global(.ts-phone--partial) {
+  border: 2px solid var(--ts-warning);
+}
+.tsRoot :global(.ts-phone--parked) {
+  border: 2px dashed var(--ts-info);
+}
+.tsRoot :global(.ts-phone--dark) {
+  background: #0f172a;
+}
+.tsRoot :global(.ts-phone--mapbg) {
+  background: #e2e8f0;
+}
+.tsRoot :global(.ts-phone--ghost) {
+  border: 2px dashed var(--ts-border);
+  background: #f7f8fa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/*
+  HARDENING CORE: each screen is authored at 2x (248x492) and scaled
+  to 0.5. Font sizes inside are 7–16px — above every browser minimum —
+  and the scale transform shrinks them visually to thumbnail size.
+*/
+.tsRoot :global(.ts-zoom) {
+  width: 248px;
+  height: 492px;
+  transform: scale(0.5);
+  transform-origin: top left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  font-family: var(--ts-font-body);
+  color: var(--ts-ui-ink);
+}
+.tsRoot :global(.ts-zoom--flush) {
+  padding: 0;
+  gap: 0;
+}
+/* defensive reset: neutralize host typography plugins inside screens */
+.tsRoot :global(.ts-phone) p,
+.tsRoot :global(.ts-phone) h5,
+.tsRoot :global(.ts-phone) h6,
+.tsRoot :global(.ts-phone) b,
+.tsRoot :global(.ts-phone) span,
+.tsRoot :global(.ts-phone) small,
+.tsRoot :global(.ts-phone) strong,
+.tsRoot :global(.ts-phone) div {
+  letter-spacing: normal;
+  text-indent: 0;
+}
+.tsRoot :global(.ts-phone) p {
+  line-height: 1.4;
+}
+
+.tsRoot :global(.ts-caption) {
+  margin-top: 10px;
+  padding: 0 2px;
+}
+.tsRoot :global(.ts-caption) b {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ts-text);
+}
+.tsRoot :global(.ts-pill) {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 99px;
+  line-height: 1.4;
+}
+.tsRoot :global(.ts-pill) i {
+  width: 6px;
+  height: 6px;
+  border-radius: 99px;
+  display: inline-block;
+}
+.tsRoot :global(.ts-pill--final) {
+  background: var(--ts-success-soft);
+  color: var(--ts-success);
+}
+.tsRoot :global(.ts-pill--final) i {
+  background: var(--ts-success);
+}
+.tsRoot :global(.ts-pill--partial) {
+  background: var(--ts-warning-soft);
+  color: var(--ts-warning);
+}
+.tsRoot :global(.ts-pill--partial) i {
+  background: var(--ts-warning);
+}
+.tsRoot :global(.ts-pill--parked) {
+  background: var(--ts-info-soft);
+  color: var(--ts-info);
+}
+.tsRoot :global(.ts-pill--parked) i {
+  background: var(--ts-info);
+}
+.tsRoot :global(.ts-caption--ghost) b {
+  color: var(--ts-text-faint);
+  font-weight: 600;
+}
+
+/* ==================================================================
+   MOCK-UI PRIMITIVES — authored at 2x scale (all sizes are 2x final)
+   ================================================================== */
+.tsRoot :global(.m-head) {
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748b;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 8px;
+  line-height: 1.3;
+}
+.tsRoot :global(.m-head--big) {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ts-ui-ink);
+}
+.tsRoot :global(.m-row) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.tsRoot :global(.m-avatar) {
+  width: 36px;
+  height: 36px;
+  border-radius: 99px;
+  background: #f1f5f9;
+  border: 2px solid #e2e8f0;
+  font-size: 10px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.tsRoot :global(.m-name) {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.tsRoot :global(.m-sub) {
+  font-size: 10px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+.tsRoot :global(.m-note) {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 8px;
+  font-size: 10px;
+  color: #475569;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.tsRoot :global(.m-foot) {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 2px solid #f1f5f9;
+  padding-top: 8px;
+}
+.tsRoot :global(.m-price) small {
+  display: block;
+  font-size: 9px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+.tsRoot :global(.m-price) b {
+  font-size: 14px;
+  font-weight: 800;
+}
+.tsRoot :global(.m-cta--blue) {
+  background: var(--ts-accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 99px;
+  line-height: 1.3;
+}
+
+/* screen 1 — viability box */
+.tsRoot :global(.m-via) {
+  background: #ecfdf5;
+  border: 2px solid #34d399;
+  border-radius: 16px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tsRoot :global(.m-via-top) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+.tsRoot :global(.m-via-label) {
+  font-size: 9px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+}
+.tsRoot :global(.m-via-badge) {
+  font-size: 9px;
+  font-weight: 700;
+  background: #d1fae5;
+  color: #047857;
+  padding: 2px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.tsRoot :global(.m-bar) {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+}
+.tsRoot :global(.m-bar) > i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 66%;
+  background: #10b981;
+  border-radius: 99px;
+  display: block;
+}
+.tsRoot :global(.m-bar) > b {
+  position: absolute;
+  left: 66%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #fff;
+  z-index: 2;
+}
+.tsRoot :global(.m-split) {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  font-weight: 600;
+  color: #64748b;
+}
+.tsRoot :global(.m-via-note) {
+  font-size: 9px;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 16px;
+  padding: 8px;
+  color: #065f46;
+  line-height: 1.4;
+}
+
+/* screen 2 — route + status */
+.tsRoot :global(.m-route) {
+  display: flex;
+  gap: 12px;
+}
+.tsRoot :global(.m-route-line) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4px;
+}
+.tsRoot :global(.m-route-line) :global(.r1) {
+  width: 12px;
+  height: 12px;
+  border-radius: 99px;
+  border: 3px solid var(--ts-accent);
+  background: #fff;
+}
+.tsRoot :global(.m-route-line) :global(.r2) {
+  width: 2px;
+  height: 32px;
+  background: #cbd5e1;
+}
+.tsRoot :global(.m-route-line) :global(.r3) {
+  width: 12px;
+  height: 12px;
+  border-radius: 99px;
+  background: var(--ts-ui-ink);
+}
+.tsRoot :global(.m-route-stops) {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.tsRoot :global(.m-statusbox) {
+  background: #f9fbfc;
+  border: 2px solid #f1f5f9;
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tsRoot :global(.m-statusbox-top) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tsRoot :global(.m-auto) {
+  font-size: 8px;
+  font-weight: 700;
+  background: #e2e8f0;
+  color: #64748b;
+  padding: 2px 6px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+.tsRoot :global(.m-status) {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: #ecfdf5;
+  border: 2px solid #a7f3d0;
+  border-radius: 10px;
+  padding: 8px;
+}
+.tsRoot :global(.m-dot) {
+  width: 10px;
+  height: 10px;
+  border-radius: 99px;
+  background: #10b981;
+  flex-shrink: 0;
+  animation: ts-pulse 2s infinite;
+}
+@keyframes ts-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+.tsRoot :global(.m-status) b {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+.tsRoot :global(.m-status) span {
+  font-size: 9px;
+  color: #64748b;
+  line-height: 1.35;
+}
+.tsRoot :global(.m-verify) {
+  font-size: 9px;
+  color: #64748b;
+  font-weight: 600;
+}
+.tsRoot :global(.m-btn-ghost) {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  border: 2px solid #e2e8f0;
+  color: var(--ts-accent);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 7px 0;
+  border-radius: 99px;
+}
+.tsRoot :global(.m-btn-book) {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: var(--ts-accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 8px 0;
+  border-radius: 99px;
+}
+.tsRoot :global(.m-chip-tag) {
+  font-size: 8px;
+  font-weight: 700;
+  background: #f1f5f9;
+  color: #64748b;
+  border: 2px solid #e2e8f0;
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+.tsRoot :global(.m-btn-stack) {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* screen 3 — map */
+.tsRoot :global(.m-map) {
+  height: 222px;
+  position: relative;
+  background: #cbd5e1;
+  flex-shrink: 0;
+  overflow: hidden;
+  background-image:
+    repeating-linear-gradient(0deg, #94a3b8 0 2px, transparent 2px 28px),
+    repeating-linear-gradient(90deg, #94a3b8 0 2px, transparent 2px 28px);
+  background-blend-mode: soft-light;
+}
+.tsRoot :global(.m-map) :global(.hwy) {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 12px;
+  height: 100%;
+  background: var(--ts-accent);
+  transform: translateX(-50%);
+}
+.tsRoot :global(.m-map) :global(.car) {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  background: #fff;
+  border: 3px solid var(--ts-accent);
+  border-radius: 99px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+.tsRoot :global(.m-map) :global(.pin) {
+  position: absolute;
+  top: 66%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border: 3px solid #1e293b;
+  border-radius: 99px;
+}
+.tsRoot :global(.m-map) :global(.walkline) {
+  position: absolute;
+  top: 66%;
+  left: 25%;
+  width: 25%;
+  height: 25%;
+}
+.tsRoot :global(.m-map) :global(.walker) {
+  position: absolute;
+  top: 82%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  width: 26px;
+  height: 26px;
+  background: #1e293b;
+  color: #fff;
+  border-radius: 99px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+.tsRoot :global(.m-sheet) {
+  flex: 1;
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+  margin-top: -16px;
+  z-index: 2;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tsRoot :global(.m-grab) {
+  width: 32px;
+  height: 4px;
+  background: #e2e8f0;
+  border-radius: 99px;
+  margin: 0 auto;
+}
+.tsRoot :global(.m-proto-badge) {
+  align-self: flex-start;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: #fffbeb;
+  color: #d97706;
+  border: 2px solid #fde68a;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+.tsRoot :global(.m-sheet) h5 {
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+.tsRoot :global(.m-sheet) p {
+  font-size: 9px;
+  color: #64748b;
+  line-height: 1.45;
+}
+.tsRoot :global(.m-walkrow) {
+  margin-top: auto;
+  background: #f8fafc;
+  border: 2px solid #f1f5f9;
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tsRoot :global(.m-walkrow) b {
+  display: block;
+  font-size: 11px;
+}
+.tsRoot :global(.m-walkrow) small {
+  font-size: 9px;
+  color: #64748b;
+}
+.tsRoot :global(.m-nav-btn) {
+  background: #0f172a;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 10px;
+}
+
+/* screen 4 — pledge */
+.tsRoot :global(.m-pledge-head) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 8px;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+}
+.tsRoot :global(.m-hand) {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: #faf5ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin: 0 auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.tsRoot :global(.m-pledge-title) {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 800;
+  margin-top: 6px;
+  line-height: 1.25;
+}
+.tsRoot :global(.m-pledge-sub) {
+  text-align: center;
+  font-size: 9px;
+  color: #64748b;
+  line-height: 1.4;
+  margin-top: 2px;
+}
+.tsRoot :global(.m-pledge-box) {
+  background: #f8fafc;
+  border: 2px solid #f1f5f9;
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tsRoot :global(.m-pledge-row) {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 9px;
+  line-height: 1.4;
+  color: #334155;
+}
+.tsRoot :global(.m-pledge-ico) {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: #f3e8ff;
+  color: var(--ts-ui-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  flex-shrink: 0;
+  font-weight: 800;
+}
+.tsRoot :global(.m-tags) {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.tsRoot :global(.m-tags) span {
+  font-size: 7px;
+  font-weight: 600;
+  background: #e9edf2;
+  color: #475569;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.tsRoot :global(.m-cta--purple) {
+  margin-top: auto;
+  display: block;
+  width: 100%;
+  background: var(--ts-ui-purple);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  text-align: center;
+  padding: 8px 0;
+  border-radius: 12px;
+}
+
+/* screens 5 & 6 — dark */
+.tsRoot :global(.ts-phone--dark) :global(.ts-zoom) {
+  color: #fff;
+}
+.tsRoot :global(.m-scan) {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 6px;
+}
+.tsRoot :global(.m-scan-ring) {
+  width: 60px;
+  height: 60px;
+  border-radius: 99px;
+  border: 2px solid rgba(0, 175, 245, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+.tsRoot :global(.m-scan-core) {
+  width: 36px;
+  height: 36px;
+  border-radius: 99px;
+  background: var(--ts-accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+}
+.tsRoot :global(.m-scan) b {
+  font-size: 13px;
+  font-weight: 700;
+}
+.tsRoot :global(.m-scan) :global(.blue) {
+  font-size: 10px;
+  color: var(--ts-accent);
+}
+.tsRoot :global(.m-scan) :global(.faint) {
+  font-size: 8px;
+  color: #64748b;
+}
+.tsRoot :global(.m-saved) {
+  background: #fff;
+  color: #0f172a;
+  border-radius: 20px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tsRoot :global(.m-saved-check) {
+  width: 28px;
+  height: 28px;
+  border-radius: 99px;
+  background: #ecfdf5;
+  color: #059669;
+  border: 4px solid #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  margin: -26px auto 0;
+}
+.tsRoot :global(.m-saved) h6 {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 800;
+}
+.tsRoot :global(.m-saved) p {
+  text-align: center;
+  font-size: 9px;
+  color: #64748b;
+  line-height: 1.4;
+}
+.tsRoot :global(.m-saved-row) {
+  background: #f8fafc;
+  border: 2px solid #f1f5f9;
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tsRoot :global(.m-saved-row) :global(.who) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tsRoot :global(.m-saved-row) :global(.who) b {
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
+}
+.tsRoot :global(.m-saved-row) :global(.who) small {
+  font-size: 8px;
+  color: #64748b;
+}
+.tsRoot :global(.m-avatar--xs) {
+  width: 24px;
+  height: 24px;
+  font-size: 8px;
+}
+.tsRoot :global(.m-badge-price) {
+  font-size: 7px;
+  font-weight: 700;
+  background: var(--ts-accent-soft);
+  color: var(--ts-accent);
+  padding: 2px 6px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.tsRoot :global(.m-cta--darkfull) {
+  display: block;
+  width: 100%;
+  background: var(--ts-ui-dark);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  text-align: center;
+  padding: 8px 0;
+  border-radius: 12px;
+}
+.tsRoot :global(.m-standby-label) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 14px;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--ts-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.tsRoot :global(.m-standby-label) i {
+  width: 8px;
+  height: 8px;
+  border-radius: 99px;
+  background: var(--ts-accent);
+  animation: ts-pulse 2s infinite;
+}
+.tsRoot :global(.m-dark-title) {
+  font-size: 16px;
+  font-weight: 800;
+}
+.tsRoot :global(.m-dark-sub) {
+  font-size: 10px;
+  color: #94a3b8;
+  margin: 4px 0 16px;
+}
+.tsRoot :global(.m-glass) {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+.tsRoot :global(.m-glass) b {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.tsRoot :global(.m-glass) p {
+  font-size: 9px;
+  color: #cbd5e1;
+  line-height: 1.45;
+}
+.tsRoot :global(.m-oncall) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tsRoot :global(.m-oncall) small {
+  display: block;
+  font-size: 9px;
+  color: #94a3b8;
+}
+.tsRoot :global(.m-oncall) b {
+  font-size: 11px;
+  font-weight: 700;
+  margin: 0;
+}
+.tsRoot :global(.m-oncall-tag) {
+  font-size: 8px;
+  font-weight: 700;
+  background: rgba(0, 175, 245, 0.2);
+  color: var(--ts-accent);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+.tsRoot :global(.m-cta--redline) {
+  margin-top: auto;
+  display: block;
+  width: 100%;
+  text-align: center;
+  border: 2px solid rgba(239, 68, 68, 0.5);
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.1);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 8px 0;
+  border-radius: 99px;
+}
+
+/* +14 ghost card (not scaled — sizes are already safe) */
+.tsRoot :global(.ts-phone--ghost) b {
+  font-family: var(--ts-font-heading);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--ts-neutral);
+}
+.tsRoot :global(.ts-phone--ghost) span {
+  font-size: 10px;
+  color: var(--ts-neutral);
+  line-height: 1.35;
+  margin-top: 4px;
+}
+
+/* ============================================================================
+   THE PROBLEMS I SAW — Annotated Mockup Rail
+   ============================================================================ */
+
+.arSection {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  background: var(--cs2-bg-page);
+  padding: var(--cs2-space-64) 0 var(--cs2-space-64);
+  overflow: hidden;
+}
+
+.arTitle {
+  font-family: var(--cs2-font-satoshi), sans-serif;
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  color: var(--cs2-text-heading);
+  text-align: center;
+  margin: 0 0 var(--cs2-space-48);
+}
+
+.arViewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.arTrack {
+  display: flex;
+  width: calc(640px * 7);
+  will-change: transform;
+}
+
+.arPanel {
+  display: flex;
+  justify-content: center;
+  width: 640px;
+  flex-shrink: 0;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.arMockup {
+  width: 280px;
+  flex-shrink: 0;
+}
+
+/* Annotation columns */
+.arColLeft,
+.arColRight {
+  position: absolute;
+  top: 0;
+  width: 230px;
+  min-height: 608px;
+}
+
+.arColLeft {
+  right: calc(50% + 140px + 24px);
+  text-align: right;
+}
+
+.arColRight {
+  left: calc(50% + 140px + 24px);
+  text-align: left;
+}
+
+/* Individual annotation note */
+.arNote {
+  position: absolute;
+  left: 0;
+  right: 0;
+  max-width: 230px;
+  transition: opacity 0.3s ease;
+}
+
+/* Heading style using Satoshi */
+.arNoteHeading {
+  display: block;
+  font-family: var(--cs2-font-satoshi), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--cs2-text-heading);
+  margin-bottom: var(--cs2-space-4);
+}
+
+/* Body copy */
+.arNoteBody {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 0.84375rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--cs2-text-muted);
+  margin: 0;
+}
+
+/* Arrow wrapper positioned above the text */
+.arArrowWrap {
+  margin-bottom: var(--cs2-space-8);
+  margin-top: 0;
+}
+
+.arColLeft .arArrowWrap {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.arColRight .arArrowWrap {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.arAnnotationArrow {
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Mockup image */
+.arMockup {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.arMockupImg {
+  width: 280px;
+  height: auto;
+  border-radius: var(--cs2-radius-16);
+  box-shadow: none;
+  object-fit: contain;
+}
+
+/* Slide navigation buttons */
+.arBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--cs2-radius-full);
+  background: var(--cs2-color-neutral-800);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: opacity 0.25s ease;
+  box-shadow: var(--cs2-shadow-raised);
+}
+
+.arBtn:hover {
+  background: var(--cs2-color-neutral-900);
+}
+
+.arBtn:disabled {
+  cursor: default;
+}
+
+.arBtnLeft {
+  left: var(--cs2-space-24);
+}
+
+.arBtnRight {
+  right: var(--cs2-space-24);
+}
+
+/* ─── Mobile: <860px ─── */
+@media (max-width: 860px) {
+  .arSection {
+    padding: var(--cs2-space-40) 0;
+  }
+
+  .arTitle {
+    font-size: 1.75rem;
+    margin-bottom: var(--cs2-space-32);
+  }
+
+  .arTrack {
+    width: auto;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 var(--cs2-space-16);
+    gap: 64px;
+    transform: none !important;
+  }
+
+  .arPanel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 260px;
+    min-width: 260px;
+    scroll-snap-align: center;
+    gap: var(--cs2-space-24);
+    padding: 0;
+  }
+
+  .arColLeft,
+  .arColRight {
+    position: static;
+    min-height: auto;
+    text-align: left;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--cs2-space-16);
+  }
+
+  .arNote {
+    position: static;
+    max-width: 100%;
+  }
+
+  .arColLeft .arNote {
+    margin-left: 0;
+  }
+
+  .arPanel > .arColLeft {
+    order: 2;
+  }
+
+  .arPanel > .arMockup {
+    order: 1;
+  }
+
+  .arPanel > .arColRight {
+    order: 3;
+  }
+
+  .arArrowWrap {
+    display: none !important;
+  }
+
+  .arMockupImg {
+    width: 260px;
+  }
+
+  .arBtn {
+    display: none;
+  }
+}

@@ -49,3 +49,7 @@ node_modules/
 /playwright/.auth/
 
 .vercel
+
+# Case Study Two scratch
+src/app/case-studies/case-study-two/scratch/
+.playwright-mcp/
