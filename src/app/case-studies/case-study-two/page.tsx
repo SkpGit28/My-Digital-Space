@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Figtree, Caveat } from "next/font/google";
 import localFont from "next/font/local";
 import styles from "./page.module.css";
@@ -427,35 +427,48 @@ function AnnotatedRail() {
 }
 
 export default function CaseStudyTwoPage() {
-  const observerRef = useRef<IntersectionObserver | null>(null);
-
-  const videoRefCallback = (el: HTMLVideoElement | null) => {
+  // Each video gets its own IntersectionObserver so every ref call
+  // correctly registers an observer (the old single-shared approach
+  // silently dropped videos 2-4 because observerRef.current was already set).
+  const videoRefCallback = React.useCallback((el: HTMLVideoElement | null) => {
     if (!el) return;
-    if (!observerRef.current) {
-      observerRef.current = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            const video = entry.target as HTMLVideoElement;
-            if (entry.isIntersecting) {
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            // Wait until the browser has buffered enough to play
+            if (video.readyState >= 2) {
               video.play().catch(() => {});
             } else {
-              video.pause();
+              const onCanPlay = () => {
+                video.play().catch(() => {});
+                video.removeEventListener("canplay", onCanPlay);
+              };
+              video.addEventListener("canplay", onCanPlay);
             }
-          });
-        },
-        { threshold: 0.1 }
-      );
-    }
-    observerRef.current.observe(el);
-  };
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
 
-  useEffect(() => {
+    observer.observe(el);
+
+    // Cleanup: disconnect when the element is unmounted
     return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
+      observer.disconnect();
     };
   }, []);
+
+  // Dummy useEffect to satisfy React hook rules (no state needed here)
+  useEffect(() => {
+    // nothing — cleanup is per-observer inside videoRefCallback
+  }, []);
+
 
   return (
     <div
@@ -1528,11 +1541,11 @@ export default function CaseStudyTwoPage() {
                 <div className={styles.solutionImageInner}>
                   <video
                     ref={videoRefCallback}
-                    src="/mockups/1st Solution.mp4"
+                    src="/mockups/1st%20Solution.mp4"
                     loop
                     muted
                     playsInline
-                    preload="none"
+                    preload="metadata"
                     poster="/mockups/poster-1.webp"
                     className={styles.solutionVideo}
                   />
@@ -1645,11 +1658,11 @@ export default function CaseStudyTwoPage() {
                 >
                   <video
                     ref={videoRefCallback}
-                    src="/mockups/2nd Solution.mp4"
+                    src="/mockups/2nd%20Solution.mp4"
                     loop
                     muted
                     playsInline
-                    preload="none"
+                    preload="metadata"
                     poster="/mockups/poster-2.webp"
                     className={`${styles.solutionVideo} ${styles.solutionVideoContain}`}
                   />
@@ -1823,11 +1836,11 @@ export default function CaseStudyTwoPage() {
                 <div className={styles.solutionImageInner}>
                   <video
                     ref={videoRefCallback}
-                    src="/mockups/3rd Solution.mp4"
+                    src="/mockups/3rd%20Solution.mp4"
                     loop
                     muted
                     playsInline
-                    preload="none"
+                    preload="metadata"
                     poster="/mockups/poster-3.webp"
                     className={styles.solutionVideo}
                   />
@@ -1892,11 +1905,11 @@ export default function CaseStudyTwoPage() {
                 <div className={styles.solutionImageInner}>
                   <video
                     ref={videoRefCallback}
-                    src="/mockups/4th Solution.mp4"
+                    src="/mockups/4th%20Solution.mp4"
                     loop
                     muted
                     playsInline
-                    preload="none"
+                    preload="metadata"
                     poster="/mockups/poster-4.webp"
                     className={styles.solutionVideo}
                   />

@@ -4,14 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { ReactNode } from "react";
 
 const navLinks = [
-  { id: 'home', label: 'Home', href: '/' },
-  { id: 'work', label: 'Work', href: '/work' },
-  { id: 'skp', label: 'SKP', href: '/about' },
-  { id: 'contact', label: 'Contact', href: '#contact' }
+  { id: "home",    label: "Home",    href: "/" },
+  { id: "work",    label: "Work",    href: "/work" },
+  { id: "skp",     label: "SKP",     href: "/about" },
+  { id: "contact", label: "Contact", href: "#contact" },
 ];
 
 export default function TopNav(): ReactNode {
@@ -19,95 +19,82 @@ export default function TopNav(): ReactNode {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [isHoveringNav, setIsHoveringNav] = useState(false);
 
-  // Motion Values for the spotlight (viewport coordinates)
+  // Motion values for the spotlight (viewport / fixed coordinates)
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    // We use client coordinates for fixed background attachment
     mouseX.set(e.clientX);
     mouseY.set(e.clientY);
   };
 
   const activeLink = navLinks.find(
-    (link) => pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href))
+    (link) =>
+      pathname === link.href ||
+      (link.href !== "/" && pathname.startsWith(link.href))
   );
   const activeId = activeLink?.id || null;
 
   const getItemWidth = (itemId: string) => {
-    const activeWidth = 96; // Fixed uniform base width for the selected state
+    const activeWidth = 96;
     let baseWidth = 66;
 
     if (itemId === activeId) {
       baseWidth = activeWidth;
     } else {
       switch (itemId) {
-        case "home":
-          baseWidth = 66;
-          break;
-        case "work":
-          baseWidth = 66;
-          break;
-        case "skp":
-          baseWidth = 58;
-          break;
-        case "contact":
-          baseWidth = 80;
-          break;
-        default:
-          baseWidth = 66;
+        case "home":    baseWidth = 66; break;
+        case "work":    baseWidth = 66; break;
+        case "skp":     baseWidth = 58; break;
+        case "contact": baseWidth = 80; break;
+        default:        baseWidth = 66;
       }
     }
 
-    // If not hovering the navigation bar, return the base width
-    if (!isHoveringNav || !hoveredId) {
-      return baseWidth;
-    }
+    if (!isHoveringNav || !hoveredId) return baseWidth;
 
-    // Restore the fluid fisheye texture:
-    // Hovered item expands by 24px. All other items contract by 8px.
-    // This keeps the sum of all item widths constant (+24 - 8*3 = 0),
-    // preventing any layout shifting or jitter in the outer navbar container.
-    if (hoveredId === itemId) {
-      return baseWidth + 24;
-    }
+    // Fisheye: hovered item +24, others -8 (sum stays constant → no layout jitter)
+    if (hoveredId === itemId) return baseWidth + 24;
     return baseWidth - 8;
   };
 
-  // Fluid Spring Config
   const navSpring = {
-    type: 'spring' as const,
-    stiffness: 200, // Slightly faster response
-    damping: 25,    // Increased damping to reduce oscillation/swing
-    mass: 1,        // Standard mass for more predictable movement
+    type: "spring" as const,
+    stiffness: 200,
+    damping: 25,
+    mass: 1,
   };
 
-  // Gradient for the spotlight
-  const gradient = useMotionTemplate`radial-gradient(100px circle at ${mouseX}px ${mouseY}px, #FFFFFF 0%, #888888 50%, #888888 100%)`;
+  // Light-mode spotlight: dark ink cursor reveal across inactive labels
+  const gradient = useMotionTemplate`radial-gradient(100px circle at ${mouseX}px ${mouseY}px, #111111 0%, #aaaaaa 50%, #aaaaaa 100%)`;
+
+  // Colour tokens
+  const COLOR_ACTIVE   = "#111111"; // near-black for active / focused label
+  const COLOR_INACTIVE = "#999999"; // medium grey for resting inactive labels
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 pt-6 pointer-events-none flex justify-center">
       <LayoutGroup>
         <motion.nav
           layout
-          className="pointer-events-auto relative flex items-center justify-center overflow-hidden border bg-black/50 backdrop-blur-lg py-2"
+          className="pointer-events-auto relative flex items-center justify-center overflow-hidden border backdrop-blur-lg py-2"
           initial={{ opacity: 0, scale: 0.8 }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-          }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{
             ...navSpring,
             opacity: { duration: 0.8 },
             scale: { duration: 0.8 },
           }}
           style={{
-            height: '58px',
-            borderRadius: '9999px',
-            borderColor: 'rgba(255, 255, 255, 0.08)',
-            gap: '8px',
-            paddingLeft: '16px',
-            paddingRight: '16px',
+            height: "58px",
+            borderRadius: "9999px",
+            // ── Light frosted-glass pill ──────────────────────────────────
+            backgroundColor: "rgba(255, 255, 255, 0.72)",
+            borderColor: "rgba(0, 0, 0, 0.09)",
+            // ─────────────────────────────────────────────────────────────
+            gap: "8px",
+            paddingLeft: "8px",
+            paddingRight: "8px",
           }}
           onMouseEnter={() => setIsHoveringNav(true)}
           onMouseLeave={() => {
@@ -124,53 +111,66 @@ export default function TopNav(): ReactNode {
               <Link
                 key={link.id}
                 href={link.href}
-                onClick={() => track("nav_click", { label: link.label, href: link.href })}
+                onClick={() =>
+                  track("nav_click", { label: link.label, href: link.href })
+                }
                 className="relative h-full"
               >
                 <motion.div
                   layout
                   onMouseEnter={() => setHoveredId(link.id)}
                   className="relative flex h-full cursor-pointer items-center justify-center bg-transparent outline-none"
-                  animate={{
-                    width: itemWidth,
-                  }}
+                  animate={{ width: itemWidth }}
                   transition={navSpring}
-                  style={{
-                    WebkitTapHighlightColor: 'transparent',
-                  }}
+                  style={{ WebkitTapHighlightColor: "transparent" }}
                 >
-                  {/* Active Pill Background */}
+                  {/* Active pill — subtle dark tint on the light background */}
                   {isActive && (
                     <motion.div
                       layoutId="active-pill"
-                      className="absolute inset-0 bg-white/10 rounded-full z-0"
+                      className="absolute inset-0 rounded-full z-0"
+                      style={{ backgroundColor: "rgba(0, 0, 0, 0.07)" }}
                       transition={{
                         type: "spring",
                         stiffness: 300,
-                        damping: 30
+                        damping: 30,
                       }}
                     />
                   )}
 
                   <motion.span
-                    className="relative z-10 transition-colors duration-200"
+                    className="relative z-10"
                     style={{
-                      fontSize: '14px',
+                      fontSize: "14px",
                       fontWeight: 500,
 
-                      // Default text color (dim grey) vs Transparent (for gradient reveal)
-                      color: isHoveringNav ? (isActive ? '#FFFFFF' : 'transparent') : (isActive ? '#FFFFFF' : '#888888'),
+                      // Active: always dark.
+                      // Inactive at rest: medium grey.
+                      // While hovering nav: inactive labels go transparent so
+                      // the dark-ink spotlight gradient shows through.
+                      color: isHoveringNav
+                        ? isActive
+                          ? COLOR_ACTIVE
+                          : "transparent"
+                        : isActive
+                        ? COLOR_ACTIVE
+                        : COLOR_INACTIVE,
 
-                      // The Magic: Spotlight Gradient
-                      backgroundImage: (isHoveringNav && !isActive) ? gradient : 'none',
-                      backgroundSize: '100% 100%',
+                      // Dark spotlight for inactive labels while cursor is on nav
+                      backgroundImage:
+                        isHoveringNav && !isActive ? gradient : "none",
+                      backgroundSize: "100% 100%",
+                      backgroundAttachment: "fixed",
+                      backgroundClip: "text",
+                      WebkitBackgroundClip: "text",
 
-                      backgroundAttachment: 'fixed',
-
-                      backgroundClip: 'text',
-                      WebkitBackgroundClip: 'text',
-
-                      WebkitTextFillColor: isHoveringNav ? (isActive ? '#FFFFFF' : 'transparent') : (isActive ? '#FFFFFF' : '#888888'),
+                      WebkitTextFillColor: isHoveringNav
+                        ? isActive
+                          ? COLOR_ACTIVE
+                          : "transparent"
+                        : isActive
+                        ? COLOR_ACTIVE
+                        : COLOR_INACTIVE,
                     }}
                   >
                     {link.label}
@@ -184,4 +184,3 @@ export default function TopNav(): ReactNode {
     </header>
   );
 }
-
