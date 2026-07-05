@@ -1,34 +1,19 @@
 "use client";
 
 /**
- * HERO TEST — Vijay Verma-style hero, isolated on /hero-test.
- * Content width: 1000px. Uses the existing TopNav from layout.
- *
- * New 3-color combination (anchored on brand blue #70B7FF):
- *   Sky   #70B7FF → text #0284C7  (existing brand / primary)
- *   Iris  #A78BFA → text #7C5CE0  (new — soft violet)
- *   Peach #FFB58A → text #E0764A  (new — warm apricot)
- * Background = whisper-strength radial washes of all three on near-white.
+ * HERO TEST — Sudeep-style centered hero, isolated on /hero-test.
+ * Headline: Fraunces serif, 48px, three lines with inline avatar + icon chips.
+ * Palette (anchored on brand blue #70B7FF):
+ *   Sky #70B7FF · Iris #A78BFA · Peach #FFB58A — whisper-strength corner washes.
  */
 
-import { Newsreader } from "next/font/google";
-import { Linkedin, Github, FileText, Mail, ArrowRight } from "lucide-react";
+import { Fraunces } from "next/font/google";
 import Link from "next/link";
 
-const newsreader = Newsreader({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600"],
 });
-
-const socials = [
-  { name: "LinkedIn", href: "https://www.linkedin.com/in/skplovesdesign", Icon: Linkedin },
-  { name: "GitHub", href: "https://github.com/SkpGit28", Icon: Github },
-  { name: "Resume", href: "/resume.pdf", Icon: FileText },
-  { name: "Email", href: "mailto:skponpurpose@gmail.com", Icon: Mail },
-];
-
-const wordmarks = ["Figma", "Framer", "Notion", "GitHub", "Payfi"];
 
 export default function HeroTestPage() {
   return (
@@ -47,97 +32,76 @@ export default function HeroTestPage() {
         }}
       />
 
-      <section className="mx-auto w-full max-w-[1000px] px-6 pt-56 pb-16">
-        {/* Social row */}
-        <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
-          {socials.map(({ name, href, Icon }) => (
-            <a
-              key={name}
-              href={href}
-              target={href.startsWith("http") ? "_blank" : undefined}
-              rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="group inline-flex items-center gap-2 text-[15px] font-semibold text-text-secondary transition-colors hover:text-foreground"
-            >
-              <Icon className="h-[18px] w-[18px] opacity-70 transition-opacity group-hover:opacity-100" />
-              {name}
-            </a>
-          ))}
-        </div>
-
-        {/* Avatar + headline — one entity, 24px gap */}
-        {/* -32px optical shift = half of (40px avatar + 24px gap), so the TEXT sits on the true center */}
-        <div className="mt-7 flex -translate-x-8 items-center justify-center gap-6">
-          <div
-            aria-hidden
-            className="h-10 w-10 shrink-0 rounded-full bg-black/[0.08] ring-1 ring-black/10"
-          />
-          <h1
-            className={`${newsreader.className} text-[48px] leading-[1.08] tracking-[-0.01em] text-foreground`}
-          >
-            Hi, I&apos;m Sushant Kumar.
-          </h1>
-        </div>
-
-        {/* Intro with tri-color inline accents */}
-        <p className="mx-auto mt-6 max-w-[860px] text-center text-[24px] leading-[1.55] text-text-primary">
-          Right now, I&apos;m designing{" "}
-          <span className="font-semibold" style={{ color: "#7C5CE0" }}>
-            clarity and trust
-          </span>{" "}
-          in fintech. I love both design and code. Alongside that, I spend time
-          on{" "}
-          <span className="font-semibold" style={{ color: "#E0764A" }}>
-            case studies
+      <section className="mx-auto flex w-full max-w-[1000px] flex-col items-center px-6 pt-56 pb-24 text-center">
+        {/* ── Headline — Fraunces 48px, inline avatar + chips ── */}
+        <h1
+          className={`${fraunces.className} text-[48px] font-medium leading-[1.22] tracking-[-0.01em] text-foreground`}
+        >
+          {/* Line 1 */}
+          <span className="block">
+            <span className="text-text-secondary">Hello, this is</span>{" "}
+            Sushant Kumar{" "}
+            <span
+              aria-hidden
+              className="mx-1 inline-block h-[52px] w-[52px] translate-y-2 rounded-2xl bg-black/[0.08] ring-1 ring-black/10"
+            />
           </span>
-          , prototyping, and building small tools.
-        </p>
 
-        {/* Studio line */}
-        <p className="mt-8 text-center text-[19px] text-text-secondary md:text-[22px]">
-          Building what I love at{" "}
+          {/* Line 2 */}
+          <span className="block">
+            A product designer{" "}
+            <span className="mx-1 inline-flex translate-y-2 items-center gap-1.5 align-baseline">
+              <span
+                aria-hidden
+                className="inline-flex h-[52px] w-[52px] items-center justify-center rounded-2xl bg-[#1E1E1E] shadow-md"
+              >
+                {/* Figma-style mark */}
+                <svg width="20" height="30" viewBox="0 0 20 30" fill="none" aria-hidden>
+                  <path d="M5 0h5v10H5a5 5 0 1 1 0-10Z" fill="#F24E1E" />
+                  <path d="M10 0h5a5 5 0 1 1 0 10h-5V0Z" fill="#FF7262" />
+                  <path d="M10 10h5a5 5 0 1 1-5 5v-5Z" fill="#1ABCFE" />
+                  <path d="M5 10h5v10H5a5 5 0 1 1 0-10Z" fill="#A259FF" />
+                  <path d="M5 20h5v5a5 5 0 1 1-5-5Z" fill="#0ACF83" />
+                </svg>
+              </span>
+              <span
+                aria-hidden
+                className="inline-flex h-[52px] w-[52px] items-center justify-center rounded-2xl bg-[#7C5CE0] shadow-md"
+              >
+                <span className="font-sans text-[15px] font-extrabold text-white">2y+</span>
+              </span>
+            </span>{" "}
+            builder,
+          </span>
+
+          {/* Line 3 */}
+          <span className="block">
+            prototyper <span className="text-text-secondary">&amp;</span> problem
+            solver.
+          </span>
+        </h1>
+
+        {/* ── Currently line ── */}
+        <p className="mt-10 flex items-center gap-2 text-[19px] text-text-secondary">
+          Currently designing at
           <a
             href="https://payfi.co.in"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold"
-            style={{
-              background:
-                "linear-gradient(90deg, #0284C7 0%, #7C5CE0 55%, #E0764A 100%)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "transparent",
-            }}
+            className="font-semibold text-foreground transition-opacity hover:opacity-75"
           >
             @Payfi
-          </a>{" "}
-          <span>fintech</span>
+          </a>
         </p>
 
-        {/* Muted wordmark strip */}
-        <div className="mt-14 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 opacity-45 grayscale">
-          {wordmarks.map((w) => (
-            <span
-              key={w}
-              className="select-none text-[19px] font-bold tracking-tight text-text-secondary"
-            >
-              {w}
-            </span>
-          ))}
-        </div>
-
-        {/* Bottom strip — CURRENT PROJECTS / All Works */}
-        <div className="mt-24 flex items-center justify-between border-t border-black/10 pt-6">
-          <span className="text-[13px] font-semibold uppercase tracking-[0.18em] text-text-secondary">
-            Current Projects
-          </span>
-          <Link
-            href="/work"
-            className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-primary transition-opacity hover:opacity-80"
-          >
-            All Works
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
+        {/* ── View Resume — black pill ── */}
+        <Link
+          href="/resume.pdf"
+          target="_blank"
+          className="mt-14 inline-flex items-center rounded-full bg-[#111111] px-8 py-4 text-[17px] font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.25)] transition-transform hover:scale-[1.03]"
+        >
+          View Resume
+        </Link>
       </section>
     </div>
   );
