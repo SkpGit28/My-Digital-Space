@@ -49,7 +49,7 @@ export default function HeroTestPage() {
 
       <section className="mx-auto w-full max-w-[1000px] px-6 pt-56 pb-16">
         {/* Social row */}
-        <div className="flex flex-wrap items-center gap-x-7 gap-y-3">
+        <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
           {socials.map(({ name, href, Icon }) => (
             <a
               key={name}
@@ -65,7 +65,7 @@ export default function HeroTestPage() {
         </div>
 
         {/* Avatar + headline — one entity, 24px gap */}
-        <div className="mt-7 flex items-center gap-6">
+        <div className="mt-7 flex items-center justify-center gap-6">
           <div
             aria-hidden
             className="h-10 w-10 shrink-0 rounded-full bg-black/[0.08] ring-1 ring-black/10"
@@ -78,7 +78,7 @@ export default function HeroTestPage() {
         </div>
 
         {/* Intro with tri-color inline accents */}
-        <p className="mt-6 max-w-[860px] text-[24px] leading-[1.55] text-text-primary">
+        <p className="mx-auto mt-6 max-w-[860px] text-center text-[24px] leading-[1.55] text-text-primary">
           Right now, I&apos;m designing{" "}
           <span className="font-semibold" style={{ color: "#7C5CE0" }}>
             clarity and trust
@@ -92,7 +92,7 @@ export default function HeroTestPage() {
         </p>
 
         {/* Studio line */}
-        <p className="mt-8 text-[19px] text-text-secondary md:text-[22px]">
+        <p className="mt-8 text-center text-[19px] text-text-secondary md:text-[22px]">
           Building what I love at{" "}
           <a
             href="https://payfi.co.in"
@@ -113,7 +113,7 @@ export default function HeroTestPage() {
         </p>
 
         {/* Muted wordmark strip */}
-        <div className="mt-14 flex flex-wrap items-center gap-x-10 gap-y-4 opacity-45 grayscale">
+        <div className="mt-14 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 opacity-45 grayscale">
           {wordmarks.map((w) => (
             <span
               key={w}
