@@ -65,7 +65,8 @@ export default function HeroTestPage() {
         </div>
 
         {/* Avatar + headline — one entity, 24px gap */}
-        <div className="mt-7 flex items-center justify-center gap-6">
+        {/* -32px optical shift = half of (40px avatar + 24px gap), so the TEXT sits on the true center */}
+        <div className="mt-7 flex -translate-x-8 items-center justify-center gap-6">
           <div
             aria-hidden
             className="h-10 w-10 shrink-0 rounded-full bg-black/[0.08] ring-1 ring-black/10"
