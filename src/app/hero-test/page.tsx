@@ -29,6 +29,8 @@ const T = {
   blueMain: "#0d99ff",
   successBg: "#e6f9f1",
   green500: "#1f9d5e",
+  purpleBg: "#f3ecfd",
+  purple500: "#a78bfa",
   border: "#e5e7eb",
 };
 
@@ -49,17 +51,17 @@ export default function HeroTestPage() {
 
         {/* Identity row — 64px below headline */}
         <div className="mt-16 flex items-center gap-6">
-          {/* Photo: 64×64, 1px border */}
+          {/* Photo: 64×64 frame, 1px border; image 64×60 with 4px top gap, flush bottom */}
           <div
-            className="flex h-16 w-16 items-center justify-center overflow-hidden bg-white"
+            className="flex h-16 w-16 items-end justify-center overflow-hidden bg-white"
             style={{ border: `1px solid ${T.border}` }}
           >
             <Image
               src="/HeroMe.svg"
               alt="Sushant Kumar"
               width={64}
-              height={64}
-              className="h-full w-full object-cover"
+              height={60}
+              className="h-[59px] w-full object-cover"
             />
           </div>
 
@@ -69,7 +71,7 @@ export default function HeroTestPage() {
               className="text-[24px] leading-8 tracking-[-0.02em]"
               style={{ color: T.heading }}
             >
-              Sushant Kumar
+              Hi, I am Sushant Kumar
             </span>
             <div className="flex items-center gap-2">
               <span
@@ -83,6 +85,12 @@ export default function HeroTestPage() {
                 style={{ background: T.successBg, color: T.green500 }}
               >
                 Builder
+              </span>
+              <span
+                className="inline-flex min-w-[76px] items-center justify-center rounded-lg px-2 py-[2.5px] text-[14px] font-bold tracking-[-0.02em]"
+                style={{ background: T.purpleBg, color: T.purple500 }}
+              >
+                Tinkerer
               </span>
             </div>
           </div>
