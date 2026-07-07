@@ -96,16 +96,6 @@ export default function FooterTest3Page() {
 
   const reset = () => { setBoard(Array(9).fill(null)); setThinking(false); };
 
-  const status = winner === "X"
-    ? "You beat perfect play. Email me “I WON” — same-day reply, promised."
-    : winner === "O"
-    ? "SKP takes the round. Run it back?"
-    : isDraw
-    ? "A draw against perfect play — respectable. That earns the reply too."
-    : thinking
-    ? "Thinking…"
-    : "Your move. You're X.";
-
   return (
     <div className="flex min-h-screen flex-col bg-white">
       <div className="flex flex-1 items-center justify-center pt-40 pb-24">
@@ -114,7 +104,7 @@ export default function FooterTest3Page() {
 
       {/* ══════════════ THE FOOTER ══════════════ */}
       <footer className="border-t" style={{ borderColor: T.border }}>
-        <div className="mx-auto grid w-full max-w-[1200px] gap-14 px-6 py-16 md:grid-cols-[1fr_400px]">
+        <div className="mx-auto grid w-full max-w-[1200px] gap-14 px-6 py-16 md:grid-cols-[1fr_auto]">
 
           {/* left: statement + links */}
           <div className="flex flex-col justify-between gap-10">
@@ -150,46 +140,9 @@ export default function FooterTest3Page() {
             </div>
           </div>
 
-          {/* right: the challenge card */}
-          <div
-            className="rounded-2xl bg-white p-7"
-            style={{ border: `1px solid ${T.border}`, boxShadow: "0 8px 28px rgba(16,24,40,0.06)" }}
-          >
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <p className="text-[16px] font-semibold tracking-[-0.01em]" style={{ color: T.heading }}>
-                  Beat me for a same-day reply
-                </p>
-                <p className="mt-1 text-[13px] leading-relaxed" style={{ color: T.body }}>
-                  I play a perfect strategy. A draw is the best you’ll get — and I respect it.
-                </p>
-              </div>
-              <button
-                onClick={reset}
-                aria-label="New round"
-                className="rounded-full px-3 py-1 text-[12.5px] font-semibold transition-colors hover:bg-black/[0.04]"
-                style={{ border: `1px solid ${T.border}`, color: T.body }}
-              >
-                New round
-              </button>
-            </div>
-
-            {/* scoreboard */}
-            <div className="mt-5 grid grid-cols-3 gap-2">
-              {[
-                { label: "You", val: score.you },
-                { label: "Draws", val: score.draws },
-                { label: "SKP", val: score.skp },
-              ].map((s) => (
-                <div key={s.label} className="rounded-xl bg-[#fafbfc] px-3 py-2 text-center" style={{ border: `1px solid rgba(0,0,0,0.05)` }}>
-                  <div className="text-[11px] font-semibold uppercase tracking-[0.1em]" style={{ color: T.body }}>{s.label}</div>
-                  <div className="text-[20px] font-bold tabular-nums" style={{ color: T.heading }}>{s.val}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* board */}
-            <div className="mx-auto mt-5 grid w-fit grid-cols-3 gap-2">
+          {/* right: quiet corner piece — a small board, no fanfare */}
+          <div className="flex flex-col items-start gap-3 self-end md:items-end">
+            <div className="grid w-fit grid-cols-3 gap-1.5">
               {board.map((cell, i) => {
                 const isWin = line.includes(i);
                 return (
@@ -197,22 +150,22 @@ export default function FooterTest3Page() {
                     key={i}
                     onClick={() => play(i)}
                     aria-label={`cell ${i + 1}`}
-                    className="flex h-[72px] w-[72px] items-center justify-center rounded-xl transition-colors"
+                    className="flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-black/[0.03]"
                     style={{
-                      border: `1px solid ${isWin ? T.brand : "rgba(0,0,0,0.07)"}`,
-                      background: isWin ? "rgba(2,132,199,0.06)" : cell ? "#fafbfc" : "#ffffff",
+                      border: `1px solid ${isWin ? "rgba(2,132,199,0.45)" : "rgba(0,0,0,0.06)"}`,
+                      background: isWin ? "rgba(2,132,199,0.05)" : "transparent",
                       cursor: cell || gameOver ? "default" : "pointer",
                     }}
                   >
                     {cell === "X" && (
-                      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden>
-                        <path d="M6 6 L24 24 M24 6 L6 24" stroke={T.heading} strokeWidth="3.4" strokeLinecap="round"
+                      <svg width="16" height="16" viewBox="0 0 30 30" aria-hidden>
+                        <path d="M6 6 L24 24 M24 6 L6 24" stroke={T.heading} strokeWidth="3" strokeLinecap="round" strokeOpacity="0.75"
                           style={{ strokeDasharray: 52, strokeDashoffset: 0, animation: "ttt-draw .28s ease-out" }} />
                       </svg>
                     )}
                     {cell === "O" && (
-                      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden>
-                        <circle cx="15" cy="15" r="9.5" fill="none" stroke={T.brand} strokeWidth="3.4" strokeLinecap="round"
+                      <svg width="16" height="16" viewBox="0 0 30 30" aria-hidden>
+                        <circle cx="15" cy="15" r="9.5" fill="none" stroke={T.brand} strokeWidth="3" strokeLinecap="round" strokeOpacity="0.75"
                           style={{ strokeDasharray: 60, strokeDashoffset: 0, animation: "ttt-draw .32s ease-out" }} />
                       </svg>
                     )}
@@ -222,9 +175,20 @@ export default function FooterTest3Page() {
             </div>
             <style>{`@keyframes ttt-draw { from { stroke-dashoffset: 60; } to { stroke-dashoffset: 0; } }`}</style>
 
-            {/* status */}
-            <p className="mt-5 min-h-[38px] text-center text-[13.5px] leading-relaxed" style={{ color: winner === "X" ? T.brand : T.body }}>
-              {status}
+            <p className="max-w-[220px] text-[12px] leading-relaxed md:text-right" style={{ color: T.body, opacity: 0.85 }}>
+              {gameOver ? (
+                <>
+                  {winner === "X" ? "You beat perfect play — email me “I WON”." : winner === "O" ? "SKP takes it." : "A draw. Respect."}{" "}
+                  <button onClick={reset} className="underline decoration-black/20 underline-offset-2 transition-colors hover:text-black" style={{ color: T.body }}>
+                    again?
+                  </button>
+                  <span className="mt-0.5 block tabular-nums" style={{ opacity: 0.7 }}>
+                    you {score.you} · draws {score.draws} · skp {score.skp}
+                  </span>
+                </>
+              ) : (
+                "a quiet game, if you feel like it"
+              )}
             </p>
           </div>
         </div>
