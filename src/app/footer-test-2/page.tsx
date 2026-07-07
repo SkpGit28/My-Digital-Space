@@ -158,7 +158,7 @@ export default function FooterTest2Page() {
   return (
     <div className="flex min-h-screen flex-col bg-white">
       <div className="flex flex-1 items-center justify-center pt-40 pb-24">
-        <p className="text-text-secondary">page content — scroll down to the footer ↓</p>
+        <p className="text-text-secondary">page content, scroll down to the footer ↓</p>
       </div>
 
       {/* ══════════════ THE FOOTER ══════════════ */}
@@ -167,7 +167,7 @@ export default function FooterTest2Page() {
           {/* header row */}
           <div className="flex items-center justify-between py-5">
             <span className="text-[14px] font-medium text-text-secondary">
-              My toolkit — go ahead, toss it around
+              My toolkit. Go ahead, toss it around
             </span>
             <button
               onClick={dropAll}
@@ -206,7 +206,7 @@ export default function FooterTest2Page() {
           {/* bottom row */}
           <div className="flex flex-wrap items-center justify-between gap-4 py-5">
             <span className="text-[13px] text-text-secondary">
-              © 2026 SKP — designed with clarity, built with trust.
+              © 2026 SKP. Designed with clarity, built with trust.
             </span>
             <div className="flex items-center gap-6">
               {LINKS.map((l) => (

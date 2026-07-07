@@ -99,7 +99,7 @@ export default function FooterTest3Page() {
   return (
     <div className="flex min-h-screen flex-col bg-white">
       <div className="flex flex-1 items-center justify-center pt-40 pb-24">
-        <p className="text-text-secondary">page content — scroll down to the footer ↓</p>
+        <p className="text-text-secondary">page content, scroll down to the footer ↓</p>
       </div>
 
       {/* ══════════════ THE FOOTER ══════════════ */}
@@ -110,7 +110,7 @@ export default function FooterTest3Page() {
           <div className="flex flex-col justify-between gap-10">
             <div>
               <p className="text-[13px] font-semibold uppercase tracking-[0.16em]" style={{ color: T.body }}>
-                Sushant Kumar — Product Designer
+                Sushant Kumar · Product Designer
               </p>
               <p className="mt-4 max-w-[420px] text-[34px] font-medium leading-[1.25] tracking-[-0.02em]" style={{ color: T.heading }}>
                 Let’s solve the right problem, together.
@@ -141,7 +141,7 @@ export default function FooterTest3Page() {
           </div>
 
           {/* right: quiet corner piece — a small board, no fanfare */}
-          <div className="flex flex-col items-start gap-3 self-end md:items-end">
+          <div className="flex w-fit flex-col items-center gap-3 self-end md:ml-auto">
             <div className="grid w-fit grid-cols-3 gap-1.5">
               {board.map((cell, i) => {
                 const isWin = line.includes(i);
@@ -175,10 +175,10 @@ export default function FooterTest3Page() {
             </div>
             <style>{`@keyframes ttt-draw { from { stroke-dashoffset: 60; } to { stroke-dashoffset: 0; } }`}</style>
 
-            <p className="max-w-[220px] text-[12px] leading-relaxed md:text-right" style={{ color: T.body, opacity: 0.85 }}>
+            <p className="max-w-[220px] text-center text-[12px] leading-relaxed" style={{ color: T.body, opacity: 0.85 }}>
               {gameOver ? (
                 <>
-                  {winner === "X" ? "Impossible — you actually won. Tell me how." : winner === "O" ? "Still unbeaten." : "A draw — the closest anyone gets."}{" "}
+                  {winner === "X" ? "Impossible. You actually won, tell me how." : winner === "O" ? "Still unbeaten." : "A draw. The closest anyone gets."}{" "}
                   <button onClick={reset} className="underline decoration-black/20 underline-offset-2 transition-colors hover:text-black" style={{ color: T.body }}>
                     again?
                   </button>
@@ -187,7 +187,7 @@ export default function FooterTest3Page() {
                   </span>
                 </>
               ) : (
-                "unbeaten at this so far — care to try?"
+                "unbeaten at this so far, care to try?"
               )}
             </p>
           </div>
