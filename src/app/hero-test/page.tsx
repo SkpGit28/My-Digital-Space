@@ -18,7 +18,18 @@ import localFont from "next/font/local";
 import Image from "next/image";
 
 const satoshi = localFont({
-  src: "../../../public/fonts/Satoshi-Bold.woff2",
+  src: [
+    {
+      path: "../../../public/fonts/Satoshi-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/Satoshi-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+  ],
   variable: "--hero-satoshi",
 });
 
@@ -66,10 +77,10 @@ export default function HeroTestPage() {
           </div>
 
           {/* Name + badges */}
-          <div className="flex flex-col items-start gap-1.5">
+          <div className="flex flex-col items-start gap-2">
             <span
               className="text-[24px] leading-8 tracking-[-0.02em]"
-              style={{ color: T.heading }}
+              style={{ color: T.heading, fontWeight: 500 }}
             >
               Hi, I am Sushant Kumar
             </span>
