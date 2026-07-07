@@ -109,7 +109,7 @@ export default function FooterTestPage() {
     <div className="flex min-h-screen flex-col bg-white">
       {/* stand-in page content so you scroll INTO the footer like on the real site */}
       <div className="flex flex-1 items-center justify-center pt-40 pb-24">
-        <p className="text-text-secondary">page content — scroll down to the footer ↓</p>
+        <p className="text-text-secondary">page content, scroll down to the footer ↓</p>
       </div>
 
       {/* ══════════════ THE FOOTER ══════════════ */}
@@ -170,7 +170,7 @@ export default function FooterTestPage() {
           {/* ── bottom row ── */}
           <div className="flex flex-wrap items-center justify-between gap-4 border-t border-black/[0.07] py-5">
             <span className="text-[13px] text-text-secondary">
-              © 2026 SKP — designed with clarity, built with trust.
+              © 2026 SKP. Designed with clarity, built with trust.
             </span>
             <div className="flex items-center gap-6">
               {LINKS.map((l) => (
