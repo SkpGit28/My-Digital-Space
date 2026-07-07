@@ -150,22 +150,22 @@ export default function FooterTest3Page() {
                     key={i}
                     onClick={() => play(i)}
                     aria-label={`cell ${i + 1}`}
-                    className="flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-black/[0.03]"
+                    className="flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-black/[0.06]"
                     style={{
-                      border: `1px solid ${isWin ? "rgba(2,132,199,0.45)" : "rgba(0,0,0,0.06)"}`,
-                      background: isWin ? "rgba(2,132,199,0.05)" : "transparent",
+                      border: `1px solid ${isWin ? "rgba(2,132,199,0.55)" : "rgba(0,0,0,0.14)"}`,
+                      background: isWin ? "rgba(2,132,199,0.08)" : "#f4f6f8",
                       cursor: cell || gameOver ? "default" : "pointer",
                     }}
                   >
                     {cell === "X" && (
                       <svg width="16" height="16" viewBox="0 0 30 30" aria-hidden>
-                        <path d="M6 6 L24 24 M24 6 L6 24" stroke={T.heading} strokeWidth="3" strokeLinecap="round" strokeOpacity="0.75"
+                        <path d="M6 6 L24 24 M24 6 L6 24" stroke={T.heading} strokeWidth="3.2" strokeLinecap="round"
                           style={{ strokeDasharray: 52, strokeDashoffset: 0, animation: "ttt-draw .28s ease-out" }} />
                       </svg>
                     )}
                     {cell === "O" && (
                       <svg width="16" height="16" viewBox="0 0 30 30" aria-hidden>
-                        <circle cx="15" cy="15" r="9.5" fill="none" stroke={T.brand} strokeWidth="3" strokeLinecap="round" strokeOpacity="0.75"
+                        <circle cx="15" cy="15" r="9.5" fill="none" stroke={T.brand} strokeWidth="3.2" strokeLinecap="round"
                           style={{ strokeDasharray: 60, strokeDashoffset: 0, animation: "ttt-draw .32s ease-out" }} />
                       </svg>
                     )}
@@ -178,7 +178,7 @@ export default function FooterTest3Page() {
             <p className="max-w-[220px] text-[12px] leading-relaxed md:text-right" style={{ color: T.body, opacity: 0.85 }}>
               {gameOver ? (
                 <>
-                  {winner === "X" ? "You beat perfect play — email me “I WON”." : winner === "O" ? "SKP takes it." : "A draw. Respect."}{" "}
+                  {winner === "X" ? "Impossible — you actually won. Tell me how." : winner === "O" ? "Still unbeaten." : "A draw — the closest anyone gets."}{" "}
                   <button onClick={reset} className="underline decoration-black/20 underline-offset-2 transition-colors hover:text-black" style={{ color: T.body }}>
                     again?
                   </button>
@@ -187,7 +187,7 @@ export default function FooterTest3Page() {
                   </span>
                 </>
               ) : (
-                "a quiet game, if you feel like it"
+                "unbeaten at this so far — care to try?"
               )}
             </p>
           </div>
