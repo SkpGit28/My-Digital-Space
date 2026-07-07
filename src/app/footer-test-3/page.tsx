@@ -141,7 +141,8 @@ export default function FooterTest3Page() {
           </div>
 
           {/* right: quiet corner piece — a small board, no fanfare */}
-          <div className="flex w-fit flex-col items-center gap-3 self-end md:ml-auto">
+          {/* fixed width + reserved caption height so the board never shifts when the copy changes */}
+          <div className="flex w-[240px] flex-col items-center gap-3 self-end md:ml-auto">
             <div className="grid w-fit grid-cols-3 gap-1.5">
               {board.map((cell, i) => {
                 const isWin = line.includes(i);
@@ -175,7 +176,7 @@ export default function FooterTest3Page() {
             </div>
             <style>{`@keyframes ttt-draw { from { stroke-dashoffset: 60; } to { stroke-dashoffset: 0; } }`}</style>
 
-            <p className="max-w-[220px] text-center text-[12px] leading-relaxed" style={{ color: T.body, opacity: 0.85 }}>
+            <p className="min-h-[60px] w-full text-center text-[12px] leading-relaxed" style={{ color: T.body, opacity: 0.85 }}>
               {gameOver ? (
                 <>
                   {winner === "X" ? "Impossible. You actually won, tell me how." : winner === "O" ? "Still unbeaten." : "A draw. The closest anyone gets."}{" "}
