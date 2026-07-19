@@ -1,0 +1,125 @@
+/* Scoped Primitive Design Tokens for Case Study 2 */
+.cs2Root {
+  /* Section Spacing Tokens */
+  --section-space-top: 4rem; /* 64px */
+  --section-space-bottom: 2.5rem; /* 40px */
+
+  /* Spacing Scale (1rem = 16px) */
+  --cs2-space-4: 0.25rem;
+  --cs2-space-8: 0.5rem;
+  --cs2-space-10: 0.625rem;
+  --cs2-space-12: 0.75rem;
+  --cs2-space-14: 0.875rem;
+  --cs2-space-16: 1rem;
+  --cs2-space-20: 1.25rem;
+  --cs2-space-24: 1.5rem;
+  --cs2-space-32: 2rem;
+  --cs2-space-40: 2.5rem;
+  --cs2-space-48: 3rem;
+  --cs2-space-56: 3.5rem;
+  --cs2-space-64: 4rem;
+  --cs2-space-115: 7.1875rem;
+  --cs2-space-layout-gap: 7.1875rem;
+
+  /* Radius Scale */
+  --cs2-radius-2: 0.125rem;
+  --cs2-radius-8: 0.375rem;
+  --cs2-radius-12: 0.75rem;
+  --cs2-radius-14: 0.75rem;
+  --cs2-radius-16: 0.75rem;
+  --cs2-radius-20: 0.75rem;
+  --cs2-radius-40: 0.75rem;
+  --cs2-radius-100: 6.25rem;
+  --cs2-radius-full: 9999rem;
+
+  /* Shadows */
+  --cs2-shadow-card: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  --cs2-shadow-raised: 1px 3px 5px 0 rgba(0, 0, 0, 0.1);
+
+  /* Primitives Colors - Neutral Family */
+  --cs2-color-neutral-0: #ffffff;
+  --cs2-color-neutral-50: #f8f8f8;
+  --cs2-color-neutral-100: #edeff2;
+  --cs2-color-neutral-200: #e5e7eb;
+  --cs2-color-neutral-300: #c2c9d4;
+  --cs2-color-neutral-400: #94a3b8;
+  --cs2-color-neutral-500: #8a8f98;
+  --cs2-color-neutral-600: #70768c;
+  --cs2-color-neutral-650: #5d6c85;
+  --cs2-color-neutral-700: #475569;
+  --cs2-color-neutral-800: #16181d;
+  --cs2-color-neutral-900: #001536;
+  --cs2-color-neutral-black: #000000;
+
+  /* Primitives Colors - Blue Family */
+  --cs2-color-blue-050: #edf1fa;
+  --cs2-color-blue-100: #e0f2fe;
+  --cs2-color-blue-300: #60a5fa;
+  --cs2-color-blue-400: #1a73e8;
+  --cs2-color-blue-500: #0066f5;
+  --cs2-color-blue-600: #0057be;
+  --cs2-color-blue-700: #0369a1;
+
+  /* Primitives Colors - Green Family */
+  --cs2-color-green-050: #e6f5ed;
+  --cs2-color-green-100: #e6f9f1;
+  --cs2-color-green-200: #a8dfbf;
+  --cs2-color-green-300: #7cbf6d;
+  --cs2-color-green-500: #1f9d5e;
+  --cs2-color-green-600: #1a7f4b;
+  --cs2-color-green-700: #106e40;
+
+  /* Primitives Colors - Amber Family */
+  --cs2-color-amber-050: #fff8e4;
+  --cs2-color-amber-100: #fff7e6;
+  --cs2-color-amber-200: #f5d99a;
+  --cs2-color-amber-500: #f4a623;
+  --cs2-color-amber-600: #c37b0a;
+  --cs2-color-amber-700: #b05c00;
+
+  /* Primitives Colors - Red Family */
+  --cs2-color-red-100: #fdecea;
+  --cs2-color-red-200: #f5c6c2;
+  --cs2-color-red-400: #f87171;
+  --cs2-color-red-500: #c0392b;
+  --cs2-color-red-700: #b81c1c;
+
+  /* Primitives Colors - Purple Family */
+  --cs2-color-purple-100: #e7dafc;
+  --cs2-color-purple-500: #a78bfa;
+
+  /* Primitives Colors - Alpha Family */
+  --cs2-color-alpha-ink-50: rgba(29, 29, 29, 0.5);
+
+  /* Semantic Colors (Aliases to primitives) */
+  --cs2-text-heading: var(--cs2-color-neutral-900);
+  --cs2-text-heading-unhighlighted: #999dad;
+  --cs2-text-body: var(--cs2-color-neutral-600);
+  --cs2-text-muted: var(--cs2-color-neutral-500);
+  --cs2-text-inverse: var(--cs2-color-neutral-0);
+  --cs2-text-primary: var(--cs2-color-blue-500);
+
+  --cs2-bg-page: var(--cs2-color-neutral-0);
+  --cs2-bg-surface: var(--cs2-color-neutral-50);
+  --cs2-bg-subtle: var(--cs2-color-neutral-100);
+
+  --cs2-border-default: var(--cs2-color-neutral-200);
+  --cs2-border-strong: var(--cs2-color-neutral-300);
+
+  --cs2-status-success: var(--cs2-color-green-500);
+  --cs2-status-success-bg: var(--cs2-color-green-100);
+  --cs2-status-warning: var(--cs2-color-amber-700);
+  --cs2-status-warning-bg: var(--cs2-color-amber-100);
+  --cs2-status-error: var(--cs2-color-red-500);
+  --cs2-status-error-bg: var(--cs2-color-red-100);
+
+  --cs2-accent-purple: var(--cs2-color-purple-500);
+}
+
+@media (max-width: 52.125em) {
+  .cs2Root {
+    --section-space-top: 2.5rem; /* 40px */
+    --section-space-bottom: 1.5rem; /* 24px */
+  }
+}
+
