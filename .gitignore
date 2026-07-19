@@ -53,3 +53,8 @@ node_modules/
 # Case Study Two scratch
 src/app/case-studies/case-study-two/scratch/
 .playwright-mcp/
+
+# AI tool configs
+.claude/
+.agents/
+.mimocode/

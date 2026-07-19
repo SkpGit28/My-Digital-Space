@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // One-off local Node tooling, not app code:
+    "process-svg.js",
+    "remove-anim.js",
   ]),
 ]);
 

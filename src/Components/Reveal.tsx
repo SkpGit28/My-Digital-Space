@@ -22,6 +22,7 @@ export default function Reveal({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- SSR hydration mount flag is intentional
     setMounted(true);
   }, []);
 

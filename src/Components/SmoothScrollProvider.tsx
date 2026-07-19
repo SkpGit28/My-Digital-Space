@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useRef } from "react";
+import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 
@@ -14,6 +14,7 @@ export default function SmoothScrollProvider({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
@@ -36,6 +37,8 @@ export default function SmoothScrollProvider({
     });
 
     lenisRef.current = lenis;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- publishing the freshly created Lenis instance to context
+    setLenisInstance(lenis); // Trigger re-render so context consumers get the instance
 
     // requestAnimationFrame scroll loop
     let rafId: number;
@@ -56,9 +59,9 @@ export default function SmoothScrollProvider({
         e.preventDefault();
         const element = document.querySelector(href) as HTMLElement;
         if (element && lenis) {
-          lenis.scrollTo(element, {
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // smooth easeOut
+           lenis.scrollTo(element, {
+            duration: 2.0,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           });
         }
       }
@@ -72,6 +75,7 @@ export default function SmoothScrollProvider({
       document.removeEventListener("click", handleAnchorClick);
       lenis.destroy();
       lenisRef.current = null;
+      setLenisInstance(null);
     };
   }, []);
 
@@ -90,7 +94,7 @@ export default function SmoothScrollProvider({
         if (lenisRef.current) {
           const element = document.querySelector(hash) as HTMLElement;
           if (element) {
-            lenisRef.current.scrollTo(element, { duration: 1.2 });
+            lenisRef.current.scrollTo(element, { duration: 2.0 });
           }
         }
       }, 250); // Give Next.js page transition time to settle
@@ -99,8 +103,9 @@ export default function SmoothScrollProvider({
   }, [pathname]);
 
   return (
-    <LenisContext.Provider value={lenisRef.current}>
+    <LenisContext.Provider value={lenisInstance}>
       {children}
     </LenisContext.Provider>
   );
 }
+

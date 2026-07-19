@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { satoshi, figtree } from "@/styles/fonts";
 import "./globals.css";
 import { defaultMetadata } from "./metadata";
 import ThemeProviderWrapper from "@/Components/ThemeProviderWrapper";
@@ -8,15 +8,9 @@ import ScrollProgress from "@/Components/ScrollProgress";
 import PageTransition from "@/Components/PageTransition";
 import SmoothScrollProvider from "@/Components/SmoothScrollProvider";
 
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-manrope",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   ...defaultMetadata,
-  metadataBase: new URL("https://your-domain.com"),
+  metadataBase: new URL("https://skpux.in"),
   alternates: { canonical: "/" },
   openGraph: {
     title: "Sushant Kumar — UI/UX Designer",
@@ -40,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${manrope.variable} antialiased font-sans min-h-screen bg-background transition-colors duration-300`}
+        className={`${figtree.variable} ${satoshi.variable} antialiased font-sans min-h-screen bg-background transition-colors duration-300`}
       >
         <ThemeProviderWrapper>
           <SmoothScrollProvider>
@@ -63,7 +57,7 @@ export default function RootLayout({
             "@context": "https://schema.org",
             "@type": "Person",
             name: "Sushant Kumar",
-            url: "https://your-domain.com/",
+            url: "https://skpux.in/",
             jobTitle: "UI/UX Designer",
             sameAs: [
               "https://www.linkedin.com/in/...",

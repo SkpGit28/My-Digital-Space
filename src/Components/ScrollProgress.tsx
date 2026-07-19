@@ -24,7 +24,7 @@ export default function ScrollProgress() {
     }
 
     // Connect directly to Lenis scroll callback for real-time synchronization
-    const handleLenisScroll = (e: any) => {
+    const handleLenisScroll = (e: { progress?: number; scroll: number; limit: number }) => {
       const progressVal = e.progress !== undefined ? e.progress * 100 : (e.scroll / e.limit) * 100;
       setProgress(progressVal);
     };
@@ -33,6 +33,7 @@ export default function ScrollProgress() {
 
     // Initial state
     const initialProgress = lenis.progress !== undefined ? lenis.progress * 100 : (lenis.scroll / lenis.limit) * 100;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- seeding from external scroll state on mount is intentional
     setProgress(initialProgress);
 
     return () => {
