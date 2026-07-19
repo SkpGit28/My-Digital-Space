@@ -1,0 +1,154 @@
+/* Scoped Typography Classes for Case Study 2 */
+/* Mapped to local Satoshi (headings) and Google Figtree (body) */
+
+.cs2Root {
+  /* Design Tokens - Typography Variables */
+  --cs2-h2-font-family: var(--cs2-font-satoshi), sans-serif;
+  --cs2-h2-font-size: 1.75rem;
+  --cs2-h2-font-weight: 700;
+  --cs2-h2-line-height: 1.35;
+  --cs2-h2-letter-spacing: -0.02em;
+
+  --cs2-body-font-family: var(--cs2-font-figtree), sans-serif;
+  --cs2-body-font-size: 1.125rem;
+  --cs2-body-font-weight: 400;
+  --cs2-body-line-height: 1.75rem;
+  --cs2-body-letter-spacing: 0.01em;
+
+  /* Specific explicit sizes */
+  --cs2-font-size-12: 0.75rem;
+}
+
+.cs2-t-display {
+  font-family: var(--cs2-font-satoshi), sans-serif;
+  font-size: 48;
+  font-weight: 700;
+  line-height: 56px; /* Exactly 64px */
+  letter-spacing: -0.03em;
+}
+
+.cs2-t-h1 {
+  font-family: var(--cs2-font-satoshi), sans-serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.cs2-t-h2 {
+  font-family: var(--cs2-font-satoshi), sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.cs2-t-h3 {
+  font-family: var(--cs2-font-satoshi), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+}
+
+/* Body Large */
+.cs2-t-body-lg-bold {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: var(--cs2-body-letter-spacing);
+}
+
+.cs2-t-body-lg-semibold {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: var(--cs2-body-letter-spacing);
+}
+
+.cs2-t-body-lg-regular {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: var(--cs2-body-letter-spacing);
+}
+
+/* Body Regular */
+.cs2-t-body-bold {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.43;
+  letter-spacing: 0.08em; /* Mapped to the 1.12px spacing at 14px size */
+}
+
+.cs2-t-body-semibold {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.43;
+  letter-spacing: var(--cs2-body-letter-spacing);
+}
+
+.cs2-t-body-regular {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: var(--cs2-body-letter-spacing);
+}
+
+/* Labels */
+.cs2-t-label-bold {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: var(--cs2-body-letter-spacing);
+}
+
+.cs2-t-label-medium {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: var(--cs2-body-letter-spacing);
+}
+
+/* Captions */
+.cs2-t-caption-bold {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+}
+
+.cs2-t-caption-medium {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+/* Additional specific Heading styles found in Foundations */
+.cs2-t-heading-light-italic-24 {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.cs2-t-heading-regular-18 {
+  font-family: var(--cs2-font-figtree), sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.55; /* Mapped to 28px line-height */
+  letter-spacing: var(--cs2-body-letter-spacing);
+}

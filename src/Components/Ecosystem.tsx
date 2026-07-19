@@ -13,11 +13,13 @@ const Ecosystem: React.FC = () => {
     // Hover states for each row
     const [hoveredRow, setHoveredRow] = React.useState<number | null>(null);
 
+    // Bare gallery rows: section shell and background come from the case-study
+    // page (Case Study 2's template), not from this component.
     return (
-        <section className="py-24 relative overflow-hidden bg-background">
-            <Container className=" max-w-full px-4 md:px-0!">
+        <div className="relative overflow-hidden z-20" style={{ width: "100vw", position: "relative", left: "50%", right: "50%", marginLeft: "-50vw", marginRight: "-50vw" }}>
+            <div className="w-full">
                 {/* Scrolling Rows */}
-                <div className="space-y-6">
+                <div className="flex flex-col gap-[24px]">
                     {/* Row 1 - Left to Right (Slow) */}
                     <div
                         className="overflow-hidden"
@@ -25,7 +27,7 @@ const Ecosystem: React.FC = () => {
                         onMouseLeave={() => setHoveredRow(null)}
                     >
                         <motion.div
-                            className="flex gap-6"
+                            className="flex gap-[24px]"
                             animate={{
                                 x: hoveredRow === 1 ? undefined : [0, -3100],
                             }}
@@ -42,7 +44,7 @@ const Ecosystem: React.FC = () => {
                             {[...row1Screens, ...row1Screens].map((item, index) => (
                                 <div
                                     key={`row1-${index}`}
-                                    className="min-w-[500px] h-[300px] bg-elevated border border-border-subtle rounded-2xl overflow-hidden shrink-0"
+                                    className="min-w-[500px] h-[300px] bg-elevated border border-border-subtle rounded-[12px] overflow-hidden shrink-0"
                                 >
                                     <img
                                         src={`/Ecosystem/${item}.svg`}
@@ -61,7 +63,7 @@ const Ecosystem: React.FC = () => {
                         onMouseLeave={() => setHoveredRow(null)}
                     >
                         <motion.div
-                            className="flex gap-6"
+                            className="flex gap-[24px]"
                             animate={{
                                 x: hoveredRow === 2 ? undefined : [-3600, 0], // Increased distance for extra item
                             }}
@@ -80,25 +82,25 @@ const Ecosystem: React.FC = () => {
                                     return (
                                         <div
                                             key={`row2-${index}`}
-                                            className="min-w-[500px] h-[300px] bg-elevated border border-border-subtle rounded-2xl overflow-hidden shrink-0 flex items-center justify-center gap-4 p-6"
+                                            className="min-w-[500px] h-[300px] bg-elevated border border-border-subtle rounded-[12px] overflow-hidden shrink-0 flex items-center justify-center gap-4 p-6"
                                         >
                                             {/* Mobile Screen 1 - Raw Image, Bigger */}
                                             <img
                                                 src="/Ecosystem/Mob1.png"
-                                                className="w-[130px] h-auto object-contain drop-shadow-xl hover:scale-105 transition-transform duration-300"
+                                                className="w-[130px] h-auto object-contain hover:scale-105 transition-transform duration-300"
                                                 alt="Mobile 1"
                                             />
                                             {/* Mobile Screen 2 (Center) - Largest */}
                                             <img
                                                 src="/Ecosystem/Mob2.png"
-                                                className="w-[150px] h-auto object-contain drop-shadow-2xl z-10 hover:scale-105 transition-transform duration-300"
+                                                className="w-[150px] h-auto object-contain z-10 hover:scale-105 transition-transform duration-300"
                                                 alt="Mobile 2"
                                             />
 
                                             {/* Mobile Screen 3 - Raw Image, Bigger */}
                                             <img
                                                 src="/Ecosystem/Mob3.png"
-                                                className="w-[130px] h-auto object-contain drop-shadow-xl hover:scale-105 transition-transform duration-300"
+                                                className="w-[130px] h-auto object-contain hover:scale-105 transition-transform duration-300"
                                                 alt="Mobile 3"
                                             />
                                         </div>
@@ -107,7 +109,7 @@ const Ecosystem: React.FC = () => {
                                 return (
                                     <div
                                         key={`row2-${index}`}
-                                        className="min-w-[500px] h-[300px] bg-elevated border border-border-subtle rounded-2xl overflow-hidden shrink-0"
+                                        className="min-w-[500px] h-[300px] bg-elevated border border-border-subtle rounded-[12px] overflow-hidden shrink-0"
                                     >
                                         <img
                                             src={`/Ecosystem/${item}.svg`}
@@ -127,7 +129,7 @@ const Ecosystem: React.FC = () => {
                         onMouseLeave={() => setHoveredRow(null)}
                     >
                         <motion.div
-                            className="flex gap-6"
+                            className="flex gap-[24px]"
                             animate={{
                                 x: hoveredRow === 3 ? undefined : [0, -3100],
                             }}
@@ -144,7 +146,7 @@ const Ecosystem: React.FC = () => {
                             {[...row3Screens, ...row3Screens].map((item, index) => (
                                 <div
                                     key={`row3-${index}`}
-                                    className="min-w-[500px] h-[300px] bg-elevated border border-border-subtle rounded-2xl overflow-hidden shrink-0"
+                                    className="min-w-[500px] h-[300px] bg-elevated border border-border-subtle rounded-[12px] overflow-hidden shrink-0"
                                 >
                                     <img
                                         src={`/Ecosystem/${item}.svg`}
@@ -156,8 +158,8 @@ const Ecosystem: React.FC = () => {
                         </motion.div>
                     </div>
                 </div>
-            </Container>
-        </section>
+            </div>
+        </div>
     );
 };
 

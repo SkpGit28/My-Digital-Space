@@ -1,21 +1,16 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { satoshi, figtree } from "@/styles/fonts";
 import "./globals.css";
 import { defaultMetadata } from "./metadata";
 import ThemeProviderWrapper from "@/Components/ThemeProviderWrapper";
 import TopNav from "@/Components/TopNav";
 import ScrollProgress from "@/Components/ScrollProgress";
 import PageTransition from "@/Components/PageTransition";
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-manrope",
-  display: "swap",
-});
+import SmoothScrollProvider from "@/Components/SmoothScrollProvider";
 
 export const metadata: Metadata = {
   ...defaultMetadata,
-  metadataBase: new URL("https://your-domain.com"),
+  metadataBase: new URL("https://skpux.in"),
   alternates: { canonical: "/" },
   openGraph: {
     title: "Sushant Kumar — UI/UX Designer",
@@ -37,22 +32,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="scroll-smooth">
       <body
-        className={`${manrope.variable} antialiased font-sans min-h-screen bg-background transition-colors duration-300`}
+        className={`${figtree.variable} ${satoshi.variable} antialiased font-sans min-h-screen bg-background transition-colors duration-300`}
       >
         <ThemeProviderWrapper>
-          <ScrollProgress />
+          <SmoothScrollProvider>
+            <ScrollProgress />
 
-          <div className="flex min-h-screen flex-col">
-            <TopNav />
+            <div className="flex min-h-screen flex-col">
+              <TopNav />
 
-            <main className="flex-1">
-              <PageTransition>
-                {children}
-              </PageTransition>
-            </main>
-          </div>
+              <main className="flex-1">
+                <PageTransition>
+                  {children}
+                </PageTransition>
+              </main>
+            </div>
+          </SmoothScrollProvider>
         </ThemeProviderWrapper>
 
         <script type="application/ld+json">
@@ -60,7 +57,7 @@ export default function RootLayout({
             "@context": "https://schema.org",
             "@type": "Person",
             name: "Sushant Kumar",
-            url: "https://your-domain.com/",
+            url: "https://skpux.in/",
             jobTitle: "UI/UX Designer",
             sameAs: [
               "https://www.linkedin.com/in/...",

@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+:root {
+  --section-space-top: 4rem; /* 64px */
+  --section-space-bottom: 2.5rem; /* 40px */
+}
+
+@media (max-width: 52.125em) {
+  :root {
+    --section-space-top: 2.5rem; /* 40px */
+    --section-space-bottom: 1.5rem; /* 24px */
+  }
+}
 
 @theme {
   --color-background: var(--background);
@@ -10,9 +21,16 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
+  --color-text-heading: var(--text-heading);
+  --color-text-body: var(--text-body);
+  --color-text-muted: var(--text-muted);
   --color-border-subtle: var(--border-subtle);
+  --color-border-hairline: var(--border-hairline);
+  --color-amber: var(--amber);
+  --color-surface-canvas: var(--surface-canvas);
   --color-nav-border: var(--nav-border);
   --color-footer-bg: var(--footer-bg);
+  --color-bg-subtle: var(--bg-subtle);
 
   --color-status-rose: var(--status-rose);
   --color-status-orange: var(--status-orange);
@@ -33,7 +51,30 @@
   --color-text-accent: var(--text-accent);
   --color-border-accent: var(--border-accent);
 
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  /* CS2 Brand */
+  --color-cs1-brand: var(--cs1-brand);
+  --color-cs2-brand: var(--cs2-brand);
+  --color-cs2-hero: var(--cs2-hero-bg);
+  --color-cs2-card: var(--cs2-card-bg);
+  --color-cs2-pill-bg: var(--cs2-card-pill-bg);
+
+  /* Hero Badge Tokens */
+  --color-badge-blue-bg: var(--badge-blue-bg);
+  --color-badge-blue-text: var(--badge-blue-text);
+  --color-badge-green-bg: var(--badge-green-bg);
+  --color-badge-green-text: var(--badge-green-text);
+  --color-badge-purple-bg: var(--badge-purple-bg);
+  --color-badge-purple-text: var(--badge-purple-text);
+
+  /* Scroll Cue Tokens */
+  --color-scroll-cue-border: var(--scroll-cue-border);
+  --color-scroll-cue-bg: var(--scroll-cue-bg);
+  --color-scroll-cue-text: var(--scroll-cue-text);
+  --color-scroll-cue-icon: var(--scroll-cue-icon);
+  --color-scroll-cue-dot: var(--scroll-cue-dot);
+
+  --font-sans: var(--font-figtree), sans-serif;
+  --font-heading: var(--font-satoshi), sans-serif;
 
   --shadow-sm: var(--shadow-sm);
   --shadow-base: var(--shadow-base);
@@ -44,6 +85,15 @@
 
 @layer base {
   :root {
+
+    /* Global Font Mappings to satisfy Satoshi + Figtree unification */
+    --cs2-font-figtree: var(--font-figtree);
+    --cs2-font-satoshi: var(--font-satoshi);
+    --cs2-body-font-family: var(--font-figtree);
+    --cs2-h2-font-family: var(--font-satoshi);
+    --cs2-font-caveat: var(--font-figtree); /* Remove Caveat handwriting, map to body font */
+    --hero-satoshi: var(--font-satoshi);
+
     /* =========================================
        LIGHT MODE (New Physics)
        ========================================= */
@@ -56,6 +106,7 @@
     /* Light mode uses Shadow for elevation, not lightness */
     --footer-bg: #F4F4F5;
     /* Zinc-100 */
+    --bg-subtle: #edeff2;
 
     /* BORDERS & DIVIDERS */
     /* Using opacity so they blend with any background */
@@ -63,11 +114,21 @@
     --nav-border: rgba(0, 0, 0, 0.05);
 
     /* TEXT */
-    --text-primary: #18181B;
-    /* Zinc-900: Soft Black */
-    --text-secondary: #71717A;
-    /* Zinc-500 */
-    --foreground: #18181B;
+    --text-heading: #001536;
+    --text-body: #70768c;
+    --text-muted: #9aa1b2;
+
+    /* HAIRLINE BORDER (solid twin of --border-subtle; NOT interchangeable —
+       border-subtle is rgba(0,0,0,0.08), this is the literal #e5e7eb used
+       across the newer pages) */
+    --border-hairline: #e5e7eb;
+
+    /* ACCENT + CANVAS SURFACES */
+    --amber: #f59e0b;
+    --surface-canvas: #f4f5f7;
+    --text-primary: var(--text-heading);
+    --text-secondary: var(--text-body);
+    --foreground: var(--text-body);
 
     /* BRANDING */
     /* Darker blue needed for Light Mode contrast against white */
@@ -92,7 +153,29 @@
     /* SPECIALTY: WORK CARDS */
     --work-card-bg: #FFFFFF;
     --work-card-border: rgba(0, 0, 0, 0.06);
-    --work-card-text: #18181B;
+    --work-card-text: var(--text-heading);
+
+    /* SPECIALTY: CASE STUDY HERO */
+    --cs2-hero-bg: #E0F2FE;
+    --cs2-card-bg: #D8F3EA;
+    --cs2-card-pill-bg: rgba(0, 0, 0, 0.06);
+    --cs1-brand: #047857;
+    --cs2-brand: #0066F5;
+
+    /* HERO BADGE TOKENS */
+    --badge-blue-bg: #e5f4ff;
+    --badge-blue-text: #0d99ff;
+    --badge-green-bg: #e6f9f1;
+    --badge-green-text: #1f9d5e;
+    --badge-purple-bg: #f3ecfd;
+    --badge-purple-text: #a78bfa;
+
+    /* SCROLL CUE TOKENS */
+    --scroll-cue-border: rgba(0, 21, 54, 0.18);
+    --scroll-cue-bg: rgba(255, 255, 255, 0.85);
+    --scroll-cue-text: rgba(0, 21, 54, 0.55);
+    --scroll-cue-icon: rgba(0, 21, 54, 0.35);
+    --scroll-cue-dot: rgba(0, 21, 54, 0.45);
 
     /* SPECIALTY: SCROLLBAR */
     --scrollbar-thumb: rgba(0, 0, 0, 0.2);
@@ -128,69 +211,15 @@
     --border-accent: rgba(255, 255, 255, 0.05);
   }
 
-  /* =========================================
-     DARK MODE (Your Original Colors)
-     ========================================= */
-  .dark {
-    /* STRUCTURE */
-    --background: #15161A;
-    /* Your Original Base */
-    --surface: #15161A;
-    /* Your Original Surface */
-    --elevated: #1B1D23;
-    /* Your Original Elevated */
-    --footer-bg: #0A0A0A;
-    /* Your Original Footer */
-
-    /* BORDERS */
-    --border-subtle: #24262E;
-    /* Your Original Border */
-    --nav-border: #24262E;
-
-    /* TEXT */
-    --text-primary: #E5ECF5;
-    /* Your Original Text */
-    --text-secondary: #94A3B8;
-    /* Slate-400 */
-    --foreground: #E5ECF5;
-
-    /* BRANDING */
-    --primary: #70B7FF;
-    /* Your Original Blue */
-    --primary-foreground: #000000;
-
-    /* STATUS COLORS (Lighter for Dark Mode) */
-    --status-rose: #f43f5e;
-    --status-orange: #f59e0b;
-    --status-blue: #3b82f6;
-    --status-emerald: #10b981;
-
-    /* SPECIALTY: GLASS NAV */
-    --glass-bg: rgba(15, 23, 42, 0.78);
-    --glass-border: rgba(255, 255, 255, 0.05);
-
-    /* SPECIALTY: WORK CARDS */
-    /* Using your original gradient concept */
-    --work-card-bg: radial-gradient(circle at top left, #1f2933, #020617);
-    --work-card-border: rgba(255, 255, 255, 0.06);
-    --work-card-text: #f9fafb;
-
-    /* SPECIALTY: SCROLLBAR */
-    --scrollbar-thumb: rgba(255, 255, 255, 0.1);
-
-    /* SHADOWS (Rim Lighting logic) */
-    --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.05);
-    --shadow-base: 0 0 0 1px rgba(255, 255, 255, 0.05);
-    --shadow-md: 0 0 0 1px rgba(255, 255, 255, 0.08);
-    --shadow-xl: 0 0 0 1px rgba(255, 255, 255, 0.12);
-    --shadow-glow: 0 0 40px rgba(70, 183, 255, 0.1);
-    /* Brand color glow */
-  }
-
   body {
     background-color: var(--background);
     color: var(--foreground);
     @apply antialiased transition-colors duration-300;
+    font-family: var(--font-figtree), sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-satoshi), sans-serif;
   }
 }
 
@@ -216,84 +245,6 @@
 
   .glass-nav-inner {
     @apply relative z-10;
-  }
-
-  /* Work Section Container */
-  .c-work {
-    width: min(1120px, 100%);
-    margin: 0 auto;
-  }
-
-  .c-work__list {
-    @apply grid gap-10;
-  }
-
-  /* Work Card */
-  .c-work__item {
-    @apply relative rounded-3xl overflow-hidden transition-colors;
-    border: 1px solid var(--work-card-border);
-    background: var(--work-card-bg);
-    color: var(--work-card-text);
-  }
-
-  @media (min-width: 768px) {
-    .c-work__item {
-      @apply sticky top-[120px] right-0 left-0;
-      display: grid;
-      grid-template-columns: 0.3fr 0.7fr;
-      grid-template-rows: minmax(360px, 70vh);
-    }
-  }
-
-  .c-work__item-figure {
-    @apply relative;
-    grid-column: 1 / -1;
-    grid-row: 1 / 2;
-  }
-
-  @media (min-width: 768px) {
-    .c-work__item-figure {
-      grid-column: 2 / -1;
-      grid-row: 1 / -1;
-    }
-  }
-
-  .c-work__item-image {
-    @apply object-cover;
-  }
-
-  .c-work__item-info {
-    @apply grid gap-4 p-8 content-center;
-    background-color: var(--background);
-    grid-column: 1 / -1;
-    grid-row: 2 / -1;
-  }
-
-  @media (min-width: 768px) {
-    .c-work__item-info {
-      grid-column: 1 / 2;
-      grid-row: 1 / -1;
-    }
-  }
-
-  .c-work__item-title {
-    @apply text-[28px] font-bold;
-  }
-
-  .c-work__item-excerpt {
-    @apply text-[15px] leading-relaxed opacity-80;
-  }
-
-  .c-work__item-link {
-    @apply w-max px-6 py-2.5 rounded-full border transition-all duration-300;
-    border-color: var(--border-subtle);
-    background-color: var(--elevated);
-    color: var(--foreground);
-  }
-
-  .c-work__item-link:hover {
-    background-color: var(--foreground);
-    color: var(--background);
   }
 
   /* Dynamic Gradient Background */

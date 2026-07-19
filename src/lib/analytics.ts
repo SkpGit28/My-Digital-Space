@@ -1,8 +1,10 @@
-type EventType = 'page_view' | 'click' | 'form_submit' | 'error';
+type PlausibleWindow = Window & {
+  plausible?: (name: string, options?: { props?: Record<string, unknown> }) => void;
+};
 
 export const track = (name: string, payload?: Record<string, unknown>) => {
   if (process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN) {
-    (window as any).plausible?.(name, { props: payload });
+    (window as PlausibleWindow).plausible?.(name, { props: payload });
   }
   // else GA4 or no-op
 };
