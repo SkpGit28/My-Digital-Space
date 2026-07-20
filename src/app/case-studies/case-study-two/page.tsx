@@ -53,12 +53,13 @@ export default function TrustRevenueCaseStudy() {
       <div
         className={`${styles.cs2Root} cs2Root ${figtree.variable} ${satoshi.variable}`}
       >
-      {/* HERO — identical shell to Case Study 2 */}
+      {/* HERO — 100vh with overflow hidden so the mockup's bottom edge clips
+          behind the next section, matching case-study-one's treatment. */}
       <header className={styles.heroSection}>
         <div className={styles.heroBgImage}>
           <Image
-            src="/mockups/BGHeroImg.png"
-            alt="Trust Over Revenue background"
+            src="/mockups/cs2-hero-bg.png"
+            alt="Navigating Product Conflicts background"
             fill
             priority
             unoptimized
@@ -83,12 +84,24 @@ export default function TrustRevenueCaseStudy() {
             from a fintech build that processed ₹1.5Cr in its first month.
           </p>
 
-          <div className={styles.heroMockupContainer}>
+          {/* Mockup — scaled up so its bottom edge clips behind the next
+              section, matching case-study-one's hero treatment. */}
+          <div
+            style={{
+              position: "relative",
+              zIndex: 2,
+              width: "52rem",
+              maxWidth: "100%",
+              marginTop: "var(--cs2-space-64)",
+            }}
+          >
             <Image
-              src="/mockup.svg"
-              alt="Trust Over Revenue hero mockup"
-              fill
+              src="/Card2mockup.svg"
+              alt="Navigating Product Conflicts hero mockup"
+              width={678}
+              height={353}
               priority
+              style={{ width: "100%", height: "auto", display: "block" }}
             />
           </div>
         </div>
