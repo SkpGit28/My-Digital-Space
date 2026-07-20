@@ -790,7 +790,7 @@
   align-items: center;
   background-color: var(--cs2-bg-subtle);
   color: var(--cs2-text-body);
-  font-family: "Courier New", Courier, monospace;
+  font-family: var(--cs2-font-figtree), sans-serif;
   font-size: var(--cs2-font-size-12);
   font-weight: 600;
   padding: 0.25rem 0.75rem; /* Optical weight correction */

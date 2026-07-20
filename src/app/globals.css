@@ -75,6 +75,8 @@
 
   --font-sans: var(--font-figtree), sans-serif;
   --font-heading: var(--font-satoshi), sans-serif;
+  /* Two-font policy: font-mono utilities render in Figtree, never a system stack */
+  --font-mono: var(--font-figtree), sans-serif;
 
   --shadow-sm: var(--shadow-sm);
   --shadow-base: var(--shadow-base);

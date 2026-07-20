@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Figtree, Caveat } from "next/font/google";
+import { Figtree } from "next/font/google";
 import localFont from "next/font/local";
 import styles from "./page.module.css";
 import Image from "next/image";
@@ -18,12 +18,6 @@ const figtree = Figtree({
   display: "block",
 });
 
-const caveat = Caveat({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--cs2-font-caveat",
-  display: "swap",
-});
 
 const satoshi = localFont({
   src: "../../../../public/fonts/Satoshi-Bold.woff2",
@@ -480,7 +474,7 @@ export default function CaseStudyTwoPage() {
       heroHeight="760px"
     >
       <div
-        className={`${styles.cs2Root} cs2Root ${figtree.variable} ${satoshi.variable} ${caveat.variable}`}
+        className={`${styles.cs2Root} cs2Root ${figtree.variable} ${satoshi.variable}`}
       >
       <header className={styles.heroSection}>
         <div className={styles.heroBgImage}>

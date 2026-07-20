@@ -1,19 +1,19 @@
 export const defaultMetadata = {
-  title: 'My Digital Space - Portfolio',
-  description: 'A showcase of my work, projects, and expertise in digital design and development.',
-  keywords: ['portfolio', 'digital design', 'development', 'UX', 'UI', 'web development'],
+  title: 'Sushant Kumar — UI/UX Designer',
+  description: 'UI/UX case studies, product thinking, and interface design.',
+  keywords: ['portfolio', 'UI/UX designer', 'product design', 'case studies', 'UX', 'UI', 'Sushant Kumar', 'SKP'],
   openGraph: {
-    title: 'My Digital Space - Portfolio',
-    description: 'A showcase of my work, projects, and expertise in digital design and development.',
+    title: 'Sushant Kumar — UI/UX Designer',
+    description: 'UI/UX case studies, product thinking, and interface design.',
     type: 'website',
     locale: 'en_US',
-    url: 'https://mydigitalspace.vercel.app',
-    siteName: 'My Digital Space',
+    url: 'https://skpux.in',
+    siteName: 'Sushant Kumar',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'My Digital Space - Portfolio',
-    description: 'A showcase of my work, projects, and expertise in digital design and development.',
+    title: 'Sushant Kumar — UI/UX Designer',
+    description: 'UI/UX case studies, product thinking, and interface design.',
   },
   robots: {
     index: true,

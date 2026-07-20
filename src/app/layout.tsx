@@ -60,8 +60,8 @@ export default function RootLayout({
             url: "https://skpux.in/",
             jobTitle: "UI/UX Designer",
             sameAs: [
-              "https://www.linkedin.com/in/...",
-              "https://github.com/...",
+              "https://www.linkedin.com/in/skplovesdesign/",
+              "https://github.com/SkpGit28",
             ],
           })}
         </script>

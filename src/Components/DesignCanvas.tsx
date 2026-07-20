@@ -18,10 +18,7 @@
 
 import React, { useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { Caveat } from "next/font/google";
-
-const caveat = Caveat({ subsets: ["latin"], weight: ["400", "600", "700"] });
-
+import { figtree } from "@/styles/fonts";
 import { EASE } from "@/lib/constants";
 
 /* ── a loose item on the board. drag it around. most never animate in. ── */
@@ -190,7 +187,7 @@ export default function DesignCanvas() {
           {/* ── GOALS. the clean book page, checklist written on it. ── */}
           <Loose x={352} y={58} w={240} rot={-1.5} stageRef={stageRef} reduce={reduce} draggable={false}>
             <img src="/Goals.svg" alt="My goals page" className="h-auto w-full" draggable={false} />
-            <div className={`${caveat.className} absolute inset-0 flex flex-col justify-center gap-2.5 pl-14 pr-6`}>
+            <div className={`${figtree.className} absolute inset-0 flex flex-col justify-center gap-2.5 pl-14 pr-6`}>
               <p className="text-[19px] font-bold text-[#1f2430]">goals</p>
               <div className="flex items-center gap-2.5">
                 <span className="relative grid h-4 w-4 shrink-0 place-items-center border-[1.5px] border-[#2b2f3a]">
@@ -254,7 +251,7 @@ export default function DesignCanvas() {
               className="absolute -top-4 left-1/2 z-10 -translate-x-1/2 rotate-[-2deg] px-3 py-1"
               style={{ background: "#e8d9b0", boxShadow: "0 1px 3px rgba(0,0,0,0.18)" }}
             >
-              <span className={`${caveat.className} text-[16px] font-bold text-[#6b5a33]`}>foodie part</span>
+              <span className={`${figtree.className} text-[16px] font-bold text-[#6b5a33]`}>foodie part</span>
             </div>
             <div className="rounded-[6px] bg-white p-2.5 pb-3" style={{ boxShadow: "0 14px 30px -16px rgba(0,21,54,0.35)" }}>
               <div className="grid h-[150px] place-items-center overflow-hidden rounded-[3px] bg-[#f3ede2]">
@@ -351,7 +348,7 @@ export default function DesignCanvas() {
             backgroundRepeat: "no-repeat",
           }}
         >
-          <p className={`${caveat.className} absolute left-11 top-7 text-[22px] font-bold text-[#1f2430]`}>
+          <p className={`${figtree.className} absolute left-11 top-7 text-[22px] font-bold text-[#1f2430]`}>
             the not-so-linear journey
           </p>
 
@@ -400,7 +397,7 @@ export default function DesignCanvas() {
                 fontSize="16"
                 fontWeight="700"
                 fill="#4b5563"
-                className={caveat.className}
+                className={figtree.className}
               >
                 {m.year}
               </text>
@@ -425,7 +422,7 @@ export default function DesignCanvas() {
           {JOURNEY.map((m) => (
             <motion.div
               key={m.title}
-              className={`${caveat.className} absolute leading-[1.2]`}
+              className={`${figtree.className} absolute leading-[1.2]`}
               style={{ left: m.x, top: m.y }}
               initial={reduce ? false : { opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
