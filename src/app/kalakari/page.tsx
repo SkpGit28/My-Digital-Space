@@ -7,8 +7,8 @@
  * Row 2 — ToPayApp, RotatoPoster, Cashmate.
  */
 
-import React, { useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import React from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { satoshi, figtree } from "@/styles/fonts";
 import { FooterReveal } from "@/Components/SiteFooter";
 import { usePageReady } from "@/lib/usePageReady";
@@ -33,13 +33,15 @@ const PROJECTS: ProjectCard[] = [
     title: "StackAlign",
     sub: "A little solution to fix the hallucination problem of AI",
     live: true,
+    href: "https://stack-align.vercel.app/",
   },
   {
-    id: "payfiweb",
+    id: "payfi",
     svg: "/PayfiWeb.svg",
-    title: "PayfiWeb",
+    title: "Payfi",
     sub: "A complete landing page with docs subpage for a PG company",
     live: true,
+    href: "https://payfi-platform.vercel.app/",
   },
   {
     id: "topay",
@@ -47,12 +49,14 @@ const PROJECTS: ProjectCard[] = [
     title: "ToPay",
     sub: "A landing page for an app facing both enterprise and consumer",
     live: true,
+    href: "https://topay-landing-page.vercel.app/",
   },
   {
     id: "topayapp",
     svg: "/ToPayApp.svg",
     title: "ToPayApp",
     sub: "A settlement app built for merchants",
+    href: "https://topayapp.vercel.app",
   },
   {
     id: "rotatoposter",
@@ -65,18 +69,23 @@ const PROJECTS: ProjectCard[] = [
     svg: "/Cashmate.svg",
     title: "Cashmate",
     sub: "Built and developed using Framer with an auth layer via code components",
+    href: "https://cashmate.vercel.app",
   },
 ];
 
-function ProjectTile({ p, onOpen }: { p: ProjectCard; onOpen: () => void }) {
+function ProjectTile({ p }: { p: ProjectCard }) {
+  const Tag = p.href ? "a" : "div";
+  const extraProps = p.href
+    ? { href: p.href, target: "_blank", rel: "noopener noreferrer" }
+    : {};
+
   return (
-    <button
-      type="button"
-      onClick={onOpen}
-      className="group flex w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-border-hairline bg-white text-left"
+    <Tag
+      {...extraProps}
+      className="group flex h-full w-full flex-col overflow-hidden rounded-xl border border-border-hairline bg-white text-left no-underline transition-shadow duration-200 hover:shadow-md cursor-pointer"
     >
       {/* Poster image — static, no hover zoom */}
-      <div className="relative w-full overflow-hidden bg-surface-canvas" style={{ aspectRatio: "4/3" }}>
+      <div className="relative w-full overflow-hidden bg-surface-canvas aspect-[4/3]">
         <img
           src={p.svg}
           alt={p.title}
@@ -95,105 +104,36 @@ function ProjectTile({ p, onOpen }: { p: ProjectCard; onOpen: () => void }) {
         )}
       </div>
 
-      {/* Text footer — white bg, always readable */}
-      <div className="flex flex-col gap-0.5 border-t border-border-hairline bg-white px-4 py-3">
-        <p className={`text-[15px] font-semibold leading-tight text-text-heading ${satoshi.className}`}>
-          {p.title}
-        </p>
-        <p className={`text-[12px] leading-relaxed text-text-body ${figtree.className}`}>
-          {p.sub}
-        </p>
+      {/* Text footer — white bg, aligned height matching tallest card in row */}
+      <div className="flex flex-1 flex-col justify-between border-t border-border-hairline bg-white px-4 py-3 min-h-[92px]">
+        <div className="flex flex-col gap-0.5">
+          <p className={`text-[15px] font-semibold leading-tight text-text-heading ${satoshi.className}`}>
+            {p.title}
+          </p>
+          <p className={`text-[12px] leading-relaxed text-text-body ${figtree.className}`}>
+            {p.sub}
+          </p>
+        </div>
       </div>
-    </button>
+    </Tag>
   );
 }
 
 function ProjectGrid({ reduce }: { reduce: boolean }) {
-  const [openId, setOpenId] = useState<string | null>(null);
-  const open = PROJECTS.find((p) => p.id === openId);
-
   return (
-    <div>
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
-        {PROJECTS.map((p, i) => (
-          <motion.div
-            key={p.id}
-            initial={reduce ? false : { opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, ease: EASE, delay: (i % 3) * 0.08 }}
-          >
-            <ProjectTile p={p} onOpen={() => setOpenId(p.id)} />
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Click-to-overlay */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            className="fixed inset-0 z-[70] grid place-items-center bg-text-heading/50 p-6 backdrop-blur-[3px]"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setOpenId(null)}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: 16 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: 12 }}
-              transition={{ duration: 0.3, ease: EASE }}
-              onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-[600px] overflow-hidden rounded-2xl border border-border-hairline bg-white shadow-2xl"
-            >
-              {/* Enlarged poster */}
-              <div className="relative w-full overflow-hidden bg-surface-canvas" style={{ aspectRatio: "16/9" }}>
-                <img
-                  src={open.svg}
-                  alt={open.title}
-                  className="h-full w-full object-cover object-top"
-                  draggable={false}
-                />
-                {open.live && (
-                  <span
-                    className={`absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[12px] font-bold uppercase tracking-widest ${figtree.className}`}
-                    style={{ background: "var(--color-badge-green-bg)", color: "var(--color-badge-green-text)" }}
-                  >
-                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-badge-green-text" />
-                    LIVE
-                  </span>
-                )}
-                {/* Close button */}
-                <button
-                  type="button"
-                  onClick={() => setOpenId(null)}
-                  className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-[14px] text-text-heading shadow-sm backdrop-blur-sm hover:bg-white"
-                >
-                  ✕
-                </button>
-              </div>
-
-              {/* Text layer */}
-              <div className="px-6 py-5">
-                <h3 className={`text-[22px] font-semibold tracking-tight text-text-heading ${satoshi.className}`}>
-                  {open.title}
-                </h3>
-                <p className={`mt-1.5 text-[14px] leading-relaxed text-text-body ${figtree.className}`}>
-                  {open.sub}
-                </p>
-                {open.href && (
-                  <a
-                    href={open.href}
-                    className={`mt-3 inline-block text-[14px] font-semibold text-badge-green-text ${figtree.className}`}
-                  >
-                    open it →
-                  </a>
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
+      {PROJECTS.map((p, i) => (
+        <motion.div
+          key={p.id}
+          className="h-full"
+          initial={reduce ? false : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, ease: EASE, delay: (i % 3) * 0.08 }}
+        >
+          <ProjectTile p={p} />
+        </motion.div>
+      ))}
     </div>
   );
 }
