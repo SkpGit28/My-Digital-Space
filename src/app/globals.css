@@ -87,6 +87,9 @@
 
 @layer base {
   :root {
+    /* Expose font family names to :root so @theme's var(--font-sans) resolves */
+    --font-figtree: "Figtree", "Figtree Fallback", sans-serif;
+    --font-satoshi: "Satoshi", sans-serif;
 
     /* Global Font Mappings to satisfy Satoshi + Figtree unification */
     --cs2-font-figtree: var(--font-figtree);
