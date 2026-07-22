@@ -1,5 +1,5 @@
 import localFont from "next/font/local";
-import { Figtree } from "next/font/google";
+import { Figtree, Caveat } from "next/font/google";
 
 export const satoshi = localFont({
   src: [
@@ -22,5 +22,15 @@ export const figtree = Figtree({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-figtree",
+  display: "swap",
+});
+
+/* Handwritten/marker font — used ONLY for the Journey Map milestone titles
+   and the SKP photo annotations. Deliberate exception to the 2-font rule;
+   do not use anywhere else. */
+export const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-caveat",
   display: "swap",
 });

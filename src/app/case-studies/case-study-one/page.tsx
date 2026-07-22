@@ -471,7 +471,7 @@ export default function CaseStudyTwoPage() {
     <FooterReveal
       id="case-study-one"
       className="bg-white"
-      heroHeight="760px"
+      heroHeight="47.5rem"
     >
       <div
         className={`${styles.cs2Root} cs2Root ${figtree.variable} ${satoshi.variable}`}

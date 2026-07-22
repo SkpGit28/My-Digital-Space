@@ -337,15 +337,15 @@ export function SiteFooterContent() {
       <div
         className="absolute inset-0 bg-bg-subtle"
         style={{
-          left: "calc(50% - 652px)",
-          right: "calc(50% - 652px)",
+          left: "calc(50% - 40.75rem)",
+          right: "calc(50% - 40.75rem)",
         }}
       />
-      <div className="relative mx-auto w-full max-w-[62.5rem] px-6 pt-[64px] pb-9 lg:px-0">
+      <div className="relative mx-auto w-full max-w-[62.5rem] px-6 pt-16 pb-9 lg:px-0">
 
         {/* ── Headline + TicTacToe side by side ── */}
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10 mb-8">
-          <div className="max-w-[490px] flex flex-col md:self-stretch">
+          <div className="max-w-[30.625rem] flex flex-col md:self-stretch">
             <h2 className={`text-[1.75rem] sm:text-[2rem] md:text-[2.25rem] font-semibold leading-[1.25] tracking-[-0.03em] text-text-primary mb-4 ${satoshi.className}`}>
               You just scrolled through 4,200px of design.
             </h2>
@@ -356,9 +356,9 @@ export function SiteFooterContent() {
             <div className="flex flex-wrap items-center gap-4 mt-6 md:mt-auto">
               <button
                 onClick={handleMailTo}
-                className={`group relative overflow-hidden inline-flex items-center justify-center rounded-full bg-text-primary px-6 py-2.5 text-[14px] font-semibold text-white active:scale-95 transition-all shadow-sm ${figtree.className}`}
+                className={`group relative overflow-hidden inline-flex items-center justify-center rounded-full bg-text-primary px-6 py-2.5 text-sm font-semibold text-white active:scale-95 transition-all shadow-sm ${figtree.className}`}
               >
-                <span className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-badge-blue-text via-badge-green-text to-badge-purple-text transition-all duration-500 ease-out group-hover:h-[300px] group-hover:w-[300px]"></span>
+                <span className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-badge-blue-text via-badge-green-text to-badge-purple-text transition-all duration-500 ease-out group-hover:h-[18.75rem] group-hover:w-[18.75rem]"></span>
                 <span className="relative z-10 flex items-center gap-2">
                   Let&apos;s talk
                   <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
@@ -369,9 +369,9 @@ export function SiteFooterContent() {
             </div>
           </div>
 
-          <div className="flex w-full flex-col md:w-[340px] md:shrink-0 md:self-stretch">
+          <div className="flex w-full flex-col md:w-[21.25rem] md:shrink-0 md:self-stretch">
             <div className="flex h-full w-full flex-col rounded-2xl border border-border-subtle bg-surface shadow-sm p-6">
-              <p className={`mb-3 text-[12px] leading-[1.5] font-semibold uppercase tracking-[0.16em] text-text-body/60 ${figtree.className}`}>
+              <p className={`mb-3 text-xs leading-[1.5] font-semibold uppercase tracking-[0.16em] text-text-body ${figtree.className}`}>
                 a friendly wager
               </p>
               <p className={`text-[1.125rem] font-semibold leading-snug tracking-[-0.01em] text-text-primary ${satoshi.className}`}>
@@ -394,7 +394,7 @@ export function SiteFooterContent() {
                 </div>
               </div>
               <style>{`@keyframes ttt-draw { from { stroke-dashoffset: 60; } to { stroke-dashoffset: 0; } }`}</style>
-              <p className={`text-center text-[14px] text-text-body/50 ${figtree.className}`}>
+              <p className={`text-center text-sm text-text-body font-medium ${figtree.className}`}>
                 {gameOver ? (
                   <>{winner === "X" ? "You won. No negotiations." : winner === "O" ? "Called it." : "Fine, we'll call it even."}{" "}<button onClick={reset} className="underline decoration-black/15 underline-offset-2 hover:text-text-primary transition-colors">Run it back</button>{" "}<span className="opacity-50 tabular-nums">{score.you}–{score.draws}–{score.skp}</span></>
                 ) : (
@@ -410,12 +410,12 @@ export function SiteFooterContent() {
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {FOOTER_LINKS.map((l) => (
               <a key={l.label} href={l.href} target={l.href.startsWith("http") ? "_blank" : undefined} rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className={`group text-[14px] text-text-body/50 hover:text-text-primary transition-colors ${figtree.className}`}>
-                {l.label}<span className="inline-block ml-0.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" style={{ transform: "rotate(0deg)" }} onMouseEnter={(e) => (e.currentTarget.style.transform = "rotate(45deg) translateX(4px)")} onMouseLeave={(e) => (e.currentTarget.style.transform = "rotate(0deg) translateX(0)")}>→</span>
+                className={`group text-sm text-text-body font-medium hover:text-text-primary transition-colors ${figtree.className}`}>
+                {l.label}<span className="inline-block ml-0.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" style={{ transform: "rotate(0deg)" }} onMouseEnter={(e) => (e.currentTarget.style.transform = "rotate(45deg) translateX(0.25rem)")} onMouseLeave={(e) => (e.currentTarget.style.transform = "rotate(0deg) translateX(0)")}>→</span>
               </a>
             ))}
           </div>
-          <p className={`text-[12px] text-text-body/25 ${figtree.className}`}>© {new Date().getFullYear()} Sushant · designed & caffeinated in Noida</p>
+          <p className={`text-xs text-text-body font-medium ${figtree.className}`}>© {new Date().getFullYear()} Sushant · designed & caffeinated in Noida</p>
         </div>
       </div>
     </section>
@@ -448,7 +448,7 @@ export function SiteFooterBackground() {
 
   return (
     <footer
-      className="sticky bottom-0 z-0 overflow-hidden w-full h-[322px] border-t border-border-subtle"
+      className="sticky bottom-0 z-0 overflow-hidden w-full h-[20.125rem] border-t border-border-subtle"
       style={{
         backgroundImage: "url('/FinalFooter.png')",
         // "cover" crops whatever the viewport's aspect ratio doesn't match;
@@ -466,7 +466,7 @@ export function SiteFooterBackground() {
         className="absolute inset-0 pointer-events-none mix-blend-overlay opacity-60"
         style={{
           backgroundImage: "url('/DigitalMosaicFrame.svg?v=2')",
-          backgroundSize: "1440px 332px",
+          backgroundSize: "90rem 20.75rem",
           backgroundRepeat: "repeat-x",
           backgroundPosition: "top right",
         }}
@@ -479,23 +479,23 @@ export function SiteFooterBackground() {
       <style>{`
         .ehip-ink { color: #fff; -webkit-text-stroke: 0.032em #fff; }
         .ehip-lift { transition: transform .35s cubic-bezier(.16, 1, .3, 1); }
-        .ehip-lift:hover { transform: translateY(-8px); }
-        @keyframes ehip-wave { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        .ehip-lift:hover { transform: translateY(-0.5rem); }
+        @keyframes ehip-wave { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-0.3125rem); } }
         .ehip-dash { background: #fff; }
       `}</style>
-      <div className="absolute top-[64px] right-[32px] z-10 pointer-events-none -translate-y-full">
+      <div className="absolute top-16 right-8 z-10 pointer-events-none -translate-y-full">
         <p
-          className={`inline-block text-[12px] leading-none font-semibold uppercase tracking-widest text-white ${figtree.className}`}
+          className={`inline-block text-xs leading-none font-semibold uppercase tracking-widest text-white ${figtree.className}`}
           style={{
             opacity: revealed ? 1 : 0,
-            transform: revealed ? "translateY(0)" : "translateY(8px)",
+            transform: revealed ? "translateY(0)" : "translateY(0.5rem)",
             transition: reduceMotion ? "none" : "opacity .6s ease .9s, transform .6s cubic-bezier(0.16, 1, 0.3, 1) .9s",
           }}
         >
           pali · come and see for yourself
         </p>
       </div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-[-20px] sm:bottom-[-40px] md:bottom-[-50px] flex justify-center">
+      <div className="pointer-events-none absolute inset-x-0 bottom-[-1.25rem] sm:bottom-[-2.5rem] md:bottom-[-3.125rem] flex justify-center">
         <div className="w-full max-w-[62.5rem] px-6 lg:px-0 relative">
           <p aria-label="Ehipassiko" className="flex select-none justify-center gap-x-0.5 sm:gap-x-1 md:gap-x-1.5 w-full">
             {"EHIPASSIKO".split("").map((ch, i) => (
@@ -553,7 +553,7 @@ export function FooterReveal({
   children,
   className = "",
   id,
-  heroHeight = "0px",
+  heroHeight = "0rem",
   showFooter = true,
 }: {
   children: React.ReactNode;
@@ -566,11 +566,11 @@ export function FooterReveal({
     <>
       <div id={id} className={`relative z-10 flex flex-col ${className}`}>
         <div
-          className="absolute bottom-0 left-[calc(50%-652px)] w-[1px] bg-border-subtle pointer-events-none hidden min-[1340px]:block z-10"
+          className="absolute bottom-0 left-[calc(50%-40.75rem)] w-[1px] bg-border-subtle pointer-events-none hidden min-[1340px]:block z-10"
           style={{ top: heroHeight }}
         />
         <div
-          className="absolute bottom-0 right-[calc(50%-652px)] w-[1px] bg-border-subtle pointer-events-none hidden min-[1340px]:block z-10"
+          className="absolute bottom-0 right-[calc(50%-40.75rem)] w-[1px] bg-border-subtle pointer-events-none hidden min-[1340px]:block z-10"
           style={{ top: heroHeight }}
         />
         {children}

@@ -21,9 +21,9 @@
 
 .cs2-t-display {
   font-family: var(--cs2-font-satoshi), sans-serif;
-  font-size: 48;
+  font-size: 3rem;
   font-weight: 700;
-  line-height: 56px; /* Exactly 64px */
+  line-height: 3.5rem;
   letter-spacing: -0.03em;
 }
 

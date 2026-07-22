@@ -83,7 +83,7 @@ function CaseStudyCard({
       transition={{ duration: 0.6, delay, ease: EASE }}
       onClick={isMeta ? (e) => e.preventDefault() : undefined}
       aria-label={isMeta ? "Case study coming soon" : undefined}
-      className={`relative md:col-span-2 flex flex-col md:flex-row md:h-[300px] rounded-xl overflow-hidden border border-border-subtle ${bgClass} ${reduce ? (isMeta ? "cursor-default" : "cursor-pointer") : "cursor-none"}`}
+      className={`relative md:col-span-2 flex flex-col md:flex-row md:h-[18.75rem] rounded-xl overflow-hidden border border-border-subtle ${bgClass} ${reduce ? (isMeta ? "cursor-default" : "cursor-pointer") : "cursor-none"}`}
     >
       {/* Custom cursor — the same glyph as the SKP evidence board.
           The OS cursor is hidden (cursor-none) and this appears instantly:
@@ -99,7 +99,7 @@ function CaseStudyCard({
 
       {/* Left — heading + body */}
       <div className="relative flex w-full md:w-[46%] shrink-0 flex-col justify-center gap-3 p-7">
-        <h3 className={`text-[28px] font-semibold leading-tight tracking-tight text-text-primary ${satoshi.className}`}>
+        <h3 className={`text-[1.75rem] font-semibold leading-tight tracking-tight text-text-primary ${satoshi.className}`}>
           {title}
         </h3>
         <p className={`text-base leading-relaxed text-text-body ${figtree.className}`}>
@@ -121,7 +121,7 @@ function CaseStudyCard({
             <span aria-hidden className="h-1.5 w-1.5 animate-pulse rounded-full bg-badge-purple-text" />
             <span className={`text-xs font-bold tracking-wide text-[#7c5cd6] ${figtree.className}`}>coming soon</span>
           </span>
-          <div className="relative ml-7 mr-0 mt-8 h-[220px] flex-1 pointer-events-none md:ml-0 md:h-auto">
+          <div className="relative ml-7 mr-0 mt-8 h-[13.75rem] flex-1 pointer-events-none md:ml-0 md:h-auto">
             <motion.div
               className="absolute inset-0 overflow-hidden rounded-tl-xl border-l border-t border-border-subtle bg-white origin-top"
               animate={reduce ? undefined : { scale: isHovered ? 1.05 : 1 }}
@@ -772,9 +772,9 @@ function TestimonialsSection() {
         </p>
       </div>
 
-      {/* Fixed 1000px Figma stage; scrolls sideways on narrower screens */}
+      {/* Fixed 1000px (62.5rem) Figma stage; scrolls sideways on narrower screens */}
       <div className="w-full overflow-x-auto pt-8 pb-8 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: "none" }}>
-        <div className="relative mx-auto h-[408px] w-[1000px]">
+        <div className="relative mx-auto h-[25.5rem] w-[62.5rem]">
           {TESTIMONIALS.map((t, i) => (
             <motion.article
               key={t.name || t.quote}
@@ -822,27 +822,27 @@ function TestimonialsSection() {
                     height={360}
                     unoptimized
                     draggable={false}
-                    className="h-[120px] w-full select-none object-cover"
+                    className="h-[7.5rem] w-full select-none object-cover"
                   />
                   {/* Punch holes — 12×12, pure white shows through the strip */}
-                  <div aria-hidden className="absolute left-[14px] top-[14px] h-3 w-3 rounded-full bg-white" />
-                  <div aria-hidden className="absolute right-[14px] top-[14px] h-3 w-3 rounded-full bg-white" />
+                  <div aria-hidden className="absolute left-[0.875rem] top-[0.875rem] h-3 w-3 rounded-full bg-white" />
+                  <div aria-hidden className="absolute right-[0.875rem] top-[0.875rem] h-3 w-3 rounded-full bg-white" />
                   {/* Quote — Symmetrical padding and text-pretty to ensure even wrapping across all cards */}
-                  <div className="mt-[6px] py-[10px] px-[24px]">
+                  <div className="mt-[0.375rem] py-[0.625rem] px-6">
                     <p className={`w-full text-base font-medium leading-normal tracking-tight text-text-primary text-pretty ${satoshi.className}`}>
                       {t.quote}
                     </p>
                   </div>
-                  {/* Byline — pinned at y 342, adjusted for the new 400px height to match SKP bottom padding */}
-                  <div className="absolute left-0 top-[342px] flex w-full flex-col gap-[4px] px-[24px]">
+                  {/* Byline — pinned at top 21.375rem (342px), adjusted for 400px height */}
+                  <div className="absolute left-0 top-[21.375rem] flex w-full flex-col gap-1 px-6">
                     <p className={`text-xs font-bold leading-normal tracking-tight text-text-primary ${figtree.className}`}>
                       {t.name}
                     </p>
-                    <div className="flex items-center gap-[6px] whitespace-nowrap">
+                    <div className="flex items-center gap-[0.375rem] whitespace-nowrap">
                       <p className={`text-xs font-normal leading-normal tracking-tight text-text-body ${figtree.className}`}>
                         {t.role}
                       </p>
-                      <span className="select-none text-[10px] leading-none text-text-body/50">•</span>
+                      <span className="select-none text-[0.625rem] leading-none text-text-body/50">•</span>
                       {t.logoSquare ? (
                         // EY: square lockup with the letters in the bottom half —
                         // a small lift centers them optically on the text line.
@@ -852,17 +852,17 @@ function TestimonialsSection() {
                           width={t.logoW}
                           height={t.logoH}
                           className="h-4 w-4 object-contain"
-                          style={{ transform: "translateY(-3px)" }}
+                          style={{ transform: "translateY(-0.1875rem)" }}
                         />
                       ) : (
                         // Wide wordmarks, tight-cropped, sized to sit level with
-                        // the 12px position text.
+                        // the text.
                         <Image
                           src={t.logo}
                           alt=""
                           width={t.logoW}
                           height={t.logoH}
-                          className="h-[14px] w-auto object-contain"
+                          className="h-[0.875rem] w-auto object-contain"
                         />
                       )}
                     </div>
@@ -927,7 +927,7 @@ export default function HeroTestPage() {
                   alt="Sushant Kumar"
                   width={64}
                   height={60}
-                  className="h-[60px] w-full object-cover"
+                  className="h-[3.75rem] w-full object-cover"
                 />
               </div>
             </MaskReveal>

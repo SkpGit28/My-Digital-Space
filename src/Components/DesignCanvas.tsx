@@ -18,7 +18,7 @@
 
 import React, { useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { figtree } from "@/styles/fonts";
+import { figtree, caveat } from "@/styles/fonts";
 import { EASE } from "@/lib/constants";
 
 /* ── a loose item on the board. drag it around. most never animate in. ── */
@@ -113,15 +113,19 @@ function Cursor({
   );
 }
 
-/* ── the not-so-linear journey: milestones on the hand-drawn wavy line ── */
-const JOURNEY: { title: string; lines: string[]; year: string; x: number; y: number; dot: [number, number]; color: string }[] = [
-  { title: "Born", lines: ["Someone's dream"], year: "1999", x: 56, y: 178, dot: [80, 245], color: "star" },
-  { title: "IPS Plan", lines: ["The plan", "was set"], year: "2012", x: 150, y: 136, dot: [192, 242], color: "#e0447c" },
-  { title: "JEE Mains", lines: ["Tried.", "Failed.", "Learned."], year: "2016", x: 296, y: 122, dot: [338, 248], color: "#f59e0b" },
-  { title: "Direct Selling", lines: ["3-4 years.", "No success.", "Big lessons."], year: "2019", x: 424, y: 118, dot: [478, 242], color: "#a78bfa" },
-  { title: "BPO / KPO", lines: ["Covid time.", "Started", "somewhere."], year: "2022", x: 574, y: 122, dot: [618, 246], color: "#0d99ff" },
-  { title: "Design", lines: ["Found my", "direction."], year: "2023", x: 722, y: 136, dot: [762, 242], color: "#1f9d5e" },
-  { title: "Design + Code", lines: ["Building.", "Learning.", "Shipping."], year: "2026", x: 846, y: 122, dot: [905, 246], color: "end" },
+/* ── the not-so-linear journey: milestones on the hand-drawn wavy line ──
+   Dots are spaced evenly across a safe inner band (x 140 → 860) so the two
+   outermost labels never bleed past the torn paper edges, and each label is
+   centred over its own dot so wide titles spread both ways instead of
+   crowding the neighbour to the right. */
+const JOURNEY: { title: string; lines: string[]; year: string; dot: [number, number]; color: string }[] = [
+  { title: "Born", lines: ["Someone's dream"], year: "1999", dot: [153, 250], color: "star" },
+  { title: "IPS Plan", lines: ["The plan", "was set"], year: "2012", dot: [280, 250], color: "#e0447c" },
+  { title: "JEE Mains", lines: ["Tried.", "Failed.", "Learned."], year: "2016", dot: [407, 250], color: "#f59e0b" },
+  { title: "Direct Selling", lines: ["3-4 years.", "No success.", "Big lessons."], year: "2019", dot: [534, 250], color: "#a78bfa" },
+  { title: "BPO / KPO", lines: ["Covid time.", "Started", "somewhere."], year: "2022", dot: [661, 250], color: "#0d99ff" },
+  { title: "Design", lines: ["Found my", "direction."], year: "2023", dot: [788, 250], color: "#1f9d5e" },
+  { title: "Design + Code", lines: ["Building.", "Learning.", "Shipping."], year: "2026", dot: [915, 250], color: "end" },
 ];
 
 export default function DesignCanvas() {
@@ -130,7 +134,14 @@ export default function DesignCanvas() {
 
   return (
     <div className="flex w-full select-none flex-col items-center">
-      <div className="flex w-full justify-center overflow-visible pb-8">
+      {/* ── EYEBROW: WHEN I AM NOT DESIGNING ── */}
+      <div className="mx-auto w-full max-w-[62.5rem] px-6 lg:px-0 mb-6">
+        <p className={`text-xs font-semibold uppercase tracking-widest text-text-body ${figtree.className}`}>
+          WHEN I AM NOT DESIGNING
+        </p>
+      </div>
+
+      <div className="flex w-full justify-center overflow-visible pb-6">
         {/* the board */}
         <div
           ref={stageRef}
@@ -177,8 +188,8 @@ export default function DesignCanvas() {
                   <path d="M12 2c.7 3.2-.9 4.9-2.4 6.5C8 10.2 6.5 11.9 6.5 15a5.5 5.5 0 0 0 11 0c0-1.8-.7-3.1-1.6-4.3-.3 1-.9 1.8-1.9 2.3.5-3-.6-6.3-2-9z" />
                 </svg>
               </p>
-              <p className="mt-1 font-mono text-[12px] text-text-muted">longest streak. current: don&apos;t ask.</p>
-              <p className="mt-0.5 font-mono text-[12px] text-text-muted">score: 15. the owl is generous.</p>
+              <p className="mt-1 font-mono text-[12px] text-[#8a92a3]">longest streak. current: don&apos;t ask.</p>
+              <p className="mt-0.5 font-mono text-[12px] text-[#8a92a3]">score: 15. the owl is generous.</p>
               <p className="mt-2 text-[14px] leading-snug text-text-body">can order food in german. but where, in India?</p>
             </div>
             <Cursor name="someday i&apos;ll use it" color="#58cc02" xs={[12, 175, 90]} ys={[8, 128, 66]} duration={23} reduce={reduce} />
@@ -331,9 +342,16 @@ export default function DesignCanvas() {
         </div>
       </div>
 
+      {/* ── EYEBROW: THE NOT-SO-LINEAR JOURNEY ── */}
+      <div className="mx-auto w-full max-w-[62.5rem] px-6 lg:px-0 mb-2 mt-8">
+        <p className={`text-xs font-semibold uppercase tracking-widest text-text-body ${figtree.className}`}>
+          THE NOT-SO-LINEAR JOURNEY
+        </p>
+      </div>
+
       {/* ── THE NOT-SO-LINEAR JOURNEY. the paper texture IS the component. ── */}
       <motion.div
-        className="flex w-full justify-center overflow-visible pb-4"
+        className="flex w-full justify-center overflow-visible pb-4 -mt-10"
         initial={reduce ? false : { opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
@@ -348,10 +366,6 @@ export default function DesignCanvas() {
             backgroundRepeat: "no-repeat",
           }}
         >
-          <p className={`${figtree.className} absolute left-11 top-7 text-[22px] font-bold text-[#1f2430]`}>
-            the not-so-linear journey
-          </p>
-
           {/* the wavy dashed line, dots, years, and little arrows — swept in left to right */}
           <motion.div
             className="absolute inset-0"
@@ -362,7 +376,7 @@ export default function DesignCanvas() {
           >
           <svg aria-hidden className="absolute inset-0 h-full w-full" viewBox="0 0 1000 340" fill="none" preserveAspectRatio="none">
             <path
-              d="M80 245 C 120 230, 155 255, 192 242 C 240 228, 295 262, 338 248 C 385 232, 435 256, 478 242 C 525 228, 575 260, 618 246 C 665 230, 720 254, 762 242 C 810 230, 862 258, 905 246"
+              d="M120 250 C 165 240, 225 260, 280 250 C 335 241, 360 259, 407 250 C 462 240, 492 260, 534 250 C 592 241, 622 259, 661 250 C 718 240, 750 260, 788 250 C 843 241, 880 259, 915 250 C 930 247, 942 250, 942 250"
               stroke="#2b2b2b"
               strokeWidth="2"
               strokeDasharray="7 6"
@@ -402,40 +416,38 @@ export default function DesignCanvas() {
                 {m.year}
               </text>
             ))}
-            {/* little hand arrows from label to dot */}
-            {JOURNEY.slice(1).map((m) => {
-              const [dx, dy] = m.dot;
-              return (
-                <path
-                  key={m.title}
-                  d={`M${dx + 16} ${dy - 46} C ${dx + 20} ${dy - 30}, ${dx + 12} ${dy - 18}, ${dx + 4} ${dy - 10} M${dx + 4} ${dy - 10} l1 -7 M${dx + 4} ${dy - 10} l7 -1`}
-                  stroke="#6b7280"
-                  strokeWidth="1.3"
-                  strokeLinecap="round"
-                />
-              );
-            })}
           </svg>
           </motion.div>
 
-          {/* milestone labels — each appears as the line sweep reaches its dot */}
+          {/* milestone labels — centred over each dot, all hanging from a
+              common baseline just above the line so titles align to a shelf
+              and the two end labels stay clear of the torn edges. */}
           {JOURNEY.map((m) => (
-            <motion.div
+            <div
               key={m.title}
-              className={`${figtree.className} absolute leading-[1.2]`}
-              style={{ left: m.x, top: m.y }}
-              initial={reduce ? false : { opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.45, delay: 0.3 + (m.dot[0] / 1000) * 2.2, ease: EASE }}
+              className="absolute flex flex-col justify-end"
+              style={{
+                left: m.dot[0],
+                bottom: 126,
+                width: 160,
+                transform: "translateX(-50%)",
+              }}
             >
-              <p className="text-[18px] font-bold text-[#1f2430]">{m.title}</p>
-              {m.lines.map((l) => (
-                <p key={l} className="text-[16px] font-semibold text-[#6b7280]">
-                  {l}
-                </p>
-              ))}
-            </motion.div>
+              <motion.div
+                className={`${figtree.className} text-center leading-[1.25]`}
+                initial={reduce ? false : { opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.45, delay: 0.3 + (m.dot[0] / 1000) * 2.2, ease: EASE }}
+              >
+                <p className={`${caveat.className} text-[20px] font-bold leading-[1] text-[#1f2430]`}>{m.title}</p>
+                {m.lines.map((l) => (
+                  <p key={l} className="text-[13px] font-semibold text-[#6b7280]">
+                    {l}
+                  </p>
+                ))}
+              </motion.div>
+            </div>
           ))}
         </div>
       </motion.div>

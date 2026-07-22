@@ -1,11 +1,18 @@
 "use client";
 
 /**
- * PAGE TRANSITION — Row Cascade everywhere.
+ * PAGE TRANSITION — Row Cascade everywhere, including the very first load.
  *
  * Horizontal bars grow in from the left, top → bottom, then drain out
  * to the right. The gradient wall stays visible until the new page
  * signals readiness via the "page-ready" custom event (usePageReady hook).
+ *
+ * Entry transition: a fresh visit (typed URL, hard refresh, first hit on
+ * the site) arrives already covered by the same wall — there's nothing to
+ * hide yet, so it skips straight to the "held" state — then drains away
+ * via the exact same revealWithRows() used between pages, once that first
+ * page's own usePageReady() fires. See earlyPageReadyFired below for why
+ * that listener has to be armed before React even starts rendering.
  */
 
 import { usePathname, useRouter } from "next/navigation";
@@ -13,6 +20,25 @@ import { useEffect, useRef, useState } from "react";
 
 import { EASE } from "@/lib/constants";
 const SAFETY_MS = 2000;
+
+/**
+ * On the very first render of the whole app, the page component (a child
+ * of PageTransition, via `children`) mounts its usePageReady() effect
+ * BEFORE PageTransition's own effects — React commits child effects
+ * before parent effects. That means the leading "page-ready" dispatch can
+ * fire before PageTransition has attached its listener. This flag is set
+ * at module-evaluation time — before React begins committing anything —
+ * so it reliably catches that leading-edge event; PageTransition checks it
+ * on mount and reveals immediately if it was already missed.
+ */
+let earlyPageReadyFired = false;
+if (typeof window !== "undefined") {
+  const catchEarly = () => {
+    earlyPageReadyFired = true;
+    window.removeEventListener("page-ready", catchEarly);
+  };
+  window.addEventListener("page-ready", catchEarly);
+}
 
 /* Brand ramp: #0d99ff → #1f9d5e → #a78bfa */
 function rampRGB(t: number): [number, number, number] {
@@ -70,7 +96,25 @@ function RowCascadeOverlay({ phase }: { phase: "cover" | "held" | "reveal" | "id
     };
   }, [phase]);
 
-  if (phase === "idle" || rows === 0) return null;
+  if (phase === "idle") return null;
+
+  // Before the row count is measured (the very first paint of a fresh
+  // load), render one gradient wall instead of returning null. This is
+  // what makes the entry transition flash-free: the cover is present from
+  // the first pixel painted — SSR included — with no dependency on the
+  // measurement effect below ever having run. cover/reveal always have a
+  // measured row count by the time they happen (they're only ever
+  // triggered from effects/handlers, well after mount), so this fallback
+  // is exclusively for the entry case.
+  if (rows === 0) {
+    if (phase !== "held") return null;
+    return (
+      <div
+        className="pointer-events-none fixed inset-0 z-[9999]"
+        style={{ background: `linear-gradient(180deg, ${rampCSS(0)}, ${rampCSS(0.5)}, ${rampCSS(1)})` }}
+      />
+    );
+  }
 
   const filled = phase === "cover" || phase === "held";
   const entering = phase === "cover";
@@ -122,12 +166,38 @@ export default function PageTransition({
   const router = useRouter();
   const prevPathnameRef = useRef(pathname);
   const reduceRef = useRef(false);
-  const navigatedRef = useRef(false);
 
-  const [rowPhase, setRowPhase] = useState<"idle" | "cover" | "held" | "reveal">("idle");
+  // Entry state: start already covered ("held", no grow-in needed — nothing
+  // was visible yet) unless the visitor has prefers-reduced-motion set, in
+  // which case skip the cover entirely. Checked synchronously here (not in
+  // an effect) so it's part of the very first render, SSR included.
+  const [rowPhase, setRowPhase] = useState<"idle" | "cover" | "held" | "reveal">(() => {
+    const reduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    return reduced ? "idle" : "held";
+  });
+
+  // Mirrors rowPhase's initial read: true only when the page actually
+  // arrived covered, so the page-ready effect below knows to reveal it.
+  // Click-nav and back/forward set this to true themselves, later.
+  const navigatedRef = useRef(rowPhase === "held");
 
   useEffect(() => {
     reduceRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }, []);
+
+  // Safety net for the entry cover specifically: if the leading-edge catch
+  // above and the live listener below somehow both miss it, don't leave
+  // the visitor stuck behind the wall.
+  useEffect(() => {
+    if (!navigatedRef.current) return;
+    const t = setTimeout(() => {
+      if (navigatedRef.current) {
+        navigatedRef.current = false;
+        revealWithRows();
+      }
+    }, SAFETY_MS);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- entry-only, deliberately runs once on mount
   }, []);
 
   const coverWithRows = () => {
@@ -159,6 +229,11 @@ export default function PageTransition({
         revealWithRows();
       }
     };
+
+    // The entry cover's own page-ready may have already fired and been
+    // caught by the module-level listener before this effect attached —
+    // act on it now instead of waiting for an event that already happened.
+    if (earlyPageReadyFired) onPageReady();
 
     window.addEventListener("page-ready", onPageReady);
     return () => window.removeEventListener("page-ready", onPageReady);

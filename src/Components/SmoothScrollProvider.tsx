@@ -24,7 +24,7 @@ export default function SmoothScrollProvider({
     ).matches;
 
     if (prefersReducedMotion) {
-      console.log("Smooth scroll disabled due to reduced motion preference.");
+      // Respect the user's reduced-motion preference — skip smooth scrolling.
       return;
     }
 

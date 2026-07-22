@@ -58,3 +58,7 @@ src/app/case-studies/case-study-two/scratch/
 .claude/
 .agents/
 .mimocode/
+
+# Local build artifacts / verification screenshots dropped at repo root
+/build-output.txt
+/*.png

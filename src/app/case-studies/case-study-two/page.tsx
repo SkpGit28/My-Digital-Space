@@ -48,7 +48,7 @@ export default function TrustRevenueCaseStudy() {
     <FooterReveal
       id="case-study-two"
       className="bg-white"
-      heroHeight="760px"
+      heroHeight="47.5rem"
     >
       <div
         className={`${styles.cs2Root} cs2Root ${figtree.variable} ${satoshi.variable}`}
@@ -83,27 +83,31 @@ export default function TrustRevenueCaseStudy() {
             I don&apos;t defend the design. I defend the solution. Two conflicts
             from a fintech build that processed ₹1.5Cr in its first month.
           </p>
+        </div>
 
-          {/* Mockup — scaled up so its bottom edge clips behind the next
-              section, matching case-study-one's hero treatment. */}
-          <div
-            style={{
-              position: "relative",
-              zIndex: 2,
-              width: "52rem",
-              maxWidth: "100%",
-              marginTop: "var(--cs2-space-64)",
-            }}
-          >
-            <Image
-              src="/Card2mockup.svg"
-              alt="Navigating Product Conflicts hero mockup"
-              width={678}
-              height={353}
-              priority
-              style={{ width: "100%", height: "auto", display: "block" }}
-            />
-          </div>
+        {/* Mockup — direct child of the 100vh flex hero, pushed to the very
+            bottom by margin-top:auto so its base always touches the hero's
+            bottom edge (no gap on tall screens, clips behind the next section
+            on short ones, matching case-study-one's treatment). The padding
+            keeps at least 64px between it and the description above. */}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 2,
+            width: "52rem",
+            maxWidth: "100%",
+            marginTop: "auto",
+            paddingTop: "var(--cs2-space-64)",
+          }}
+        >
+          <Image
+            src="/Card2mockup.svg"
+            alt="Navigating Product Conflicts hero mockup"
+            width={678}
+            height={353}
+            priority
+            style={{ width: "100%", height: "auto", display: "block" }}
+          />
         </div>
       </header>
 

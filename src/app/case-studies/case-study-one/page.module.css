@@ -61,7 +61,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 100vw;
-  height: 1px;
+  height: 0.0625rem;
   background-color: var(--border-subtle, rgba(0, 0, 0, 0.08));
   z-index: 10;
 }
@@ -69,7 +69,7 @@
 @media (max-width: 52.125em) {
   .innerContainer {
     gap: 0;
-    padding: 0 var(--cs2-space-20) 0 var(--cs2-space-20);
+    padding: 0 var(--cs2-space-24) 0 var(--cs2-space-24);
   }
   .innerContainer .sectionContainer,
   .innerContainer .platformContainer,
@@ -312,7 +312,7 @@
   .invertedSection {
     padding: var(--section-space-top) var(--cs2-space-24) var(--section-space-bottom) var(--cs2-space-24);
     background-size: auto 65%;
-    background-position: left -20px bottom -20px;
+    background-position: left -1.25rem bottom -1.25rem;
   }
 }
 

@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { satoshi, figtree } from "@/styles/fonts";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { satoshi, figtree, caveat } from "@/styles/fonts";
 import { FooterReveal } from "@/Components/SiteFooter";
 import { usePageReady } from "@/lib/usePageReady";
 import DesignCanvas from "@/Components/DesignCanvas";
@@ -36,11 +36,42 @@ const THUMBNAILS = [
 ];
 
 const GALLERY_IMAGES = [
-  "/FirstImage.svg",
-  "/SecondImage.svg",
-  "/ThirdImg.svg",
-  "/FourthImg.svg",
+  "/FirstImage.webp",
+  "/SecondImage.webp",
+  "/ThirdImg.webp",
+  "/FourthImg.webp",
 ];
+
+/* Hand-written notes pinned to each gallery photo, shown top-right of the main
+   image with a curved arrow into the shot. `over` marks a struck-then-corrected
+   word (Parent → Brother). */
+type PhotoNote = { text?: string; pre?: string; struck?: string; over?: string };
+const PHOTO_NOTES: PhotoNote[] = [
+  { text: "Promoted the Startup at National Level @ Global Fintech Festival" },
+  { pre: "Pet ", struck: "Parent", over: "Brother" },
+  { text: "Goa Done" },
+  { text: "AI Gen Model" },
+];
+
+function NoteBody({ note }: { note: PhotoNote }) {
+  if (note.over) {
+    return (
+      <span className="whitespace-nowrap">
+        {note.pre}
+        <span className="relative inline-block">
+          <span className="relative inline-block">
+            {note.struck}
+            <span aria-hidden className="absolute left-[-2px] right-[-2px] top-1/2 h-[2.5px] -rotate-3 rounded-full bg-[#d92d20]" />
+          </span>
+          <span className="absolute -top-[0.9em] left-1/2 -translate-x-1/2 -rotate-[7deg] whitespace-nowrap text-[#d92d20]">
+            {note.over}
+          </span>
+        </span>
+      </span>
+    );
+  }
+  return <>{note.text}</>;
+}
 
 export default function SkpPage() {
   usePageReady();
@@ -50,22 +81,18 @@ export default function SkpPage() {
 
   return (
     <FooterReveal id="skp" className={`${satoshi.className} min-h-screen bg-background`} showFooter={false}>
-      {/* Vertical lines from top — full height */}
-      <div className="absolute bottom-0 left-[calc(50%-652px)] w-[1px] bg-border-subtle pointer-events-none hidden min-[1340px]:block z-0" />
-      <div className="absolute bottom-0 right-[calc(50%-652px)] w-[1px] bg-border-subtle pointer-events-none hidden min-[1340px]:block z-0" />
-
-      {/* Punch hole circles — 24px from left vertical line */}
-      <div className="absolute left-[calc(50%-652px+24px)] top-[130px] bottom-0 flex flex-col items-center justify-start gap-[56px] pointer-events-none hidden min-[1340px]:flex z-[1]">
+      {/* Punch hole circles — 1.5rem from left vertical line */}
+      <div className="absolute left-[calc(50%-40.75rem+1.5rem)] top-[8.125rem] bottom-0 flex flex-col items-center justify-start gap-[3.5rem] pointer-events-none hidden min-[1340px]:flex z-[1]">
         {Array.from({ length: 22 }).map((_, i) => (
           <div
             key={i}
-            className="w-[24px] h-[24px] rounded-full border-[2px] border-slate-300 bg-white"
+            className="w-6 h-6 rounded-full border-[2px] border-slate-300 bg-white"
           />
         ))}
       </div>
 
-      {/* Horizontal line at the top of the SKP section, 24px below the menu bar; texture starts here */}
-      <div className="pt-[104px]">
+      {/* Horizontal line at the top of the SKP section, 1.5rem below the menu bar; texture starts here */}
+      <div className="pt-[6.5rem]">
         <div className="w-full border-t border-border-subtle relative z-10" />
 
         {/* Paper texture between vertical lines, from the first section onward */}
@@ -74,13 +101,13 @@ export default function SkpPage() {
             className="absolute inset-0 bg-repeat bg-center z-0"
             style={{
               backgroundImage: "url('/paperbg.png')",
-              left: "calc(50% - 652px)",
-              right: "calc(50% - 652px)",
+              left: "calc(50% - 40.75rem)",
+              right: "calc(50% - 40.75rem)",
             }}
           />
 
       {/* ═══════════════  HERO  ═══════════════ */}
-      <section className="relative z-10 mx-auto w-full max-w-[62.5rem] px-6 pb-10 pt-16 lg:px-0">
+      <section className="relative z-10 mx-auto w-full max-w-[62.5rem] px-6 pb-16 pt-16 lg:px-0">
         <div className="mb-6">
           <motion.p
             initial={reduce ? false : { opacity: 0, y: 10 }}
@@ -98,16 +125,52 @@ export default function SkpPage() {
             initial={reduce ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
-            className="relative w-full md:w-[484px] shrink-0"
+            className="relative w-full md:w-[30.25rem] shrink-0"
           >
-            <div className="bg-white p-3 rounded-[32px] border border-slate-200/50 shadow-md">
-              <div className="relative h-[420px] rounded-[24px] overflow-hidden bg-slate-100 group">
+            <div className="bg-white p-3 rounded-[2rem] border border-slate-200/50 shadow-md">
+              <div className="relative h-[26.25rem] rounded-[1.5rem] overflow-hidden bg-slate-100 group">
                 <img
                   src={GALLERY_IMAGES[activeIndex] || GALLERY_IMAGES[0]}
                   alt="SKP Gallery"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102"
                 />
               </div>
+            </div>
+
+            {/* Hand-written note for the active photo — lives in the empty space
+                to the RIGHT of the photo's top (over the intro column's blank
+                upper area on md+), with a curved arrow pointing back down-left
+                into the shot. On mobile it tucks against the photo's top-right. */}
+            <div className="pointer-events-none absolute right-2 top-2 z-30 flex w-[15rem] flex-col items-start md:right-auto md:left-full md:ml-11 md:top-[-4.25rem]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeIndex}
+                  initial={reduce ? false : { opacity: 0, y: -6, rotate: -7 }}
+                  animate={{ opacity: 1, y: 0, rotate: -4 }}
+                  exit={reduce ? { opacity: 0 } : { opacity: 0, y: 4, transition: { duration: 0.18 } }}
+                  transition={{ duration: 0.4, ease: EASE }}
+                  className={`${caveat.className} flex flex-col items-start`}
+                  style={{ textShadow: "0 1px 2px rgba(255,255,255,0.95), 0 0 10px rgba(255,255,255,0.8)" }}
+                >
+                  <p className="text-left text-[21px] font-bold leading-[1.1] text-[#1f2430]">
+                    <NoteBody note={PHOTO_NOTES[activeIndex]} />
+                  </p>
+                  {/* short arrow angling down-left into the empty gap toward the
+                      photo's top-right corner — lands on neither image nor text */}
+                  <svg
+                    width="118"
+                    height="46"
+                    viewBox="0 0 118 46"
+                    fill="none"
+                    className="-ml-8 mt-1"
+                    style={{ filter: "drop-shadow(0 1px 1px rgba(255,255,255,0.85))" }}
+                    aria-hidden
+                  >
+                    <path d="M110 5 C 92 22, 56 32, 14 35" stroke="#1f2430" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M14 35 l 14 -5 M14 35 l 6 12" stroke="#1f2430" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </motion.div>
+              </AnimatePresence>
             </div>
 
             {/* Thumbnails overlapping bottom edge */}
@@ -129,10 +192,10 @@ export default function SkpPage() {
                       y: isHovered ? -10 : 0,
                       scale: isHovered ? 0.92 : 1,
                       rotate: spread ? 0 : thumb.rotation,
-                      marginLeft: i === 0 ? "0px" : spread ? "12px" : "-30px",
+                      marginLeft: i === 0 ? "0rem" : spread ? "0.75rem" : "-1.875rem",
                     }}
                     transition={{ type: "spring", stiffness: 420, damping: 28, mass: 0.7 }}
-                    className="relative shrink-0 w-[72px] h-[72px] rounded-2xl overflow-hidden border-[2.5px] border-white cursor-pointer"
+                    className="relative shrink-0 w-[4.5rem] h-[4.5rem] rounded-2xl overflow-hidden border-[2.5px] border-white cursor-pointer"
                     style={{
                       zIndex: isHovered ? 50 : i + 10,
                       boxShadow: isHovered
@@ -162,7 +225,7 @@ export default function SkpPage() {
               variants={textContainerVariants}
               initial="hidden"
               animate="visible"
-              className={`text-[18px] leading-relaxed text-text-primary max-w-lg space-y-4 ${satoshi.className}`}
+              className={`text-[1.125rem] leading-relaxed text-text-body max-w-lg space-y-4 ${figtree.className}`}
             >
               <p>
                 {"Hi, SKP here. UI/UX Designer, professional overthinker, and part-time perfectionist. I enjoy making confusing things feel obvious. My design decisions are driven by curiosity and constantly challenged by my own perfectionism.".split(" ").map((word, idx) => (
