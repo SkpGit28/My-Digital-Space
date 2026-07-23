@@ -303,14 +303,23 @@
   background-position: left center;
   background-repeat: no-repeat;
   border-radius: 0;
-  padding: var(--section-space-top) var(--cs2-space-24) var(--section-space-bottom) var(--cs2-space-24);
+  /* Balanced, symmetric padding so the panel reads as an intentional feature
+     card — was 64px top but only 24px sides, which felt lopsided. */
+  padding: var(--cs2-space-64);
   border-left: 0.0625rem solid var(--cs2-color-neutral-200);
   border-right: 0.0625rem solid var(--cs2-color-neutral-200);
 }
 
+/* The generic `.innerContainer .sectionContainer` rule (higher specificity)
+   forces the standard top:64/bottom:40 section rhythm. For this feature card
+   we want symmetric vertical padding, so match that specificity here. */
+.innerContainer .invertedSection {
+  padding: var(--cs2-space-64);
+}
+
 @media (max-width: 52.125em) {
-  .invertedSection {
-    padding: var(--section-space-top) var(--cs2-space-24) var(--section-space-bottom) var(--cs2-space-24);
+  .innerContainer .invertedSection {
+    padding: var(--cs2-space-40) var(--cs2-space-32);
     background-size: auto 65%;
     background-position: left -1.25rem bottom -1.25rem;
   }
@@ -2764,7 +2773,9 @@
 .contextImageContainer {
   position: relative;
   width: 100%;
-  height: 34.5rem; /* 552px */
+  /* Match the source image's aspect ratio (2000×1165) so object-fit: cover
+     fills the box without clipping the phone status bar / caption. */
+  aspect-ratio: 2000 / 1165;
   margin: var(--cs2-space-40) 0 0 0;
   border-radius: var(--cs2-radius-12);
   overflow: hidden;
