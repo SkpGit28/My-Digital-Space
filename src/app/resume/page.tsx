@@ -3,14 +3,14 @@
 /**
  * SUSHANT KUMAR — RESUME & ATS SCORER
  *
- * Exact copy, layout, and visual balance matching the Francesco Fagioli CV specification:
- * - Standalone Photo Card on top left.
- * - Standalone Name + Title + Contacts Card on top right.
- * - Removed Awards & Recognitions; replaced with Core Capabilities card.
+ * Exact copy, layout, and visual design matching Francesco Fagioli's CV:
+ * - Top Header Row (Left Column): Separate Photo Card + Separate Name & QR Code Card.
+ * - Right Column: Contacts Card back at top right position.
+ * - Replaced Core Capabilities with "Side Quests & Crafts" (Unique & Standout).
  * - Vertical blue timeline line for Work Experience.
- * - Full-bleed section header separators.
- * - Rounded-xl rectangular skill badges.
- * - Both 5-card columns align pixel-perfectly on top and bottom horizontal baselines.
+ * - Full-bleed section header separators across all cards.
+ * - Rounded-xl rectangular skill badges filled seamlessly.
+ * - Strictly unified gap system (space-y-6) and identical font sizes/weights.
  */
 
 import React, { useState } from "react";
@@ -218,24 +218,71 @@ export default function ResumePage() {
 
         {/* ═══════════════ RESUME DOCUMENT (EXACT FRANCESCO FAGIOLI LAYOUT) ═══════════════ */}
         <section className="relative z-10 mx-auto w-full max-w-[66rem] px-4 sm:px-6 lg:px-0">
-          <div className="print-container grid grid-cols-1 gap-6 md:grid-cols-12">
+          <div className="print-container grid grid-cols-1 gap-6 md:grid-cols-12 items-start">
             
             {/* ═══════════════ LEFT COLUMN (8 COLS / ~65%) ═══════════════ */}
-            <div className="md:col-span-8 flex flex-col justify-between gap-6">
+            <div className="md:col-span-8 space-y-6">
               
-              {/* CARD 1: PHOTO CARD (SEPARATE PARENT) */}
-              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs flex items-center justify-start">
-                <div className="relative h-32 w-32 sm:h-36 sm:w-36 shrink-0 overflow-hidden rounded-2xl border border-slate-200 bg-slate-100">
-                  <img
-                    src="/HeroMe.svg"
-                    alt="Sushant Kumar"
-                    className="h-full w-full object-cover grayscale"
-                  />
+              {/* CARD 1: TOP HEADER ROW (2 SEPARATE CARDS: PHOTO CARD + NAME/QR CARD) */}
+              <div className="flex flex-col sm:flex-row items-stretch gap-6">
+                
+                {/* 1A: PHOTO CARD (SEPARATE PARENT) */}
+                <div className="rounded-2xl border border-slate-200/90 bg-white p-3 shadow-xs flex items-center justify-center shrink-0">
+                  <div className="relative h-36 w-36 overflow-hidden rounded-xl border border-slate-200 bg-slate-100">
+                    <img
+                      src="/HeroMe.svg"
+                      alt="Sushant Kumar"
+                      className="h-full w-full object-cover grayscale"
+                    />
+                  </div>
                 </div>
+
+                {/* 1B: NAME, TITLE & QR CARD (SEPARATE PARENT) */}
+                <div className="flex-1 rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs flex items-center justify-between gap-4">
+                  <div>
+                    <h1 className={`text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight ${satoshi.className}`}>
+                      Sushant Kumar
+                    </h1>
+                    <p className={`text-base font-semibold text-slate-600 mt-1 ${figtree.className}`}>
+                      UI/UX Designer
+                    </p>
+                    <p className={`text-xs text-slate-500 mt-3 flex items-center gap-1.5 ${figtree.className}`}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                      Noida, India
+                    </p>
+                  </div>
+
+                  {/* QR Code / Portfolio Badge */}
+                  <a
+                    href="https://skpux.in"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center gap-1 text-center shrink-0 group"
+                  >
+                    <div className="flex h-16 w-16 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 p-1.5 shadow-2xs group-hover:border-blue-400 transition-colors">
+                      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="text-slate-800">
+                        <rect x="3" y="3" width="7" height="7" rx="1" />
+                        <rect x="14" y="3" width="7" height="7" rx="1" />
+                        <rect x="3" y="14" width="7" height="7" rx="1" />
+                        <rect x="14" y="14" width="3" height="3" />
+                        <rect x="18" y="14" width="3" height="3" />
+                        <rect x="14" y="18" width="3" height="3" />
+                        <rect x="18" y="18" width="3" height="3" />
+                      </svg>
+                    </div>
+                    <span className={`text-[10px] font-bold text-slate-500 group-hover:text-blue-600 transition-colors ${figtree.className}`}>
+                      Portfolio
+                    </span>
+                  </a>
+                </div>
+
               </div>
 
               {/* CARD 2: PROFESSIONAL PROFILE */}
-              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs">
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs">
                 {/* Main Header with Full-Bleed Separator Line */}
                 <div className="flex items-center gap-3 pb-4">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
@@ -248,7 +295,7 @@ export default function ResumePage() {
                     Professional Profile
                   </h2>
                 </div>
-                <div className="-mx-6 sm:-mx-8 border-b-2 border-slate-100 mb-5" />
+                <div className="-mx-6 sm:-mx-7 border-b-2 border-slate-100 mb-5" />
 
                 <p className={`text-sm leading-relaxed text-slate-600 ${figtree.className}`}>
                   UI/UX Designer with <strong className="font-bold text-slate-900">2.4 years</strong> designing fintech products end-to-end — settlement dashboards, merchant onboarding, and design systems — and shipping them alongside engineering. I turn complex financial workflows into clear, usable interfaces, working from <strong className="font-bold text-slate-900">design tokens</strong> through to <strong className="font-bold text-slate-900">code-level auth</strong> (Supabase / RBAC) and no-code build in Framer.
@@ -256,7 +303,7 @@ export default function ResumePage() {
               </div>
 
               {/* CARD 3: WORK EXPERIENCE */}
-              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs">
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs">
                 {/* Main Header with Full-Bleed Separator Line */}
                 <div className="flex items-center gap-3 pb-4">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
@@ -269,7 +316,7 @@ export default function ResumePage() {
                     Work Experience
                   </h2>
                 </div>
-                <div className="-mx-6 sm:-mx-8 border-b-2 border-slate-100 mb-5" />
+                <div className="-mx-6 sm:-mx-7 border-b-2 border-slate-100 mb-5" />
 
                 {/* Job Entry with Vertical Timeline Line */}
                 <div className="relative pl-6 border-l-2 border-blue-200/80 space-y-4 my-2">
@@ -338,7 +385,7 @@ export default function ResumePage() {
               </div>
 
               {/* CARD 4: PERSONAL PROJECTS */}
-              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs">
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs">
                 {/* Main Header with Full-Bleed Separator Line */}
                 <div className="flex items-center gap-3 pb-4">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
@@ -350,7 +397,7 @@ export default function ResumePage() {
                     Personal Projects
                   </h2>
                 </div>
-                <div className="-mx-6 sm:-mx-8 border-b-2 border-slate-100 mb-5" />
+                <div className="-mx-6 sm:-mx-7 border-b-2 border-slate-100 mb-5" />
 
                 <div className="space-y-4">
                   {/* BlaBlaCar */}
@@ -386,7 +433,7 @@ export default function ResumePage() {
               </div>
 
               {/* CARD 5: EDUCATION */}
-              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs">
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs">
                 {/* Main Header with Full-Bleed Separator Line */}
                 <div className="flex items-center gap-3 pb-4">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
@@ -399,7 +446,7 @@ export default function ResumePage() {
                     Education
                   </h2>
                 </div>
-                <div className="-mx-6 sm:-mx-8 border-b-2 border-slate-100 mb-4" />
+                <div className="-mx-6 sm:-mx-7 border-b-2 border-slate-100 mb-4" />
 
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
@@ -420,30 +467,25 @@ export default function ResumePage() {
             </div>
 
             {/* ═══════════════ RIGHT COLUMN (4 COLS / ~35%) ═══════════════ */}
-            <div className="md:col-span-4 flex flex-col justify-between gap-6">
+            <div className="md:col-span-4 space-y-6">
               
-              {/* CARD 1: NAME, TITLE & CONTACTS (SEPARATE PARENT) */}
-              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-                <div>
-                  <h1 className={`text-3xl font-extrabold text-slate-900 tracking-tight ${satoshi.className}`}>
-                    Sushant Kumar
-                  </h1>
-                  <p className={`text-base font-semibold text-slate-600 mt-1 ${figtree.className}`}>
-                    UI/UX Designer
-                  </p>
-                  <p className={`text-xs text-slate-500 mt-2 flex items-center gap-1.5 ${figtree.className}`}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                      <circle cx="12" cy="10" r="3" />
+              {/* CARD 1: CONTACTS */}
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
+                {/* Main Header with Full-Bleed Separator Line */}
+                <div className="flex items-center gap-3 pb-4">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                     </svg>
-                    Noida, India
-                  </p>
+                  </div>
+                  <h2 className={`text-lg font-bold text-blue-600 ${satoshi.className}`}>
+                    Contacts
+                  </h2>
                 </div>
-
-                <div className="-mx-6 border-b-2 border-slate-100 my-4" />
+                <div className="-mx-6 border-b-2 border-slate-100 mb-5" />
 
                 {/* Contact Items with Light Blue Square Icons */}
-                <div className={`space-y-3.5 text-xs text-slate-600 ${figtree.className}`}>
+                <div className={`space-y-4 text-xs text-slate-600 ${figtree.className}`}>
                   {/* Portfolio */}
                   <div className="flex items-center gap-3">
                     <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60">
@@ -580,7 +622,7 @@ export default function ResumePage() {
                 </div>
               </div>
 
-              {/* CARD 3: CORE CAPABILITIES (REPLACES AWARDS) */}
+              {/* CARD 3: SIDE QUESTS & CRAFTS (UNIQUE & STANDOUT) */}
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
                 {/* Main Header with Full-Bleed Separator Line */}
                 <div className="flex items-center gap-3 pb-4">
@@ -590,27 +632,27 @@ export default function ResumePage() {
                     </svg>
                   </div>
                   <h2 className={`text-lg font-bold text-blue-600 ${satoshi.className}`}>
-                    Core Capabilities
+                    Side Quests & Crafts
                   </h2>
                 </div>
                 <div className="-mx-6 border-b-2 border-slate-100 mb-5" />
 
-                <div className="space-y-3.5">
+                <div className="space-y-4">
                   <div>
                     <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
-                      Design System Architecture
+                      Type & Micro-Interactions
                     </h3>
                     <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
-                      Token-based component libraries (Figma & code) accelerating dev handoffs.
+                      Designing custom typing benchmarks and high-precision micro-interactions in Framer & React.
                     </p>
                   </div>
 
                   <div>
                     <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
-                      Fintech Workflow Optimization
+                      Interactive Game Mechanics
                     </h3>
                     <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
-                      5-step merchant onboarding & settlement dashboards handling ₹1.2+ Cr volume.
+                      Exploring 2D physics engines and spatial user flows using Godot.
                     </p>
                   </div>
                 </div>
@@ -635,7 +677,7 @@ export default function ResumePage() {
                 <div className="-mx-6 border-b-2 border-slate-100 mb-5" />
 
                 {/* Clean Certification Entries */}
-                <div className="space-y-3.5">
+                <div className="space-y-4">
                   <div>
                     <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
                       Google UX Design Certificate
