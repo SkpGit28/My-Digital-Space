@@ -4,11 +4,11 @@
  * SUSHANT KUMAR — RESUME & ATS SCORER
  *
  * Exact copy, layout, and visual balance matching the Francesco Fagioli CV specification.
- * - Header icons ONLY on main section titles (no inner icons).
- * - Subtle header-content separator line under section headers.
- * - Perfectly filled Top Skills pills grid.
- * - Personal Projects section added under Work Experience (BlaBlaCar, StackAlign, Rotato).
- * - 100% height-balanced 2-column card layout.
+ * - Header icons ONLY on main section titles + clean contact icons matching reference CV.
+ * - Full-bleed, prominent section separator lines under headers.
+ * - Rounded-xl rectangular skill badges filled seamlessly without orphan space.
+ * - Integrated Personal Projects section (BlaBlaCar, StackAlign, Rotato).
+ * - Height-balanced 2-column card layout.
  */
 
 import React, { useState } from "react";
@@ -251,8 +251,8 @@ export default function ResumePage() {
 
               {/* CARD 2: PROFESSIONAL PROFILE */}
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs">
-                {/* Main Header with Separator Line */}
-                <div className="flex items-center gap-3 border-b border-slate-100 pb-3.5 mb-4">
+                {/* Main Header with Full-Bleed Separator Line */}
+                <div className="flex items-center gap-3 pb-4">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -263,6 +263,7 @@ export default function ResumePage() {
                     Professional Profile
                   </h2>
                 </div>
+                <div className="-mx-6 sm:-mx-8 border-b-2 border-slate-100 mb-5" />
 
                 <p className={`text-sm leading-relaxed text-slate-600 ${figtree.className}`}>
                   UI/UX Designer with <strong className="font-bold text-slate-900">2.4 years</strong> designing fintech products end-to-end — settlement dashboards, merchant onboarding, and design systems — and shipping them alongside engineering. I turn complex financial workflows into clear, usable interfaces, working from <strong className="font-bold text-slate-900">design tokens</strong> through to <strong className="font-bold text-slate-900">code-level auth</strong> (Supabase / RBAC) and no-code build in Framer.
@@ -271,8 +272,8 @@ export default function ResumePage() {
 
               {/* CARD 3: WORK EXPERIENCE */}
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs">
-                {/* Main Header with Separator Line */}
-                <div className="flex items-center gap-3 border-b border-slate-100 pb-3.5 mb-5">
+                {/* Main Header with Full-Bleed Separator Line */}
+                <div className="flex items-center gap-3 pb-4">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
@@ -283,6 +284,7 @@ export default function ResumePage() {
                     Work Experience
                   </h2>
                 </div>
+                <div className="-mx-6 sm:-mx-8 border-b-2 border-slate-100 mb-5" />
 
                 {/* Job Entry */}
                 <div className="space-y-4">
@@ -351,10 +353,10 @@ export default function ResumePage() {
                 </div>
               </div>
 
-              {/* CARD 4: PERSONAL PROJECTS (BALANCES LEFT COLUMN HEIGHT) */}
+              {/* CARD 4: PERSONAL PROJECTS */}
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs">
-                {/* Main Header with Separator Line */}
-                <div className="flex items-center gap-3 border-b border-slate-100 pb-3.5 mb-5">
+                {/* Main Header with Full-Bleed Separator Line */}
+                <div className="flex items-center gap-3 pb-4">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
@@ -364,6 +366,7 @@ export default function ResumePage() {
                     Personal Projects
                   </h2>
                 </div>
+                <div className="-mx-6 sm:-mx-8 border-b-2 border-slate-100 mb-5" />
 
                 <div className="space-y-4">
                   {/* BlaBlaCar */}
@@ -371,7 +374,7 @@ export default function ResumePage() {
                     <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
                       BlaBlaCar <span className="font-normal text-slate-500">(Trust UX Case Study)</span>
                     </h3>
-                    <p className={`text-xs text-slate-600 leading-relaxed mt-0.5 ${figtree.className}`}>
+                    <p className={`text-xs text-slate-600 leading-relaxed mt-1 ${figtree.className}`}>
                       Redesigned trust verification & ride-sharing booking flows to reduce cancellation rates and increase driver transparency across high-density intercity routes.
                     </p>
                   </div>
@@ -381,7 +384,7 @@ export default function ResumePage() {
                     <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
                       StackAlign <span className="font-normal text-slate-500">(AI-Hallucination Tool · Live)</span>
                     </h3>
-                    <p className={`text-xs text-slate-600 leading-relaxed mt-0.5 ${figtree.className}`}>
+                    <p className={`text-xs text-slate-600 leading-relaxed mt-1 ${figtree.className}`}>
                       Built a live UI framework solving LLM hallucination in data retrieval flows through real-time confidence scores and citation overlays.
                     </p>
                   </div>
@@ -391,7 +394,7 @@ export default function ResumePage() {
                     <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
                       Rotato <span className="font-normal text-slate-500">(Godot Game)</span>
                     </h3>
-                    <p className={`text-xs text-slate-600 leading-relaxed mt-0.5 ${figtree.className}`}>
+                    <p className={`text-xs text-slate-600 leading-relaxed mt-1 ${figtree.className}`}>
                       Designed and developed custom 2D mechanics, physics-based level design, and interactive gameplay prototypes in Godot (2 levels completed).
                     </p>
                   </div>
@@ -400,8 +403,8 @@ export default function ResumePage() {
 
               {/* CARD 5: EDUCATION */}
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs">
-                {/* Main Header with Separator Line */}
-                <div className="flex items-center gap-3 border-b border-slate-100 pb-3.5 mb-4">
+                {/* Main Header with Full-Bleed Separator Line */}
+                <div className="flex items-center gap-3 pb-4">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
@@ -412,6 +415,7 @@ export default function ResumePage() {
                     Education
                   </h2>
                 </div>
+                <div className="-mx-6 sm:-mx-8 border-b-2 border-slate-100 mb-4" />
 
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
@@ -436,8 +440,8 @@ export default function ResumePage() {
               
               {/* CARD 1: CONTACTS */}
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
-                {/* Main Header with Separator Line */}
-                <div className="flex items-center gap-3 border-b border-slate-100 pb-3.5 mb-4">
+                {/* Main Header with Full-Bleed Separator Line */}
+                <div className="flex items-center gap-3 pb-4">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
@@ -447,55 +451,95 @@ export default function ResumePage() {
                     Contacts
                   </h2>
                 </div>
+                <div className="-mx-6 border-b-2 border-slate-100 mb-5" />
 
-                {/* Clean Contact Items WITHOUT inner icon circles */}
-                <div className={`space-y-3.5 text-xs text-slate-600 ${figtree.className}`}>
+                {/* Contact Items with Light Blue Square Icons + Clean Clickable Labels */}
+                <div className={`space-y-4 text-xs text-slate-600 ${figtree.className}`}>
                   {/* Portfolio */}
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">PORTFOLIO</p>
-                    <a href="https://skpux.in" target="_blank" rel="noopener noreferrer" className="font-semibold text-slate-900 hover:text-blue-600 transition-colors">
-                      skpux.in
-                    </a>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">PORTFOLIO</p>
+                      <a href="https://skpux.in" target="_blank" rel="noopener noreferrer" className="font-bold text-slate-900 hover:text-blue-600 transition-colors">
+                        skpux.in
+                      </a>
+                    </div>
                   </div>
 
                   {/* Email */}
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">EMAIL</p>
-                    <a href="mailto:skponpurpose@gmail.com" className="font-semibold text-slate-900 hover:text-blue-600 transition-colors">
-                      skponpurpose@gmail.com
-                    </a>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">EMAIL</p>
+                      <a href="mailto:skponpurpose@gmail.com" className="font-bold text-slate-900 hover:text-blue-600 transition-colors break-all">
+                        skponpurpose@gmail.com
+                      </a>
+                    </div>
                   </div>
 
                   {/* Phone */}
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">PHONE</p>
-                    <a href="tel:+919997320490" className="font-semibold text-slate-900 hover:text-blue-600 transition-colors">
-                      +91 99973 20490
-                    </a>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">PHONE</p>
+                      <a href="tel:+919997320490" className="font-bold text-slate-900 hover:text-blue-600 transition-colors">
+                        +91 99973 20490
+                      </a>
+                    </div>
                   </div>
 
                   {/* LinkedIn */}
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">LINKEDIN</p>
-                    <a href="https://www.linkedin.com/in/skplovesdesign" target="_blank" rel="noopener noreferrer" className="font-semibold text-slate-900 hover:text-blue-600 transition-colors">
-                      /skplovesdesign
-                    </a>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                        <rect x="2" y="9" width="4" height="12" />
+                        <circle cx="4" cy="4" r="2" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">LINKEDIN</p>
+                      <a href="https://www.linkedin.com/in/skplovesdesign" target="_blank" rel="noopener noreferrer" className="font-bold text-slate-900 hover:text-blue-600 transition-colors">
+                        /skplovesdesign
+                      </a>
+                    </div>
                   </div>
 
                   {/* GitHub */}
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">GITHUB</p>
-                    <a href="https://github.com/SkpGit28" target="_blank" rel="noopener noreferrer" className="font-semibold text-slate-900 hover:text-blue-600 transition-colors">
-                      /SkpGit28
-                    </a>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">GITHUB</p>
+                      <a href="https://github.com/SkpGit28" target="_blank" rel="noopener noreferrer" className="font-bold text-slate-900 hover:text-blue-600 transition-colors">
+                        /SkpGit28
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* CARD 2: TOP SKILLS */}
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
-                {/* Main Header with Separator Line */}
-                <div className="flex items-center gap-3 border-b border-slate-100 pb-3.5 mb-4">
+                {/* Main Header with Full-Bleed Separator Line */}
+                <div className="flex items-center gap-3 pb-4">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                       <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
@@ -505,30 +549,41 @@ export default function ResumePage() {
                     Top Skills
                   </h2>
                 </div>
+                <div className="-mx-6 border-b-2 border-slate-100 mb-5" />
 
-                {/* Professional UI/UX Skills Pills - Perfectly filled grid */}
+                {/* Professional UI/UX Skills Rectangular Badges (rounded-xl / border-radius 10-12px) - Filled grid */}
                 <div className="flex flex-wrap gap-2">
                   {[
-                    "UI/UX Design",
-                    "Design Systems",
-                    "Design Tokens",
-                    "Object-Oriented UI",
                     "User Research",
+                    "Experience Mapping",
+                    "Information Architecture",
                     "Wireframing",
+                    "Prioritization Frameworks",
+                    "Design System",
+                    "Design Tokens",
                     "Prototyping",
                     "Interaction Design",
                     "Usability Testing",
-                    "Information Architecture",
+                    "Handoff",
+                    "Agile Methodologies",
+                    "Miro",
+                    "Principle",
+                    "After Effects",
+                    "Photoshop",
+                    "Jira",
+                    "Notion",
+                    "HTML",
+                    "CSS",
+                    "Wordpress",
                     "Figma",
                     "Framer",
                     "Supabase",
                     "RBAC / Auth",
                     "Next.js",
-                    "HTML / CSS",
                   ].map((skill) => (
                     <span
                       key={skill}
-                      className={`rounded-full border border-slate-200 bg-slate-50/80 px-3.5 py-1.5 text-xs font-medium text-slate-700 hover:border-slate-300 transition-colors ${figtree.className}`}
+                      className={`rounded-xl border border-slate-200 bg-slate-50/70 px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-slate-300 transition-colors ${figtree.className}`}
                     >
                       {skill}
                     </span>
@@ -538,8 +593,8 @@ export default function ResumePage() {
 
               {/* CARD 3: CERTIFICATIONS */}
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
-                {/* Main Header with Separator Line */}
-                <div className="flex items-center gap-3 border-b border-slate-100 pb-3.5 mb-4">
+                {/* Main Header with Full-Bleed Separator Line */}
+                <div className="flex items-center gap-3 pb-4">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -552,9 +607,10 @@ export default function ResumePage() {
                     Certifications
                   </h2>
                 </div>
+                <div className="-mx-6 border-b-2 border-slate-100 mb-5" />
 
                 {/* Clean Certification Entries WITHOUT inner document icons */}
-                <div className="space-y-3.5">
+                <div className="space-y-4">
                   <div>
                     <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
                       Google UX Design Certificate
@@ -586,8 +642,8 @@ export default function ResumePage() {
 
               {/* CARD 4: LANGUAGES */}
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
-                {/* Main Header with Separator Line */}
-                <div className="flex items-center gap-3 border-b border-slate-100 pb-3.5 mb-4">
+                {/* Main Header with Full-Bleed Separator Line */}
+                <div className="flex items-center gap-3 pb-4">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                       <circle cx="12" cy="12" r="10" />
@@ -599,19 +655,20 @@ export default function ResumePage() {
                     Languages
                   </h2>
                 </div>
+                <div className="-mx-6 border-b-2 border-slate-100 mb-5" />
 
-                <div className={`space-y-3 divide-y divide-slate-100 ${figtree.className}`}>
+                <div className={`space-y-3.5 divide-y divide-slate-100 ${figtree.className}`}>
                   <div className="pt-1">
                     <p className="text-sm font-bold text-slate-900">Hindi</p>
                     <p className="text-xs text-slate-500">Native</p>
                   </div>
 
-                  <div className="pt-3">
+                  <div className="pt-3.5">
                     <p className="text-sm font-bold text-slate-900">English</p>
                     <p className="text-xs text-slate-500">Professional Working Proficiency</p>
                   </div>
 
-                  <div className="pt-3">
+                  <div className="pt-3.5">
                     <p className="text-sm font-bold text-slate-900">German</p>
                     <p className="text-xs text-slate-500">Beginner (A1) · Learning</p>
                   </div>
