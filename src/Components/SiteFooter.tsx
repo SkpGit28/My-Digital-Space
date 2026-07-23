@@ -365,7 +365,31 @@ export function SiteFooterContent() {
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10 mb-8">
           <div className="max-w-[30.625rem] flex flex-col md:self-stretch">
             <h2 className={`text-[1.75rem] sm:text-[2rem] md:text-[2.25rem] font-semibold leading-[1.25] tracking-[-0.03em] text-text-primary mb-4 ${satoshi.className}`}>
-              You just scrolled through {(pageHeight ?? 4200).toLocaleString()}px of design.
+              You just scrolled through{" "}
+              <span className="relative mx-0.5 inline-block whitespace-nowrap rounded-md bg-text-primary px-2 py-0.5 text-white">
+                {(pageHeight ?? 4200).toLocaleString()}px
+                {/* needle cursor — top-right corner, pointing down-left into the number */}
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 16 16"
+                  aria-hidden
+                  className="pointer-events-none absolute -right-2.5 -top-2.5 -rotate-90"
+                >
+                  <path d="M2 1 L14 8.5 L8.5 9.5 L6 15 Z" fill="#0d99ff" stroke="#fff" strokeWidth="1" />
+                </svg>
+                {/* needle cursor — bottom-left corner, pointing up-right into the number */}
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 16 16"
+                  aria-hidden
+                  className="pointer-events-none absolute -bottom-2.5 -left-2.5 rotate-90"
+                >
+                  <path d="M2 1 L14 8.5 L8.5 9.5 L6 15 Z" fill="#a78bfa" stroke="#fff" strokeWidth="1" />
+                </svg>
+              </span>{" "}
+              of design.
             </h2>
             <div className={`text-[1.125rem] sm:text-[1.25rem] md:text-[1.375rem] font-normal leading-[1.6] tracking-tight text-text-body mb-6 ${figtree.className}`}>
               Clearly, you care about detail. That’s exactly how I build products. If you value craft, polish, and execution, let&apos;s build together.
