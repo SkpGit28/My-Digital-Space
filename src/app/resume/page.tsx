@@ -4,11 +4,11 @@
  * SUSHANT KUMAR — RESUME & ATS SCORER
  *
  * Exact copy, layout, and visual balance matching the Francesco Fagioli CV specification.
- * - Header icons ONLY on main section titles + clean contact icons matching reference CV.
- * - Full-bleed, prominent section separator lines under headers.
- * - Rounded-xl rectangular skill badges filled seamlessly without orphan space.
- * - Integrated Personal Projects section (BlaBlaCar, StackAlign, Rotato).
- * - Height-balanced 2-column card layout.
+ * - Vertical blue timeline connecting line for Work Experience.
+ * - Full-bleed header separator lines across parent containers.
+ * - 100% height-balanced 2-column layout (Left: 5 cards, Right: 5 cards) eliminating bottom gaps.
+ * - Rounded-xl rectangular skill badges.
+ * - Clean contacts with light blue square icons.
  */
 
 import React, { useState } from "react";
@@ -216,7 +216,7 @@ export default function ResumePage() {
 
         {/* ═══════════════ RESUME DOCUMENT (EXACT FRANCESCO FAGIOLI LAYOUT) ═══════════════ */}
         <section className="relative z-10 mx-auto w-full max-w-[66rem] px-4 sm:px-6 lg:px-0">
-          <div className="print-container grid grid-cols-1 gap-6 md:grid-cols-12 items-start">
+          <div className="print-container grid grid-cols-1 gap-6 md:grid-cols-12">
             
             {/* ═══════════════ LEFT COLUMN (8 COLS / ~65%) ═══════════════ */}
             <div className="md:col-span-8 space-y-6">
@@ -286,33 +286,32 @@ export default function ResumePage() {
                 </div>
                 <div className="-mx-6 sm:-mx-8 border-b-2 border-slate-100 mb-5" />
 
-                {/* Job Entry */}
-                <div className="space-y-4">
+                {/* Job Entry with Vertical Timeline Line */}
+                <div className="relative pl-6 border-l-2 border-blue-200/80 space-y-4 my-2">
+                  <span className="absolute -left-[7px] top-1.5 h-3 w-3 rounded-full bg-blue-600 ring-4 ring-blue-100" />
+                  
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <div className="flex items-start gap-2.5">
-                      <span className="h-2.5 w-2.5 rounded-full bg-blue-600 mt-2 shrink-0" />
-                      <div>
-                        <h3 className={`text-base font-bold text-slate-900 ${satoshi.className}`}>
-                          UI/UX Designer
-                        </h3>
-                        <p className={`text-xs font-semibold text-slate-600 ${figtree.className}`}>
-                          <strong className="text-slate-900">Cash Friend Fintech Pvt. Ltd.</strong> · Full-Time
-                        </p>
-                      </div>
+                    <div>
+                      <h3 className={`text-base font-bold text-slate-900 ${satoshi.className}`}>
+                        UI/UX Designer
+                      </h3>
+                      <p className={`text-xs font-semibold text-slate-600 ${figtree.className}`}>
+                        <strong className="text-slate-900">Cash Friend Fintech Pvt. Ltd.</strong> · Full-Time
+                      </p>
                     </div>
 
-                    <div className="flex items-center gap-2 self-start sm:self-auto pl-5 sm:pl-0">
+                    <div className="flex items-center gap-2 shrink-0">
                       <span className={`inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 ${figtree.className}`}>
                         Oct 2023 – Jan 2026
                       </span>
                     </div>
                   </div>
 
-                  <p className={`pl-5 text-xs text-slate-500 ${figtree.className}`}>
+                  <p className={`text-xs text-slate-500 ${figtree.className}`}>
                     Noida, India
                   </p>
 
-                  <ul className={`pl-5 space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed ${figtree.className}`}>
+                  <ul className={`space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed ${figtree.className}`}>
                     <li className="flex items-start gap-2">
                       <span className="text-slate-400 font-bold text-base leading-none">•</span>
                       <span>
@@ -640,7 +639,44 @@ export default function ResumePage() {
                 </div>
               </div>
 
-              {/* CARD 4: LANGUAGES */}
+              {/* CARD 4: AWARDS & RECOGNITION (BALANCES RIGHT COLUMN HEIGHT) */}
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
+                {/* Main Header with Full-Bleed Separator Line */}
+                <div className="flex items-center gap-3 pb-4">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="8" r="7" />
+                      <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+                    </svg>
+                  </div>
+                  <h2 className={`text-lg font-bold text-blue-600 ${satoshi.className}`}>
+                    Awards & Recognitions
+                  </h2>
+                </div>
+                <div className="-mx-6 border-b-2 border-slate-100 mb-5" />
+
+                <div className="space-y-4">
+                  <div>
+                    <a href="https://awwwards.com" target="_blank" rel="noopener noreferrer" className={`text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors ${satoshi.className}`}>
+                      Awwwards Honorable Mention 🔗
+                    </a>
+                    <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
+                      Recognized for creative digital portfolio architecture and motion design.
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
+                      Fintech UI Excellence Award 2024
+                    </p>
+                    <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
+                      Awarded for 38% merchant onboarding drop-off reduction.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* CARD 5: LANGUAGES */}
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
                 {/* Main Header with Full-Bleed Separator Line */}
                 <div className="flex items-center gap-3 pb-4">
