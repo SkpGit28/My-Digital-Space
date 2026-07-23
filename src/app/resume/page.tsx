@@ -658,7 +658,7 @@ export default function ResumePage() {
                 <div className="space-y-4">
                   <div>
                     <a href="https://awwwards.com" target="_blank" rel="noopener noreferrer" className={`text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors ${satoshi.className}`}>
-                      Awwwards Honorable Mention 🔗
+                      Awwwards Honorable Mention
                     </a>
                     <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
                       Recognized for creative digital portfolio architecture and motion design.
