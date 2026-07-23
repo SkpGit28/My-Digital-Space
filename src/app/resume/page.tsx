@@ -3,12 +3,14 @@
 /**
  * SUSHANT KUMAR — RESUME & ATS SCORER
  *
- * Exact copy, layout, and visual balance matching the Francesco Fagioli CV specification.
- * - Vertical blue timeline connecting line for Work Experience.
- * - Full-bleed header separator lines across parent containers.
- * - 100% height-balanced 2-column layout (Left: 5 cards, Right: 5 cards) eliminating bottom gaps.
+ * Exact copy, layout, and visual balance matching the Francesco Fagioli CV specification:
+ * - Standalone Photo Card on top left.
+ * - Standalone Name + Title + Contacts Card on top right.
+ * - Removed Awards & Recognitions; replaced with Core Capabilities card.
+ * - Vertical blue timeline line for Work Experience.
+ * - Full-bleed section header separators.
  * - Rounded-xl rectangular skill badges.
- * - Clean contacts with light blue square icons.
+ * - Both 5-card columns align pixel-perfectly on top and bottom horizontal baselines.
  */
 
 import React, { useState } from "react";
@@ -219,33 +221,16 @@ export default function ResumePage() {
           <div className="print-container grid grid-cols-1 gap-6 md:grid-cols-12">
             
             {/* ═══════════════ LEFT COLUMN (8 COLS / ~65%) ═══════════════ */}
-            <div className="md:col-span-8 space-y-6">
+            <div className="md:col-span-8 flex flex-col justify-between gap-6">
               
-              {/* CARD 1: HEADER CARD */}
-              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row items-center sm:items-start gap-6">
-                {/* Profile Photo */}
+              {/* CARD 1: PHOTO CARD (SEPARATE PARENT) */}
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs flex items-center justify-start">
                 <div className="relative h-32 w-32 sm:h-36 sm:w-36 shrink-0 overflow-hidden rounded-2xl border border-slate-200 bg-slate-100">
                   <img
                     src="/HeroMe.svg"
                     alt="Sushant Kumar"
                     className="h-full w-full object-cover grayscale"
                   />
-                </div>
-
-                <div className="flex-1 text-center sm:text-left pt-1">
-                  <h1 className={`text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight ${satoshi.className}`}>
-                    Sushant Kumar
-                  </h1>
-                  <p className={`text-lg font-semibold text-slate-600 mt-1 ${figtree.className}`}>
-                    UI/UX Designer
-                  </p>
-                  <p className={`text-xs text-slate-500 mt-3 flex items-center justify-center sm:justify-start gap-1.5 ${figtree.className}`}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                      <circle cx="12" cy="10" r="3" />
-                    </svg>
-                    Noida, India
-                  </p>
                 </div>
               </div>
 
@@ -435,25 +420,30 @@ export default function ResumePage() {
             </div>
 
             {/* ═══════════════ RIGHT COLUMN (4 COLS / ~35%) ═══════════════ */}
-            <div className="md:col-span-4 space-y-6">
+            <div className="md:col-span-4 flex flex-col justify-between gap-6">
               
-              {/* CARD 1: CONTACTS */}
-              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
-                {/* Main Header with Full-Bleed Separator Line */}
-                <div className="flex items-center gap-3 pb-4">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              {/* CARD 1: NAME, TITLE & CONTACTS (SEPARATE PARENT) */}
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
+                <div>
+                  <h1 className={`text-3xl font-extrabold text-slate-900 tracking-tight ${satoshi.className}`}>
+                    Sushant Kumar
+                  </h1>
+                  <p className={`text-base font-semibold text-slate-600 mt-1 ${figtree.className}`}>
+                    UI/UX Designer
+                  </p>
+                  <p className={`text-xs text-slate-500 mt-2 flex items-center gap-1.5 ${figtree.className}`}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
                     </svg>
-                  </div>
-                  <h2 className={`text-lg font-bold text-blue-600 ${satoshi.className}`}>
-                    Contacts
-                  </h2>
+                    Noida, India
+                  </p>
                 </div>
-                <div className="-mx-6 border-b-2 border-slate-100 mb-5" />
 
-                {/* Contact Items with Light Blue Square Icons + Clean Clickable Labels */}
-                <div className={`space-y-4 text-xs text-slate-600 ${figtree.className}`}>
+                <div className="-mx-6 border-b-2 border-slate-100 my-4" />
+
+                {/* Contact Items with Light Blue Square Icons */}
+                <div className={`space-y-3.5 text-xs text-slate-600 ${figtree.className}`}>
                   {/* Portfolio */}
                   <div className="flex items-center gap-3">
                     <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60">
@@ -590,7 +580,43 @@ export default function ResumePage() {
                 </div>
               </div>
 
-              {/* CARD 3: CERTIFICATIONS */}
+              {/* CARD 3: CORE CAPABILITIES (REPLACES AWARDS) */}
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
+                {/* Main Header with Full-Bleed Separator Line */}
+                <div className="flex items-center gap-3 pb-4">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                  </div>
+                  <h2 className={`text-lg font-bold text-blue-600 ${satoshi.className}`}>
+                    Core Capabilities
+                  </h2>
+                </div>
+                <div className="-mx-6 border-b-2 border-slate-100 mb-5" />
+
+                <div className="space-y-3.5">
+                  <div>
+                    <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
+                      Design System Architecture
+                    </h3>
+                    <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
+                      Token-based component libraries (Figma & code) accelerating dev handoffs.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
+                      Fintech Workflow Optimization
+                    </h3>
+                    <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
+                      5-step merchant onboarding & settlement dashboards handling ₹1.2+ Cr volume.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* CARD 4: CERTIFICATIONS */}
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
                 {/* Main Header with Full-Bleed Separator Line */}
                 <div className="flex items-center gap-3 pb-4">
@@ -608,8 +634,8 @@ export default function ResumePage() {
                 </div>
                 <div className="-mx-6 border-b-2 border-slate-100 mb-5" />
 
-                {/* Clean Certification Entries WITHOUT inner document icons */}
-                <div className="space-y-4">
+                {/* Clean Certification Entries */}
+                <div className="space-y-3.5">
                   <div>
                     <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
                       Google UX Design Certificate
@@ -634,43 +660,6 @@ export default function ResumePage() {
                     </h3>
                     <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
                       Professional Certification
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* CARD 4: AWARDS & RECOGNITION (BALANCES RIGHT COLUMN HEIGHT) */}
-              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
-                {/* Main Header with Full-Bleed Separator Line */}
-                <div className="flex items-center gap-3 pb-4">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="8" r="7" />
-                      <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
-                    </svg>
-                  </div>
-                  <h2 className={`text-lg font-bold text-blue-600 ${satoshi.className}`}>
-                    Awards & Recognitions
-                  </h2>
-                </div>
-                <div className="-mx-6 border-b-2 border-slate-100 mb-5" />
-
-                <div className="space-y-4">
-                  <div>
-                    <a href="https://awwwards.com" target="_blank" rel="noopener noreferrer" className={`text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors ${satoshi.className}`}>
-                      Awwwards Honorable Mention
-                    </a>
-                    <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
-                      Recognized for creative digital portfolio architecture and motion design.
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
-                      Fintech UI Excellence Award 2024
-                    </p>
-                    <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
-                      Awarded for 38% merchant onboarding drop-off reduction.
                     </p>
                   </div>
                 </div>
