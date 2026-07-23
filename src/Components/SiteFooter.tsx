@@ -274,6 +274,9 @@ export function SiteFooterContent() {
   const [thinking, setThinking] = useState(false);
   const [score, setScore] = useState({ you: 0, draws: 0, skp: 0 });
   const [time, setTime] = useState("");
+  // Actual scrolled height of the page this footer sits on. `null` until measured
+  // on the client; the headline falls back to 4,200 for SSR / first paint.
+  const [pageHeight, setPageHeight] = useState<number | null>(null);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrating the score from localStorage on mount is intentional
@@ -285,6 +288,21 @@ export function SiteFooterContent() {
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
+  }, []);
+
+  // Measure the real page height and keep it in sync with layout changes
+  // (lazy images, font swaps, viewport resize) so the headline stays exact.
+  useEffect(() => {
+    const measure = () =>
+      setPageHeight(Math.round(document.documentElement.scrollHeight));
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(document.body);
+    window.addEventListener("load", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("load", measure);
+    };
   }, []);
 
   const saveScore = (s: typeof score) => { setScore(s); try { localStorage.setItem("skp-ttt-score", JSON.stringify(s)); } catch {} };
@@ -347,7 +365,7 @@ export function SiteFooterContent() {
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10 mb-8">
           <div className="max-w-[30.625rem] flex flex-col md:self-stretch">
             <h2 className={`text-[1.75rem] sm:text-[2rem] md:text-[2.25rem] font-semibold leading-[1.25] tracking-[-0.03em] text-text-primary mb-4 ${satoshi.className}`}>
-              You just scrolled through 4,200px of design.
+              You just scrolled through {(pageHeight ?? 4200).toLocaleString()}px of design.
             </h2>
             <div className={`text-[1.125rem] sm:text-[1.25rem] md:text-[1.375rem] font-normal leading-[1.6] tracking-tight text-text-body mb-6 ${figtree.className}`}>
               Clearly, you care about detail. That’s exactly how I build products. If you value craft, polish, and execution, let&apos;s build together.
