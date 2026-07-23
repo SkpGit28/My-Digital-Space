@@ -339,7 +339,7 @@ export function SiteFooterContent() {
       ? { head: `Nice, you've beaten me ${score.you === 1 ? "once" : `${score.you} times`}.` }
       : gamesPlayed > 0
         ? { head: `Still unbeaten. You're 0–${score.draws}–${score.skp} against me, care to change that?` }
-        : { head: "Beat me at tic-tac-toe if you can." };
+        : { head: "Beat me at tic-tac-toe and there will be no salary negotiations." };
 
   const handleMailTo = () => {
     const subject = encodeURIComponent("Let's talk");
