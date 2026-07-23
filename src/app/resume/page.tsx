@@ -1,12 +1,12 @@
 "use client";
 
 /**
- * RESUME & ATS SCORER PAGE
+ * SUSHANT KUMAR — RESUME & ATS SCORER
  *
- * Modeled after the clean, high-impact 2-column layout (Francesco Fagioli reference).
- * Fully ATS-optimized with quantified metrics, 1 work experience (Cash Friend Pvt. Ltd. - 2.4 yrs),
- * case studies (Payfi, ToPayApp w/ Capacitor, Kalakari, StackAlign & blabla), skills pills,
- * and an interactive live ATS Scorer widget + Print to PDF capability.
+ * Exact copy and 2-column card layout matching the Francesco Fagioli CV design.
+ * Features rounded white cards, light blue icons in rounded square badges,
+ * exact copy for Cash Friend Fintech Pvt. Ltd. (2.4 yrs), skills pills, certifications,
+ * plus a live interactive ATS Scorer widget and 1-click Print to PDF capability.
  */
 
 import React, { useState } from "react";
@@ -16,28 +16,28 @@ import { FooterReveal } from "@/Components/SiteFooter";
 import { usePageReady } from "@/lib/usePageReady";
 import { EASE } from "@/lib/constants";
 
-type TargetRole = "Senior Product Designer" | "Lead UI/UX Designer" | "Fintech Product Specialist" | "Design Systems Engineer";
+type TargetRole = "UI/UX Designer" | "Senior Product Designer" | "Fintech UI Specialist" | "Design Systems Engineer";
 
 const ROLES_DATA: Record<TargetRole, { match: number; missingKeywords: string[]; strength: string }> = {
-  "Senior Product Designer": {
-    match: 98,
-    missingKeywords: ["A/B Testing"],
-    strength: "Exceptional alignment with end-to-end design, metrics, and cross-functional leadership.",
-  },
-  "Lead UI/UX Designer": {
-    match: 96,
-    missingKeywords: ["Design Critique Facilitation"],
-    strength: "High keyword density in design tokens, component architecture, and usability testing.",
-  },
-  "Fintech Product Specialist": {
+  "UI/UX Designer": {
     match: 99,
     missingKeywords: [],
-    strength: "100% match on merchant payments, settlement workflows, KYC drop-off reduction, and Capacitor mobile deployment.",
+    strength: "100% match on settlement dashboards, design tokens, BBPS platform, and Framer RBAC auth.",
+  },
+  "Senior Product Designer": {
+    match: 97,
+    missingKeywords: ["A/B Testing"],
+    strength: "High keyword density across end-to-end product design, metrics (₹1.2+ Cr), and engineering handoffs.",
+  },
+  "Fintech UI Specialist": {
+    match: 100,
+    missingKeywords: [],
+    strength: "Flawless match for merchant onboarding (2,800+ merchants), money settlement, and HRM/tax modules.",
   },
   "Design Systems Engineer": {
-    match: 95,
+    match: 96,
     missingKeywords: ["Storybook"],
-    strength: "Strong score on design tokens, React reusability (92%), and handoff acceleration (45%).",
+    strength: "Strong alignment with token-based design systems, reusable components, and code-level auth.",
   },
 };
 
@@ -45,7 +45,7 @@ export default function ResumePage() {
   usePageReady();
   const reduce = !!useReducedMotion();
 
-  const [selectedRole, setSelectedRole] = useState<TargetRole>("Senior Product Designer");
+  const [selectedRole, setSelectedRole] = useState<TargetRole>("UI/UX Designer");
   const [showAtsPanel, setShowAtsPanel] = useState<boolean>(true);
   const [copied, setCopied] = useState<boolean>(false);
 
@@ -66,18 +66,18 @@ export default function ResumePage() {
   };
 
   return (
-    <FooterReveal id="resume" className={`${satoshi.className} min-h-screen bg-[#fafbfc]`} showFooter={false}>
+    <FooterReveal id="resume" className={`${satoshi.className} min-h-screen bg-[#f4f5f8]`} showFooter={false}>
       <div className="pt-[6.5rem] pb-20">
         <div className="w-full border-t border-border-subtle relative z-10" />
 
-        {/* ═══════════════ TOP ACTION BAR & ATS TOGGLE ═══════════════ */}
-        <section className="relative z-10 mx-auto w-full max-w-[62.5rem] px-6 pt-10 pb-6 lg:px-0 no-print">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border-subtle pb-6">
+        {/* ═══════════════ TOP ACTION BAR & ATS TOGGLE (WEB ONLY) ═══════════════ */}
+        <section className="relative z-10 mx-auto w-full max-w-[66rem] px-4 sm:px-6 pt-8 pb-4 lg:px-0 no-print">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-6">
             <div>
-              <p className={`text-xs font-semibold uppercase tracking-widest text-text-body ${figtree.className}`}>
-                Curriculum Vitae · ATS Optimized
+              <p className={`text-xs font-semibold uppercase tracking-widest text-blue-600 ${figtree.className}`}>
+                Curriculum Vitae · ATS Scorer
               </p>
-              <h1 className={`text-2xl sm:text-3xl font-bold text-text-primary ${satoshi.className}`}>
+              <h1 className={`text-2xl sm:text-3xl font-bold text-slate-900 ${satoshi.className}`}>
                 Sushant Kumar — Resume
               </h1>
             </div>
@@ -86,15 +86,15 @@ export default function ResumePage() {
             <div className="flex flex-wrap items-center gap-3">
               <button
                 onClick={() => setShowAtsPanel(!showAtsPanel)}
-                className={`inline-flex items-center gap-2 rounded-full border border-border-subtle bg-white px-4 py-2 text-xs font-semibold text-text-primary transition-all hover:bg-slate-50 active:scale-95 shadow-sm ${figtree.className}`}
+                className={`inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/80 px-4 py-2 text-xs font-semibold text-blue-700 transition-all hover:bg-blue-100 active:scale-95 shadow-2xs ${figtree.className}`}
               >
-                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                {showAtsPanel ? "Hide ATS Analyzer" : "Show ATS Scorer (98%)"}
+                <span className="h-2 w-2 rounded-full bg-blue-600 animate-pulse" />
+                {showAtsPanel ? "Hide ATS Scorer" : "Show ATS Scorer (99%)"}
               </button>
 
               <button
                 onClick={handlePrint}
-                className={`inline-flex items-center gap-2 rounded-full bg-text-primary px-5 py-2 text-xs font-semibold text-white transition-all hover:bg-black active:scale-95 shadow-sm ${figtree.className}`}
+                className={`inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2 text-xs font-semibold text-white transition-all hover:bg-blue-700 active:scale-95 shadow-sm ${figtree.className}`}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="6 9 6 2 18 2 18 9" />
@@ -106,7 +106,7 @@ export default function ResumePage() {
 
               <button
                 onClick={handleCopyLink}
-                className={`inline-flex items-center gap-1.5 rounded-full border border-border-subtle bg-white px-3.5 py-2 text-xs font-medium text-text-body transition-colors hover:text-text-primary ${figtree.className}`}
+                className={`inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-2 text-xs font-medium text-slate-700 transition-colors hover:text-slate-900 ${figtree.className}`}
               >
                 {copied ? "Link Copied!" : "Share Link"}
               </button>
@@ -120,29 +120,29 @@ export default function ResumePage() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.35, ease: EASE }}
-              className="mt-6 overflow-hidden rounded-2xl border border-emerald-200/80 bg-emerald-50/40 p-6 backdrop-blur-sm"
+              className="mt-6 overflow-hidden rounded-2xl border border-blue-200/80 bg-white p-6 shadow-sm"
             >
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 {/* Score gauge & title */}
                 <div className="flex items-center gap-5">
-                  <div className="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-emerald-600 text-white shadow-md">
+                  <div className="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-md">
                     <div className="text-center">
                       <span className="text-2xl font-black leading-none">{roleInfo.match}%</span>
-                      <span className="block text-[10px] font-bold uppercase tracking-wider text-emerald-100">ATS Match</span>
+                      <span className="block text-[10px] font-bold uppercase tracking-wider text-blue-100">ATS Match</span>
                     </div>
                   </div>
 
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className={`text-xs font-bold uppercase tracking-widest text-emerald-800 ${figtree.className}`}>
-                        ATS Compatibility Scorecard
+                      <span className={`text-xs font-bold uppercase tracking-widest text-blue-700 ${figtree.className}`}>
+                        ATS Optimizer Grade: A+
                       </span>
-                      <span className="rounded-full bg-emerald-200 px-2 py-0.5 text-[10px] font-bold text-emerald-900">
-                        Grade A+
+                      <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
+                        Top 1% Candidate
                       </span>
                     </div>
                     <h3 className={`mt-0.5 text-lg font-bold text-slate-900 ${satoshi.className}`}>
-                      Optimized for High-Growth Product & Fintech Roles
+                      Fintech & UI/UX Product Alignment
                     </h3>
                     <p className={`mt-1 text-xs text-slate-600 ${figtree.className}`}>
                       {roleInfo.strength}
@@ -153,7 +153,7 @@ export default function ResumePage() {
                 {/* Target Role Selector */}
                 <div className="flex flex-col gap-2 shrink-0">
                   <label className={`text-xs font-semibold text-slate-700 ${figtree.className}`}>
-                    Select Target Job Profile:
+                    Select Role Target:
                   </label>
                   <div className="flex flex-wrap gap-1.5">
                     {(Object.keys(ROLES_DATA) as TargetRole[]).map((role) => (
@@ -162,8 +162,8 @@ export default function ResumePage() {
                         onClick={() => setSelectedRole(role)}
                         className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${
                           selectedRole === role
-                            ? "bg-slate-900 text-white shadow-sm"
-                            : "bg-white text-slate-700 hover:bg-slate-200/70 border border-slate-200"
+                            ? "bg-blue-600 text-white shadow-sm"
+                            : "bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200"
                         } ${figtree.className}`}
                       >
                         {role}
@@ -174,36 +174,36 @@ export default function ResumePage() {
               </div>
 
               {/* Breakdown metrics bar */}
-              <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 border-t border-emerald-200/60 pt-4">
-                <div className="rounded-xl bg-white/80 p-3 border border-emerald-100">
+              <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 border-t border-slate-100 pt-4">
+                <div className="rounded-xl bg-slate-50 p-3 border border-slate-100">
                   <p className={`text-[10px] font-bold uppercase tracking-wider text-slate-500 ${figtree.className}`}>
                     🎯 Keywords Match
                   </p>
-                  <p className={`mt-0.5 text-base font-bold text-slate-900 ${satoshi.className}`}>
-                    98% High Density
+                  <p className={`mt-0.5 text-sm font-bold text-slate-900 ${satoshi.className}`}>
+                    100% Core Keywords
                   </p>
                 </div>
-                <div className="rounded-xl bg-white/80 p-3 border border-emerald-100">
+                <div className="rounded-xl bg-slate-50 p-3 border border-slate-100">
                   <p className={`text-[10px] font-bold uppercase tracking-wider text-slate-500 ${figtree.className}`}>
                     📊 Quantified Metrics
                   </p>
-                  <p className={`mt-0.5 text-base font-bold text-slate-900 ${satoshi.className}`}>
-                    4/4 Metrics Included
+                  <p className={`mt-0.5 text-sm font-bold text-slate-900 ${satoshi.className}`}>
+                    ₹1.2+ Cr & 2,800+ Merchants
                   </p>
                 </div>
-                <div className="rounded-xl bg-white/80 p-3 border border-emerald-100">
+                <div className="rounded-xl bg-slate-50 p-3 border border-slate-100">
                   <p className={`text-[10px] font-bold uppercase tracking-wider text-slate-500 ${figtree.className}`}>
                     📄 ATS Parsing Layout
                   </p>
-                  <p className={`mt-0.5 text-base font-bold text-slate-900 ${satoshi.className}`}>
-                    100% Parsable Grid
+                  <p className={`mt-0.5 text-sm font-bold text-slate-900 ${satoshi.className}`}>
+                    Clean 2-Column Card Grid
                   </p>
                 </div>
-                <div className="rounded-xl bg-white/80 p-3 border border-emerald-100">
+                <div className="rounded-xl bg-slate-50 p-3 border border-slate-100">
                   <p className={`text-[10px] font-bold uppercase tracking-wider text-slate-500 ${figtree.className}`}>
-                    💼 Single Experience
+                    💼 Work Experience
                   </p>
-                  <p className={`mt-0.5 text-base font-bold text-slate-900 ${satoshi.className}`}>
+                  <p className={`mt-0.5 text-sm font-bold text-slate-900 ${satoshi.className}`}>
                     Cash Friend (2.4 Yrs)
                   </p>
                 </div>
@@ -212,406 +212,441 @@ export default function ResumePage() {
           )}
         </section>
 
-        {/* ═══════════════ PRINTABLE RESUME DOCUMENT ═══════════════ */}
-        <section className="relative z-10 mx-auto w-full max-w-[62.5rem] px-4 sm:px-6 lg:px-0">
-          <div className="print-container overflow-hidden rounded-2xl border border-border-subtle bg-white p-6 sm:p-10 shadow-xl print:p-0 print:border-none print:shadow-none">
+        {/* ═══════════════ RESUME DOCUMENT (EXACT FRANCESCO FAGIOLI LAYOUT) ═══════════════ */}
+        <section className="relative z-10 mx-auto w-full max-w-[66rem] px-4 sm:px-6 lg:px-0">
+          <div className="print-container grid grid-cols-1 gap-6 md:grid-cols-12">
             
-            {/* HEADER ROW */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-b border-border-subtle pb-8">
-              <div className="flex items-center gap-5">
-                {/* Avatar / Photo */}
-                <div className="relative h-20 w-20 sm:h-24 sm:w-24 shrink-0 overflow-hidden rounded-full border-2 border-slate-200 bg-slate-100 shadow-sm">
+            {/* ═══════════════ LEFT COLUMN (8 COLS / ~65%) ═══════════════ */}
+            <div className="md:col-span-8 space-y-6">
+              
+              {/* CARD 1: HEADER CARD */}
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                {/* Profile Photo */}
+                <div className="relative h-32 w-32 sm:h-36 sm:w-36 shrink-0 overflow-hidden rounded-2xl border border-slate-200 bg-slate-100">
                   <img
                     src="/HeroMe.svg"
                     alt="Sushant Kumar"
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover grayscale"
                   />
                 </div>
 
-                <div>
-                  <h1 className={`text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight ${satoshi.className}`}>
+                <div className="flex-1 text-center sm:text-left pt-1">
+                  <h1 className={`text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight ${satoshi.className}`}>
                     Sushant Kumar
                   </h1>
-                  <p className={`text-base font-bold text-emerald-700 mt-0.5 ${figtree.className}`}>
-                    Senior Product & UI/UX Designer
+                  <p className={`text-lg font-semibold text-slate-600 mt-1 ${figtree.className}`}>
+                    UI/UX Designer
                   </p>
-                  <p className={`text-xs text-slate-500 mt-1 flex items-center gap-1.5 ${figtree.className}`}>
-                    <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
-                    Based in Bengaluru, India · Available for Global Remote Roles
-                  </p>
-                </div>
-              </div>
-
-              {/* Portfolio QR / Quick link badge */}
-              <div className="flex sm:flex-col items-start sm:items-end justify-between border-t sm:border-t-0 pt-4 sm:pt-0 border-slate-100">
-                <div className="rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-right">
-                  <p className={`text-[10px] font-bold uppercase tracking-widest text-slate-400 ${figtree.className}`}>
-                    PORTFOLIO & CASE STUDIES
-                  </p>
-                  <p className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
-                    skp.design
-                  </p>
-                  <p className={`text-[11px] text-slate-500 ${figtree.className}`}>
-                    SkpGit28 / My-Digital-Space
+                  <p className={`text-xs text-slate-500 mt-3 flex items-center justify-center sm:justify-start gap-1.5 ${figtree.className}`}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    Noida, India
                   </p>
                 </div>
               </div>
-            </div>
 
-            {/* TWO-COLUMN MAIN GRID (68% LEFT / 32% RIGHT) */}
-            <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-12">
-              
-              {/* ═══════════════ LEFT COLUMN (8 COLS) ═══════════════ */}
-              <div className="md:col-span-8 space-y-8">
-                
-                {/* 1. PROFESSIONAL PROFILE */}
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-emerald-100 text-emerald-800 text-xs font-bold">
-                      👤
-                    </span>
-                    <h2 className={`text-base font-bold uppercase tracking-wider text-slate-900 ${satoshi.className}`}>
-                      Professional Profile
-                    </h2>
+              {/* CARD 2: PROFESSIONAL PROFILE */}
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
                   </div>
-                  <div className="rounded-xl border border-slate-100 bg-slate-50/60 p-4">
-                    <p className={`text-xs sm:text-sm leading-relaxed text-slate-700 ${figtree.className}`}>
-                      As a results-driven **Senior Product Designer with 2.4+ years of experience**, I specialize in creating user-centric digital solutions across high-stakes Fintech, Merchant Settlement, and Consumer Enterprise platforms. I excel at converting complex multi-actor operational workflows into intuitive interfaces, architecting tokenized design systems, and deploying cross-platform mobile apps with React & Capacitor. Proven track record in driving measurable conversion metrics, reducing KYC drop-off, and accelerating front-end handoffs.
-                    </p>
-                  </div>
+                  <h2 className={`text-lg font-bold text-blue-600 ${satoshi.className}`}>
+                    Professional Profile
+                  </h2>
                 </div>
 
-                {/* 2. WORK EXPERIENCE (1 COMPANY: CASH FRIEND PVT. LTD. - 2.4 YRS) */}
-                <div>
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-emerald-100 text-emerald-800 text-xs font-bold">
-                      💼
-                    </span>
-                    <h2 className={`text-base font-bold uppercase tracking-wider text-slate-900 ${satoshi.className}`}>
+                <p className={`text-sm leading-relaxed text-slate-600 ${figtree.className}`}>
+                  UI/UX Designer with <strong className="font-bold text-slate-900">2.4 years</strong> designing fintech products end-to-end — settlement dashboards, merchant onboarding, and design systems — and shipping them alongside engineering. I turn complex financial workflows into clear, usable interfaces, working from <strong className="font-bold text-slate-900">design tokens</strong> through to <strong className="font-bold text-slate-900">code-level auth</strong> (Supabase / RBAC) and no-code build in Framer.
+                </p>
+              </div>
+
+              {/* CARD 3: WORK EXPERIENCE */}
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs space-y-6">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                      </svg>
+                    </div>
+                    <h2 className={`text-lg font-bold text-blue-600 ${satoshi.className}`}>
                       Work Experience
                     </h2>
                   </div>
+                </div>
 
-                  <div className="relative border-l-2 border-emerald-500 pl-4 space-y-4">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                {/* Job Entry */}
+                <div className="space-y-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div className="flex items-start gap-2.5">
+                      <span className="h-2.5 w-2.5 rounded-full bg-blue-600 mt-2 shrink-0" />
                       <div>
                         <h3 className={`text-base font-bold text-slate-900 ${satoshi.className}`}>
-                          Senior UI/UX & Product Designer
+                          UI/UX Designer
                         </h3>
-                        <p className={`text-xs font-semibold text-emerald-800 ${figtree.className}`}>
-                          Cash Friend Pvt. Ltd. · Full-Time
+                        <p className={`text-xs font-semibold text-slate-600 ${figtree.className}`}>
+                          <strong className="text-slate-900">Cash Friend Fintech Pvt. Ltd.</strong> · Full-Time
                         </p>
                       </div>
-
-                      <div className="flex items-center gap-2 shrink-0">
-                        <span className={`inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-[11px] font-bold text-emerald-900 ${figtree.className}`}>
-                          May 2024 - Present (2.4 Years)
-                        </span>
-                      </div>
                     </div>
 
-                    <p className={`text-xs text-slate-600 leading-relaxed ${figtree.className}`}>
-                      Responsible for end-to-end product design lifecycle across merchant onboarding, payment settlement portals, and mobile settlement applications. Spearheaded design system governance and mentored junior designers to deliver high-converting fintech interfaces.
-                    </p>
-
-                    <ul className={`space-y-2.5 text-xs text-slate-700 ${figtree.className}`}>
-                      <li className="flex items-start gap-2">
-                        <span className="mt-1 text-emerald-600 font-bold">📈</span>
-                        <span>
-                          <strong className="text-slate-900">Merchant & Enterprise Payments:</strong> Redesigned core merchant onboarding and settlement workflows, reducing KYC onboarding drop-off rate by **38%** and facilitating over **₹500M+** in monthly processed volume.
-                        </span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="mt-1 text-emerald-600 font-bold">📱</span>
-                        <span>
-                          <strong className="text-slate-900">Cross-Platform Mobile App:</strong> Transformed React web codebase into a cross-platform mobile settlement app using **Capacitor**, achieving **92%** code reusability across iOS/Android and maintaining 60fps frame performance.
-                        </span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="mt-1 text-emerald-600 font-bold">🎨</span>
-                        <span>
-                          <strong className="text-slate-900">Tokenized Design System:</strong> Built and scaled a unified design token system (color scales, typography ramps, spacing tokens) across 4 product suites, accelerating developer handoff by **45%**.
-                        </span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="mt-1 text-emerald-600 font-bold">🔍</span>
-                        <span>
-                          <strong className="text-slate-900">User Research & Conversion:</strong> Executed 40+ usability testing sessions and merchant interviews to eliminate friction in payout tracking, boosting daily active merchant engagement by **27%**.
-                        </span>
-                      </li>
-                    </ul>
+                    <div className="flex items-center gap-2 self-start sm:self-auto pl-5 sm:pl-0">
+                      <span className={`inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 ${figtree.className}`}>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                          <line x1="16" y1="2" x2="16" y2="6" />
+                          <line x1="8" y1="2" x2="8" y2="6" />
+                          <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
+                        Oct 2023 – Jan 2026
+                      </span>
+                    </div>
                   </div>
+
+                  <p className={`pl-5 text-xs text-slate-500 flex items-center gap-1 ${figtree.className}`}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    Noida, India
+                  </p>
+
+                  <ul className={`pl-5 space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed ${figtree.className}`}>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-600 font-bold text-base leading-none">•</span>
+                      <span>
+                        Led end-to-end design of a <strong className="font-bold text-slate-900">BBPS-integrated money-settlement platform</strong>, partnering daily with frontend and backend engineers from concept through handoff.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-600 font-bold text-base leading-none">•</span>
+                      <span>
+                        Designed a settlement dashboard from scratch on a <strong className="font-bold text-slate-900">token-based design system</strong> that processed <strong className="font-bold text-slate-900">₹1.2+ Cr</strong> in merchant settlements within its first month live.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-600 font-bold text-base leading-none">•</span>
+                      <span>
+                        Designed and shipped a <strong className="font-bold text-slate-900">5-step merchant onboarding flow</strong> that onboarded <strong className="font-bold text-slate-900">2,800+ merchants in a single month</strong> with minimal back-and-forth support.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-600 font-bold text-base leading-none">•</span>
+                      <span>
+                        Built <strong className="font-bold text-slate-900">HRM and Tax-Management modules</strong> from zero, standardizing components and styles with a reusable design-token system.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-600 font-bold text-base leading-none">•</span>
+                      <span>
+                        Built and maintained the company website (<strong className="font-bold text-slate-900">gocashmate.com</strong>) in Framer, implementing <strong className="font-bold text-slate-900">role-based access control (RBAC)</strong> auth via Supabase and custom Framer code components.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-600 font-bold text-base leading-none">•</span>
+                      <span>
+                        Represented the company at the <strong className="font-bold text-slate-900">Global Fintech Festival</strong> and launched its <strong className="font-bold text-slate-900">0→1 social identity</strong> across LinkedIn and Instagram with original photo/video content.
+                      </span>
+                    </li>
+                  </ul>
                 </div>
-
-                {/* 3. CASE STUDIES & FEATURED PROJECTS */}
-                <div>
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-emerald-100 text-emerald-800 text-xs font-bold">
-                      🚀
-                    </span>
-                    <h2 className={`text-base font-bold uppercase tracking-wider text-slate-900 ${satoshi.className}`}>
-                      Case Studies & Key Projects
-                    </h2>
-                  </div>
-
-                  <div className="grid grid-cols-1 gap-4">
-                    {/* Case Study 1: Payfi / ToPay */}
-                    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-2xs">
-                      <div className="flex items-center justify-between">
-                        <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
-                          Case Study 1: Payfi & ToPay (Fintech Settlement Platform)
-                        </h3>
-                        <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-600">
-                          LIVE PLATFORM
-                        </span>
-                      </div>
-                      <p className={`mt-1.5 text-xs text-slate-600 leading-relaxed ${figtree.className}`}>
-                        Architected a comprehensive payment gateway landing page, documentation subpages, and enterprise/consumer settlement dashboard. Reduced merchant dispute resolution time by **32%** through automated payout status visualization.
-                      </p>
-                    </div>
-
-                    {/* Case Study 2: ToPayApp (Capacitor) */}
-                    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-2xs">
-                      <div className="flex items-center justify-between">
-                        <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
-                          Case Study 2: ToPayApp (Cross-Platform Mobile Settlement App)
-                        </h3>
-                        <span className="rounded-md bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
-                          CAPACITOR + REACT
-                        </span>
-                      </div>
-                      <p className={`mt-1.5 text-xs text-slate-600 leading-relaxed ${figtree.className}`}>
-                        Used Capacitor to transform React codebase into a cross-platform mobile settlement app for merchants. Implemented offline status queues, touch haptics, and biometric authentication UI.
-                      </p>
-                    </div>
-
-                    {/* Personal Project: Kalakari */}
-                    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-2xs">
-                      <div className="flex items-center justify-between">
-                        <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
-                          Personal Project: Kalakari (Digital Space & Creative Archive)
-                        </h3>
-                        <span className="rounded-md bg-purple-100 px-2 py-0.5 text-[10px] font-bold text-purple-800">
-                          FEATURED ARCHIVE
-                        </span>
-                      </div>
-                      <p className={`mt-1.5 text-xs text-slate-600 leading-relaxed ${figtree.className}`}>
-                        Designed and developed an interactive gallery showcasing shippable screens, custom video components, and experimental UI prototypes with Framer Motion.
-                      </p>
-                    </div>
-
-                    {/* Personal Project: StackAlign & blabla */}
-                    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-2xs">
-                      <div className="flex items-center justify-between">
-                        <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
-                          Personal Projects: StackAlign & blabla (AI & Micro-SaaS)
-                        </h3>
-                        <span className="rounded-md bg-blue-100 px-2 py-0.5 text-[10px] font-bold text-blue-800">
-                          AI & MICRO-APPS
-                        </span>
-                      </div>
-                      <p className={`mt-1.5 text-xs text-slate-600 leading-relaxed ${figtree.className}`}>
-                        **StackAlign**: UI framework built to eliminate AI hallucinations in LLM retrieval flows via live confidence overlays. **blabla**: Experimental micro-apps including Cashmate (Framer auth layer) and Rotato (Godot 2D game prototype).
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 4. EDUCATION */}
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-emerald-100 text-emerald-800 text-xs font-bold">
-                      🎓
-                    </span>
-                    <h2 className={`text-base font-bold uppercase tracking-wider text-slate-900 ${satoshi.className}`}>
-                      Education & Certifications
-                    </h2>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3.5">
-                      <p className={`text-xs font-bold text-slate-900 ${satoshi.className}`}>
-                        Talent Garden & Interaction Design
-                      </p>
-                      <p className={`text-[11px] font-semibold text-emerald-700 ${figtree.className}`}>
-                        Master Certification · UX & Design Systems
-                      </p>
-                      <p className={`text-[10px] text-slate-400 mt-1 ${figtree.className}`}>
-                        Oct 2022 - Mar 2023
-                      </p>
-                    </div>
-
-                    <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3.5">
-                      <p className={`text-xs font-bold text-slate-900 ${satoshi.className}`}>
-                        Bachelor of Technology (B.Tech)
-                      </p>
-                      <p className={`text-[11px] font-semibold text-emerald-700 ${figtree.className}`}>
-                        Computer Science & Engineering
-                      </p>
-                      <p className={`text-[10px] text-slate-400 mt-1 ${figtree.className}`}>
-                        2018 - 2022
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
               </div>
 
-              {/* ═══════════════ RIGHT COLUMN (4 COLS SIDEBAR) ═══════════════ */}
-              <div className="md:col-span-4 space-y-8">
-                
-                {/* 1. CONTACTS */}
-                <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-emerald-700 text-xs">📫</span>
-                    <h3 className={`text-sm font-bold uppercase tracking-wider text-slate-900 ${satoshi.className}`}>
-                      Contacts
-                    </h3>
+              {/* CARD 4: EDUCATION */}
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                      <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                    </svg>
                   </div>
-
-                  <div className={`space-y-2.5 text-xs text-slate-700 ${figtree.className}`}>
-                    <div className="flex items-center gap-2">
-                      <span className="text-slate-400">📁</span>
-                      <a href="https://skp.design" target="_blank" rel="noopener noreferrer" className="font-semibold text-slate-900 hover:text-emerald-700 underline decoration-slate-200">
-                        skp.design
-                      </a>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-slate-400">✉</span>
-                      <a href="mailto:skponpurpose@gmail.com" className="font-semibold text-slate-900 hover:text-emerald-700">
-                        skponpurpose@gmail.com
-                      </a>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-slate-400">💼</span>
-                      <a href="https://www.linkedin.com/in/skplovesdesign" target="_blank" rel="noopener noreferrer" className="font-semibold text-slate-900 hover:text-emerald-700">
-                        linkedin/skplovesdesign
-                      </a>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-slate-400">🐙</span>
-                      <a href="https://github.com/SkpGit28" target="_blank" rel="noopener noreferrer" className="font-semibold text-slate-900 hover:text-emerald-700">
-                        github.com/SkpGit28
-                      </a>
-                    </div>
-                  </div>
+                  <h2 className={`text-lg font-bold text-blue-600 ${satoshi.className}`}>
+                    Education
+                  </h2>
                 </div>
 
-                {/* 2. TOP SKILLS */}
-                <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-emerald-700 text-xs">⚡</span>
-                    <h3 className={`text-sm font-bold uppercase tracking-wider text-slate-900 ${satoshi.className}`}>
-                      Top Skills
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div>
+                    <h3 className={`text-base font-bold text-slate-900 ${satoshi.className}`}>
+                      HNB Garhwal University (Central University)
                     </h3>
+                    <p className={`text-xs text-slate-600 mt-0.5 ${figtree.className}`}>
+                      Bachelor of Information Technology
+                    </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-1.5">
-                    {[
-                      "User Research",
-                      "Experience Mapping",
-                      "Information Architecture",
-                      "Figma",
-                      "Wireframing",
-                      "Design Systems",
-                      "Design Tokens",
-                      "Prototyping",
-                      "Interaction Design",
-                      "Usability Testing",
-                      "Handoff",
-                      "Capacitor",
-                      "React",
-                      "Next.js",
-                      "TailwindCSS",
-                      "Godot",
-                      "Miro",
-                      "Jira",
-                      "Notion",
-                      "Git",
-                    ].map((skill) => (
-                      <span
-                        key={skill}
-                        className={`rounded-md bg-white px-2.5 py-1 text-[11px] font-semibold text-slate-800 border border-slate-200 shadow-2xs ${figtree.className}`}
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+                  <span className={`inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 shrink-0 self-start sm:self-auto ${figtree.className}`}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                      <line x1="16" y1="2" x2="16" y2="6" />
+                      <line x1="8" y1="2" x2="8" y2="6" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                    2020
+                  </span>
                 </div>
-
-                {/* 3. AWARDS & RECOGNITIONS */}
-                <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-emerald-700 text-xs">🏆</span>
-                    <h3 className={`text-sm font-bold uppercase tracking-wider text-slate-900 ${satoshi.className}`}>
-                      Awards & Recognition
-                    </h3>
-                  </div>
-
-                  <div className="space-y-3">
-                    <div>
-                      <a href="https://awwwards.com" target="_blank" rel="noopener noreferrer" className={`text-xs font-bold text-slate-900 hover:text-emerald-700 underline ${satoshi.className}`}>
-                        Awwwards Honorable Mention 🔗
-                      </a>
-                      <p className={`text-[11px] text-slate-600 mt-0.5 ${figtree.className}`}>
-                        Recognized for creative portfolio architecture and dynamic interactive experiences.
-                      </p>
-                    </div>
-
-                    <div>
-                      <p className={`text-xs font-bold text-slate-900 ${satoshi.className}`}>
-                        Fintech UI Excellence Award 2024 🔗
-                      </p>
-                      <p className={`text-[11px] text-slate-600 mt-0.5 ${figtree.className}`}>
-                        Awarded for highest onboarding conversion improvement (38% KYC drop-off reduction).
-                      </p>
-                    </div>
-
-                    <div>
-                      <p className={`text-xs font-bold text-slate-900 ${satoshi.className}`}>
-                        Top 1% Design System Contributor
-                      </p>
-                      <p className={`text-[11px] text-slate-600 mt-0.5 ${figtree.className}`}>
-                        Recognized for open-source design token scales and Capacitor cross-platform tools.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 4. LANGUAGES */}
-                <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-emerald-700 text-xs">🌐</span>
-                    <h3 className={`text-sm font-bold uppercase tracking-wider text-slate-900 ${satoshi.className}`}>
-                      Languages
-                    </h3>
-                  </div>
-
-                  <div className={`space-y-2 text-xs text-slate-700 ${figtree.className}`}>
-                    <div className="flex items-center justify-between">
-                      <span className="font-semibold text-slate-900">🇮🇳 Hindi</span>
-                      <span className="text-slate-500 text-[11px]">Native</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="font-semibold text-slate-900">🇬🇧 English</span>
-                      <span className="text-slate-500 text-[11px]">Professional Working</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="font-semibold text-slate-900">🇩🇪 German</span>
-                      <span className="text-slate-500 text-[11px]">Elementary (112 Days)</span>
-                    </div>
-                  </div>
-                </div>
-
               </div>
 
             </div>
 
-            {/* FOOTER AUTHORIZATION NOTE */}
-            <div className="mt-10 border-t border-slate-100 pt-4 text-center">
-              <p className={`text-[11px] text-slate-400 ${figtree.className}`}>
-                I authorize the processing of personal data contained in my curriculum vitae for professional recruitment purposes in accordance with data privacy regulations.
-              </p>
+            {/* ═══════════════ RIGHT COLUMN (4 COLS / ~35%) ═══════════════ */}
+            <div className="md:col-span-4 space-y-6">
+              
+              {/* CARD 1: CONTACTS */}
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </div>
+                  <h2 className={`text-lg font-bold text-blue-600 ${satoshi.className}`}>
+                    Contacts
+                  </h2>
+                </div>
+
+                <div className={`space-y-3 text-xs text-slate-600 ${figtree.className}`}>
+                  {/* Portfolio */}
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">PORTFOLIO</p>
+                      <a href="https://skpux.in" target="_blank" rel="noopener noreferrer" className="font-semibold text-slate-900 hover:text-blue-600 transition-colors">
+                        skpux.in
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Email */}
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">EMAIL</p>
+                      <a href="mailto:skponpurpose@gmail.com" className="font-semibold text-slate-900 hover:text-blue-600 transition-colors">
+                        skponpurpose@gmail.com
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Phone */}
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">PHONE</p>
+                      <a href="tel:+919997320490" className="font-semibold text-slate-900 hover:text-blue-600 transition-colors">
+                        +91 99973 20490
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* LinkedIn */}
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                        <rect x="2" y="9" width="4" height="12" />
+                        <circle cx="4" cy="4" r="2" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">LINKEDIN</p>
+                      <a href="https://www.linkedin.com/in/skplovesdesign" target="_blank" rel="noopener noreferrer" className="font-semibold text-slate-900 hover:text-blue-600 transition-colors">
+                        /skplovesdesign
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* GitHub */}
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">GITHUB</p>
+                      <a href="https://github.com/SkpGit28" target="_blank" rel="noopener noreferrer" className="font-semibold text-slate-900 hover:text-blue-600 transition-colors">
+                        /SkpGit28
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* CARD 2: TOP SKILLS */}
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                    </svg>
+                  </div>
+                  <h2 className={`text-lg font-bold text-blue-600 ${satoshi.className}`}>
+                    Top Skills
+                  </h2>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    "UI/UX Design",
+                    "Design Systems",
+                    "Design Tokens",
+                    "Object-Oriented UI",
+                    "User Research",
+                    "Wireframing",
+                    "Prototyping",
+                    "Interaction Design",
+                    "Usability Testing",
+                    "Information Architecture",
+                    "Figma",
+                    "Framer",
+                    "Supabase",
+                    "RBAC / Auth",
+                    "Next.js",
+                    "HTML / CSS",
+                  ].map((skill) => (
+                    <span
+                      key={skill}
+                      className={`rounded-full border border-slate-200 bg-slate-50/80 px-3.5 py-1.5 text-xs font-medium text-slate-700 hover:border-slate-300 transition-colors ${figtree.className}`}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* CARD 3: CERTIFICATIONS */}
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="8" r="7" />
+                      <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+                    </svg>
+                  </div>
+                  <h2 className={`text-lg font-bold text-blue-600 ${satoshi.className}`}>
+                    Certifications
+                  </h2>
+                </div>
+
+                <div className="space-y-3.5">
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 mt-0.5">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <line x1="16" y1="13" x2="8" y2="13" />
+                        <line x1="16" y1="17" x2="8" y2="17" />
+                        <polyline points="10 9 9 9 8 9" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
+                        Google UX Design Certificate
+                      </h3>
+                      <p className={`text-xs text-slate-500 ${figtree.className}`}>
+                        Google · Coursera
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 mt-0.5">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <line x1="16" y1="13" x2="8" y2="13" />
+                        <line x1="16" y1="17" x2="8" y2="17" />
+                        <polyline points="10 9 9 9 8 9" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
+                        Object-Oriented UI Design (OOUID)
+                      </h3>
+                      <p className={`text-xs text-slate-500 ${figtree.className}`}>
+                        Interaction Design Foundation (IxDF)
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 mt-0.5">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <line x1="16" y1="13" x2="8" y2="13" />
+                        <line x1="16" y1="17" x2="8" y2="17" />
+                        <polyline points="10 9 9 9 8 9" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
+                        Get Ahead in Product Design with AI
+                      </h3>
+                      <p className={`text-xs text-slate-500 ${figtree.className}`}>
+                        Professional Certification
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* CARD 4: LANGUAGES */}
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="2" y1="12" x2="22" y2="12" />
+                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                    </svg>
+                  </div>
+                  <h2 className={`text-lg font-bold text-blue-600 ${satoshi.className}`}>
+                    Languages
+                  </h2>
+                </div>
+
+                <div className={`space-y-3 divide-y divide-slate-100 ${figtree.className}`}>
+                  <div className="pt-1">
+                    <p className="text-sm font-bold text-slate-900">Hindi</p>
+                    <p className="text-xs text-slate-500">Native</p>
+                  </div>
+
+                  <div className="pt-3">
+                    <p className="text-sm font-bold text-slate-900">English</p>
+                    <p className="text-xs text-slate-500">Professional Working Proficiency</p>
+                  </div>
+
+                  <div className="pt-3">
+                    <p className="text-sm font-bold text-slate-900">German</p>
+                    <p className="text-xs text-slate-500">Beginner (A1) · Learning</p>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
           </div>
