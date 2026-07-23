@@ -186,7 +186,7 @@ function minimax(b: Cell[], isAI: boolean): { score: number; move: number } {
 const FOOTER_LINKS = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/skplovesdesign" },
   { label: "GitHub", href: "https://github.com/SkpGit28" },
-  { label: "Resume", href: "/resume.pdf" },
+  { label: "Resume", href: "/resume" },
 ];
 
 const BAYER_8 = [

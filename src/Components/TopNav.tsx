@@ -11,10 +11,10 @@ import "slot-text/style.css";
 import { slotText, type SlotTextController } from "slot-text";
 
 const navLinks = [
-  { id: "work",     label: "Work",     href: "/",            icon: "work" },
-  { id: "skp",      label: "SKP",      href: "/skp",         icon: "skp" },
-  { id: "kalakari", label: "Kalakari", href: "/kalakari",    icon: "kalakari" },
-  { id: "resume",   label: "Resume",   href: "/resume.pdf",  icon: "resume" },
+  { id: "work",     label: "Work",     href: "/",         icon: "work" },
+  { id: "skp",      label: "SKP",      href: "/skp",      icon: "skp" },
+  { id: "kalakari", label: "Kalakari", href: "/kalakari", icon: "kalakari" },
+  { id: "resume",   label: "Resume",   href: "/resume",   icon: "resume" },
 ];
 
 /** Imperative hook — gives us a ref callback + a trigger fn for slot-text rolls. */
