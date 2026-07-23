@@ -336,10 +336,10 @@ export function SiteFooterContent() {
   const gamesPlayed = score.you + score.draws + score.skp;
   const wager =
     score.you > 0
-      ? { head: `Fine, you've beaten me ${score.you === 1 ? "once" : `${score.you} times`}. The no-negotiation clause stands.` }
+      ? { head: `Nice, you've beaten me ${score.you === 1 ? "once" : `${score.you} times`}.` }
       : gamesPlayed > 0
         ? { head: `Still unbeaten. You're 0–${score.draws}–${score.skp} against me, care to change that?` }
-        : { head: "Beat me at tic-tac-toe and we skip the salary negotiation." };
+        : { head: "Beat me at tic-tac-toe if you can." };
 
   const handleMailTo = () => {
     const subject = encodeURIComponent("Let's talk");
@@ -438,9 +438,9 @@ export function SiteFooterContent() {
               <style>{`@keyframes ttt-draw { from { stroke-dashoffset: 60; } to { stroke-dashoffset: 0; } }`}</style>
               <p className={`text-center text-sm text-text-body font-medium ${figtree.className}`}>
                 {gameOver ? (
-                  <>{winner === "X" ? "You won. No negotiations." : winner === "O" ? "Called it." : "Fine, we'll call it even."}{" "}<button onClick={reset} className="underline decoration-black/15 underline-offset-2 hover:text-text-primary transition-colors">Run it back</button>{" "}<span className="opacity-50 tabular-nums">{score.you}–{score.draws}–{score.skp}</span></>
+                  <>{winner === "X" ? "You won!" : winner === "O" ? "Called it." : "Fine, we'll call it even."}{" "}<button onClick={reset} className="underline decoration-black/15 underline-offset-2 hover:text-text-primary transition-colors">Run it back</button>{" "}<span className="opacity-50 tabular-nums">{score.you}–{score.draws}–{score.skp}</span></>
                 ) : (
-                  <>{"You're X. Win and there's no negotiations."}</>
+                  <>{"You're X. Make your move."}</>
                 )}
               </p>
             </div>
