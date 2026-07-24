@@ -8,23 +8,8 @@ import ScrollProgress from "@/Components/ScrollProgress";
 import PageTransition from "@/Components/PageTransition";
 import SmoothScrollProvider from "@/Components/SmoothScrollProvider";
 
-export const metadata: Metadata = {
-  ...defaultMetadata,
-  metadataBase: new URL("https://skpux.in"),
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: "Sushant Kumar — UI/UX Designer",
-    url: "/",
-    type: "website",
-    description: "UI/UX case studies, product thinking, and interface design.",
-    siteName: "Sushant Kumar",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Sushant Kumar — UI/UX Designer",
-    description: "UI/UX case studies, product thinking, and interface design.",
-  },
-};
+// All root metadata lives in ./metadata.ts (single source of truth).
+export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({
   children,
