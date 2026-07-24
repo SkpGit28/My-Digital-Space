@@ -3,14 +3,14 @@
 /**
  * SUSHANT KUMAR — RESUME & ATS SCORER
  *
- * Exact copy, layout, and visual design matching Francesco Fagioli's CV:
- * - Top Header Row (Left Column): Separate Photo Card + Separate Name & QR Code Card.
- * - Right Column: Contacts Card back at top right position.
- * - Replaced Core Capabilities with "Side Quests & Crafts" (Unique & Standout).
+ * Exact copy, layout, and visual balance matching Francesco Fagioli's CV:
+ * - Standalone Photo Card + Standalone Name Card (QR Code removed).
+ * - Right Column: Contacts Card at top right.
+ * - Removed Core Capabilities; replaced with "Side Quests & Crafts".
  * - Vertical blue timeline line for Work Experience.
  * - Full-bleed section header separators across all cards.
  * - Rounded-xl rectangular skill badges filled seamlessly.
- * - Strictly unified gap system (space-y-6) and identical font sizes/weights.
+ * - Both 5-card columns aligned pixel-perfectly on top and bottom horizontal baselines.
  */
 
 import React, { useState } from "react";
@@ -223,7 +223,7 @@ export default function ResumePage() {
             {/* ═══════════════ LEFT COLUMN (8 COLS / ~65%) ═══════════════ */}
             <div className="md:col-span-8 space-y-6">
               
-              {/* CARD 1: TOP HEADER ROW (2 SEPARATE CARDS: PHOTO CARD + NAME/QR CARD) */}
+              {/* CARD 1: TOP HEADER ROW (2 SEPARATE CARDS: PHOTO CARD + NAME CARD) */}
               <div className="flex flex-col sm:flex-row items-stretch gap-6">
                 
                 {/* 1A: PHOTO CARD (SEPARATE PARENT) */}
@@ -237,46 +237,21 @@ export default function ResumePage() {
                   </div>
                 </div>
 
-                {/* 1B: NAME, TITLE & QR CARD (SEPARATE PARENT) */}
-                <div className="flex-1 rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs flex items-center justify-between gap-4">
-                  <div>
-                    <h1 className={`text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight ${satoshi.className}`}>
-                      Sushant Kumar
-                    </h1>
-                    <p className={`text-base font-semibold text-slate-600 mt-1 ${figtree.className}`}>
-                      UI/UX Designer
-                    </p>
-                    <p className={`text-xs text-slate-500 mt-3 flex items-center gap-1.5 ${figtree.className}`}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                        <circle cx="12" cy="10" r="3" />
-                      </svg>
-                      Noida, India
-                    </p>
-                  </div>
-
-                  {/* QR Code / Portfolio Badge */}
-                  <a
-                    href="https://skpux.in"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-col items-center gap-1 text-center shrink-0 group"
-                  >
-                    <div className="flex h-16 w-16 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 p-1.5 shadow-2xs group-hover:border-blue-400 transition-colors">
-                      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="text-slate-800">
-                        <rect x="3" y="3" width="7" height="7" rx="1" />
-                        <rect x="14" y="3" width="7" height="7" rx="1" />
-                        <rect x="3" y="14" width="7" height="7" rx="1" />
-                        <rect x="14" y="14" width="3" height="3" />
-                        <rect x="18" y="14" width="3" height="3" />
-                        <rect x="14" y="18" width="3" height="3" />
-                        <rect x="18" y="18" width="3" height="3" />
-                      </svg>
-                    </div>
-                    <span className={`text-[10px] font-bold text-slate-500 group-hover:text-blue-600 transition-colors ${figtree.className}`}>
-                      Portfolio
-                    </span>
-                  </a>
+                {/* 1B: NAME & TITLE CARD (SEPARATE PARENT — NO QR CODE) */}
+                <div className="flex-1 rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs flex flex-col justify-center">
+                  <h1 className={`text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight ${satoshi.className}`}>
+                    Sushant Kumar
+                  </h1>
+                  <p className={`text-base font-semibold text-slate-600 mt-1 ${figtree.className}`}>
+                    UI/UX Designer
+                  </p>
+                  <p className={`text-xs text-slate-500 mt-3 flex items-center gap-1.5 ${figtree.className}`}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    Noida, India
+                  </p>
                 </div>
 
               </div>
