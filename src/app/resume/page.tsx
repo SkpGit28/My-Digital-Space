@@ -6,12 +6,12 @@
  * Exact copy, layout, and visual balance matching Francesco Fagioli's CV:
  * - Standalone Photo Card + Standalone Name Card (No QR code).
  * - Right Column: Contacts Card at top right.
- * - Certifications (4 items: OOUID, AI Product Design, Design Thinking [Ongoing], Google UX).
+ * - Certifications (4 items with IxDF certificate links for OOUID & AI Product Design).
  * - Education title updated to: "Bachelors in Information Technology".
+ * - Languages Card bottom padding adjusted (pb-[2.75rem]) to align flush with Education card.
  * - Perfectly centered blue timeline dot over vertical blue line for Work Experience.
  * - Full-bleed section header separators across all cards.
  * - Rounded-xl rectangular skill badges filled seamlessly.
- * - Both columns sit on the exact same invisible horizontal bottom baseline.
  */
 
 import React, { useState } from "react";
@@ -598,7 +598,7 @@ export default function ResumePage() {
                 </div>
               </div>
 
-              {/* CARD 3: CERTIFICATIONS (4 ITEMS WITH ONGOING CHIPS) */}
+              {/* CARD 3: CERTIFICATIONS (WITH DIRECT CERTIFICATE HYPERLINKS) */}
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
                 {/* Main Header with Full-Bleed Separator Line */}
                 <div className="flex items-center gap-3 pb-4">
@@ -616,23 +616,43 @@ export default function ResumePage() {
                 </div>
                 <div className="-mx-6 border-b-2 border-slate-100 mb-5" />
 
-                {/* 4 Certifications in exact requested order */}
+                {/* 4 Certifications with Direct IxDF Links */}
                 <div className="space-y-4">
-                  {/* 1. OOUID */}
+                  {/* 1. OOUID with Direct Certificate Link */}
                   <div>
-                    <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
+                    <a
+                      href="https://ixdf.org/members/sushant-kumar/certificate/course/2e074c09-5e05-4564-8c67-2a764b433189"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors inline-flex items-center gap-1.5 ${satoshi.className}`}
+                    >
                       Object-Oriented UI Design (OOUID)
-                    </h3>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="text-slate-400">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                      </svg>
+                    </a>
                     <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
                       Interaction Design Foundation (IxDF)
                     </p>
                   </div>
 
-                  {/* 2. Get Ahead in Product Design with AI */}
+                  {/* 2. Get Ahead in Product Design with AI with Direct Masterclass Link */}
                   <div>
-                    <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
+                    <a
+                      href="https://ixdf.org/members/sushant-kumar/certificate/masterclass/mcc_5c874b2d238d44c8b6028a861a17bc6d"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors inline-flex items-center gap-1.5 ${satoshi.className}`}
+                    >
                       Get Ahead in Product Design with AI
-                    </h3>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="text-slate-400">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                      </svg>
+                    </a>
                     <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
                       Interaction Design Foundation (IxDF)
                     </p>
@@ -665,8 +685,8 @@ export default function ResumePage() {
                 </div>
               </div>
 
-              {/* CARD 4: LANGUAGES */}
-              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
+              {/* CARD 4: LANGUAGES (BOTTOM PADDING ADJUSTED FOR EXACT HORIZONTAL BASELINE ALIGNMENT) */}
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 pb-9 shadow-xs">
                 {/* Main Header with Full-Bleed Separator Line */}
                 <div className="flex items-center gap-3 pb-4">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
