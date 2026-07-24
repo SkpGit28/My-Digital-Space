@@ -675,9 +675,19 @@ export default function ResumePage() {
 
                   {/* 4. Google UX Design Certificate */}
                   <div>
-                    <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
+                    <a
+                      href="https://coursera.org/verify/K0VTA7T83K8T"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors inline-flex items-center gap-1.5 ${satoshi.className}`}
+                    >
                       Google UX Design Certificate
-                    </h3>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="text-slate-400">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                      </svg>
+                    </a>
                     <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
                       Google · Coursera
                     </p>
@@ -686,7 +696,7 @@ export default function ResumePage() {
               </div>
 
               {/* CARD 4: LANGUAGES (BOTTOM PADDING ADJUSTED FOR EXACT HORIZONTAL BASELINE ALIGNMENT) */}
-              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 pb-9 shadow-xs">
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 pb-20 shadow-xs">
                 {/* Main Header with Full-Bleed Separator Line */}
                 <div className="flex items-center gap-3 pb-4">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
