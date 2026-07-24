@@ -4,13 +4,14 @@
  * SUSHANT KUMAR — RESUME & ATS SCORER
  *
  * Exact copy, layout, and visual balance matching Francesco Fagioli's CV:
- * - Standalone Photo Card + Standalone Name Card (QR Code removed).
+ * - Standalone Photo Card + Standalone Name Card (No QR code).
  * - Right Column: Contacts Card at top right.
- * - Removed Core Capabilities; replaced with "Side Quests & Crafts".
- * - Vertical blue timeline line for Work Experience.
+ * - Deleted Side Quests & Crafts section completely.
+ * - Expanded Certifications to 5 entries (OOUID, AI Product Design, Design Thinking [Ongoing], Google UX, Lottie Animation [Ongoing]).
+ * - Perfectly centered blue timeline dot (-left-[5px]) over vertical blue line for Work Experience.
  * - Full-bleed section header separators across all cards.
  * - Rounded-xl rectangular skill badges filled seamlessly.
- * - Both 5-card columns aligned pixel-perfectly on top and bottom horizontal baselines.
+ * - Both columns sit on the exact same invisible horizontal bottom baseline.
  */
 
 import React, { useState } from "react";
@@ -293,9 +294,9 @@ export default function ResumePage() {
                 </div>
                 <div className="-mx-6 sm:-mx-7 border-b-2 border-slate-100 mb-5" />
 
-                {/* Job Entry with Vertical Timeline Line */}
+                {/* Job Entry with Perfectly Centered Timeline Dot over Vertical Blue Line */}
                 <div className="relative pl-6 border-l-2 border-blue-200/80 space-y-4 my-2">
-                  <span className="absolute -left-[7px] top-1.5 h-3 w-3 rounded-full bg-blue-600 ring-4 ring-blue-100" />
+                  <span className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-blue-600 ring-4 ring-blue-100" />
                   
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
@@ -597,43 +598,7 @@ export default function ResumePage() {
                 </div>
               </div>
 
-              {/* CARD 3: SIDE QUESTS & CRAFTS (UNIQUE & STANDOUT) */}
-              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
-                {/* Main Header with Full-Bleed Separator Line */}
-                <div className="flex items-center gap-3 pb-4">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                    </svg>
-                  </div>
-                  <h2 className={`text-lg font-bold text-blue-600 ${satoshi.className}`}>
-                    Side Quests & Crafts
-                  </h2>
-                </div>
-                <div className="-mx-6 border-b-2 border-slate-100 mb-5" />
-
-                <div className="space-y-4">
-                  <div>
-                    <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
-                      Type & Micro-Interactions
-                    </h3>
-                    <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
-                      Designing custom typing benchmarks and high-precision micro-interactions in Framer & React.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
-                      Interactive Game Mechanics
-                    </h3>
-                    <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
-                      Exploring 2D physics engines and spatial user flows using Godot.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* CARD 4: CERTIFICATIONS */}
+              {/* CARD 3: CERTIFICATIONS (RESHUFFLED & EXPANDED TO 5) */}
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
                 {/* Main Header with Full-Bleed Separator Line */}
                 <div className="flex items-center gap-3 pb-4">
@@ -651,17 +616,9 @@ export default function ResumePage() {
                 </div>
                 <div className="-mx-6 border-b-2 border-slate-100 mb-5" />
 
-                {/* Clean Certification Entries */}
+                {/* 5 Certifications in exact requested order */}
                 <div className="space-y-4">
-                  <div>
-                    <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
-                      Google UX Design Certificate
-                    </h3>
-                    <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
-                      Google · Coursera
-                    </p>
-                  </div>
-
+                  {/* 1. OOUID */}
                   <div>
                     <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
                       Object-Oriented UI Design (OOUID)
@@ -671,10 +628,51 @@ export default function ResumePage() {
                     </p>
                   </div>
 
+                  {/* 2. Get Ahead in Product Design with AI */}
                   <div>
                     <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
                       Get Ahead in Product Design with AI
                     </h3>
+                    <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
+                      Interaction Design Foundation (IxDF)
+                    </p>
+                  </div>
+
+                  {/* 3. Design Thinking: The Ultimate Guide */}
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
+                        Design Thinking: The Ultimate Guide
+                      </h3>
+                      <span className="inline-flex items-center rounded-full bg-amber-50 border border-amber-200/80 px-2 py-0.5 text-[10px] font-semibold text-amber-700">
+                        Ongoing
+                      </span>
+                    </div>
+                    <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
+                      Interaction Design Foundation (IxDF)
+                    </p>
+                  </div>
+
+                  {/* 4. Google UX Design Certificate */}
+                  <div>
+                    <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
+                      Google UX Design Certificate
+                    </h3>
+                    <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
+                      Google · Coursera
+                    </p>
+                  </div>
+
+                  {/* 5. Lottie Animation for Figma & Framer */}
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
+                        Lottie Animation for Figma & Framer
+                      </h3>
+                      <span className="inline-flex items-center rounded-full bg-amber-50 border border-amber-200/80 px-2 py-0.5 text-[10px] font-semibold text-amber-700">
+                        Ongoing
+                      </span>
+                    </div>
                     <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
                       Professional Certification
                     </p>
@@ -682,7 +680,7 @@ export default function ResumePage() {
                 </div>
               </div>
 
-              {/* CARD 5: LANGUAGES */}
+              {/* CARD 4: LANGUAGES */}
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
                 {/* Main Header with Full-Bleed Separator Line */}
                 <div className="flex items-center gap-3 pb-4">
