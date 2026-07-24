@@ -6,12 +6,10 @@
  * Exact copy, layout, and visual balance matching Francesco Fagioli's CV:
  * - Standalone Photo Card + Standalone Name Card (No QR code).
  * - Right Column: Contacts Card at top right.
- * - Certifications (4 items with IxDF certificate links for OOUID & AI Product Design).
+ * - Certifications: Ongoing course (Design Thinking) on top as 1st item.
  * - Education title updated to: "Bachelors in Information Technology".
- * - Languages Card bottom padding adjusted (pb-[2.75rem]) to align flush with Education card.
  * - Perfectly centered blue timeline dot over vertical blue line for Work Experience.
- * - Full-bleed section header separators across all cards.
- * - Rounded-xl rectangular skill badges filled seamlessly.
+ * - Single-page A4 print optimization (@media print).
  */
 
 import React, { useState } from "react";
@@ -72,8 +70,44 @@ export default function ResumePage() {
 
   return (
     <FooterReveal id="resume" className={`${satoshi.className} min-h-screen bg-[#f4f5f8]`} showFooter={false}>
+      {/* ═══════════════ A4 SINGLE PAGE PRINT STYLES ═══════════════ */}
+      <style jsx global>{`
+        @media print {
+          @page {
+            size: A4 portrait;
+            margin: 6mm 8mm;
+          }
+          html, body {
+            background-color: #ffffff !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            font-size: 11px !important;
+          }
+          .no-print, header, footer, nav, button {
+            display: none !important;
+          }
+          .pt-\\[6\\.5rem\\] {
+            padding-top: 0 !important;
+          }
+          .pb-20 {
+            padding-bottom: 0 !important;
+          }
+          .print-container {
+            display: grid !important;
+            grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+            gap: 1rem !important;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+          }
+          .print-container * {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+          }
+        }
+      `}</style>
+
       <div className="pt-[6.5rem] pb-20">
-        <div className="w-full border-t border-border-subtle relative z-10" />
+        <div className="w-full border-t border-border-subtle relative z-10 no-print" />
 
         {/* ═══════════════ TOP ACTION BAR & ATS TOGGLE (WEB ONLY) ═══════════════ */}
         <section className="relative z-10 mx-auto w-full max-w-[66rem] px-4 sm:px-6 pt-8 pb-4 lg:px-0 no-print">
@@ -598,7 +632,7 @@ export default function ResumePage() {
                 </div>
               </div>
 
-              {/* CARD 3: CERTIFICATIONS (WITH DIRECT CERTIFICATE HYPERLINKS) */}
+              {/* CARD 3: CERTIFICATIONS (ONGOING COURSE MOVED TO TOP AS ITEM #1) */}
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
                 {/* Main Header with Full-Bleed Separator Line */}
                 <div className="flex items-center gap-3 pb-4">
@@ -616,9 +650,24 @@ export default function ResumePage() {
                 </div>
                 <div className="-mx-6 border-b-2 border-slate-100 mb-5" />
 
-                {/* 4 Certifications — consistent flex row: title+icon left, Ongoing chip right */}
+                {/* 4 Certifications — Ongoing course #1 at top */}
                 <div className="space-y-4">
-                  {/* 1. OOUID */}
+                  {/* 1. Design Thinking — ONGOING COURSE AT TOP */}
+                  <div>
+                    <div className="flex items-center justify-between gap-2">
+                      <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
+                        Design Thinking: The Ultimate Guide
+                      </h3>
+                      <span className="inline-flex shrink-0 items-center rounded-full bg-amber-50 border border-amber-200/80 px-2 py-0.5 text-[10px] font-semibold text-amber-700">
+                        Ongoing
+                      </span>
+                    </div>
+                    <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
+                      Interaction Design Foundation (IxDF)
+                    </p>
+                  </div>
+
+                  {/* 2. OOUID */}
                   <div>
                     <div className="flex items-center justify-between gap-2">
                       <a
@@ -640,7 +689,7 @@ export default function ResumePage() {
                     </p>
                   </div>
 
-                  {/* 2. Get Ahead in Product Design with AI */}
+                  {/* 3. Get Ahead in Product Design with AI */}
                   <div>
                     <div className="flex items-center justify-between gap-2">
                       <a
@@ -656,21 +705,6 @@ export default function ResumePage() {
                         <polyline points="15 3 21 3 21 9" />
                         <line x1="10" y1="14" x2="21" y2="3" />
                       </svg>
-                    </div>
-                    <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
-                      Interaction Design Foundation (IxDF)
-                    </p>
-                  </div>
-
-                  {/* 3. Design Thinking — Ongoing chip right-aligned */}
-                  <div>
-                    <div className="flex items-center justify-between gap-2">
-                      <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
-                        Design Thinking: The Ultimate Guide
-                      </h3>
-                      <span className="inline-flex shrink-0 items-center rounded-full bg-amber-50 border border-amber-200/80 px-2 py-0.5 text-[10px] font-semibold text-amber-700">
-                        Ongoing
-                      </span>
                     </div>
                     <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
                       Interaction Design Foundation (IxDF)
@@ -701,8 +735,8 @@ export default function ResumePage() {
                 </div>
               </div>
 
-              {/* CARD 4: LANGUAGES (BOTTOM PADDING ADJUSTED FOR EXACT HORIZONTAL BASELINE ALIGNMENT) */}
-              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 pb-10 shadow-xs">
+              {/* CARD 4: LANGUAGES */}
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
                 {/* Main Header with Full-Bleed Separator Line */}
                 <div className="flex items-center gap-3 pb-4">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/60 shrink-0">
