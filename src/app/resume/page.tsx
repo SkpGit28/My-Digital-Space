@@ -6,9 +6,9 @@
  * Exact copy, layout, and visual balance matching Francesco Fagioli's CV:
  * - Standalone Photo Card + Standalone Name Card (No QR code).
  * - Right Column: Contacts Card at top right.
- * - Deleted Side Quests & Crafts section completely.
- * - Expanded Certifications to 5 entries (OOUID, AI Product Design, Design Thinking [Ongoing], Google UX, Lottie Animation [Ongoing]).
- * - Perfectly centered blue timeline dot (-left-[5px]) over vertical blue line for Work Experience.
+ * - Certifications (4 items: OOUID, AI Product Design, Design Thinking [Ongoing], Google UX).
+ * - Education title updated to: "Bachelors in Information Technology".
+ * - Perfectly centered blue timeline dot over vertical blue line for Work Experience.
  * - Full-bleed section header separators across all cards.
  * - Rounded-xl rectangular skill badges filled seamlessly.
  * - Both columns sit on the exact same invisible horizontal bottom baseline.
@@ -430,7 +430,7 @@ export default function ResumePage() {
                       HNB Garhwal University (Central University)
                     </h3>
                     <p className={`text-xs text-slate-600 mt-0.5 ${figtree.className}`}>
-                      Bachelor of Information Technology
+                      Bachelors in Information Technology
                     </p>
                   </div>
 
@@ -598,7 +598,7 @@ export default function ResumePage() {
                 </div>
               </div>
 
-              {/* CARD 3: CERTIFICATIONS (RESHUFFLED & EXPANDED TO 5) */}
+              {/* CARD 3: CERTIFICATIONS (4 ITEMS WITH ONGOING CHIPS) */}
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
                 {/* Main Header with Full-Bleed Separator Line */}
                 <div className="flex items-center gap-3 pb-4">
@@ -616,7 +616,7 @@ export default function ResumePage() {
                 </div>
                 <div className="-mx-6 border-b-2 border-slate-100 mb-5" />
 
-                {/* 5 Certifications in exact requested order */}
+                {/* 4 Certifications in exact requested order */}
                 <div className="space-y-4">
                   {/* 1. OOUID */}
                   <div>
@@ -660,21 +660,6 @@ export default function ResumePage() {
                     </h3>
                     <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
                       Google · Coursera
-                    </p>
-                  </div>
-
-                  {/* 5. Lottie Animation for Figma & Framer */}
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className={`text-sm font-bold text-slate-900 ${satoshi.className}`}>
-                        Lottie Animation for Figma & Framer
-                      </h3>
-                      <span className="inline-flex items-center rounded-full bg-amber-50 border border-amber-200/80 px-2 py-0.5 text-[10px] font-semibold text-amber-700">
-                        Ongoing
-                      </span>
-                    </div>
-                    <p className={`text-xs text-slate-500 mt-0.5 ${figtree.className}`}>
-                      Professional Certification
                     </p>
                   </div>
                 </div>
