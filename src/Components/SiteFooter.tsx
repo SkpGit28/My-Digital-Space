@@ -186,7 +186,7 @@ function minimax(b: Cell[], isAI: boolean): { score: number; move: number } {
 const FOOTER_LINKS = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/skplovesdesign" },
   { label: "GitHub", href: "https://github.com/SkpGit28" },
-  { label: "Resume", href: "/resume" },
+  { label: "Resume", href: "/CV_SKP.pdf", download: "CV_SKP.pdf" },
 ];
 
 const BAYER_8 = [
@@ -451,7 +451,7 @@ export function SiteFooterContent() {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-6 border-t border-border-subtle">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {FOOTER_LINKS.map((l) => (
-              <a key={l.label} href={l.href} target={l.href.startsWith("http") ? "_blank" : undefined} rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              <a key={l.label} href={l.href} target={l.href.startsWith("http") || l.href.endsWith(".pdf") ? "_blank" : undefined} rel={l.href.startsWith("http") || l.href.endsWith(".pdf") ? "noopener noreferrer" : undefined} download={"download" in l ? (l as { download?: string }).download : undefined}
                 className={`group text-sm text-text-body font-medium hover:text-text-primary transition-colors ${figtree.className}`}>
                 {l.label}<span className="inline-block ml-0.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" style={{ transform: "rotate(0deg)" }} onMouseEnter={(e) => (e.currentTarget.style.transform = "rotate(45deg) translateX(0.25rem)")} onMouseLeave={(e) => (e.currentTarget.style.transform = "rotate(0deg) translateX(0)")}>→</span>
               </a>

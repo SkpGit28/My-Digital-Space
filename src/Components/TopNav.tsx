@@ -14,7 +14,7 @@ const navLinks = [
   { id: "work",     label: "Work",     href: "/",         icon: "work" },
   { id: "skp",      label: "SKP",      href: "/skp",      icon: "skp" },
   { id: "kalakari", label: "Kalakari", href: "/kalakari", icon: "kalakari" },
-  { id: "resume",   label: "Resume",   href: "/resume",   icon: "resume" },
+  { id: "resume",   label: "Resume",   href: "/CV_SKP.pdf", icon: "resume" },
 ];
 
 /** Imperative hook — gives us a ref callback + a trigger fn for slot-text rolls. */
@@ -173,6 +173,7 @@ export default function TopNav(): ReactNode {
                 href={link.href}
                 target={isResume ? "_blank" : undefined}
                 rel={isResume ? "noopener noreferrer" : undefined}
+                download={isResume ? "CV_SKP.pdf" : undefined}
                 onClick={(e) => {
                   track("nav_click", { label: link.label, href: link.href });
                   if (link.id === "work" && pathname === "/") {
