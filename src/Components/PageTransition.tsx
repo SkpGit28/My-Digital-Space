@@ -68,7 +68,7 @@ const ROW_DURATION_MS = 380;
 const ROW_CUBIC = `cubic-bezier(${EASE.join(",")})`;
 
 function RowCascadeOverlay({ phase }: { phase: "cover" | "held" | "reveal" | "idle" }) {
-  const [rows, setRows] = useState(0);
+  const [rows, setRows] = useState(() => typeof window !== "undefined" ? Math.ceil(window.innerHeight / ROW_HEIGHT) : 20);
   const [armed, setArmed] = useState(false);
 
   useEffect(() => {
@@ -97,24 +97,6 @@ function RowCascadeOverlay({ phase }: { phase: "cover" | "held" | "reveal" | "id
   }, [phase]);
 
   if (phase === "idle") return null;
-
-  // Before the row count is measured (the very first paint of a fresh
-  // load), render one gradient wall instead of returning null. This is
-  // what makes the entry transition flash-free: the cover is present from
-  // the first pixel painted — SSR included — with no dependency on the
-  // measurement effect below ever having run. cover/reveal always have a
-  // measured row count by the time they happen (they're only ever
-  // triggered from effects/handlers, well after mount), so this fallback
-  // is exclusively for the entry case.
-  if (rows === 0) {
-    if (phase !== "held") return null;
-    return (
-      <div
-        className="pointer-events-none fixed inset-0 z-[9999]"
-        style={{ background: `linear-gradient(180deg, ${rampCSS(0)}, ${rampCSS(0.5)}, ${rampCSS(1)})` }}
-      />
-    );
-  }
 
   const filled = phase === "cover" || phase === "held";
   const entering = phase === "cover";
@@ -153,7 +135,7 @@ function RowCascadeOverlay({ phase }: { phase: "cover" | "held" | "reveal" | "id
 }
 
 function rowCascadeTotalMs(): number {
-  const rows = Math.ceil(window.innerHeight / ROW_HEIGHT);
+  const rows = typeof window !== "undefined" ? Math.ceil(window.innerHeight / ROW_HEIGHT) : 20;
   return (rows - 1) * ROW_STAGGER_MS + ROW_DURATION_MS + 60;
 }
 
@@ -167,22 +149,24 @@ export default function PageTransition({
   const prevPathnameRef = useRef(pathname);
   const reduceRef = useRef(false);
 
-  // Entry state: start already covered ("held", no grow-in needed — nothing
-  // was visible yet) unless the visitor has prefers-reduced-motion set, in
-  // which case skip the cover entirely. Checked synchronously here (not in
-  // an effect) so it's part of the very first render, SSR included.
+  // Entry state: start with row cascade cover animation ("cover") unless
+  // prefers-reduced-motion is set.
   const [rowPhase, setRowPhase] = useState<"idle" | "cover" | "held" | "reveal">(() => {
     const reduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    return reduced ? "idle" : "held";
+    return reduced ? "idle" : "cover";
   });
 
-  // Mirrors rowPhase's initial read: true only when the page actually
-  // arrived covered, so the page-ready effect below knows to reveal it.
-  // Click-nav and back/forward set this to true themselves, later.
-  const navigatedRef = useRef(rowPhase === "held");
+  // Mirrors rowPhase's initial read: true when page arrives covered or cascading.
+  const navigatedRef = useRef(rowPhase === "cover" || rowPhase === "held");
 
   useEffect(() => {
     reduceRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (rowPhase === "cover") {
+      const t = setTimeout(() => {
+        setRowPhase("held");
+      }, rowCascadeTotalMs());
+      return () => clearTimeout(t);
+    }
   }, []);
 
   // Safety net for the entry cover specifically: if the leading-edge catch
