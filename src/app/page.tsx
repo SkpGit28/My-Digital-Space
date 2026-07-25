@@ -322,7 +322,7 @@ function MaskShape({
 /* ── Headline: line-mask word reveal (long glide + eased stagger → one wave) ── */
 function Headline({ reduce }: { reduce: boolean }) {
   return (
-    <h1 className="relative z-10 text-center text-5xl font-bold leading-[1.35] tracking-tight">
+    <h1 className="relative z-10 text-center text-5xl font-bold leading-[1.25] tracking-tight">
       {WORDS.map((w, i) =>
         w.isBreak ? (
           <br key={i} />
