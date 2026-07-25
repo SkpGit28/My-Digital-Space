@@ -293,7 +293,7 @@ export default function KalakariPage() {
             Kalakari · कलाकारी
           </motion.p>
 
-          <h1 className={`max-w-[54rem] text-[2.5rem] font-bold leading-[1.25] tracking-tight text-text-primary sm:text-[3.25rem] ${satoshi.className}`}>
+          <h1 className={`max-w-[54rem] text-[2.5rem] font-bold leading-[1.35] tracking-tight text-text-primary sm:text-[3.25rem] ${satoshi.className}`}>
             <motion.span
               initial={reduce ? false : { y: "110%", display: "inline-block" }}
               animate={{ y: "0%" }}
