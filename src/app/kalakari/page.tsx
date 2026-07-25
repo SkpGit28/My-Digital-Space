@@ -294,23 +294,30 @@ export default function KalakariPage() {
           </motion.p>
 
           <h1 className={`max-w-[54rem] text-[2.5rem] font-bold leading-[1.35] tracking-tight text-text-primary sm:text-[3.25rem] ${satoshi.className}`}>
-            <motion.span
-              initial={reduce ? false : { y: "110%", display: "inline-block" }}
-              animate={{ y: "0%" }}
-              transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
-              style={{ display: "inline-block", overflow: "hidden" }}
-            >
-              Everything I design, build,
-            </motion.span>
-            <br />
-            <motion.span
-              initial={reduce ? false : { y: "110%", display: "inline-block" }}
-              animate={{ y: "0%" }}
-              transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
-              style={{ display: "inline-block", overflow: "hidden" }}
-            >
-              break, and dream about.
-            </motion.span>
+            {[
+              { text: "Everything", breakAfter: false },
+              { text: "I", breakAfter: false },
+              { text: "design,", breakAfter: false },
+              { text: "build,", breakAfter: true },
+              { text: "break,", breakAfter: false },
+              { text: "and", breakAfter: false },
+              { text: "dream", breakAfter: false },
+              { text: "about.", breakAfter: false },
+            ].map((w, i) => (
+              <React.Fragment key={i}>
+                <span style={{ display: "inline-block", overflow: "hidden", verticalAlign: "top" }}>
+                  <motion.span
+                    initial={reduce ? false : { y: "110%" }}
+                    animate={{ y: "0%" }}
+                    transition={{ duration: 0.8, delay: 0.15 + i * 0.03, ease: EASE }}
+                    style={{ display: "inline-block", marginRight: w.breakAfter ? "0" : "0.28em" }}
+                  >
+                    {w.text}
+                  </motion.span>
+                </span>
+                {w.breakAfter && <br />}
+              </React.Fragment>
+            ))}
           </h1>
 
           <motion.p
