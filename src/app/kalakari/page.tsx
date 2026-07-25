@@ -47,7 +47,7 @@ const PROJECTS: ProjectCard[] = [
   },
   {
     id: "topay",
-    svg: "/ToPay.svg",
+    svg: "/ToPay.webp",
     title: "ToPay",
     sub: "A landing page for an app facing both enterprise and consumer",
     live: true,
@@ -55,7 +55,7 @@ const PROJECTS: ProjectCard[] = [
   },
   {
     id: "topayapp",
-    svg: "/ToPayApp.svg",
+    svg: "/ToPayApp.webp",
     title: "ToPayApp",
     sub: "Used Capacitor to transform React codebase into a cross-platform mobile settlement app",
     overlaySub: "A settlement app built for merchants",

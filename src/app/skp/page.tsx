@@ -100,7 +100,7 @@ export default function SkpPage() {
           <div
             className="absolute inset-0 bg-repeat bg-center z-0"
             style={{
-              backgroundImage: "url('/paperbg.png')",
+              backgroundImage: "url('/paperbg.webp')",
               left: "calc(50% - 40.75rem)",
               right: "calc(50% - 40.75rem)",
             }}

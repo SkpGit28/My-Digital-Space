@@ -62,7 +62,7 @@ const BoringView: React.FC<BoringViewProps> = ({ onSwitch }) => {
 
             <div className="w-full flex flex-col gap-8 items-center justify-center">
                 <img
-                    src="/assets/Standardform.svg"
+                    src="/assets/Standardform.webp"
                     alt="Standard Input Form"
                     className="w-full h-auto rounded-[6px]"
                     style={{ border: "1px solid var(--cs2-border-default)" }}

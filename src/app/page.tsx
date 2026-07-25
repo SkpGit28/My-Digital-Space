@@ -1007,7 +1007,7 @@ export default function HeroTestPage() {
               tags={["Behavioral UX", "Trust Design", "Concept Work"]}
               tagBg="bg-cs2-brand/8"
               tagText="text-cs2-brand"
-              mockupSrc="/mockups/CardMockup.svg"
+              mockupSrc="/mockups/CardMockup.webp"
               mockupAlt="BlaBlaCar Mockup"
             />
 
