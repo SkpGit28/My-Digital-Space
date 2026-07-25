@@ -153,7 +153,7 @@ export default function PageTransition({
   // prefers-reduced-motion is set.
   const [rowPhase, setRowPhase] = useState<"idle" | "cover" | "held" | "reveal">(() => {
     const reduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    return reduced ? "idle" : "cover";
+    return reduced ? "idle" : "held";
   });
 
   // Mirrors rowPhase's initial read: true when page arrives covered or cascading.

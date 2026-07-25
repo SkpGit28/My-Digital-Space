@@ -293,31 +293,39 @@ export default function KalakariPage() {
             Kalakari · कलाकारी
           </motion.p>
 
-          <h1 className={`max-w-[54rem] text-[2.5rem] font-bold leading-[1.35] tracking-tight text-text-primary sm:text-[3.25rem] ${satoshi.className}`}>
+          <h1 className={`max-w-[54rem] text-5xl font-bold leading-[1.35] tracking-tight text-text-primary ${satoshi.className}`}>
             {[
-              { text: "Everything", breakAfter: false },
-              { text: "I", breakAfter: false },
-              { text: "design,", breakAfter: false },
-              { text: "build,", breakAfter: true },
-              { text: "break,", breakAfter: false },
-              { text: "and", breakAfter: false },
-              { text: "dream", breakAfter: false },
-              { text: "about.", breakAfter: false },
-            ].map((w, i) => (
-              <React.Fragment key={i}>
-                <span style={{ display: "inline-block", overflow: "hidden", verticalAlign: "top" }}>
+              { text: "Everything" },
+              { text: " ", isSpace: true },
+              { text: "I" },
+              { text: " ", isSpace: true },
+              { text: "design," },
+              { text: " ", isSpace: true },
+              { text: "build," },
+              { text: "", isBreak: true },
+              { text: "break," },
+              { text: " ", isSpace: true },
+              { text: "and" },
+              { text: " ", isSpace: true },
+              { text: "dream" },
+              { text: " ", isSpace: true },
+              { text: "about." },
+            ].map((w, i) =>
+              w.isBreak ? (
+                <br key={i} />
+              ) : (
+                <span key={i} style={{ display: "inline-block", overflow: "hidden", verticalAlign: "top" }}>
                   <motion.span
                     initial={reduce ? false : { y: "110%" }}
                     animate={{ y: "0%" }}
-                    transition={{ duration: 0.8, delay: 0.15 + i * 0.03, ease: EASE }}
-                    style={{ display: "inline-block", marginRight: w.breakAfter ? "0" : "0.28em" }}
+                    transition={{ duration: 0.8, delay: 0.15 + i * 0.02, ease: EASE }}
+                    style={{ display: "inline-block", whiteSpace: w.isSpace ? "pre" : "normal" }}
                   >
                     {w.text}
                   </motion.span>
                 </span>
-                {w.breakAfter && <br />}
-              </React.Fragment>
-            ))}
+              )
+            )}
           </h1>
 
           <motion.p
