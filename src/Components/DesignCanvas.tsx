@@ -399,13 +399,7 @@ export default function DesignCanvas() {
             }}
           >
           {/* the wavy dashed line, dots, years, and little arrows — swept in left to right */}
-          <motion.div
-            className="absolute inset-0"
-            initial={reduce ? false : { clipPath: "inset(0 100% 0 0)" }}
-            whileInView={{ clipPath: "inset(0 0% 0 0)" }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 2.4, delay: 0.3, ease: "easeInOut" }}
-          >
+          <div className="absolute inset-0">
           <svg aria-hidden className="absolute inset-0 h-full w-full" viewBox="0 0 1000 340" fill="none" preserveAspectRatio="none">
             <path
               d="M120 250 C 165 240, 225 260, 280 250 C 335 241, 360 259, 407 250 C 462 240, 492 260, 534 250 C 592 241, 622 259, 661 250 C 718 240, 750 260, 788 250 C 843 241, 880 259, 915 250 C 930 247, 942 250, 942 250"
@@ -449,11 +443,9 @@ export default function DesignCanvas() {
               </text>
             ))}
           </svg>
-          </motion.div>
+          </div>
 
-          {/* milestone labels — centred over each dot, all hanging from a
-              common baseline just above the line so titles align to a shelf
-              and the two end labels stay clear of the torn edges. */}
+          {/* milestone labels — centred over each dot */}
           {JOURNEY.map((m) => (
             <div
               key={m.title}
@@ -465,20 +457,14 @@ export default function DesignCanvas() {
                 transform: "translateX(-50%)",
               }}
             >
-              <motion.div
-                className={`${figtree.className} text-center leading-[1.25]`}
-                initial={reduce ? false : { opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.45, delay: 0.3 + (m.dot[0] / 1000) * 2.2, ease: EASE }}
-              >
+              <div className={`${figtree.className} text-center leading-[1.25]`}>
                 <p className={`${caveat.className} text-[20px] font-bold leading-[1] text-[#1f2430]`}>{m.title}</p>
                 {m.lines.map((l) => (
                   <p key={l} className="text-[13px] font-semibold text-[#6b7280]">
                     {l}
                   </p>
                 ))}
-              </motion.div>
+              </div>
             </div>
           ))}
         </div>
