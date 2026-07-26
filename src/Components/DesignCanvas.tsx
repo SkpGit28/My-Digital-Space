@@ -394,10 +394,6 @@ export default function DesignCanvas() {
               backgroundRepeat: "no-repeat",
             }}
           >
-            <p className={`${caveat.className} absolute left-[145px] top-6 text-[22px] font-bold text-[#1f2430]`}>
-              the not-so-linear journey
-            </p>
-
             {/* the wavy dashed line, dots, years, and little arrows — swept in left to right */}
             <div className="absolute inset-0">
             <svg aria-hidden className="absolute inset-0 h-full w-full" viewBox="0 0 1000 340" fill="none" preserveAspectRatio="none">
