@@ -16,7 +16,7 @@ const Ecosystem: React.FC = () => {
     // Bare gallery rows: section shell and background come from the case-study
     // page (Case Study 2's template), not from this component.
     return (
-        <div className="relative overflow-hidden z-20 w-full" style={{ width: "100%", marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)" }}>
+        <div className="relative overflow-hidden z-20" style={{ width: "100vw", marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)" }}>
             <div className="w-full">
                 {/* Scrolling Rows */}
                 <div className="flex flex-col gap-[24px]">
