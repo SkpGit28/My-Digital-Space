@@ -454,12 +454,12 @@ export default function DesignCanvas() {
             </svg>
             </div>
 
-            {/* milestone labels — aligned at top=105 so titles form a clean shelf */}
+            {/* milestone labels — bottom-aligned so all text blocks end at the same height above arrows */}
             {JOURNEY.map((m) => (
               <div
                 key={m.title}
                 className={`${caveat.className} absolute leading-[1.15] text-center`}
-                style={{ left: m.dot[0], top: 105, width: 140, transform: "translateX(-50%)" }}
+                style={{ left: m.dot[0], bottom: 140, width: 140, transform: "translateX(-50%)" }}
               >
                 <p className="text-[19px] font-bold text-[#1f2430]">{m.title}</p>
                 {m.lines.map((l) => (
