@@ -12,6 +12,7 @@ import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { satoshi, figtree } from "@/styles/fonts";
 import { FooterReveal } from "@/Components/SiteFooter";
 import { usePageReady } from "@/lib/usePageReady";
+import { useLenis } from "@/Components/SmoothScrollProvider";
 
 import { EASE } from "@/lib/constants";
 
@@ -163,17 +164,21 @@ function ProjectOverlay({
   project: ProjectCard;
   onClose: () => void;
 }) {
+  const lenis = useLenis();
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
     document.body.style.overflow = "hidden";
+    lenis?.stop();
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       document.body.style.overflow = "";
+      lenis?.start();
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [onClose]);
+  }, [onClose, lenis]);
 
   return (
     <motion.div
@@ -181,7 +186,7 @@ function ProjectOverlay({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.25 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/60 backdrop-blur-md"
+      className="fixed inset-0 z-50 flex items-center justify-center p-0 md:p-8 bg-black/60 backdrop-blur-md"
       onClick={onClose}
     >
       <motion.div
@@ -189,7 +194,7 @@ function ProjectOverlay({
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 16 }}
         transition={{ duration: 0.3, ease: EASE }}
-        className="relative flex flex-col w-full max-w-4xl max-h-[90vh] overflow-hidden rounded-2xl bg-white border border-border-subtle shadow-2xl"
+        className="relative flex flex-col w-full h-[100dvh] md:h-auto max-w-4xl md:max-h-[90dvh] overflow-hidden rounded-none md:rounded-2xl bg-white md:border border-border-subtle shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header bar */}
@@ -218,19 +223,22 @@ function ProjectOverlay({
           <button
             onClick={onClose}
             aria-label="Close modal"
-            className="flex items-center justify-center h-8 w-8 rounded-full bg-bg-subtle text-text-body hover:bg-slate-200 transition-colors text-sm font-bold"
+            className="flex items-center justify-center h-[44px] w-[44px] md:h-8 md:w-8 rounded-full bg-bg-subtle text-text-body hover:bg-slate-200 transition-colors text-sm font-bold"
           >
             ✕
           </button>
         </div>
 
         {/* Content Body */}
-        <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-6">
+        <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-6" data-lenis-prevent>
           {/* Media Player / Image container */}
           <div className="relative w-full overflow-hidden rounded-xl bg-black flex items-center justify-center min-h-[16rem]">
             {project.video ? (
               <video
                 src={project.video}
+                poster={project.svg}
+                preload="none"
+                muted
                 controls
                 autoPlay
                 loop

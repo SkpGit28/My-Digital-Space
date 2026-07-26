@@ -113,7 +113,7 @@ const ProfilePivot: React.FC = () => {
         : { color: "var(--cs2-color-neutral-500)", background: "transparent" };
 
     return (
-        <div className="relative w-full h-[750px] rounded-[12px] overflow-hidden group flex flex-col" style={{ background: "var(--cs2-bg-page)", border: "1px solid var(--cs2-border-default)" }}>
+        <div className="relative w-full h-[80vh] min-h-[500px] md:h-[750px] md:min-h-0 rounded-[12px] overflow-hidden group flex flex-col" style={{ background: "var(--cs2-bg-page)", border: "1px solid var(--cs2-border-default)" }}>
                     {/* Tab bar: proper tab buttons, active state carries a fill, a bold
                         label, and a thick accent underline, not just a thin text link */}
                     <div className="flex shrink-0" style={{ background: "var(--cs2-bg-surface)", borderBottom: "1px solid var(--cs2-border-default)" }}>

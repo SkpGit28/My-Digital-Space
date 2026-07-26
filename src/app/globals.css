@@ -396,3 +396,5 @@ html.lenis body {
     size: A4 portrait;
   }
 }
+
+html, body { overflow-x: clip; }

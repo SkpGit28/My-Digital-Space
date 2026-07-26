@@ -353,11 +353,7 @@ export function SiteFooterContent() {
     <section id="contact" className="w-full border-t border-border-subtle relative">
       {/* Background only between vertical lines */}
       <div
-        className="absolute inset-0 bg-bg-subtle"
-        style={{
-          left: "calc(50% - 40.75rem)",
-          right: "calc(50% - 40.75rem)",
-        }}
+        className="absolute inset-y-0 left-0 right-0 min-[1340px]:left-[calc(50%-40.75rem)] min-[1340px]:right-[calc(50%-40.75rem)] bg-bg-subtle"
       />
       <div className="relative mx-auto w-full max-w-[62.5rem] px-6 pt-16 pb-9 lg:px-0">
 
@@ -452,7 +448,7 @@ export function SiteFooterContent() {
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {FOOTER_LINKS.map((l) => (
               <a key={l.label} href={l.href} target={l.href.startsWith("http") || l.href.endsWith(".pdf") ? "_blank" : undefined} rel={l.href.startsWith("http") || l.href.endsWith(".pdf") ? "noopener noreferrer" : undefined} download={"download" in l ? (l as { download?: string }).download : undefined}
-                className={`group text-sm text-text-body font-medium hover:text-text-primary transition-colors ${figtree.className}`}>
+                className={`group inline-flex items-center py-1 min-h-[24px] text-sm text-text-body font-medium hover:text-text-primary transition-colors ${figtree.className}`}>
                 {l.label}<span className="inline-block ml-0.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" style={{ transform: "rotate(0deg)" }} onMouseEnter={(e) => (e.currentTarget.style.transform = "rotate(45deg) translateX(0.25rem)")} onMouseLeave={(e) => (e.currentTarget.style.transform = "rotate(0deg) translateX(0)")}>→</span>
               </a>
             ))}
@@ -537,7 +533,7 @@ export function SiteFooterBackground() {
           pali · come and see for yourself
         </p>
       </div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-[-1.25rem] sm:bottom-[-2.5rem] md:bottom-[-3.125rem] flex justify-center">
+      <div className="pointer-events-none absolute inset-x-0 bottom-[-1.25rem] sm:bottom-[-2.5rem] md:bottom-[-3.125rem] flex justify-center overflow-hidden">
         <div className="w-full max-w-[62.5rem] px-6 lg:px-0 relative">
           <p aria-label="Ehipassiko" className="flex select-none justify-center gap-x-0.5 sm:gap-x-1 md:gap-x-1.5 w-full">
             {"EHIPASSIKO".split("").map((ch, i) => (

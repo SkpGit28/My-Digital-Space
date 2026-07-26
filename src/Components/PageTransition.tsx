@@ -68,7 +68,7 @@ const ROW_DURATION_MS = 380;
 const ROW_CUBIC = `cubic-bezier(${EASE.join(",")})`;
 
 function RowCascadeOverlay({ phase }: { phase: "cover" | "held" | "reveal" | "idle" }) {
-  const [rows, setRows] = useState(() => typeof window !== "undefined" ? Math.ceil(window.innerHeight / ROW_HEIGHT) : 20);
+  const [rows, setRows] = useState(20);
   const [armed, setArmed] = useState(false);
 
   useEffect(() => {

@@ -126,7 +126,7 @@ export default function TopNav(): ReactNode {
   const COLOR_INACTIVE = "var(--text-body)";    // body color for inactive / resting
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 pt-6 pointer-events-none flex justify-center" style={{ transform: "translateZ(0)" }}>
+    <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none flex justify-center" style={{ transform: "translateZ(0)", paddingTop: 'max(1.5rem, env(safe-area-inset-top))' }}>
       <LayoutGroup>
         <nav
           className="pointer-events-auto relative flex items-center justify-center overflow-hidden py-1.5 px-2"
@@ -171,6 +171,7 @@ export default function TopNav(): ReactNode {
               <Link
                 key={link.id}
                 href={link.href}
+                aria-label={link.label}
                 target={isResume ? "_blank" : undefined}
                 rel={isResume ? "noopener noreferrer" : undefined}
                 download={isResume ? "CV_SKP.pdf" : undefined}
@@ -191,7 +192,7 @@ export default function TopNav(): ReactNode {
                 }}
                 className="relative h-full flex items-center justify-center"
               >
-                <div className="relative flex h-8 w-[112px] items-center justify-center rounded-full outline-none [-webkit-tap-highlight-color:transparent]">
+                <div className="relative flex h-8 w-auto px-3 md:w-[112px] md:px-0 items-center justify-center rounded-full outline-none [-webkit-tap-highlight-color:transparent]">
                   {/* Sliding active background pill */}
                   {isReady && isActive && (
                     <motion.div
@@ -228,7 +229,7 @@ export default function TopNav(): ReactNode {
                         </span>
                       </span>
                     </span>
-                    <span ref={slot.setRef} />
+                    <span className="hidden md:block" ref={slot.setRef} />
                   </span>
                 </div>
               </Link>

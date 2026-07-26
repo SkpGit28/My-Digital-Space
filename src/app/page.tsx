@@ -8,10 +8,9 @@ import {
   animate,
   AnimatePresence,
   motion,
-  useMotionValue,
-  useMotionTemplate,
-  useSpring,
   useTransform,
+  useSpring,
+  useMotionValue,
   useReducedMotion,
   useInView,
   type MotionValue,
@@ -83,14 +82,14 @@ function CaseStudyCard({
       transition={{ duration: 0.6, delay, ease: EASE }}
       onClick={isMeta ? (e) => e.preventDefault() : undefined}
       aria-label={isMeta ? "Case study coming soon" : undefined}
-      className={`relative md:col-span-2 flex flex-col md:flex-row md:h-[18.75rem] rounded-xl overflow-hidden border border-border-subtle ${bgClass} ${reduce ? (isMeta ? "cursor-default" : "cursor-pointer") : "cursor-none"}`}
+      className={`relative md:col-span-2 flex flex-col md:flex-row md:h-[18.75rem] rounded-xl overflow-hidden border border-border-subtle ${bgClass} ${isMeta ? "cursor-default" : "pointer-fine:cursor-none cursor-pointer"}`}
     >
       {/* Custom cursor — the same glyph as the SKP evidence board.
-          The OS cursor is hidden (cursor-none) and this appears instantly:
+          The OS cursor is hidden (pointer-fine:cursor-none) and this appears instantly:
           no fade, no scale, the triangle tip sits exactly on the pointer. */}
       {isHovered && !reduce && (
         <motion.div
-          className="pointer-events-none absolute z-[60]"
+          className="pointer-events-none absolute z-[60] hidden pointer-fine:block"
           style={{ left: cursorX, top: cursorY }}
         >
           <CursorGlyph name={isMeta ? "Coming Soon" : "View Case Study"} color={brandColor} />
@@ -112,6 +111,19 @@ function CaseStudyCard({
             </span>
           ))}
         </div>
+        
+        {/* Touch affordance chip — only visible on touch devices where the cursor-dot is disabled */}
+        {!isMeta && (
+          <div className="mt-3 pointer-fine:hidden">
+            <span className={`inline-flex items-center gap-1.5 rounded-full border border-border-subtle bg-surface px-4 py-2 shadow-sm text-sm font-bold text-text-primary ${figtree.className}`}>
+              View Case Study
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M5 12h14"/>
+                <path d="m12 5 7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Right — mockup with hover zoom and cropped right edge */}
@@ -151,7 +163,7 @@ function CaseStudyCard({
           </div>
         </>
       ) : (
-        <div className="relative ml-7 mr-0 mt-8 h-[220px] flex-1 pointer-events-none md:ml-0 md:h-auto">
+        <div className="relative ml-7 mr-0 mt-8 aspect-[4/3] flex-1 pointer-events-none md:ml-0 md:aspect-auto md:h-auto">
           {/* the image box overhangs the card's right edge, so the card's
               overflow-hidden crops the mockup's rounded corners clean off */}
           <motion.div
@@ -168,6 +180,7 @@ function CaseStudyCard({
               src={mockupSrc || ""}
               alt={mockupAlt || ""}
               fill
+              sizes="(max-width: 768px) 100vw, 1000px"
               className="object-cover object-left-top"
             />
           </motion.div>
@@ -217,11 +230,12 @@ const SEGMENTS = [
   { text: ".", emphasis: false },
 ];
 
-type Token = { text: string; color: string; isSpace: boolean; isBreak?: boolean };
+type Token = { text: string; color: string; isSpace: boolean; isBreak?: boolean; lineGroup: number };
 
 /** Word stream for the headline, with a forced line break right after "right". */
 function buildTokens(): Token[] {
   const out: Token[] = [];
+  let currentGroup = 0;
   for (const seg of SEGMENTS) {
     const color = seg.emphasis ? T.heading : T.body;
     const tokens = seg.text.split(/(\s+)/).filter((s) => s.length > 0);
@@ -229,10 +243,11 @@ function buildTokens(): Token[] {
       const isSpace = /^\s+$/.test(t);
       const prev = out[out.length - 1];
       if (isSpace && prev && prev.text === "right") {
-        out.push({ text: "", color, isSpace: false, isBreak: true });
+        out.push({ text: "", color, isSpace: false, isBreak: true, lineGroup: currentGroup });
+        currentGroup++;
         continue;
       }
-      out.push({ text: t, color, isSpace });
+      out.push({ text: t, color, isSpace, lineGroup: currentGroup });
     }
   }
   return out;
@@ -321,8 +336,17 @@ function MaskShape({
 
 /* ── Headline: line-mask word reveal (long glide + eased stagger → one wave) ── */
 function Headline({ reduce }: { reduce: boolean }) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const m = window.matchMedia("(max-width: 767px)");
+    setIsMobile(m.matches);
+    const cb = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    m.addEventListener("change", cb);
+    return () => m.removeEventListener("change", cb);
+  }, []);
+
   return (
-    <h1 className="relative z-10 text-center text-5xl font-bold leading-[1.35] tracking-tight">
+    <h1 className="relative z-10 text-center text-4xl md:text-5xl font-bold leading-[1.35] tracking-tight">
       {WORDS.map((w, i) =>
         w.isBreak ? (
           <br key={i} />
@@ -331,7 +355,7 @@ function Headline({ reduce }: { reduce: boolean }) {
             <motion.span
               initial={reduce ? false : { y: "110%" }}
               animate={{ y: "0%" }}
-              transition={{ duration: WORD_DURATION, delay: wordDelay(i), ease: EASE }}
+              transition={{ duration: WORD_DURATION, delay: isMobile ? wordDelay(w.lineGroup * 15) : wordDelay(i), ease: EASE }}
               style={{ display: "inline-block", color: w.color, whiteSpace: w.isSpace ? "pre" : "normal" }}
             >
               {w.text}
@@ -484,11 +508,9 @@ function ConstellationChip({
   }, [reduce]);
   const present = useTransform([settle, wake], ([s, w]: number[]) => 1 - s * (1 - w));
 
-  // Whisper (0.3) → full (1) opacity and blur.
+  // Whisper (0.3) → full (1) opacity.
   const opacity = useTransform(present, (v) => 0.3 + v * 0.7);
   const scale = useTransform(present, (v) => 0.94 + v * 0.1);
-  const blurPx = useTransform(present, (v) => (1 - v) * 3);
-  const filter = useMotionTemplate`blur(${blurPx}px)`;
 
   // Tooltip appears only when directly hovering the icon disc
   const [tipOn, setTipOn] = useState(false);
@@ -511,7 +533,7 @@ function ConstellationChip({
           animationPlayState: tipOn ? "paused" : "running",
         }}
       >
-        <motion.div style={reduce ? { opacity: 0.5 } : { x: tx, y: ty, opacity, scale, filter }}>
+        <motion.div style={reduce ? { opacity: 0.5 } : { x: tx, y: ty, opacity, scale }}>
           <MaskReveal delay={ICON_REVEAL(order)} duration={0.6} reduce={reduce} style={{ borderRadius: 9999 }}>
             <div
               className="flex items-center justify-center rounded-full"
@@ -886,6 +908,7 @@ export default function HeroTestPage() {
   // not partway through the hero — measure it instead of hardcoding.
   const [workTop, setWorkTop] = useState("100vh");
   useEffect(() => {
+    let lastWidth = window.innerWidth;
     const measure = () => {
       const topEl = document.getElementById("top");
       const workEl = document.getElementById("work");
@@ -893,12 +916,18 @@ export default function HeroTestPage() {
       const delta = workEl.getBoundingClientRect().top - topEl.getBoundingClientRect().top;
       setWorkTop(`${Math.round(delta)}px`);
     };
+    const onResize = () => {
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        measure();
+      }
+    };
     measure();
     const settle = setTimeout(measure, 700); // re-measure after fonts/entrance settle
-    window.addEventListener("resize", measure);
+    window.addEventListener("resize", onResize);
     return () => {
       clearTimeout(settle);
-      window.removeEventListener("resize", measure);
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 
@@ -910,7 +939,7 @@ export default function HeroTestPage() {
           reduce={reduce}
         />
 
-        <section id="hero" className="relative z-10 mx-auto flex w-full max-w-[62.5rem] flex-col items-center px-6 pt-52 pb-10 lg:px-0">
+        <section id="hero" className="relative z-10 mx-auto flex w-full max-w-[62.5rem] flex-col items-center px-6 pt-32 pb-10 md:pt-52 lg:px-0">
           <Headline reduce={reduce} />
 
           {/* Intro card */}
@@ -918,7 +947,7 @@ export default function HeroTestPage() {
             initial={reduce ? false : { opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: CARD_DELAY, duration: 0.6, ease: EASE }}
-            className="relative mt-16 flex items-center gap-6 overflow-hidden rounded-xl border border-border-subtle bg-surface px-6 py-4"
+            className="relative mt-16 max-w-full flex flex-col sm:flex-row items-center gap-4 sm:gap-6 overflow-hidden rounded-xl border border-border-subtle bg-surface px-6 py-4 text-center sm:text-left"
           >
             <MaskReveal delay={PHOTO_DELAY} duration={0.6} reduce={reduce}>
               <div className="flex h-16 w-16 items-end justify-center overflow-hidden bg-surface">
@@ -932,7 +961,7 @@ export default function HeroTestPage() {
               </div>
             </MaskReveal>
 
-            <div className="flex flex-col items-start gap-2">
+            <div className="flex flex-col items-center sm:items-start gap-2">
               <MaskReveal delay={NAME_DELAY} duration={0.55} reduce={reduce}>
                 <span className={`text-2xl leading-8 tracking-tight font-medium text-text-primary ${satoshi.className}`}>
                   Hi, I am Sushant Kumar
@@ -1007,7 +1036,7 @@ export default function HeroTestPage() {
               tags={["Behavioral UX", "Trust Design", "Concept Work"]}
               tagBg="bg-cs2-brand/8"
               tagText="text-cs2-brand"
-              mockupSrc="/mockups/CardMockup.webp"
+              mockupSrc="/CardMockup.svg"
               mockupAlt="BlaBlaCar Mockup"
             />
 

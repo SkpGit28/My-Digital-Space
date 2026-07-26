@@ -16,8 +16,20 @@
  *   when dragged and can never wander off its territory.
  */
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+  return isMobile;
+}
 import { figtree, caveat } from "@/styles/fonts";
 import { EASE } from "@/lib/constants";
 
@@ -32,6 +44,7 @@ function Loose({
   stageRef,
   reduce,
   draggable = true,
+  isMobile = false,
   children,
 }: {
   x: number;
@@ -43,28 +56,41 @@ function Loose({
   stageRef: React.RefObject<HTMLDivElement | null>;
   reduce: boolean;
   draggable?: boolean;
+  isMobile?: boolean;
   children: React.ReactNode;
 }) {
   const animated = entry !== "none" && !reduce;
+  const canDrag = draggable && !isMobile && !reduce;
+
   return (
-    <motion.div
-      className={`group absolute ${draggable ? "cursor-grab active:cursor-grabbing" : ""}`}
-      style={{ left: x, top: y, width: w, zIndex: z, rotate: rot }}
-      initial={animated ? (entry === "slide" ? { opacity: 0, x: -16 } : { opacity: 0, y: 14 }) : false}
-      whileInView={animated ? { opacity: 1, x: 0, y: 0 } : undefined}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={
-        entry === "bounce"
-          ? { type: "spring", stiffness: 320, damping: 13, mass: 0.9 }
-          : { duration: 0.55, ease: EASE }
-      }
-      drag={draggable && !reduce}
-      dragConstraints={stageRef}
-      dragMomentum={false}
-      dragElastic={0.08}
+    <div
+      className="group relative mb-8 flex w-full justify-center md:mb-0 md:absolute md:block md:[width:var(--md-width)] md:[left:var(--md-left)] md:[top:var(--md-top)] md:[transform:rotate(var(--md-rot))]"
+      style={{
+        "--md-left": `${x}px`,
+        "--md-top": `${y}px`,
+        "--md-rot": `${rot}deg`,
+        "--md-width": w ? `${w}px` : "max-content",
+        zIndex: z,
+      } as React.CSSProperties}
     >
-      {children}
-    </motion.div>
+      <motion.div
+        className={canDrag ? "cursor-grab active:cursor-grabbing" : ""}
+        initial={animated ? (entry === "slide" ? { opacity: 0, x: -16 } : { opacity: 0, y: 14 }) : false}
+        whileInView={animated ? { opacity: 1, x: 0, y: 0 } : undefined}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={
+          entry === "bounce"
+            ? { type: "spring", stiffness: 320, damping: 13, mass: 0.9 }
+            : { duration: 0.55, ease: EASE }
+        }
+        drag={canDrag ? true : false}
+        dragConstraints={stageRef}
+        dragMomentum={false}
+        dragElastic={0.08}
+      >
+        {children}
+      </motion.div>
+    </div>
   );
 }
 
@@ -101,10 +127,11 @@ function Cursor({
   duration: number;
   reduce: boolean;
 }) {
+
   if (reduce) return null;
   return (
     <motion.div
-      className="pointer-events-none absolute left-0 top-0 z-40"
+      className="pointer-events-none absolute left-0 top-0 z-40 hidden pointer-fine:block"
       animate={{ x: xs, y: ys }}
       transition={{ duration, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
     >
@@ -131,6 +158,7 @@ const JOURNEY: { title: string; lines: string[]; year: string; dot: [number, num
 export default function DesignCanvas() {
   const reduce = !!useReducedMotion();
   const stageRef = useRef<HTMLDivElement | null>(null);
+  const isMobile = useIsMobile();
 
   return (
     <div className="flex w-full select-none flex-col items-center">
@@ -145,7 +173,7 @@ export default function DesignCanvas() {
         {/* the board */}
         <div
           ref={stageRef}
-          className="relative h-[680px] w-[1000px] shrink-0 overflow-hidden rounded-2xl border border-border-hairline"
+          className="relative h-auto w-full max-w-[1000px] md:h-[680px] shrink-0 overflow-hidden rounded-2xl border border-border-hairline"
           style={{
             background: "#f4f5f7",
             backgroundImage: "radial-gradient(circle, #dde1e8 1px, transparent 1px)",
@@ -157,11 +185,13 @@ export default function DesignCanvas() {
             <span>
               <span className="font-semibold text-text-heading">skp_life.fig</span> · work in progress
             </span>
-            <span>63%</span>
+            <span className="hidden md:inline">63%</span>
           </div>
 
+          <div className="mt-16 flex flex-col md:block">
+
           {/* ── GERMAN. owl peeking top-left, paperclip top-right, slides in. ── */}
-          <Loose x={64} y={82} w={256} rot={-1} entry="slide" stageRef={stageRef} reduce={reduce} z={12}>
+          <Loose x={64} y={82} w={256} rot={-1} entry="slide" stageRef={stageRef} reduce={reduce} isMobile={isMobile} z={12}>
             {/* the owl, peeking */}
             <img src="/duolingo.svg" alt="Duolingo owl" className="absolute -top-9 left-5 z-10 h-14 w-auto rotate-[-5deg]" draggable={false} />
             {/* the clip, away from the owl */}
@@ -196,7 +226,7 @@ export default function DesignCanvas() {
           </Loose>
 
           {/* ── GOALS. the clean book page, checklist written on it. ── */}
-          <Loose x={352} y={58} w={240} rot={-1.5} stageRef={stageRef} reduce={reduce} draggable={false}>
+          <Loose x={352} y={58} w={240} rot={-1.5} stageRef={stageRef} reduce={reduce} isMobile={isMobile} draggable={false}>
             <img src="/Goals.svg" alt="My goals page" className="h-auto w-full" draggable={false} />
             <div className={`${figtree.className} absolute inset-0 flex flex-col justify-center gap-2.5 pl-14 pr-6`}>
               <p className="text-[19px] font-bold text-[#1f2430]">goals</p>
@@ -220,7 +250,7 @@ export default function DesignCanvas() {
           </Loose>
 
           {/* ── TYPING. a screenshot, annotated by hand. never animates. ── */}
-          <Loose x={618} y={72} w={296} rot={0.5} stageRef={stageRef} reduce={reduce}>
+          <Loose x={618} y={72} w={296} rot={0.5} stageRef={stageRef} reduce={reduce} isMobile={isMobile}>
             <div className="overflow-hidden rounded-[6px]" style={{ boxShadow: "0 14px 30px -16px rgba(0,0,0,0.45)" }}>
               <div className="bg-[#323437] px-4 pb-4 pt-3 font-mono">
                 <div className="flex items-center justify-between">
@@ -239,7 +269,7 @@ export default function DesignCanvas() {
           </Loose>
 
           {/* ── CURRENT VIBE. a real player. press play. ── */}
-          <Loose x={370} y={330} w={300} rot={1} stageRef={stageRef} reduce={reduce}>
+          <Loose x={370} y={330} w={300} rot={1} stageRef={stageRef} reduce={reduce} isMobile={isMobile}>
             <div className="overflow-hidden rounded-xl" style={{ boxShadow: "0 14px 30px -16px rgba(0,0,0,0.4)" }}>
               <iframe
                 src="https://open.spotify.com/embed/track/7lQ8MOhq6IN2w8EYcFNSUk?utm_source=generator&theme=0"
@@ -256,7 +286,7 @@ export default function DesignCanvas() {
           </Loose>
 
           {/* ── FOOD. a polaroid from the foodie part. tiny bounce. ── */}
-          <Loose x={700} y={318} w={232} rot={2} entry="bounce" stageRef={stageRef} reduce={reduce}>
+          <Loose x={700} y={318} w={232} rot={2} entry="bounce" stageRef={stageRef} reduce={reduce} isMobile={isMobile}>
             {/* tape label */}
             <div
               className="absolute -top-4 left-1/2 z-10 -translate-x-1/2 rotate-[-2deg] px-3 py-1"
@@ -282,7 +312,7 @@ export default function DesignCanvas() {
           </Loose>
 
           {/* ── MONSTER. wide black card, the real can inside, neon fuel log. ── */}
-          <Loose x={58} y={478} w={430} rot={0} stageRef={stageRef} reduce={reduce}>
+          <Loose x={58} y={478} w={430} rot={0} stageRef={stageRef} reduce={reduce} isMobile={isMobile}>
             <div
               className="relative flex items-center gap-6 overflow-hidden rounded-xl px-6 py-5"
               style={{
@@ -339,6 +369,7 @@ export default function DesignCanvas() {
           <div aria-hidden className="absolute -left-9 top-[308px] h-14 w-32 border border-dashed border-[#c9cfdb]">
             <span className="absolute -top-5 left-10 whitespace-nowrap font-mono text-[12px] text-[#b6bcc9]">Rectangle 12 copy copy</span>
           </div>
+          </div>
         </div>
       </div>
 
@@ -351,21 +382,22 @@ export default function DesignCanvas() {
 
       {/* ── THE NOT-SO-LINEAR JOURNEY. the paper texture IS the component. ── */}
       <motion.div
-        className="flex w-full justify-center overflow-visible pb-4 -mt-10"
+        className="flex w-full overflow-hidden pb-4 -mt-10"
         initial={reduce ? false : { opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6, ease: EASE }}
       >
-        <div
-          className="relative h-[340px] w-[1000px] shrink-0"
-          style={{
-            backgroundImage: "url('/JourneyBg.svg')",
-            backgroundSize: "100% 421px",
-            backgroundPosition: "top left",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
+        <div className="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar relative" style={{ WebkitMaskImage: "linear-gradient(to right, black 85%, transparent 100%)", maskImage: "linear-gradient(to right, black 85%, transparent 100%)" }}>
+          <div
+            className="relative h-[340px] w-[1000px] shrink-0 snap-center"
+            style={{
+              backgroundImage: "url('/JourneyBg.svg')",
+              backgroundSize: "100% 421px",
+              backgroundPosition: "top left",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
           {/* the wavy dashed line, dots, years, and little arrows — swept in left to right */}
           <motion.div
             className="absolute inset-0"
@@ -449,6 +481,7 @@ export default function DesignCanvas() {
               </motion.div>
             </div>
           ))}
+        </div>
         </div>
       </motion.div>
     </div>

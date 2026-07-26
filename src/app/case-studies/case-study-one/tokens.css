@@ -116,7 +116,7 @@
   --cs2-accent-purple: var(--cs2-color-purple-500);
 }
 
-@media (max-width: 52.125em) {
+@media (max-width: 1023px) {
   .cs2Root {
     --section-space-top: 2.5rem; /* 40px */
     --section-space-bottom: 1.5rem; /* 24px */

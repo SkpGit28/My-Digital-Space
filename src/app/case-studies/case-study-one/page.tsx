@@ -86,6 +86,7 @@ export default function CaseStudyTwoPage() {
             src="/mockups/BGHeroImg.png"
             alt="Making Shared Travel More Predictable Background"
             fill
+            sizes="100vw"
             priority
             unoptimized
           />
@@ -120,6 +121,7 @@ export default function CaseStudyTwoPage() {
               src="/mockups/Hero-Mockup.webp"
               alt="Hero Mockup"
               fill
+              sizes="(max-width: 768px) 100vw, 1000px"
               priority
             />
           </div>
@@ -277,6 +279,7 @@ export default function CaseStudyTwoPage() {
                 src="/mockups/Context.webp"
                 alt="Context: how a BlaBlaCar trip is listed and discovered today"
                 fill
+                sizes="(max-width: 768px) 100vw, 1000px"
                 className={styles.coverImage}
                 loading="lazy"
               />
@@ -333,6 +336,7 @@ export default function CaseStudyTwoPage() {
                 src="/mockups/problem.webp"
                 alt="Problem: where the booking flow breaks rider expectations"
                 fill
+                sizes="(max-width: 768px) 100vw, 1000px"
                 className={styles.coverImage}
                 loading="lazy"
               />

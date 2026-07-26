@@ -98,11 +98,9 @@ export default function SkpPage() {
         {/* Paper texture between vertical lines, from the first section onward */}
         <div className="relative">
           <div
-            className="absolute inset-0 bg-repeat bg-center z-0"
+            className="absolute inset-y-0 left-0 right-0 min-[1340px]:left-[calc(50%-40.75rem)] min-[1340px]:right-[calc(50%-40.75rem)] bg-repeat bg-center z-0"
             style={{
-              backgroundImage: "url('/paperbg.webp')",
-              left: "calc(50% - 40.75rem)",
-              right: "calc(50% - 40.75rem)",
+              backgroundImage: "url('/paperbg.webp')"
             }}
           />
 
@@ -139,9 +137,9 @@ export default function SkpPage() {
 
             {/* Hand-written note for the active photo — lives in the empty space
                 to the RIGHT of the photo's top (over the intro column's blank
-                upper area on md+), with a curved arrow pointing back down-left
-                into the shot. On mobile it tucks against the photo's top-right. */}
-            <div className="pointer-events-none absolute right-2 top-2 z-30 flex w-[15rem] flex-col items-start md:right-auto md:left-full md:ml-11 md:top-[-4.25rem]">
+                upper area on lg+), with a curved arrow pointing back down-left
+                into the shot. On mobile/tablet it stacks under the photo. */}
+            <div className="pointer-events-none relative mx-auto mt-12 lg:mt-0 lg:absolute right-auto top-auto z-30 flex w-[15rem] flex-col items-center lg:items-start lg:right-auto lg:left-full lg:ml-11 lg:top-[-4.25rem]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeIndex}
@@ -149,10 +147,10 @@ export default function SkpPage() {
                   animate={{ opacity: 1, y: 0, rotate: -4 }}
                   exit={reduce ? { opacity: 0 } : { opacity: 0, y: 4, transition: { duration: 0.18 } }}
                   transition={{ duration: 0.4, ease: EASE }}
-                  className={`${caveat.className} flex flex-col items-start`}
+                  className={`${caveat.className} flex flex-col items-center lg:items-start`}
                   style={{ textShadow: "0 1px 2px rgba(255,255,255,0.95), 0 0 10px rgba(255,255,255,0.8)" }}
                 >
-                  <p className="text-left text-[21px] font-bold leading-[1.1] text-[#1f2430]">
+                  <p className="text-center lg:text-left text-[21px] font-bold leading-[1.1] text-[#1f2430]">
                     <NoteBody note={PHOTO_NOTES[activeIndex]} />
                   </p>
                   {/* short arrow angling down-left into the empty gap toward the
@@ -162,7 +160,7 @@ export default function SkpPage() {
                     height="46"
                     viewBox="0 0 118 46"
                     fill="none"
-                    className="-ml-8 mt-1"
+                    className="-ml-8 mt-1 hidden lg:block"
                     style={{ filter: "drop-shadow(0 1px 1px rgba(255,255,255,0.85))" }}
                     aria-hidden
                   >

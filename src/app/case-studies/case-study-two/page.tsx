@@ -61,6 +61,7 @@ export default function TrustRevenueCaseStudy() {
             src="/mockups/cs2-hero-bg.png"
             alt="Navigating Product Conflicts background"
             fill
+            sizes="100vw"
             priority
             unoptimized
           />
