@@ -1349,6 +1349,7 @@
   background-color: var(--cs2-color-neutral-0);
   margin-top: 0;
   box-shadow: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.02);
+  overflow: hidden;
 }
 
 .overflowWrapper {
