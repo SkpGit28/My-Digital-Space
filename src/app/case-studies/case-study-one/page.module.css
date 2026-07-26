@@ -1,6 +1,4 @@
 .cs2Root {
-  /* Reset all properties to browser defaults, shielding the subtree from portfolio global styles */
-  all: revert;
   display: block;
   box-sizing: border-box;
   width: 100%;
@@ -60,10 +58,8 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 100%;
+  width: 100vw;
   height: 0.0625rem;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
   background-color: var(--border-subtle, rgba(0, 0, 0, 0.08));
   z-index: 10;
 }
