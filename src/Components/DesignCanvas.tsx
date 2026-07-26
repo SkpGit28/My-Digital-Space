@@ -141,14 +141,14 @@ function Cursor({
 }
 
 /* ── the not-so-linear journey: milestones on the hand-drawn wavy line ── */
-const JOURNEY: { title: string; lines: string[]; year: string; x: number; y: number; dot: [number, number]; color: string }[] = [
-  { title: "Born", lines: ["Someone's dream"], year: "1999", x: 56, y: 178, dot: [80, 245], color: "star" },
-  { title: "IPS Plan", lines: ["The plan", "was set"], year: "2012", x: 150, y: 136, dot: [192, 242], color: "#e0447c" },
-  { title: "JEE Mains", lines: ["Tried.", "Failed.", "Learned."], year: "2016", x: 296, y: 122, dot: [338, 248], color: "#f59e0b" },
-  { title: "Direct Selling", lines: ["3-4 years.", "No success.", "Big lessons."], year: "2019", x: 424, y: 118, dot: [478, 242], color: "#a78bfa" },
-  { title: "BPO / KPO", lines: ["Covid time.", "Started", "somewhere."], year: "2022", x: 574, y: 122, dot: [618, 246], color: "#0d99ff" },
-  { title: "Design", lines: ["Found my", "direction."], year: "2023", x: 722, y: 136, dot: [762, 242], color: "#1f9d5e" },
-  { title: "Design + Code", lines: ["Building.", "Learning.", "Shipping."], year: "2026", x: 846, y: 122, dot: [905, 246], color: "end" },
+const JOURNEY: { title: string; lines: string[]; year: string; dot: [number, number]; color: string }[] = [
+  { title: "Born", lines: ["Someone's dream"], year: "1999", dot: [153, 250], color: "star" },
+  { title: "IPS Plan", lines: ["The plan", "was set"], year: "2012", dot: [280, 250], color: "#e0447c" },
+  { title: "JEE Mains", lines: ["Tried.", "Failed.", "Learned."], year: "2016", dot: [407, 250], color: "#f59e0b" },
+  { title: "Direct Selling", lines: ["3-4 years.", "No success.", "Big lessons."], year: "2019", dot: [534, 250], color: "#a78bfa" },
+  { title: "BPO / KPO", lines: ["Covid time.", "Started", "somewhere."], year: "2022", dot: [661, 250], color: "#0d99ff" },
+  { title: "Design", lines: ["Found my", "direction."], year: "2023", dot: [788, 250], color: "#1f9d5e" },
+  { title: "Design + Code", lines: ["Building.", "Learning.", "Shipping."], year: "2026", dot: [915, 250], color: "end" },
 ];
 
 export default function DesignCanvas() {
@@ -394,7 +394,7 @@ export default function DesignCanvas() {
               backgroundRepeat: "no-repeat",
             }}
           >
-            <p className={`${caveat.className} absolute left-11 top-7 text-[22px] font-bold text-[#1f2430]`}>
+            <p className={`${caveat.className} absolute left-[145px] top-6 text-[22px] font-bold text-[#1f2430]`}>
               the not-so-linear journey
             </p>
 
@@ -402,7 +402,7 @@ export default function DesignCanvas() {
             <div className="absolute inset-0">
             <svg aria-hidden className="absolute inset-0 h-full w-full" viewBox="0 0 1000 340" fill="none" preserveAspectRatio="none">
               <path
-                d="M80 245 C 120 230, 155 255, 192 242 C 240 228, 295 262, 338 248 C 385 232, 435 256, 478 242 C 525 228, 575 260, 618 246 C 665 230, 720 254, 762 242 C 810 230, 862 258, 905 246"
+                d="M120 250 C 165 240, 225 260, 280 250 C 335 241, 360 259, 407 250 C 462 240, 492 260, 534 250 C 592 241, 622 259, 661 250 C 718 240, 750 260, 788 250 C 843 241, 880 259, 915 250 C 930 247, 942 250, 942 250"
                 stroke="#2b2b2b"
                 strokeWidth="2"
                 strokeDasharray="7 6"
@@ -448,7 +448,7 @@ export default function DesignCanvas() {
                 return (
                   <path
                     key={m.title}
-                    d={`M${dx + 16} ${dy - 46} C ${dx + 20} ${dy - 30}, ${dx + 12} ${dy - 18}, ${dx + 4} ${dy - 10} M${dx + 4} ${dy - 10} l1 -7 M${dx + 4} ${dy - 10} l7 -1`}
+                    d={`M${dx + 12} ${dy - 40} C ${dx + 16} ${dy - 26}, ${dx + 10} ${dy - 16}, ${dx + 3} ${dy - 8} M${dx + 3} ${dy - 8} l1 -6 M${dx + 3} ${dy - 8} l6 -1`}
                     stroke="#6b7280"
                     strokeWidth="1.3"
                     strokeLinecap="round"
@@ -458,16 +458,16 @@ export default function DesignCanvas() {
             </svg>
             </div>
 
-            {/* milestone labels — each appears at its designated position */}
+            {/* milestone labels — aligned at top=105 so titles form a clean shelf */}
             {JOURNEY.map((m) => (
               <div
                 key={m.title}
-                className={`${caveat.className} absolute leading-[1.2]`}
-                style={{ left: m.x, top: m.y }}
+                className={`${caveat.className} absolute leading-[1.15] text-center`}
+                style={{ left: m.dot[0], top: 105, width: 140, transform: "translateX(-50%)" }}
               >
-                <p className="text-[18px] font-bold text-[#1f2430]">{m.title}</p>
+                <p className="text-[19px] font-bold text-[#1f2430]">{m.title}</p>
                 {m.lines.map((l) => (
-                  <p key={l} className="text-[16px] font-semibold text-[#6b7280]">
+                  <p key={l} className="text-[15px] font-semibold text-[#6b7280]">
                     {l}
                   </p>
                 ))}
