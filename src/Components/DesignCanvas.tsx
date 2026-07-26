@@ -384,9 +384,9 @@ export default function DesignCanvas() {
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6, ease: EASE }}
       >
-        <div className="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar relative" style={{ WebkitMaskImage: "linear-gradient(to right, black 85%, transparent 100%)", maskImage: "linear-gradient(to right, black 85%, transparent 100%)" }}>
+        <div className="w-full max-w-[1000px] mx-auto overflow-x-auto snap-x snap-mandatory hide-scrollbar relative">
           <div
-            className="relative h-[340px] w-[1000px] shrink-0 snap-center"
+            className="relative h-[340px] w-[1000px] shrink-0 snap-start"
             style={{
               backgroundImage: "url('/JourneyBg.svg')",
               backgroundSize: "100% 421px",
