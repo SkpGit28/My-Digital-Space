@@ -62,3 +62,6 @@ src/app/case-studies/case-study-two/scratch/
 # Local build artifacts / verification screenshots dropped at repo root
 /build-output.txt
 /*.png
+
+# Generated poster output
+/output/
