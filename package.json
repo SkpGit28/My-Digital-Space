@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "preview": "next build && next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "posters": "node scripts/posters/generate.mjs",
+    "posters:dry": "node scripts/posters/generate.mjs --dry-run"
   },
   "dependencies": {
     "@types/d3": "^7.4.3",
